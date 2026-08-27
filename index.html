@@ -234,7 +234,59 @@
     border-radius: 10px;
     padding: 14px;
   }
-  .chart-card canvas { max-height: 230px; }
+  .chart-card canvas { max-height: 210px; }
+  .chart-card-header { margin-bottom: 10px; }
+  .chart-card-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+  .chart-card-nome {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .chart-card-rank {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--header-bg);
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .chart-card-rank.top { background: var(--gold); }
+  .tier-badge {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .tier-badge.tier-top { background: var(--gold-tint); color: var(--gold); }
+  .tier-badge.tier-mid { background: #e6f5e6; color: var(--status-good); }
+  .tier-badge.tier-low { background: #f0f0ee; color: var(--text-muted); }
+  .chart-card-stats {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  .chart-card-stats .valor-gold { color: var(--gold); font-weight: 700; }
+  .chart-card-stats .dot-sep { color: var(--text-muted); }
 
   footer {
     text-align: center;
@@ -569,20 +621,63 @@ function renderRankingChart(lista) {
   });
 }
 
-function renderCharts(registros, tecnicoSelecionado) {
+function computeRecordeRaw(registros, canon) {
+  let recorde = 0;
+  registros.forEach(r => {
+    const participa = r.participantes.some(nome => {
+      if (isExFuncionario(nome)) return false;
+      const tec = matchTecnicoAtivo(nome);
+      return tec && tec.canon === canon;
+    });
+    if (participa) recorde = Math.max(recorde, r.ligacoes);
+  });
+  return recorde;
+}
+
+function tierBadge(recordeRaw) {
+  const tier = bonusRate(recordeRaw);
+  if (tier === 0.01) return { label: "Nível R$ 0,01", cls: "tier-top" };
+  if (tier === 0.005) return { label: "Nível R$ 0,005", cls: "tier-mid" };
+  return { label: "Abaixo do bônus", cls: "tier-low" };
+}
+
+function renderCharts(registros, tecnicoSelecionado, rankingLista) {
   const grid = document.getElementById("charts-grid");
   grid.innerHTML = "";
   charts = {};
 
-  const lista = tecnicoSelecionado
-    ? TECNICOS_ATIVOS.filter(t => t.canon === tecnicoSelecionado)
-    : TECNICOS_ATIVOS;
+  // ordena a grade pela mesma classificação do gráfico de bonificação,
+  // pra quem está na frente no ranking aparecer primeiro na grade
+  const ordem = rankingLista.map(r => r.canon);
+  let lista = [...TECNICOS_ATIVOS].sort((a, b) => ordem.indexOf(a.canon) - ordem.indexOf(b.canon));
+  if (tecnicoSelecionado) lista = lista.filter(t => t.canon === tecnicoSelecionado);
 
-  lista.forEach(t => {
+  lista.forEach((t, i) => {
+    const resumoTec = rankingLista.find(r => r.canon === t.canon) || { ligacoes: 0, bonificacao: 0 };
+    const recordeRaw = computeRecordeRaw(registros, t.canon);
+    const badge = tierBadge(recordeRaw);
+    const posicao = i + 1;
+    const isTop = i === 0 && resumoTec.bonificacao > 0;
+
     const card = document.createElement("div");
     card.className = "chart-card";
     const canvasId = `chart-${t.canon}`;
-    card.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+    card.innerHTML = `
+      <div class="chart-card-header">
+        <div class="chart-card-title-row">
+          <span class="chart-card-nome"><span class="chart-card-rank${isTop ? " top" : ""}">${posicao}</span>${t.canon}</span>
+          <span class="tier-badge ${badge.cls}">${badge.label}</span>
+        </div>
+        <div class="chart-card-stats">
+          <span>${NUM.format(Math.round(resumoTec.ligacoes))} ligações</span>
+          <span class="dot-sep">·</span>
+          <span class="valor-gold">${BRL.format(resumoTec.bonificacao)}</span>
+          <span class="dot-sep">·</span>
+          <span>recorde: ${NUM.format(recordeRaw)}</span>
+        </div>
+      </div>
+      <canvas id="${canvasId}"></canvas>
+    `;
     grid.appendChild(card);
 
     const pontos = computeSeriePorTecnico(registros, t.canon);
@@ -612,13 +707,7 @@ function renderCharts(registros, tecnicoSelecionado) {
         plugins: {
           legend: { display: false },
           datalabels: { display: false },
-          title: {
-            display: true,
-            text: `PRODUTIVIDADE  -  ${t.canon.toUpperCase()}  -  (BONIFICAÇÃO)`,
-            font: { size: 11, weight: "bold" },
-            color: "#444",
-            padding: { bottom: 10 },
-          },
+          title: { display: false },
           tooltip: {
             backgroundColor: "#1a1a1a",
             titleFont: { size: 11 },
@@ -708,9 +797,10 @@ function renderTudo() {
     );
   }
 
+  const rankingLista = computeBonificacaoPorTecnico(registrosPeriodo);
   renderResumo(computeResumo(registrosResumo));
-  renderRankingChart(computeBonificacaoPorTecnico(registrosPeriodo));
-  renderCharts(registrosPeriodo, tecnico || null);
+  renderRankingChart(rankingLista);
+  renderCharts(registrosPeriodo, tecnico || null, rankingLista);
 
   document.getElementById("footer-periodo").textContent =
     `Período: ${inicio.split("-").reverse().join("/")} a ${fim.split("-").reverse().join("/")}`;
