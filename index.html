@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PC 392 - GE D.LEAK (SBESP-NORTE)</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
+<style>
+  :root {
+    --header-bg: #5B6B4A;
+    --gold: #8C6D1F;
+    --card-border: #e0e0e0;
+    --text-dark: #333;
+    --text-muted: #666;
+    --bg-page: #f4f4f2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg-page);
+    color: var(--text-dark);
+  }
+  header {
+    background: var(--header-bg);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+  }
+  .filtros {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .filtro-box {
+    background: rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 6px 12px;
+    display: flex;
+    flex-direction: column;
+    min-width: 160px;
+  }
+  .filtro-box label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .filtro-box input, .filtro-box select {
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 2px 0;
+  }
+  .filtro-box input::-webkit-calendar-picker-indicator { filter: invert(1); }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 16px;
+    padding: 16px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 14px;
+  }
+  .card-title {
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #555;
+    margin: 0 0 10px 0;
+    letter-spacing: 0.02em;
+  }
+
+  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+  .stat-row { display: flex; gap: 10px; }
+  .stat-card {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 12px;
+  }
+  .stat-card .label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #555;
+  }
+  .stat-card .value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 4px;
+    white-space: nowrap;
+  }
+  .stat-card.bonificacao .value { color: var(--gold); }
+  .stat-card .sub { font-size: 0.68rem; color: var(--text-muted); }
+
+  table.indicadores {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table.indicadores td {
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+  table.indicadores td:last-child {
+    text-align: right;
+    font-weight: 700;
+  }
+
+  .tecnico-item { margin-bottom: 10px; }
+  .tecnico-item:last-child { margin-bottom: 0; }
+  .tecnico-item .top-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+  }
+  .tecnico-item .nome { font-weight: 600; }
+  .tecnico-item .valor { color: var(--gold); font-weight: 700; }
+  .barra-bg {
+    background: #eee;
+    border-radius: 3px;
+    height: 6px;
+    overflow: hidden;
+  }
+  .barra-fill {
+    background: var(--gold);
+    height: 100%;
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .chart-card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 12px;
+  }
+  .chart-card canvas { max-height: 230px; }
+
+  footer {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    padding: 10px;
+  }
+
+  #status-msg {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  #status-msg.erro { color: #a33; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>PC 392 - GE D.LEAK (SBESP-NORTE)</h1>
+  <div class="filtros">
+    <div class="filtro-box">
+      <label>Período - início</label>
+      <input type="date" id="filtro-data-inicio">
+    </div>
+    <div class="filtro-box">
+      <label>Período - fim</label>
+      <input type="date" id="filtro-data-fim">
+    </div>
+    <div class="filtro-box">
+      <label>Técnico</label>
+      <select id="filtro-tecnico">
+        <option value="">Todos</option>
+      </select>
+    </div>
+  </div>
+</header>
+
+<div id="status-msg">Carregando dados...</div>
+
+<div class="layout" id="layout" style="display:none;">
+  <div class="sidebar">
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="label">Total de vistorias</div>
+        <div class="value" id="stat-vistorias">-</div>
+        <div class="sub">Vistorias realizadas</div>
+      </div>
+      <div class="stat-card bonificacao">
+        <div class="label">Bonificação total</div>
+        <div class="value" id="stat-bonificacao">-</div>
+        <div class="sub">Valor acumulado</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Indicadores de produção</div>
+      <table class="indicadores">
+        <tr><td>Total de registros</td><td id="ind-registros">-</td></tr>
+        <tr><td>Técnicos envolvidos</td><td id="ind-tecnicos">-</td></tr>
+        <tr><td>Dias com atividade</td><td id="ind-dias">-</td></tr>
+        <tr><td>Média de vistorias / dia</td><td id="ind-media-vistorias-dia">-</td></tr>
+        <tr><td>Média de ligações / vistoria</td><td id="ind-media-ligacoes-vistoria">-</td></tr>
+        <tr><td>Média de ligações / dia</td><td id="ind-media-ligacoes-dia">-</td></tr>
+        <tr><td>Maior registro</td><td id="ind-maior-registro">-</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bonificação por técnico</div>
+      <div id="lista-bonificacao"></div>
+    </div>
+  </div>
+
+  <div class="charts-grid" id="charts-grid"></div>
+</div>
+
+<footer id="footer-periodo"></footer>
+
+<script>
+const DATA_URL = "data/pc392.json";
+
+const TECNICOS_ATIVOS = [
+  { canon: "Adeilson",   aliases: ["adeilson"] },
+  { canon: "Oldair",     aliases: ["oldair"] },
+  { canon: "Rairan",     aliases: ["rairan"] },
+  { canon: "Carlos",     aliases: ["carlos"] },
+  { canon: "Gisclayton", aliases: ["gisclayton", "giscalyton"] },
+  { canon: "Christian",  aliases: ["christian", "christin"] },
+  { canon: "Ronaldo",    aliases: ["ronaldo"] },
+];
+
+const EX_FUNCIONARIOS = [
+  "gabriel hariel", "igor aquino", "aparecido valentim",
+  "jackson zanetti", "ailton ramos rocha jr.", "mykael antonio",
+];
+
+const PERIODO_INICIO_PADRAO = "2025-12-31";
+
+const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const NUM = new Intl.NumberFormat("pt-BR");
+
+function primeiroNome(nome) {
+  return nome.trim().split(/\s+/)[0].toLowerCase();
+}
+
+function matchTecnicoAtivo(nome) {
+  const primeiro = primeiroNome(nome);
+  return TECNICOS_ATIVOS.find(t => t.aliases.includes(primeiro)) || null;
+}
+
+function isExFuncionario(nome) {
+  return EX_FUNCIONARIOS.includes(nome.trim().toLowerCase());
+}
+
+function bonusRate(ligacoes) {
+  if (ligacoes > 700) return 0.01;
+  if (ligacoes >= 650) return 0.005;
+  return 0;
+}
+
+// --- estado global ---
+let REGISTROS = [];
+
+function filtrarPorData(registros, inicio, fim) {
+  return registros.filter(r => r.data >= inicio && r.data <= fim);
+}
+
+function computeResumo(registros) {
+  const nomes = new Set();
+  let totalLigacoes = 0;
+  let totalBonificacao = 0;
+  let maiorRegistro = 0;
+  const dias = new Set();
+
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    r.participantes.forEach(p => nomes.add(p.toLowerCase()));
+    totalLigacoes += r.ligacoes;
+    totalBonificacao += r.ligacoes * bonusRate(r.ligacoes);
+    maiorRegistro = Math.max(maiorRegistro, r.ligacoes);
+    dias.add(r.data);
+  });
+
+  const totalRegistros = registros.filter(r => r.participantes.length > 0).length;
+  const totalVistorias = totalRegistros;
+  const diasAtividade = dias.size;
+
+  return {
+    totalRegistros,
+    totalVistorias,
+    totalLigacoes,
+    totalTecnicos: nomes.size,
+    totalBonificacao,
+    diasAtividade,
+    mediaLigacoesVistoria: totalVistorias > 0 ? totalLigacoes / totalVistorias : 0,
+    mediaLigacoesDia: diasAtividade > 0 ? totalLigacoes / diasAtividade : 0,
+    mediaVistoriasDia: diasAtividade > 0 ? totalVistorias / diasAtividade : 0,
+    maiorRegistro,
+  };
+}
+
+function computeBonificacaoPorTecnico(registros) {
+  const totals = {};
+  TECNICOS_ATIVOS.forEach(t => { totals[t.canon] = { bonificacao: 0, ligacoes: 0, vistorias: 0 }; });
+
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    const bonusRegistro = r.ligacoes * bonusRate(r.ligacoes);
+    r.participantes.forEach(nome => {
+      if (isExFuncionario(nome)) return;
+      const tec = matchTecnicoAtivo(nome);
+      if (!tec) return;
+      totals[tec.canon].bonificacao += bonusRegistro / n;
+      totals[tec.canon].ligacoes += r.ligacoes / n;
+      totals[tec.canon].vistorias += 1 / n;
+    });
+  });
+
+  const lista = TECNICOS_ATIVOS.map(t => ({ canon: t.canon, ...totals[t.canon] }))
+    .sort((a, b) => b.bonificacao - a.bonificacao);
+  const max = lista.length > 0 ? lista[0].bonificacao : 0;
+  lista.forEach(item => { item.percentual = max > 0 ? (item.bonificacao / max) * 100 : 0; });
+  return lista;
+}
+
+function computeSeriePorTecnico(registros, canon) {
+  const pontos = [];
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    const participa = r.participantes.some(nome => {
+      if (isExFuncionario(nome)) return false;
+      const tec = matchTecnicoAtivo(nome);
+      return tec && tec.canon === canon;
+    });
+    if (participa) {
+      pontos.push({ x: r.data, y: r.ligacoes / n });
+    }
+  });
+  pontos.sort((a, b) => a.x.localeCompare(b.x));
+  return pontos;
+}
+
+// --- render ---
+let charts = {};
+
+function renderResumo(resumo) {
+  document.getElementById("stat-vistorias").textContent = NUM.format(resumo.totalVistorias);
+  document.getElementById("stat-bonificacao").textContent = BRL.format(resumo.totalBonificacao);
+  document.getElementById("ind-registros").textContent = NUM.format(resumo.totalRegistros);
+  document.getElementById("ind-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
+  document.getElementById("ind-dias").textContent = NUM.format(resumo.diasAtividade);
+  document.getElementById("ind-media-vistorias-dia").textContent = resumo.mediaVistoriasDia.toFixed(2).replace(".", ",");
+  document.getElementById("ind-media-ligacoes-vistoria").textContent = resumo.mediaLigacoesVistoria.toFixed(2).replace(".", ",");
+  document.getElementById("ind-media-ligacoes-dia").textContent = resumo.mediaLigacoesDia.toFixed(2).replace(".", ",");
+  document.getElementById("ind-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
+}
+
+function renderBonificacaoPorTecnico(lista) {
+  const container = document.getElementById("lista-bonificacao");
+  container.innerHTML = "";
+  const maxBonificacao = lista.length > 0 ? lista[0].bonificacao : 0;
+  lista.forEach(item => {
+    const badge = item.bonificacao > 0 && item.bonificacao === maxBonificacao ? " 🏆" : "";
+    const div = document.createElement("div");
+    div.className = "tecnico-item";
+    div.innerHTML = `
+      <div class="top-row">
+        <span class="nome">${item.canon}${badge}</span>
+        <span class="valor">${BRL.format(item.bonificacao)}</span>
+      </div>
+      <div class="barra-bg"><div class="barra-fill" style="width:${item.percentual}%;"></div></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function renderCharts(registros, tecnicoSelecionado) {
+  const grid = document.getElementById("charts-grid");
+  grid.innerHTML = "";
+  charts = {};
+
+  const lista = tecnicoSelecionado
+    ? TECNICOS_ATIVOS.filter(t => t.canon === tecnicoSelecionado)
+    : TECNICOS_ATIVOS;
+
+  lista.forEach(t => {
+    const card = document.createElement("div");
+    card.className = "chart-card";
+    const canvasId = `chart-${t.canon}`;
+    card.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+    grid.appendChild(card);
+
+    const pontos = computeSeriePorTecnico(registros, t.canon);
+    const ctx = document.getElementById(canvasId).getContext("2d");
+    charts[t.canon] = new Chart(ctx, {
+      type: "line",
+      data: {
+        datasets: [{
+          label: "Ligações",
+          data: pontos,
+          borderColor: "#5B6B4A",
+          backgroundColor: "#5B6B4A",
+          pointRadius: 3,
+          tension: 0.15,
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: `PRODUTIVIDADE  -  ${t.canon.toUpperCase()}  -  (BONIFICAÇÃO)`,
+            font: { size: 11, weight: "bold" },
+            color: "#444",
+          },
+          annotation: {
+            annotations: {
+              linha650: {
+                type: "line",
+                yMin: 650,
+                yMax: 650,
+                borderColor: "#2e7d32",
+                borderWidth: 1,
+                label: {
+                  display: true,
+                  content: "Bonificações R$ 0,05",
+                  position: "start",
+                  font: { size: 9 },
+                  backgroundColor: "rgba(255,255,255,0.85)",
+                  color: "#2e7d32",
+                },
+              },
+              linha700: {
+                type: "line",
+                yMin: 700,
+                yMax: 700,
+                borderColor: "#c62828",
+                borderWidth: 1,
+                label: {
+                  display: true,
+                  content: "Bonificações R$ 0,10",
+                  position: "end",
+                  font: { size: 9 },
+                  backgroundColor: "rgba(255,255,255,0.85)",
+                  color: "#c62828",
+                },
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            type: "time",
+            time: { unit: "month", tooltipFormat: "dd/MM/yyyy" },
+            title: { display: false },
+          },
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  });
+}
+
+function renderTudo() {
+  const inicio = document.getElementById("filtro-data-inicio").value;
+  const fim = document.getElementById("filtro-data-fim").value;
+  const tecnico = document.getElementById("filtro-tecnico").value;
+
+  let registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
+
+  let registrosResumo = registrosPeriodo;
+  if (tecnico) {
+    registrosResumo = registrosPeriodo.filter(r =>
+      r.participantes.some(nome => {
+        if (isExFuncionario(nome)) return false;
+        const tec = matchTecnicoAtivo(nome);
+        return tec && tec.canon === tecnico;
+      })
+    );
+  }
+
+  renderResumo(computeResumo(registrosResumo));
+  renderBonificacaoPorTecnico(computeBonificacaoPorTecnico(registrosPeriodo));
+  renderCharts(registrosPeriodo, tecnico || null);
+
+  document.getElementById("footer-periodo").textContent =
+    `Período: ${inicio.split("-").reverse().join("/")} a ${fim.split("-").reverse().join("/")}`;
+}
+
+function popularFiltroTecnico() {
+  const select = document.getElementById("filtro-tecnico");
+  TECNICOS_ATIVOS.forEach(t => {
+    const opt = document.createElement("option");
+    opt.value = t.canon;
+    opt.textContent = t.canon;
+    select.appendChild(opt);
+  });
+}
+
+async function init() {
+  try {
+    const resp = await fetch(DATA_URL);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const json = await resp.json();
+    REGISTROS = json.registros || [];
+
+    popularFiltroTecnico();
+
+    const hoje = new Date().toISOString().slice(0, 10);
+    document.getElementById("filtro-data-inicio").value = PERIODO_INICIO_PADRAO;
+    document.getElementById("filtro-data-fim").value = hoje;
+
+    ["filtro-data-inicio", "filtro-data-fim", "filtro-tecnico"].forEach(id =>
+      document.getElementById(id).addEventListener("change", renderTudo)
+    );
+
+    document.getElementById("status-msg").style.display = "none";
+    document.getElementById("layout").style.display = "grid";
+    renderTudo();
+  } catch (err) {
+    const msg = document.getElementById("status-msg");
+    msg.textContent = `Erro ao carregar ${DATA_URL}: ${err.message}. Rode o export (scripts/export_pc392.py) antes de abrir esta página.`;
+    msg.classList.add("erro");
+  }
+}
+
+init();
+</script>
+
+</body>
+</html>

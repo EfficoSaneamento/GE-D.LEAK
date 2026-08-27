@@ -1,0 +1,55 @@
+name: Exportar dados PC 392
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # todo dia às 06:00 UTC (~03:00 horário de Brasília)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  export-e-publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar export
+        env:
+          ARCGIS_USERNAME: ${{ secrets.ARCGIS_USERNAME }}
+          ARCGIS_PASSWORD: ${{ secrets.ARCGIS_PASSWORD }}
+        run: python scripts/export_pc392.py
+
+      - name: Commitar data/pc392.json atualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/pc392.json
+          git diff --staged --quiet || git commit -m "Atualiza data/pc392.json [skip ci]"
+          git push
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload do site estático
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy no GitHub Pages
+        uses: actions/deploy-pages@v4
