@@ -1,0 +1,9752 @@
+{
+  "gerado_em": "2026-08-27T20:22:38Z",
+  "registros": [
+    {
+      "id": 1,
+      "data": "2025-06-04",
+      "ligacoes": 242.0,
+      "participantes": [
+        "Fabio Faustino",
+        "Vitor Felipe",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 2,
+      "data": "2025-03-19",
+      "ligacoes": 531.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 3,
+      "data": "2025-03-20",
+      "ligacoes": 1092.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 4,
+      "data": "2025-03-20",
+      "ligacoes": 823.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 5,
+      "data": "2025-03-20",
+      "ligacoes": 622.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 6,
+      "data": "2025-03-20",
+      "ligacoes": 983.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Vitor Felipe"
+      ]
+    },
+    {
+      "id": 7,
+      "data": "2025-03-21",
+      "ligacoes": 179.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 8,
+      "data": "2025-03-21",
+      "ligacoes": 1036.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 9,
+      "data": "2025-03-21",
+      "ligacoes": 522.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 10,
+      "data": "2025-03-24",
+      "ligacoes": 341.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 11,
+      "data": "2025-03-24",
+      "ligacoes": 1076.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 12,
+      "data": "2025-03-24",
+      "ligacoes": 1029.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Vitor Felipe"
+      ]
+    },
+    {
+      "id": 13,
+      "data": "2025-03-24",
+      "ligacoes": 1283.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 14,
+      "data": "2025-03-25",
+      "ligacoes": 1201.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 15,
+      "data": "2025-03-25",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 16,
+      "data": "2025-03-25",
+      "ligacoes": 1091.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 17,
+      "data": "2025-03-25",
+      "ligacoes": 1071.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 18,
+      "data": "2025-03-25",
+      "ligacoes": 1023.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Vitor Felipe"
+      ]
+    },
+    {
+      "id": 19,
+      "data": "2025-03-26",
+      "ligacoes": 1219.0,
+      "participantes": [
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 20,
+      "data": "2025-03-26",
+      "ligacoes": 1035.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 21,
+      "data": "2025-03-26",
+      "ligacoes": 1017.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Vitor Felipe"
+      ]
+    },
+    {
+      "id": 22,
+      "data": "2025-03-26",
+      "ligacoes": 716.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 23,
+      "data": "2025-03-27",
+      "ligacoes": 530.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 24,
+      "data": "2025-03-27",
+      "ligacoes": 1207.0,
+      "participantes": [
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 25,
+      "data": "2025-03-27",
+      "ligacoes": 769.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 26,
+      "data": "2025-03-28",
+      "ligacoes": 1157.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 27,
+      "data": "2025-03-28",
+      "ligacoes": 1019.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 28,
+      "data": "2025-03-28",
+      "ligacoes": 1334.0,
+      "participantes": [
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 29,
+      "data": "2025-03-28",
+      "ligacoes": 880.0,
+      "participantes": [
+        "Vitor Felipe",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 30,
+      "data": "2025-03-27",
+      "ligacoes": 1158.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 31,
+      "data": "2025-03-31",
+      "ligacoes": 1129.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 32,
+      "data": "2025-03-31",
+      "ligacoes": 956.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Vitor Felipe"
+      ]
+    },
+    {
+      "id": 33,
+      "data": "2025-03-31",
+      "ligacoes": 1250.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 34,
+      "data": "2025-04-01",
+      "ligacoes": 1032.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 35,
+      "data": "2025-04-01",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 36,
+      "data": "2025-04-01",
+      "ligacoes": 1213.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 37,
+      "data": "2025-04-02",
+      "ligacoes": 1072.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 38,
+      "data": "2025-04-02",
+      "ligacoes": 1077.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 39,
+      "data": "2025-04-02",
+      "ligacoes": 230.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 40,
+      "data": "2025-04-02",
+      "ligacoes": 1030.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 41,
+      "data": "2025-04-03",
+      "ligacoes": 425.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 42,
+      "data": "2025-04-03",
+      "ligacoes": 711.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 43,
+      "data": "2025-04-03",
+      "ligacoes": 836.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 44,
+      "data": "2025-04-04",
+      "ligacoes": 1027.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 45,
+      "data": "2025-04-04",
+      "ligacoes": 1213.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 46,
+      "data": "2025-04-04",
+      "ligacoes": 1189.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 47,
+      "data": "2025-04-07",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 48,
+      "data": "2025-04-07",
+      "ligacoes": 1013.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Vitor Felipe"
+      ]
+    },
+    {
+      "id": 49,
+      "data": "2025-04-07",
+      "ligacoes": 1180.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 50,
+      "data": "2025-04-08",
+      "ligacoes": 527.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 51,
+      "data": "2025-04-08",
+      "ligacoes": 584.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 52,
+      "data": "2025-04-08",
+      "ligacoes": 1222.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 53,
+      "data": "2025-04-08",
+      "ligacoes": 1152.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 54,
+      "data": "2025-04-09",
+      "ligacoes": 423.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 55,
+      "data": "2025-04-09",
+      "ligacoes": 1023.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 56,
+      "data": "2025-04-10",
+      "ligacoes": 1031.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 57,
+      "data": "2025-04-10",
+      "ligacoes": 1202.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 58,
+      "data": "2025-04-11",
+      "ligacoes": 1180.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 59,
+      "data": "2025-04-11",
+      "ligacoes": 1289.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 60,
+      "data": "2025-04-11",
+      "ligacoes": 1035.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 61,
+      "data": "2025-04-14",
+      "ligacoes": 184.0,
+      "participantes": [
+        "Oldair Luciano",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 62,
+      "data": "2025-04-15",
+      "ligacoes": 688.0,
+      "participantes": [
+        "Oldair Luciano",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 63,
+      "data": "2025-04-16",
+      "ligacoes": 1241.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 64,
+      "data": "2025-04-16",
+      "ligacoes": 1337.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 65,
+      "data": "2025-04-17",
+      "ligacoes": 747.0,
+      "participantes": [
+        "Oldair Luciano",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 66,
+      "data": "2025-04-22",
+      "ligacoes": 1120.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 67,
+      "data": "2025-04-22",
+      "ligacoes": 815.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 68,
+      "data": "2025-04-22",
+      "ligacoes": 151.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 69,
+      "data": "2025-04-23",
+      "ligacoes": 1008.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "maykon_douglas"
+      ]
+    },
+    {
+      "id": 70,
+      "data": "2025-04-23",
+      "ligacoes": 1220.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 71,
+      "data": "2025-04-23",
+      "ligacoes": 1005.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 72,
+      "data": "2025-04-24",
+      "ligacoes": 794.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 73,
+      "data": "2025-04-24",
+      "ligacoes": 1225.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 74,
+      "data": "2025-04-24",
+      "ligacoes": 953.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 75,
+      "data": "2025-04-25",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 76,
+      "data": "2025-04-28",
+      "ligacoes": 1256.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 77,
+      "data": "2025-04-28",
+      "ligacoes": 975.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 78,
+      "data": "2025-04-28",
+      "ligacoes": 42.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 79,
+      "data": "2025-04-28",
+      "ligacoes": 1168.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 80,
+      "data": "2025-04-29",
+      "ligacoes": 1162.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 81,
+      "data": "2025-04-29",
+      "ligacoes": 965.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 82,
+      "data": "2025-04-29",
+      "ligacoes": 1195.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 83,
+      "data": "2025-04-30",
+      "ligacoes": 1264.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 84,
+      "data": "2025-04-30",
+      "ligacoes": 505.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 85,
+      "data": "2025-04-30",
+      "ligacoes": 1018.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 86,
+      "data": "2025-05-05",
+      "ligacoes": 1169.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 87,
+      "data": "2025-05-05",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 88,
+      "data": "2025-05-06",
+      "ligacoes": 1208.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 89,
+      "data": "2025-05-06",
+      "ligacoes": 1262.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 90,
+      "data": "2025-05-06",
+      "ligacoes": 1164.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 91,
+      "data": "2025-05-07",
+      "ligacoes": 1260.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 92,
+      "data": "2025-05-07",
+      "ligacoes": 1044.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 93,
+      "data": "2025-05-08",
+      "ligacoes": 589.0,
+      "participantes": [
+        "Carlos Alberto",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 94,
+      "data": "2025-05-08",
+      "ligacoes": 715.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 95,
+      "data": "2025-05-08",
+      "ligacoes": 1027.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 96,
+      "data": "2025-05-08",
+      "ligacoes": 978.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 97,
+      "data": "2025-05-09",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 98,
+      "data": "2025-05-09",
+      "ligacoes": 940.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ailton Ramos Rocha Jr.",
+        "Maykon Douglas"
+      ]
+    },
+    {
+      "id": 99,
+      "data": "2025-05-09",
+      "ligacoes": 1387.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 100,
+      "data": "2025-05-12",
+      "ligacoes": 1035.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 101,
+      "data": "2025-05-12",
+      "ligacoes": 849.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 102,
+      "data": "2025-05-13",
+      "ligacoes": 603.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 103,
+      "data": "2025-05-13",
+      "ligacoes": 1081.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 104,
+      "data": "2025-05-13",
+      "ligacoes": 551.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 105,
+      "data": "2025-05-13",
+      "ligacoes": 315.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 106,
+      "data": "2025-05-12",
+      "ligacoes": 1063.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 107,
+      "data": "2025-05-13",
+      "ligacoes": 1016.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 108,
+      "data": "2025-05-14",
+      "ligacoes": 1071.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 109,
+      "data": "2025-05-14",
+      "ligacoes": 1113.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 110,
+      "data": "2025-05-14",
+      "ligacoes": 1080.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 111,
+      "data": "2025-05-14",
+      "ligacoes": 989.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 112,
+      "data": "2025-05-15",
+      "ligacoes": 966.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 113,
+      "data": "2025-05-15",
+      "ligacoes": 293.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 114,
+      "data": "2025-05-15",
+      "ligacoes": 1246.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 115,
+      "data": "2025-05-15",
+      "ligacoes": 1258.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 116,
+      "data": "2025-05-15",
+      "ligacoes": 1315.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 117,
+      "data": "2025-05-16",
+      "ligacoes": 1416.0,
+      "participantes": [
+        "Igor Aquino",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 118,
+      "data": "2025-05-16",
+      "ligacoes": 1319.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 119,
+      "data": "2025-05-16",
+      "ligacoes": 796.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 120,
+      "data": "2025-05-16",
+      "ligacoes": 217.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 121,
+      "data": "2025-05-16",
+      "ligacoes": 1315.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 122,
+      "data": "2025-05-19",
+      "ligacoes": 1339.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 123,
+      "data": "2025-05-19",
+      "ligacoes": 1345.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 124,
+      "data": "2025-05-19",
+      "ligacoes": 1902.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 125,
+      "data": "2025-05-19",
+      "ligacoes": 1222.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 126,
+      "data": "2025-05-20",
+      "ligacoes": 1327.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 127,
+      "data": "2025-05-20",
+      "ligacoes": 1348.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 128,
+      "data": "2025-05-20",
+      "ligacoes": 1432.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 129,
+      "data": "2025-05-20",
+      "ligacoes": 283.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 130,
+      "data": "2025-05-20",
+      "ligacoes": 985.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 131,
+      "data": "2025-05-21",
+      "ligacoes": 1379.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 132,
+      "data": "2025-05-21",
+      "ligacoes": 1254.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 133,
+      "data": "2025-05-21",
+      "ligacoes": 1447.0,
+      "participantes": [
+        "Igor Aquino",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 134,
+      "data": "2025-05-21",
+      "ligacoes": 1317.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 135,
+      "data": "2025-05-22",
+      "ligacoes": 678.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 136,
+      "data": "2025-05-23",
+      "ligacoes": 1383.0,
+      "participantes": [
+        "Igor Aquino",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 137,
+      "data": "2025-05-23",
+      "ligacoes": 971.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 138,
+      "data": "2025-05-23",
+      "ligacoes": 1236.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 139,
+      "data": "2025-05-23",
+      "ligacoes": 1250.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 140,
+      "data": "2025-05-26",
+      "ligacoes": 1449.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 141,
+      "data": "2025-05-26",
+      "ligacoes": 1391.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 142,
+      "data": "2025-05-26",
+      "ligacoes": 1315.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 143,
+      "data": "2025-05-26",
+      "ligacoes": 805.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 144,
+      "data": "2025-05-26",
+      "ligacoes": 524.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 145,
+      "data": "2025-05-27",
+      "ligacoes": 1453.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 146,
+      "data": "2025-05-27",
+      "ligacoes": 1383.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 147,
+      "data": "2025-05-27",
+      "ligacoes": 1381.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 148,
+      "data": "2025-05-27",
+      "ligacoes": 1383.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 149,
+      "data": "2025-05-28",
+      "ligacoes": 1224.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 150,
+      "data": "2025-05-28",
+      "ligacoes": 702.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Carlos Alberto",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 151,
+      "data": "2025-05-28",
+      "ligacoes": 1053.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "João Paulo",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 152,
+      "data": "2025-05-30",
+      "ligacoes": 505.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 153,
+      "data": "2025-05-30",
+      "ligacoes": 1520.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 154,
+      "data": "2025-05-30",
+      "ligacoes": 1204.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 155,
+      "data": "2025-06-02",
+      "ligacoes": 1298.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 156,
+      "data": "2025-06-02",
+      "ligacoes": 1118.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 157,
+      "data": "2025-06-02",
+      "ligacoes": 218.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 158,
+      "data": "2025-06-02",
+      "ligacoes": 1277.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 159,
+      "data": "2025-06-03",
+      "ligacoes": 559.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 160,
+      "data": "2025-06-03",
+      "ligacoes": 456.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 161,
+      "data": "2025-06-03",
+      "ligacoes": 534.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 162,
+      "data": "2025-06-04",
+      "ligacoes": 1259.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 163,
+      "data": "2025-06-04",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 164,
+      "data": "2025-06-04",
+      "ligacoes": 666.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 165,
+      "data": "2025-06-05",
+      "ligacoes": 1207.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 166,
+      "data": "2025-06-05",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 167,
+      "data": "2025-06-06",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 168,
+      "data": "2025-06-05",
+      "ligacoes": 1249.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 169,
+      "data": "2025-06-06",
+      "ligacoes": 1213.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 170,
+      "data": "2025-06-06",
+      "ligacoes": 1161.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 171,
+      "data": "2025-06-10",
+      "ligacoes": 1317.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 172,
+      "data": "2025-06-10",
+      "ligacoes": 1230.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 173,
+      "data": "2025-06-10",
+      "ligacoes": 754.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 174,
+      "data": "2025-06-11",
+      "ligacoes": 344.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 175,
+      "data": "2025-06-11",
+      "ligacoes": 384.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 176,
+      "data": "2025-06-11",
+      "ligacoes": 243.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 177,
+      "data": "2025-06-12",
+      "ligacoes": 1278.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 178,
+      "data": "2025-06-12",
+      "ligacoes": 1353.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 179,
+      "data": "2025-06-12",
+      "ligacoes": 1218.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 180,
+      "data": "2025-06-13",
+      "ligacoes": 1553.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 181,
+      "data": "2025-06-13",
+      "ligacoes": 1257.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 182,
+      "data": "2025-06-16",
+      "ligacoes": 1634.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 183,
+      "data": "2025-06-16",
+      "ligacoes": 1291.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 184,
+      "data": "2025-06-16",
+      "ligacoes": 623.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 185,
+      "data": "2025-06-17",
+      "ligacoes": 1304.0,
+      "participantes": [
+        "Igor Aquino",
+        "João Paulo",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 186,
+      "data": "2025-06-17",
+      "ligacoes": 972.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 187,
+      "data": "2025-06-17",
+      "ligacoes": 1275.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 188,
+      "data": "2025-06-18",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 189,
+      "data": "2025-06-18",
+      "ligacoes": 1424.0,
+      "participantes": [
+        "Igor Aquino",
+        "João Paulo",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 190,
+      "data": "2025-06-18",
+      "ligacoes": 1262.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 191,
+      "data": "2025-06-18",
+      "ligacoes": 428.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 192,
+      "data": "2025-06-23",
+      "ligacoes": 922.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 193,
+      "data": "2025-06-23",
+      "ligacoes": 1237.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 194,
+      "data": "2025-06-24",
+      "ligacoes": 712.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 195,
+      "data": "2025-06-24",
+      "ligacoes": 275.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 196,
+      "data": "2025-06-24",
+      "ligacoes": 435.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 197,
+      "data": "2025-06-23",
+      "ligacoes": 633.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 198,
+      "data": "2025-06-25",
+      "ligacoes": 352.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 199,
+      "data": "2025-06-25",
+      "ligacoes": 1211.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 200,
+      "data": "2025-06-25",
+      "ligacoes": 785.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 201,
+      "data": "2025-06-25",
+      "ligacoes": 1231.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 202,
+      "data": "2025-06-26",
+      "ligacoes": 1272.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 203,
+      "data": "2025-06-26",
+      "ligacoes": 801.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 204,
+      "data": "2025-06-27",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 205,
+      "data": "2025-06-27",
+      "ligacoes": 24.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 206,
+      "data": "2025-06-26",
+      "ligacoes": 1248.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 207,
+      "data": "2025-06-30",
+      "ligacoes": 921.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 208,
+      "data": "2025-06-30",
+      "ligacoes": 630.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 209,
+      "data": "2025-06-30",
+      "ligacoes": 1200.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 210,
+      "data": "2025-06-30",
+      "ligacoes": 1019.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 211,
+      "data": "2025-06-30",
+      "ligacoes": 241.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 212,
+      "data": "2025-07-01",
+      "ligacoes": 220.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 213,
+      "data": "2025-07-01",
+      "ligacoes": 523.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 214,
+      "data": "2025-07-01",
+      "ligacoes": 658.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 215,
+      "data": "2025-07-01",
+      "ligacoes": 1241.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 216,
+      "data": "2025-07-01",
+      "ligacoes": 9.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 217,
+      "data": "2025-07-02",
+      "ligacoes": 1095.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 218,
+      "data": "2025-07-02",
+      "ligacoes": 427.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 219,
+      "data": "2025-07-02",
+      "ligacoes": 663.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 220,
+      "data": "2025-07-02",
+      "ligacoes": 619.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 221,
+      "data": "2025-07-02",
+      "ligacoes": 1056.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 222,
+      "data": "2025-07-03",
+      "ligacoes": 1032.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 223,
+      "data": "2025-07-03",
+      "ligacoes": 320.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 224,
+      "data": "2025-07-04",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 225,
+      "data": "2025-07-04",
+      "ligacoes": 1223.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 226,
+      "data": "2025-07-04",
+      "ligacoes": 945.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 227,
+      "data": "2025-07-04",
+      "ligacoes": 439.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 228,
+      "data": "2025-07-04",
+      "ligacoes": 1202.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 229,
+      "data": "2025-07-07",
+      "ligacoes": 419.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 230,
+      "data": "2025-07-07",
+      "ligacoes": 957.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 231,
+      "data": "2025-07-07",
+      "ligacoes": 579.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 232,
+      "data": "2025-07-07",
+      "ligacoes": 291.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 233,
+      "data": "2025-07-07",
+      "ligacoes": 722.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 234,
+      "data": "2025-07-08",
+      "ligacoes": 786.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 235,
+      "data": "2025-07-08",
+      "ligacoes": 414.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 236,
+      "data": "2025-07-08",
+      "ligacoes": 252.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 237,
+      "data": "2025-07-08",
+      "ligacoes": 1233.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 238,
+      "data": "2025-07-08",
+      "ligacoes": 1262.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 239,
+      "data": "2025-07-10",
+      "ligacoes": 1535.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 240,
+      "data": "2025-07-10",
+      "ligacoes": 1209.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 241,
+      "data": "2025-07-10",
+      "ligacoes": 712.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 242,
+      "data": "2025-07-10",
+      "ligacoes": 794.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 243,
+      "data": "2025-07-08",
+      "ligacoes": 635.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 244,
+      "data": "2025-07-11",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 245,
+      "data": "2025-07-11",
+      "ligacoes": 826.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 246,
+      "data": "2025-07-11",
+      "ligacoes": 1448.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 247,
+      "data": "2025-07-11",
+      "ligacoes": 561.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 248,
+      "data": "2025-07-14",
+      "ligacoes": 1218.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 249,
+      "data": "2025-07-14",
+      "ligacoes": 926.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 250,
+      "data": "2025-07-14",
+      "ligacoes": 2179.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 251,
+      "data": "2025-07-14",
+      "ligacoes": 731.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 252,
+      "data": "2025-07-15",
+      "ligacoes": 1203.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 253,
+      "data": "2025-07-15",
+      "ligacoes": 1218.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 254,
+      "data": "2025-07-15",
+      "ligacoes": 1001.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 255,
+      "data": "2025-07-15",
+      "ligacoes": 1222.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 256,
+      "data": "2025-07-15",
+      "ligacoes": 509.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 257,
+      "data": "2025-07-16",
+      "ligacoes": 1451.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 258,
+      "data": "2025-07-16",
+      "ligacoes": 302.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 259,
+      "data": "2025-07-16",
+      "ligacoes": 533.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 260,
+      "data": "2025-07-16",
+      "ligacoes": 1030.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 261,
+      "data": "2025-07-17",
+      "ligacoes": 992.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 262,
+      "data": "2025-07-16",
+      "ligacoes": 242.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 263,
+      "data": "2025-07-18",
+      "ligacoes": 953.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 264,
+      "data": "2025-07-18",
+      "ligacoes": 41.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 265,
+      "data": "2025-07-18",
+      "ligacoes": 848.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 266,
+      "data": "2025-07-21",
+      "ligacoes": 585.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 267,
+      "data": "2025-07-21",
+      "ligacoes": 891.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 268,
+      "data": "2025-07-21",
+      "ligacoes": 944.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 269,
+      "data": "2025-07-21",
+      "ligacoes": 423.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 270,
+      "data": "2025-07-18",
+      "ligacoes": 447.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 271,
+      "data": "2025-07-22",
+      "ligacoes": 1012.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 272,
+      "data": "2025-07-28",
+      "ligacoes": 430.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 273,
+      "data": "2025-07-28",
+      "ligacoes": 856.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 274,
+      "data": "2025-07-29",
+      "ligacoes": 1211.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 275,
+      "data": "2025-07-29",
+      "ligacoes": 1041.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 276,
+      "data": "2025-07-29",
+      "ligacoes": 1044.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Rairan Nascimento",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 277,
+      "data": "2025-07-30",
+      "ligacoes": 1268.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 278,
+      "data": "2025-07-30",
+      "ligacoes": 778.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 279,
+      "data": "2025-07-28",
+      "ligacoes": 923.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 280,
+      "data": "2025-07-31",
+      "ligacoes": 1013.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 281,
+      "data": "2025-07-31",
+      "ligacoes": 1249.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 282,
+      "data": "2025-07-31",
+      "ligacoes": 1231.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 283,
+      "data": "2025-08-01",
+      "ligacoes": 1229.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 284,
+      "data": "2025-08-01",
+      "ligacoes": 1207.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 285,
+      "data": "2025-08-01",
+      "ligacoes": 1249.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 286,
+      "data": "2025-08-01",
+      "ligacoes": 1242.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 287,
+      "data": "2025-08-04",
+      "ligacoes": 1232.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 288,
+      "data": "2025-08-04",
+      "ligacoes": 1261.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 289,
+      "data": "2025-08-04",
+      "ligacoes": 1241.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 290,
+      "data": "2025-08-05",
+      "ligacoes": 1080.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 291,
+      "data": "2025-08-05",
+      "ligacoes": 1243.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 292,
+      "data": "2025-07-31",
+      "ligacoes": 1019.0,
+      "participantes": [
+        "Wiliam Alencar",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 293,
+      "data": "2025-08-05",
+      "ligacoes": 1276.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 294,
+      "data": "2025-08-06",
+      "ligacoes": 1218.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 295,
+      "data": "2025-08-06",
+      "ligacoes": 893.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 296,
+      "data": "2025-08-06",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 297,
+      "data": "2025-08-07",
+      "ligacoes": 1200.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 298,
+      "data": "2025-08-07",
+      "ligacoes": 1258.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 299,
+      "data": "2025-08-07",
+      "ligacoes": 1228.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 300,
+      "data": "2025-08-08",
+      "ligacoes": 232.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 301,
+      "data": "2025-08-08",
+      "ligacoes": 158.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 302,
+      "data": "2025-08-08",
+      "ligacoes": 1220.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 303,
+      "data": "2025-08-08",
+      "ligacoes": 1068.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 304,
+      "data": "2025-08-08",
+      "ligacoes": 1247.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 305,
+      "data": "2025-08-11",
+      "ligacoes": 1284.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 306,
+      "data": "2025-08-11",
+      "ligacoes": 1106.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 307,
+      "data": "2025-08-11",
+      "ligacoes": 938.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 308,
+      "data": "2025-08-12",
+      "ligacoes": 1242.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 309,
+      "data": "2025-08-12",
+      "ligacoes": 811.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 310,
+      "data": "2025-08-12",
+      "ligacoes": 469.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 311,
+      "data": "2025-08-12",
+      "ligacoes": 766.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 312,
+      "data": "2025-08-12",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 313,
+      "data": "2025-08-13",
+      "ligacoes": 1221.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 314,
+      "data": "2025-08-13",
+      "ligacoes": 1244.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 315,
+      "data": "2025-08-13",
+      "ligacoes": 1221.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 316,
+      "data": "2025-08-14",
+      "ligacoes": 1275.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 317,
+      "data": "2025-08-14",
+      "ligacoes": 358.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 318,
+      "data": "2025-08-14",
+      "ligacoes": 887.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 319,
+      "data": "2025-08-14",
+      "ligacoes": 1204.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 320,
+      "data": "2025-08-14",
+      "ligacoes": 959.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 321,
+      "data": "2025-08-15",
+      "ligacoes": 1257.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 322,
+      "data": "2025-08-15",
+      "ligacoes": 1246.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 323,
+      "data": "2025-08-19",
+      "ligacoes": 1501.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 324,
+      "data": "2025-08-19",
+      "ligacoes": 1250.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 325,
+      "data": "2025-08-19",
+      "ligacoes": 1232.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Igor Aquino",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 326,
+      "data": "2025-08-20",
+      "ligacoes": 1492.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 327,
+      "data": "2025-08-20",
+      "ligacoes": 1227.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 328,
+      "data": "2025-08-20",
+      "ligacoes": 1079.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 329,
+      "data": "2025-08-21",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Christian Costa",
+        "Natan Santos Dativo"
+      ]
+    },
+    {
+      "id": 330,
+      "data": "2025-08-21",
+      "ligacoes": 1271.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 331,
+      "data": "2025-08-21",
+      "ligacoes": 1238.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Aparecido Valentim",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 332,
+      "data": "2025-08-21",
+      "ligacoes": 914.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "João Paulo"
+      ]
+    },
+    {
+      "id": 333,
+      "data": "2025-08-22",
+      "ligacoes": 1234.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 334,
+      "data": "2025-08-22",
+      "ligacoes": 439.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 335,
+      "data": "2025-08-22",
+      "ligacoes": 800.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 336,
+      "data": "2025-08-22",
+      "ligacoes": 1242.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 337,
+      "data": "2025-08-25",
+      "ligacoes": 1229.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 338,
+      "data": "2025-08-25",
+      "ligacoes": 1280.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 339,
+      "data": "2025-08-25",
+      "ligacoes": 847.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 340,
+      "data": "2025-08-26",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 341,
+      "data": "2025-08-26",
+      "ligacoes": 672.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 342,
+      "data": "2025-08-26",
+      "ligacoes": 1240.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 343,
+      "data": "2025-08-27",
+      "ligacoes": 1256.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 344,
+      "data": "2025-08-27",
+      "ligacoes": 612.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 345,
+      "data": "2025-08-28",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 346,
+      "data": "2025-08-28",
+      "ligacoes": 862.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 347,
+      "data": "2025-08-29",
+      "ligacoes": 1261.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 348,
+      "data": "2025-08-29",
+      "ligacoes": 1288.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 349,
+      "data": "2025-08-28",
+      "ligacoes": 1252.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 350,
+      "data": "2025-08-29",
+      "ligacoes": 1228.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Igor Aquino",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 351,
+      "data": "2025-09-01",
+      "ligacoes": 827.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 352,
+      "data": "2025-09-01",
+      "ligacoes": 1220.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 353,
+      "data": "2025-09-01",
+      "ligacoes": 1249.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 354,
+      "data": "2025-09-02",
+      "ligacoes": 1248.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 355,
+      "data": "2025-09-02",
+      "ligacoes": 1222.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Igor Aquino",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 356,
+      "data": "2025-09-02",
+      "ligacoes": 1242.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 357,
+      "data": "2025-09-03",
+      "ligacoes": 1205.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 358,
+      "data": "2025-09-03",
+      "ligacoes": 1115.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 359,
+      "data": "2025-09-03",
+      "ligacoes": 1124.0,
+      "participantes": [
+        "Igor Aquino",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 360,
+      "data": "2025-09-01",
+      "ligacoes": 614.0,
+      "participantes": [
+        "Igor Aquino",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 361,
+      "data": "2025-09-03",
+      "ligacoes": 1238.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 362,
+      "data": "2025-09-03",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 363,
+      "data": "2025-09-04",
+      "ligacoes": 1174.0,
+      "participantes": [
+        "Igor Aquino",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 364,
+      "data": "2025-09-04",
+      "ligacoes": 1230.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 365,
+      "data": "2025-09-04",
+      "ligacoes": 1209.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 366,
+      "data": "2025-09-05",
+      "ligacoes": 809.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 367,
+      "data": "2025-09-05",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 368,
+      "data": "2025-09-05",
+      "ligacoes": 322.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 369,
+      "data": "2025-09-05",
+      "ligacoes": 862.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 370,
+      "data": "2025-09-05",
+      "ligacoes": 764.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 371,
+      "data": "2025-09-08",
+      "ligacoes": 1233.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 372,
+      "data": "2025-09-09",
+      "ligacoes": 1328.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 373,
+      "data": "2025-09-09",
+      "ligacoes": 267.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 374,
+      "data": "2025-09-10",
+      "ligacoes": 1307.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 375,
+      "data": "2025-09-10",
+      "ligacoes": 1215.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 376,
+      "data": "2025-09-10",
+      "ligacoes": 388.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 377,
+      "data": "2025-09-11",
+      "ligacoes": 1220.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 378,
+      "data": "2025-09-11",
+      "ligacoes": 1216.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 379,
+      "data": "2025-09-12",
+      "ligacoes": 1254.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 380,
+      "data": "2025-09-15",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 381,
+      "data": "2025-09-12",
+      "ligacoes": 662.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 382,
+      "data": "2025-09-12",
+      "ligacoes": 222.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 383,
+      "data": "2025-09-16",
+      "ligacoes": 1223.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 384,
+      "data": "2025-09-16",
+      "ligacoes": 944.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 385,
+      "data": "2025-09-16",
+      "ligacoes": 1235.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 386,
+      "data": "2025-09-17",
+      "ligacoes": 1226.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 387,
+      "data": "2025-09-17",
+      "ligacoes": 1149.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 388,
+      "data": "2025-09-11",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 389,
+      "data": "2025-09-17",
+      "ligacoes": 1192.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 390,
+      "data": "2025-09-18",
+      "ligacoes": 331.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 391,
+      "data": "2025-09-18",
+      "ligacoes": 1252.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 392,
+      "data": "2025-09-18",
+      "ligacoes": 1238.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Fabio Faustino"
+      ]
+    },
+    {
+      "id": 393,
+      "data": "2025-09-18",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 394,
+      "data": "2025-09-18",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 395,
+      "data": "2025-09-18",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Jackson Zanetti",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 396,
+      "data": "2025-09-19",
+      "ligacoes": 674.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 397,
+      "data": "2025-09-19",
+      "ligacoes": 532.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 398,
+      "data": "2025-09-19",
+      "ligacoes": 1012.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 399,
+      "data": "2025-09-23",
+      "ligacoes": 1207.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 400,
+      "data": "2025-09-23",
+      "ligacoes": 514.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 401,
+      "data": "2025-09-24",
+      "ligacoes": 1250.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 402,
+      "data": "2025-09-24",
+      "ligacoes": 1128.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 403,
+      "data": "2025-09-24",
+      "ligacoes": 410.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 404,
+      "data": "2025-09-24",
+      "ligacoes": 1208.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 405,
+      "data": "2025-09-25",
+      "ligacoes": 1622.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 406,
+      "data": "2025-09-25",
+      "ligacoes": 727.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 407,
+      "data": "2025-09-26",
+      "ligacoes": 1386.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 408,
+      "data": "2025-09-26",
+      "ligacoes": 1221.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 409,
+      "data": "2025-09-29",
+      "ligacoes": 577.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 410,
+      "data": "2025-09-29",
+      "ligacoes": 318.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 411,
+      "data": "2025-09-29",
+      "ligacoes": 1307.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 412,
+      "data": "2025-09-29",
+      "ligacoes": 1239.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 413,
+      "data": "2025-09-30",
+      "ligacoes": 835.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 414,
+      "data": "2025-09-30",
+      "ligacoes": 1220.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 415,
+      "data": "2025-10-01",
+      "ligacoes": 1227.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 416,
+      "data": "2025-10-01",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 417,
+      "data": "2025-10-01",
+      "ligacoes": 1227.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 418,
+      "data": "2025-10-01",
+      "ligacoes": 891.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 419,
+      "data": "2025-10-01",
+      "ligacoes": 382.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 420,
+      "data": "2025-10-03",
+      "ligacoes": 378.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 421,
+      "data": "2025-10-03",
+      "ligacoes": 1130.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 422,
+      "data": "2025-10-03",
+      "ligacoes": 858.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 423,
+      "data": "2025-10-03",
+      "ligacoes": 403.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 424,
+      "data": "2025-10-06",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 425,
+      "data": "2025-10-06",
+      "ligacoes": 1245.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 426,
+      "data": "2025-10-06",
+      "ligacoes": 1225.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 427,
+      "data": "2025-10-07",
+      "ligacoes": 1501.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 428,
+      "data": "2025-10-07",
+      "ligacoes": 670.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 429,
+      "data": "2025-10-08",
+      "ligacoes": 1253.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 430,
+      "data": "2025-10-08",
+      "ligacoes": 757.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 431,
+      "data": "2025-10-08",
+      "ligacoes": 440.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 432,
+      "data": "2025-10-08",
+      "ligacoes": 1130.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 433,
+      "data": "2025-10-09",
+      "ligacoes": 728.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 434,
+      "data": "2025-10-09",
+      "ligacoes": 774.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 435,
+      "data": "2025-10-09",
+      "ligacoes": 856.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 436,
+      "data": "2025-10-10",
+      "ligacoes": 720.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 437,
+      "data": "2025-10-10",
+      "ligacoes": 46.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 438,
+      "data": "2025-10-10",
+      "ligacoes": 690.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 439,
+      "data": "2025-10-10",
+      "ligacoes": 725.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 440,
+      "data": "2025-10-13",
+      "ligacoes": 1209.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 441,
+      "data": "2025-10-13",
+      "ligacoes": 1164.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 442,
+      "data": "2025-10-13",
+      "ligacoes": 1095.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 443,
+      "data": "2025-10-14",
+      "ligacoes": 1205.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 444,
+      "data": "2025-10-15",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 445,
+      "data": "2025-10-15",
+      "ligacoes": 1232.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 446,
+      "data": "2025-10-15",
+      "ligacoes": 1222.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 447,
+      "data": "2025-10-16",
+      "ligacoes": 1197.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 448,
+      "data": "2025-10-16",
+      "ligacoes": 1215.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 449,
+      "data": "2025-10-16",
+      "ligacoes": 1264.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 450,
+      "data": "2025-10-17",
+      "ligacoes": 986.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 451,
+      "data": "2025-10-17",
+      "ligacoes": 218.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 452,
+      "data": "2025-10-17",
+      "ligacoes": 1207.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 453,
+      "data": "2025-10-14",
+      "ligacoes": 293.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 454,
+      "data": "2025-10-17",
+      "ligacoes": 963.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 455,
+      "data": "2025-10-20",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 456,
+      "data": "2025-10-20",
+      "ligacoes": 1202.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 457,
+      "data": "2025-10-20",
+      "ligacoes": 1325.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 458,
+      "data": "2025-10-21",
+      "ligacoes": 651.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 459,
+      "data": "2025-10-21",
+      "ligacoes": 1235.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 460,
+      "data": "2025-10-21",
+      "ligacoes": 691.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 461,
+      "data": "2025-10-22",
+      "ligacoes": 1237.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 462,
+      "data": "2025-10-22",
+      "ligacoes": 1067.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 463,
+      "data": "2025-10-22",
+      "ligacoes": 1026.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 464,
+      "data": "2025-10-23",
+      "ligacoes": 1174.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 465,
+      "data": "2025-10-23",
+      "ligacoes": 1240.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 466,
+      "data": "2025-10-23",
+      "ligacoes": 1222.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 467,
+      "data": "2025-10-23",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 468,
+      "data": "2025-10-24",
+      "ligacoes": 1216.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 469,
+      "data": "2025-10-24",
+      "ligacoes": 843.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 470,
+      "data": "2025-10-24",
+      "ligacoes": 1263.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 471,
+      "data": "2025-10-27",
+      "ligacoes": 1212.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 472,
+      "data": "2025-10-27",
+      "ligacoes": 1242.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 473,
+      "data": "2025-10-27",
+      "ligacoes": 1137.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 474,
+      "data": "2025-10-29",
+      "ligacoes": 1209.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 475,
+      "data": "2025-10-28",
+      "ligacoes": 129.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 476,
+      "data": "2025-10-29",
+      "ligacoes": 389.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 477,
+      "data": "2025-10-29",
+      "ligacoes": 1209.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 478,
+      "data": "2025-10-30",
+      "ligacoes": 603.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 479,
+      "data": "2025-10-30",
+      "ligacoes": 388.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 480,
+      "data": "2025-10-30",
+      "ligacoes": 616.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 481,
+      "data": "2025-11-03",
+      "ligacoes": 495.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 482,
+      "data": "2025-11-03",
+      "ligacoes": 831.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 483,
+      "data": "2025-11-03",
+      "ligacoes": 1247.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 484,
+      "data": "2025-11-03",
+      "ligacoes": 1318.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 485,
+      "data": "2025-11-04",
+      "ligacoes": 1211.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 486,
+      "data": "2025-11-04",
+      "ligacoes": 1241.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Carlos Alberto",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 487,
+      "data": "2025-11-05",
+      "ligacoes": 2.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 488,
+      "data": "2025-11-05",
+      "ligacoes": 1200.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 489,
+      "data": "2025-11-05",
+      "ligacoes": 676.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 490,
+      "data": "2025-11-05",
+      "ligacoes": 102.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 491,
+      "data": "2025-11-06",
+      "ligacoes": 1219.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 492,
+      "data": "2025-11-06",
+      "ligacoes": 1234.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 493,
+      "data": "2025-11-06",
+      "ligacoes": 1175.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 494,
+      "data": "2025-11-07",
+      "ligacoes": 47.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 495,
+      "data": "2025-11-07",
+      "ligacoes": 1258.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 496,
+      "data": "2025-11-07",
+      "ligacoes": 207.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 497,
+      "data": "2025-11-07",
+      "ligacoes": 1009.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 498,
+      "data": "2025-11-07",
+      "ligacoes": 317.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 499,
+      "data": "2025-11-07",
+      "ligacoes": 921.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 500,
+      "data": "2025-11-10",
+      "ligacoes": 243.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 501,
+      "data": "2025-11-10",
+      "ligacoes": 1217.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 502,
+      "data": "2025-11-10",
+      "ligacoes": 1219.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 503,
+      "data": "2025-11-10",
+      "ligacoes": 1234.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 504,
+      "data": "2025-11-11",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 505,
+      "data": "2025-11-11",
+      "ligacoes": 1230.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 506,
+      "data": "2025-11-11",
+      "ligacoes": 463.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 507,
+      "data": "2025-11-11",
+      "ligacoes": 610.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 508,
+      "data": "2025-11-11",
+      "ligacoes": 1214.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 509,
+      "data": "2025-11-11",
+      "ligacoes": 138.0,
+      "participantes": [
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 510,
+      "data": "2025-11-12",
+      "ligacoes": 1264.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 511,
+      "data": "2025-11-12",
+      "ligacoes": 868.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 512,
+      "data": "2025-11-12",
+      "ligacoes": 659.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Alexsandro Souza Mota",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 513,
+      "data": "2025-11-13",
+      "ligacoes": 1217.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 514,
+      "data": "2025-11-13",
+      "ligacoes": 1223.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 515,
+      "data": "2025-11-13",
+      "ligacoes": 695.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 516,
+      "data": "2025-11-14",
+      "ligacoes": 163.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 517,
+      "data": "2025-11-14",
+      "ligacoes": 96.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 518,
+      "data": "2025-11-14",
+      "ligacoes": 275.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 519,
+      "data": "2025-11-14",
+      "ligacoes": 389.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 520,
+      "data": "2025-11-14",
+      "ligacoes": 748.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 521,
+      "data": "2025-11-14",
+      "ligacoes": 1250.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 522,
+      "data": "2025-11-14",
+      "ligacoes": 952.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 523,
+      "data": "2025-11-17",
+      "ligacoes": 1206.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 524,
+      "data": "2025-11-17",
+      "ligacoes": 1162.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 525,
+      "data": "2025-11-17",
+      "ligacoes": 1223.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 526,
+      "data": "2025-11-17",
+      "ligacoes": 116.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 527,
+      "data": "2025-11-17",
+      "ligacoes": 360.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 528,
+      "data": "2025-11-18",
+      "ligacoes": 198.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 529,
+      "data": "2025-11-18",
+      "ligacoes": 360.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 530,
+      "data": "2025-11-18",
+      "ligacoes": 503.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 531,
+      "data": "2025-11-18",
+      "ligacoes": 815.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 532,
+      "data": "2025-11-18",
+      "ligacoes": 1056.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 533,
+      "data": "2025-11-19",
+      "ligacoes": 1241.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 534,
+      "data": "2025-11-19",
+      "ligacoes": 101.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 535,
+      "data": "2025-11-19",
+      "ligacoes": 34.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 536,
+      "data": "2025-11-19",
+      "ligacoes": 576.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 537,
+      "data": "2025-11-19",
+      "ligacoes": 234.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 538,
+      "data": "2025-11-18",
+      "ligacoes": 577.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 539,
+      "data": "2025-11-21",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 540,
+      "data": "2025-11-22",
+      "ligacoes": 524.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 541,
+      "data": "2025-11-22",
+      "ligacoes": 562.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 542,
+      "data": "2025-11-24",
+      "ligacoes": 17.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 543,
+      "data": "2025-11-24",
+      "ligacoes": 406.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 544,
+      "data": "2025-11-24",
+      "ligacoes": 813.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 545,
+      "data": "2025-11-24",
+      "ligacoes": 1142.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 546,
+      "data": "2025-11-24",
+      "ligacoes": 794.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 547,
+      "data": "2025-11-24",
+      "ligacoes": 59.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 548,
+      "data": "2025-11-24",
+      "ligacoes": 416.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 549,
+      "data": "2025-11-25",
+      "ligacoes": 35.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 550,
+      "data": "2025-11-25",
+      "ligacoes": 1320.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 551,
+      "data": "2025-11-25",
+      "ligacoes": 1248.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 552,
+      "data": "2025-11-25",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 553,
+      "data": "2025-11-26",
+      "ligacoes": 1246.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 554,
+      "data": "2025-11-26",
+      "ligacoes": 1514.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 555,
+      "data": "2025-11-26",
+      "ligacoes": 1242.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 556,
+      "data": "2025-11-27",
+      "ligacoes": 1039.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 557,
+      "data": "2025-11-27",
+      "ligacoes": 190.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 558,
+      "data": "2025-11-27",
+      "ligacoes": 1309.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 559,
+      "data": "2025-11-27",
+      "ligacoes": 904.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 560,
+      "data": "2025-11-27",
+      "ligacoes": 311.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 561,
+      "data": "2025-11-28",
+      "ligacoes": 1215.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 562,
+      "data": "2025-11-28",
+      "ligacoes": 1277.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 563,
+      "data": "2025-11-29",
+      "ligacoes": 648.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 564,
+      "data": "2025-11-28",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 565,
+      "data": "2025-11-28",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 566,
+      "data": "2025-11-28",
+      "ligacoes": 355.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 567,
+      "data": "2025-11-28",
+      "ligacoes": 655.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 568,
+      "data": "2025-12-01",
+      "ligacoes": 1314.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 569,
+      "data": "2025-12-01",
+      "ligacoes": 769.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 570,
+      "data": "2025-12-01",
+      "ligacoes": 449.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 571,
+      "data": "2025-12-01",
+      "ligacoes": 1211.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 572,
+      "data": "2025-12-02",
+      "ligacoes": 1038.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 573,
+      "data": "2025-12-02",
+      "ligacoes": 1249.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 574,
+      "data": "2025-12-02",
+      "ligacoes": 1198.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 575,
+      "data": "2025-12-03",
+      "ligacoes": 135.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 576,
+      "data": "2025-12-03",
+      "ligacoes": 16.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 577,
+      "data": "2025-12-03",
+      "ligacoes": 718.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 578,
+      "data": "2025-12-03",
+      "ligacoes": 1261.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 579,
+      "data": "2025-12-03",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 580,
+      "data": "2025-12-03",
+      "ligacoes": 18.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 581,
+      "data": "2025-12-03",
+      "ligacoes": 760.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 582,
+      "data": "2025-12-04",
+      "ligacoes": 1239.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 583,
+      "data": "2025-12-04",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 584,
+      "data": "2025-12-04",
+      "ligacoes": 484.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 585,
+      "data": "2025-12-04",
+      "ligacoes": 717.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 586,
+      "data": "2025-12-04",
+      "ligacoes": 1203.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 587,
+      "data": "2025-12-05",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 588,
+      "data": "2025-12-05",
+      "ligacoes": 1024.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 589,
+      "data": "2025-12-05",
+      "ligacoes": 948.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 590,
+      "data": "2025-12-05",
+      "ligacoes": 136.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 591,
+      "data": "2025-12-08",
+      "ligacoes": 1277.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 592,
+      "data": "2025-12-08",
+      "ligacoes": 709.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 593,
+      "data": "2025-12-08",
+      "ligacoes": 92.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 594,
+      "data": "2025-12-08",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 595,
+      "data": "2025-12-08",
+      "ligacoes": 1232.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 596,
+      "data": "2025-12-10",
+      "ligacoes": 1240.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 597,
+      "data": "2025-12-10",
+      "ligacoes": 976.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 598,
+      "data": "2025-12-10",
+      "ligacoes": 1296.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 599,
+      "data": "2025-12-11",
+      "ligacoes": 1215.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 600,
+      "data": "2025-12-11",
+      "ligacoes": 472.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 601,
+      "data": "2025-12-11",
+      "ligacoes": 1253.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 602,
+      "data": "2025-12-11",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 603,
+      "data": "2025-12-12",
+      "ligacoes": 1339.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 604,
+      "data": "2025-12-12",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 605,
+      "data": "2025-12-12",
+      "ligacoes": 1342.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 606,
+      "data": "2025-12-12",
+      "ligacoes": 14.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 607,
+      "data": "2025-12-12",
+      "ligacoes": 725.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 608,
+      "data": "2025-12-12",
+      "ligacoes": 198.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 609,
+      "data": "2025-12-15",
+      "ligacoes": 1511.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 610,
+      "data": "2025-12-15",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 611,
+      "data": "2025-12-16",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 612,
+      "data": "2025-12-16",
+      "ligacoes": 1205.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 613,
+      "data": "2025-12-16",
+      "ligacoes": 1224.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 614,
+      "data": "2025-12-16",
+      "ligacoes": 1345.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Alexsandro Souza Mota"
+      ]
+    },
+    {
+      "id": 615,
+      "data": "2025-12-17",
+      "ligacoes": 41.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 616,
+      "data": "2025-12-16",
+      "ligacoes": 1137.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 617,
+      "data": "2025-12-18",
+      "ligacoes": 1203.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 618,
+      "data": "2025-12-18",
+      "ligacoes": 1249.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 619,
+      "data": "2025-12-19",
+      "ligacoes": 71.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 620,
+      "data": "2025-12-19",
+      "ligacoes": 17.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 621,
+      "data": "2025-12-19",
+      "ligacoes": 1423.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 622,
+      "data": "2025-12-19",
+      "ligacoes": 1220.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 623,
+      "data": "2025-12-19",
+      "ligacoes": 267.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 624,
+      "data": "2025-12-18",
+      "ligacoes": 1280.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 625,
+      "data": "2025-12-22",
+      "ligacoes": 1053.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 626,
+      "data": "2025-12-22",
+      "ligacoes": 197.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 627,
+      "data": "2025-12-22",
+      "ligacoes": 1225.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 628,
+      "data": "2025-12-23",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 629,
+      "data": "2025-12-22",
+      "ligacoes": 1357.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 630,
+      "data": "2026-01-05",
+      "ligacoes": 7.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 631,
+      "data": "2026-01-06",
+      "ligacoes": 1467.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 632,
+      "data": "2026-01-07",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 633,
+      "data": "2026-01-07",
+      "ligacoes": 1412.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 634,
+      "data": "2026-01-07",
+      "ligacoes": 1341.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 635,
+      "data": "2026-01-08",
+      "ligacoes": 1395.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 636,
+      "data": "2026-01-08",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 637,
+      "data": "2026-01-08",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 638,
+      "data": "2026-01-08",
+      "ligacoes": 1350.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 639,
+      "data": "2026-01-09",
+      "ligacoes": 1367.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 640,
+      "data": "2026-01-09",
+      "ligacoes": 1303.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 641,
+      "data": "2026-01-12",
+      "ligacoes": 1306.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 642,
+      "data": "2026-01-12",
+      "ligacoes": 1428.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 643,
+      "data": "2026-01-13",
+      "ligacoes": 1201.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 644,
+      "data": "2026-01-13",
+      "ligacoes": 862.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 645,
+      "data": "2026-01-14",
+      "ligacoes": 42.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 646,
+      "data": "2026-01-14",
+      "ligacoes": 1508.0,
+      "participantes": [
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 647,
+      "data": "2026-01-14",
+      "ligacoes": 1317.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 648,
+      "data": "2026-01-15",
+      "ligacoes": 1436.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 649,
+      "data": "2026-01-15",
+      "ligacoes": 1329.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 650,
+      "data": "2026-01-16",
+      "ligacoes": 701.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 651,
+      "data": "2026-01-16",
+      "ligacoes": 30.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 652,
+      "data": "2026-01-16",
+      "ligacoes": 1461.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 653,
+      "data": "2026-01-16",
+      "ligacoes": 39.0,
+      "participantes": [
+        "Igor Aquino",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 654,
+      "data": "2026-01-19",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 655,
+      "data": "2026-01-19",
+      "ligacoes": 8.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 656,
+      "data": "2026-01-19",
+      "ligacoes": 551.0,
+      "participantes": [
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 657,
+      "data": "2026-01-19",
+      "ligacoes": 1334.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 658,
+      "data": "2026-01-20",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 659,
+      "data": "2026-01-20",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 660,
+      "data": "2026-01-20",
+      "ligacoes": 19.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 661,
+      "data": "2026-01-20",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 662,
+      "data": "2026-01-20",
+      "ligacoes": 1324.0,
+      "participantes": [
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 663,
+      "data": "2026-01-20",
+      "ligacoes": 1335.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 664,
+      "data": "2026-01-21",
+      "ligacoes": 59.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 665,
+      "data": "2026-01-21",
+      "ligacoes": 1337.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 666,
+      "data": "2026-01-21",
+      "ligacoes": 1168.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 667,
+      "data": "2026-01-21",
+      "ligacoes": 302.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 668,
+      "data": "2026-01-22",
+      "ligacoes": 605.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 669,
+      "data": "2026-01-22",
+      "ligacoes": 1338.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 670,
+      "data": "2026-01-23",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 671,
+      "data": "2026-01-23",
+      "ligacoes": 1333.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 672,
+      "data": "2026-01-23",
+      "ligacoes": 1321.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 673,
+      "data": "2026-01-26",
+      "ligacoes": 1558.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 674,
+      "data": "2026-01-26",
+      "ligacoes": 1328.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 675,
+      "data": "2026-01-27",
+      "ligacoes": 1465.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 676,
+      "data": "2026-01-27",
+      "ligacoes": 605.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 677,
+      "data": "2026-01-28",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 678,
+      "data": "2026-01-27",
+      "ligacoes": 1090.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 679,
+      "data": "2026-01-28",
+      "ligacoes": 1345.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 680,
+      "data": "2026-01-28",
+      "ligacoes": 1221.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 681,
+      "data": "2026-01-29",
+      "ligacoes": 1311.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 682,
+      "data": "2026-01-29",
+      "ligacoes": 1005.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 683,
+      "data": "2026-01-29",
+      "ligacoes": 1208.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 684,
+      "data": "2026-01-30",
+      "ligacoes": 1322.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 685,
+      "data": "2026-01-30",
+      "ligacoes": 1317.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 686,
+      "data": "2026-01-30",
+      "ligacoes": 1033.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 687,
+      "data": "2026-02-02",
+      "ligacoes": 1304.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 688,
+      "data": "2026-02-02",
+      "ligacoes": 329.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 689,
+      "data": "2026-02-02",
+      "ligacoes": 1320.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 690,
+      "data": "2026-01-30",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 691,
+      "data": "2026-02-03",
+      "ligacoes": 38.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 692,
+      "data": "2026-02-03",
+      "ligacoes": 301.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 693,
+      "data": "2026-02-03",
+      "ligacoes": 1347.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 694,
+      "data": "2026-02-04",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 695,
+      "data": "2026-02-04",
+      "ligacoes": 1355.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 696,
+      "data": "2026-02-04",
+      "ligacoes": 1337.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 697,
+      "data": "2026-02-05",
+      "ligacoes": 36.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 698,
+      "data": "2026-02-03",
+      "ligacoes": 1235.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 699,
+      "data": "2026-02-05",
+      "ligacoes": 1304.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 700,
+      "data": "2026-02-05",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 701,
+      "data": "2026-02-05",
+      "ligacoes": 1260.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 702,
+      "data": "2026-02-06",
+      "ligacoes": 1303.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 703,
+      "data": "2026-02-06",
+      "ligacoes": 30.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 704,
+      "data": "2026-02-06",
+      "ligacoes": 1335.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 705,
+      "data": "2026-02-06",
+      "ligacoes": 1343.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 706,
+      "data": "2026-02-06",
+      "ligacoes": 1156.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 707,
+      "data": "2026-02-09",
+      "ligacoes": 706.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 708,
+      "data": "2026-02-09",
+      "ligacoes": 1067.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 709,
+      "data": "2026-02-10",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 710,
+      "data": "2026-02-10",
+      "ligacoes": 1335.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 711,
+      "data": "2026-02-10",
+      "ligacoes": 1351.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 712,
+      "data": "2026-02-10",
+      "ligacoes": 1085.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 713,
+      "data": "2026-02-11",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 714,
+      "data": "2026-02-11",
+      "ligacoes": 1330.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 715,
+      "data": "2026-02-11",
+      "ligacoes": 1360.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 716,
+      "data": "2026-02-11",
+      "ligacoes": 1403.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Aparecido Valentim"
+      ]
+    },
+    {
+      "id": 717,
+      "data": "2026-02-11",
+      "ligacoes": 1324.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 718,
+      "data": "2026-02-12",
+      "ligacoes": 1348.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 719,
+      "data": "2026-02-12",
+      "ligacoes": 1322.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 720,
+      "data": "2026-02-12",
+      "ligacoes": 1319.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 721,
+      "data": "2026-02-12",
+      "ligacoes": 1338.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 722,
+      "data": "2026-02-13",
+      "ligacoes": 1330.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 723,
+      "data": "2026-02-13",
+      "ligacoes": 1312.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 724,
+      "data": "2026-02-13",
+      "ligacoes": 566.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 725,
+      "data": "2026-02-13",
+      "ligacoes": 810.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 726,
+      "data": "2026-02-13",
+      "ligacoes": 1307.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 727,
+      "data": "2026-02-16",
+      "ligacoes": 1329.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 728,
+      "data": "2026-02-16",
+      "ligacoes": 1308.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 729,
+      "data": "2026-02-16",
+      "ligacoes": 1336.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 730,
+      "data": "2026-02-17",
+      "ligacoes": 915.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 731,
+      "data": "2026-02-17",
+      "ligacoes": 396.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 732,
+      "data": "2026-02-17",
+      "ligacoes": 752.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 733,
+      "data": "2026-02-17",
+      "ligacoes": 370.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 734,
+      "data": "2026-02-17",
+      "ligacoes": 577.0,
+      "participantes": [
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 735,
+      "data": "2026-02-18",
+      "ligacoes": 1574.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 736,
+      "data": "2026-02-18",
+      "ligacoes": 1323.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 737,
+      "data": "2026-02-18",
+      "ligacoes": 35.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 738,
+      "data": "2026-02-19",
+      "ligacoes": 67.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 739,
+      "data": "2026-02-19",
+      "ligacoes": 1331.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 740,
+      "data": "2026-02-19",
+      "ligacoes": 1542.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 741,
+      "data": "2026-02-20",
+      "ligacoes": 1528.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 742,
+      "data": "2026-02-20",
+      "ligacoes": 47.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 743,
+      "data": "2026-02-23",
+      "ligacoes": 1303.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 744,
+      "data": "2026-02-23",
+      "ligacoes": 1332.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 745,
+      "data": "2026-02-23",
+      "ligacoes": 329.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 746,
+      "data": "2026-02-23",
+      "ligacoes": 342.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 747,
+      "data": "2026-02-24",
+      "ligacoes": 1344.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 748,
+      "data": "2026-02-24",
+      "ligacoes": 1326.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 749,
+      "data": "2026-02-24",
+      "ligacoes": 1311.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 750,
+      "data": "2026-02-25",
+      "ligacoes": 229.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 751,
+      "data": "2026-02-25",
+      "ligacoes": 1352.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 752,
+      "data": "2026-02-25",
+      "ligacoes": 1261.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Jackson Zanetti"
+      ]
+    },
+    {
+      "id": 753,
+      "data": "2026-02-25",
+      "ligacoes": 1317.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 754,
+      "data": "2026-02-26",
+      "ligacoes": 205.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 755,
+      "data": "2026-02-27",
+      "ligacoes": 42.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 756,
+      "data": "2026-03-02",
+      "ligacoes": 1585.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 757,
+      "data": "2026-03-03",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 758,
+      "data": "2026-03-03",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 759,
+      "data": "2026-03-03",
+      "ligacoes": 532.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 760,
+      "data": "2026-03-03",
+      "ligacoes": 1346.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 761,
+      "data": "2026-03-04",
+      "ligacoes": 1318.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 762,
+      "data": "2026-03-04",
+      "ligacoes": 1190.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 763,
+      "data": "2026-03-04",
+      "ligacoes": 144.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 764,
+      "data": "2026-03-05",
+      "ligacoes": 58.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 765,
+      "data": "2026-03-05",
+      "ligacoes": 1336.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 766,
+      "data": "2026-03-05",
+      "ligacoes": 1321.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 767,
+      "data": "2026-03-06",
+      "ligacoes": 17.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 768,
+      "data": "2026-03-06",
+      "ligacoes": 1406.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 769,
+      "data": "2026-03-06",
+      "ligacoes": 1354.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 770,
+      "data": "2026-03-09",
+      "ligacoes": 858.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 771,
+      "data": "2026-03-10",
+      "ligacoes": 1006.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 772,
+      "data": "2026-03-10",
+      "ligacoes": 849.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 773,
+      "data": "2026-03-10",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 774,
+      "data": "2026-03-11",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 775,
+      "data": "2026-03-11",
+      "ligacoes": 1378.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 776,
+      "data": "2026-03-12",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 777,
+      "data": "2026-03-13",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 778,
+      "data": "2026-03-16",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 779,
+      "data": "2026-03-16",
+      "ligacoes": 1335.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 780,
+      "data": "2026-03-16",
+      "ligacoes": 931.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 781,
+      "data": "2026-03-16",
+      "ligacoes": 411.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 782,
+      "data": "2026-03-16",
+      "ligacoes": 1365.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 783,
+      "data": "2026-03-17",
+      "ligacoes": 1352.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 784,
+      "data": "2026-03-17",
+      "ligacoes": 1352.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 785,
+      "data": "2026-03-18",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 786,
+      "data": "2026-03-17",
+      "ligacoes": 1372.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 787,
+      "data": "2026-03-18",
+      "ligacoes": 1304.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 788,
+      "data": "2026-03-18",
+      "ligacoes": 1324.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 789,
+      "data": "2026-03-18",
+      "ligacoes": 1333.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 790,
+      "data": "2026-03-19",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 791,
+      "data": "2026-03-19",
+      "ligacoes": 627.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 792,
+      "data": "2026-03-19",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 793,
+      "data": "2026-03-19",
+      "ligacoes": 1010.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 794,
+      "data": "2026-03-20",
+      "ligacoes": 55.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 795,
+      "data": "2026-03-20",
+      "ligacoes": 1301.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 796,
+      "data": "2026-03-20",
+      "ligacoes": 1325.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 797,
+      "data": "2026-03-20",
+      "ligacoes": 82.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 798,
+      "data": "2026-03-20",
+      "ligacoes": 1369.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 799,
+      "data": "2026-03-23",
+      "ligacoes": 120.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 800,
+      "data": "2026-03-23",
+      "ligacoes": 71.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 801,
+      "data": "2026-03-23",
+      "ligacoes": 16.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 802,
+      "data": "2026-03-23",
+      "ligacoes": 619.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 803,
+      "data": "2026-03-23",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 804,
+      "data": "2026-03-23",
+      "ligacoes": 1330.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 805,
+      "data": "2026-03-23",
+      "ligacoes": 1334.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 806,
+      "data": "2026-03-24",
+      "ligacoes": 1324.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 807,
+      "data": "2026-03-25",
+      "ligacoes": 24.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 808,
+      "data": "2026-03-25",
+      "ligacoes": 14.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 809,
+      "data": "2026-03-25",
+      "ligacoes": 1503.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 810,
+      "data": "2026-03-25",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 811,
+      "data": "2026-03-25",
+      "ligacoes": 1324.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 812,
+      "data": "2026-03-26",
+      "ligacoes": 1581.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ronaldo De Oliveira Barbosa",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 813,
+      "data": "2026-03-27",
+      "ligacoes": 21.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 814,
+      "data": "2026-03-27",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 815,
+      "data": "2026-03-27",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 816,
+      "data": "2026-03-27",
+      "ligacoes": 1310.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 817,
+      "data": "2026-03-30",
+      "ligacoes": 1513.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 818,
+      "data": "2026-03-30",
+      "ligacoes": 508.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 819,
+      "data": "2026-03-31",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 820,
+      "data": "2026-03-31",
+      "ligacoes": 1117.0,
+      "participantes": [
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 821,
+      "data": "2026-03-31",
+      "ligacoes": 900.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 822,
+      "data": "2026-03-24",
+      "ligacoes": 1319.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 823,
+      "data": "2026-04-01",
+      "ligacoes": 30.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 824,
+      "data": "2026-04-01",
+      "ligacoes": 1031.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 825,
+      "data": "2026-04-01",
+      "ligacoes": 1303.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 826,
+      "data": "2026-04-02",
+      "ligacoes": 45.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 827,
+      "data": "2026-04-02",
+      "ligacoes": 1339.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 828,
+      "data": "2026-04-02",
+      "ligacoes": 1359.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 829,
+      "data": "2026-04-02",
+      "ligacoes": 1329.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 830,
+      "data": "2026-04-06",
+      "ligacoes": 1339.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 831,
+      "data": "2026-04-06",
+      "ligacoes": 1320.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 832,
+      "data": "2026-04-07",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 833,
+      "data": "2026-04-07",
+      "ligacoes": 2.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 834,
+      "data": "2026-04-07",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 835,
+      "data": "2026-04-07",
+      "ligacoes": 1600.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 836,
+      "data": "2026-04-07",
+      "ligacoes": 1307.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 837,
+      "data": "2026-04-08",
+      "ligacoes": 1303.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 838,
+      "data": "2026-04-08",
+      "ligacoes": 1310.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 839,
+      "data": "2026-04-09",
+      "ligacoes": 1316.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 840,
+      "data": "2026-04-09",
+      "ligacoes": 1508.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 841,
+      "data": "2026-04-10",
+      "ligacoes": 1203.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 842,
+      "data": "2026-04-10",
+      "ligacoes": 314.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 843,
+      "data": "2026-04-10",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 844,
+      "data": "2026-04-10",
+      "ligacoes": 1319.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 845,
+      "data": "2026-04-14",
+      "ligacoes": 1314.0,
+      "participantes": [
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 846,
+      "data": "2026-04-14",
+      "ligacoes": 1437.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 847,
+      "data": "2026-04-15",
+      "ligacoes": 6.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 848,
+      "data": "2026-04-15",
+      "ligacoes": 1061.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 849,
+      "data": "2026-04-15",
+      "ligacoes": 460.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 850,
+      "data": "2026-04-15",
+      "ligacoes": 1352.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 851,
+      "data": "2026-04-16",
+      "ligacoes": 700.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 852,
+      "data": "2026-04-16",
+      "ligacoes": 1414.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 853,
+      "data": "2026-04-16",
+      "ligacoes": 670.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 854,
+      "data": "2026-04-17",
+      "ligacoes": 1357.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 855,
+      "data": "2026-04-17",
+      "ligacoes": 536.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 856,
+      "data": "2026-04-17",
+      "ligacoes": 174.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 857,
+      "data": "2026-04-20",
+      "ligacoes": 1342.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 858,
+      "data": "2026-04-20",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 859,
+      "data": "2026-04-20",
+      "ligacoes": 1309.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 860,
+      "data": "2026-04-22",
+      "ligacoes": 1311.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 861,
+      "data": "2026-04-22",
+      "ligacoes": 1302.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 862,
+      "data": "2026-04-22",
+      "ligacoes": 1461.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 863,
+      "data": "2026-04-23",
+      "ligacoes": 4.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 864,
+      "data": "2026-04-23",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 865,
+      "data": "2026-04-14",
+      "ligacoes": 23.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 866,
+      "data": "2026-04-15",
+      "ligacoes": 17.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 867,
+      "data": "2026-04-23",
+      "ligacoes": 1346.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 868,
+      "data": "2026-04-23",
+      "ligacoes": 1307.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 869,
+      "data": "2026-04-23",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 870,
+      "data": "2026-04-24",
+      "ligacoes": 19.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 871,
+      "data": "2026-04-24",
+      "ligacoes": 1410.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 872,
+      "data": "2026-04-24",
+      "ligacoes": 1320.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 873,
+      "data": "2026-04-27",
+      "ligacoes": 374.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 874,
+      "data": "2026-04-27",
+      "ligacoes": 665.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 875,
+      "data": "2026-04-28",
+      "ligacoes": 466.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 876,
+      "data": "2026-04-28",
+      "ligacoes": 840.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 877,
+      "data": "2026-04-29",
+      "ligacoes": 377.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 878,
+      "data": "2026-04-29",
+      "ligacoes": 184.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 879,
+      "data": "2026-04-29",
+      "ligacoes": 594.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 880,
+      "data": "2026-04-30",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 881,
+      "data": "2026-04-30",
+      "ligacoes": 359.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 882,
+      "data": "2026-04-30",
+      "ligacoes": 88.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 883,
+      "data": "2026-04-30",
+      "ligacoes": 628.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 884,
+      "data": "2026-05-04",
+      "ligacoes": 309.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 885,
+      "data": "2026-05-04",
+      "ligacoes": 421.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 886,
+      "data": "2026-05-04",
+      "ligacoes": 708.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 887,
+      "data": "2026-05-05",
+      "ligacoes": 727.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 888,
+      "data": "2026-05-06",
+      "ligacoes": 752.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 889,
+      "data": "2026-05-06",
+      "ligacoes": 1176.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 890,
+      "data": "2026-05-07",
+      "ligacoes": 1090.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 891,
+      "data": "2026-05-07",
+      "ligacoes": 822.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 892,
+      "data": "2026-05-08",
+      "ligacoes": 1294.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 893,
+      "data": "2026-05-08",
+      "ligacoes": 1016.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 894,
+      "data": "2026-05-11",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 895,
+      "data": "2026-05-11",
+      "ligacoes": 1188.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 896,
+      "data": "2026-05-11",
+      "ligacoes": 814.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 897,
+      "data": "2026-05-11",
+      "ligacoes": 293.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 898,
+      "data": "2026-05-12",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 899,
+      "data": "2026-05-12",
+      "ligacoes": 1011.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 900,
+      "data": "2026-05-12",
+      "ligacoes": 1079.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 901,
+      "data": "2026-05-13",
+      "ligacoes": 1130.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Igor Aquino",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 902,
+      "data": "2026-05-13",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 903,
+      "data": "2026-05-14",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 904,
+      "data": "2026-05-14",
+      "ligacoes": 1127.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Carlos Alberto",
+        "Igor Aquino"
+      ]
+    },
+    {
+      "id": 905,
+      "data": "2026-05-14",
+      "ligacoes": 1129.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 906,
+      "data": "2026-05-15",
+      "ligacoes": 952.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 907,
+      "data": "2026-05-18",
+      "ligacoes": 833.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 908,
+      "data": "2026-05-18",
+      "ligacoes": 105.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 909,
+      "data": "2026-05-18",
+      "ligacoes": 777.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 910,
+      "data": "2026-05-19",
+      "ligacoes": 809.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 911,
+      "data": "2026-05-19",
+      "ligacoes": 738.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 912,
+      "data": "2026-05-19",
+      "ligacoes": 719.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 913,
+      "data": "2026-05-20",
+      "ligacoes": 1021.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 914,
+      "data": "2026-05-20",
+      "ligacoes": 771.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 915,
+      "data": "2026-05-21",
+      "ligacoes": 844.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 916,
+      "data": "2026-05-22",
+      "ligacoes": 840.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 917,
+      "data": "2026-05-22",
+      "ligacoes": 1191.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 918,
+      "data": "2026-05-22",
+      "ligacoes": 1170.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 919,
+      "data": "2026-05-25",
+      "ligacoes": 1100.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 920,
+      "data": "2026-05-25",
+      "ligacoes": 1214.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 921,
+      "data": "2026-05-25",
+      "ligacoes": 681.0,
+      "participantes": [
+        "Oldair Luciano",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 922,
+      "data": "2026-05-26",
+      "ligacoes": 0.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 923,
+      "data": "2026-05-26",
+      "ligacoes": 1076.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 924,
+      "data": "2026-05-26",
+      "ligacoes": 1291.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 925,
+      "data": "2026-05-27",
+      "ligacoes": 700.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 926,
+      "data": "2026-05-27",
+      "ligacoes": 441.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 927,
+      "data": "2026-05-27",
+      "ligacoes": 1325.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 928,
+      "data": "2026-05-27",
+      "ligacoes": 630.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 929,
+      "data": "2026-05-28",
+      "ligacoes": 1106.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 930,
+      "data": "2026-05-28",
+      "ligacoes": 1261.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 931,
+      "data": "2026-05-28",
+      "ligacoes": 860.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 932,
+      "data": "2026-05-29",
+      "ligacoes": 1183.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 933,
+      "data": "2026-05-29",
+      "ligacoes": 1197.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ailton Ramos Rocha Jr.",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 934,
+      "data": "2026-05-29",
+      "ligacoes": 638.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 935,
+      "data": "2026-06-01",
+      "ligacoes": 1042.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 936,
+      "data": "2026-06-01",
+      "ligacoes": 643.0,
+      "participantes": [
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 937,
+      "data": "2026-06-02",
+      "ligacoes": 1133.0,
+      "participantes": [
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 938,
+      "data": "2026-06-02",
+      "ligacoes": 502.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 939,
+      "data": "2026-06-02",
+      "ligacoes": 1042.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 940,
+      "data": "2026-06-03",
+      "ligacoes": 1040.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 941,
+      "data": "2026-06-05",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 942,
+      "data": "2026-06-05",
+      "ligacoes": 653.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 943,
+      "data": "2026-06-05",
+      "ligacoes": 471.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 944,
+      "data": "2026-06-08",
+      "ligacoes": 1221.0,
+      "participantes": [
+        "Oldair Luciano",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 945,
+      "data": "2026-06-08",
+      "ligacoes": 1238.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 946,
+      "data": "2026-06-09",
+      "ligacoes": 1243.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 947,
+      "data": "2026-06-10",
+      "ligacoes": 1282.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 948,
+      "data": "2026-06-10",
+      "ligacoes": 1158.0,
+      "participantes": [
+        "Igor Aquino",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 949,
+      "data": "2026-06-11",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 950,
+      "data": "2026-06-16",
+      "ligacoes": 1013.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 951,
+      "data": "2026-06-16",
+      "ligacoes": 936.0,
+      "participantes": [
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 952,
+      "data": "2026-06-16",
+      "ligacoes": 916.0,
+      "participantes": [
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 953,
+      "data": "2026-06-17",
+      "ligacoes": 1165.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 954,
+      "data": "2026-06-17",
+      "ligacoes": 907.0,
+      "participantes": [
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 955,
+      "data": "2026-06-18",
+      "ligacoes": 930.0,
+      "participantes": [
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 956,
+      "data": "2026-06-19",
+      "ligacoes": 902.0,
+      "participantes": [
+        "Christian Costa",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 957,
+      "data": "2026-06-19",
+      "ligacoes": 1131.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "mykael_antonio"
+      ]
+    },
+    {
+      "id": 958,
+      "data": "2026-06-22",
+      "ligacoes": 1329.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 959,
+      "data": "2026-06-23",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 960,
+      "data": "2026-06-25",
+      "ligacoes": 1196.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 961,
+      "data": "2026-06-26",
+      "ligacoes": 1208.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Ailton Ramos Rocha Jr."
+      ]
+    },
+    {
+      "id": 962,
+      "data": "2026-06-22",
+      "ligacoes": 811.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 963,
+      "data": "2026-06-27",
+      "ligacoes": 108.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 964,
+      "data": "2026-06-30",
+      "ligacoes": 1213.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 965,
+      "data": "2026-07-01",
+      "ligacoes": 1226.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 966,
+      "data": "2026-07-01",
+      "ligacoes": 1024.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 967,
+      "data": "2026-07-02",
+      "ligacoes": 1204.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 968,
+      "data": "2026-07-02",
+      "ligacoes": 873.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 969,
+      "data": "2026-06-30",
+      "ligacoes": 800.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 970,
+      "data": "2026-07-03",
+      "ligacoes": 31.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 971,
+      "data": "2026-07-03",
+      "ligacoes": 27.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 972,
+      "data": "2026-07-03",
+      "ligacoes": 12.0,
+      "participantes": [
+        "Ailton Ramos Rocha Jr.",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 973,
+      "data": "2026-07-03",
+      "ligacoes": 281.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 974,
+      "data": "2026-07-06",
+      "ligacoes": 1201.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 975,
+      "data": "2026-07-03",
+      "ligacoes": 755.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 976,
+      "data": "2026-07-08",
+      "ligacoes": 1181.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 977,
+      "data": "2026-07-07",
+      "ligacoes": 968.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 978,
+      "data": "2026-07-10",
+      "ligacoes": 461.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 979,
+      "data": "2026-07-10",
+      "ligacoes": 803.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 980,
+      "data": "2026-07-13",
+      "ligacoes": 472.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 981,
+      "data": "2026-07-13",
+      "ligacoes": 990.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 982,
+      "data": "2026-07-13",
+      "ligacoes": 208.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 983,
+      "data": "2026-07-13",
+      "ligacoes": 930.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 984,
+      "data": "2026-07-14",
+      "ligacoes": 1210.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 985,
+      "data": "2026-07-14",
+      "ligacoes": 1015.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 986,
+      "data": "2026-07-15",
+      "ligacoes": 911.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 987,
+      "data": "2026-07-15",
+      "ligacoes": 168.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 988,
+      "data": "2026-07-15",
+      "ligacoes": 976.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 989,
+      "data": "2026-07-16",
+      "ligacoes": 1218.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 990,
+      "data": "2026-07-16",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 991,
+      "data": "2026-07-17",
+      "ligacoes": 1351.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 992,
+      "data": "2026-07-17",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 993,
+      "data": "2026-07-20",
+      "ligacoes": 20.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 994,
+      "data": "2026-07-20",
+      "ligacoes": 1263.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 995,
+      "data": "2026-07-21",
+      "ligacoes": 1369.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 996,
+      "data": "2026-07-21",
+      "ligacoes": 619.0,
+      "participantes": [
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 997,
+      "data": "2026-07-22",
+      "ligacoes": 1429.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 998,
+      "data": "2026-07-22",
+      "ligacoes": 1989.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 999,
+      "data": "2026-07-23",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1000,
+      "data": "2026-07-23",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1001,
+      "data": "2026-07-23",
+      "ligacoes": 1312.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1002,
+      "data": "2026-07-23",
+      "ligacoes": 1324.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1003,
+      "data": "2026-07-23",
+      "ligacoes": 30.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1004,
+      "data": "2026-07-23",
+      "ligacoes": 1328.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 1005,
+      "data": "2026-07-24",
+      "ligacoes": 1316.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Gabriel Hariel"
+      ]
+    },
+    {
+      "id": 1006,
+      "data": "2026-07-24",
+      "ligacoes": 1408.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1007,
+      "data": "2026-07-24",
+      "ligacoes": 1308.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1008,
+      "data": "2026-07-25",
+      "ligacoes": 1343.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1009,
+      "data": "2026-07-27",
+      "ligacoes": 1997.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1010,
+      "data": "2026-07-27",
+      "ligacoes": 1022.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1011,
+      "data": "2026-07-28",
+      "ligacoes": 785.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1012,
+      "data": "2026-07-28",
+      "ligacoes": 550.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1013,
+      "data": "2026-07-28",
+      "ligacoes": 982.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1014,
+      "data": "2026-07-28",
+      "ligacoes": 334.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1015,
+      "data": "2026-07-28",
+      "ligacoes": 9.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1016,
+      "data": "2026-07-29",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1017,
+      "data": "2026-07-29",
+      "ligacoes": 1401.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1018,
+      "data": "2026-07-29",
+      "ligacoes": 706.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1019,
+      "data": "2026-07-29",
+      "ligacoes": 712.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1020,
+      "data": "2026-07-30",
+      "ligacoes": 1963.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1021,
+      "data": "2026-07-31",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1022,
+      "data": "2026-07-31",
+      "ligacoes": 1340.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1023,
+      "data": "2026-07-31",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1024,
+      "data": "2026-07-31",
+      "ligacoes": 1314.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1025,
+      "data": "2026-08-03",
+      "ligacoes": 2083.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1026,
+      "data": "2026-08-04",
+      "ligacoes": 1082.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1027,
+      "data": "2026-08-04",
+      "ligacoes": 402.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1028,
+      "data": "2026-08-04",
+      "ligacoes": 4.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1029,
+      "data": "2026-08-05",
+      "ligacoes": 1415.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1030,
+      "data": "2026-08-06",
+      "ligacoes": 1430.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1031,
+      "data": "2026-08-07",
+      "ligacoes": 6.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1032,
+      "data": "2026-08-07",
+      "ligacoes": 2.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1033,
+      "data": "2026-08-10",
+      "ligacoes": 1240.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1034,
+      "data": "2026-08-10",
+      "ligacoes": 132.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1035,
+      "data": "2026-08-10",
+      "ligacoes": 1432.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1036,
+      "data": "2026-08-11",
+      "ligacoes": 1428.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1037,
+      "data": "2026-08-11",
+      "ligacoes": 1422.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1038,
+      "data": "2026-08-12",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1039,
+      "data": "2026-08-12",
+      "ligacoes": 1455.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1040,
+      "data": "2026-08-12",
+      "ligacoes": 1494.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1041,
+      "data": "2026-08-13",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1042,
+      "data": "2026-08-13",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1043,
+      "data": "2026-08-13",
+      "ligacoes": 1321.0,
+      "participantes": [
+        "Oldair Luciano",
+        "marcus_levi"
+      ]
+    },
+    {
+      "id": 1044,
+      "data": "2026-08-13",
+      "ligacoes": 1460.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1045,
+      "data": "2026-08-14",
+      "ligacoes": 1336.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1046,
+      "data": "2026-08-14",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1047,
+      "data": "2026-08-17",
+      "ligacoes": 549.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1048,
+      "data": "2026-08-14",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Oldair Luciano",
+        "marcus_levi",
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1049,
+      "data": "2026-08-17",
+      "ligacoes": 70.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1050,
+      "data": "2026-08-17",
+      "ligacoes": 13.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1051,
+      "data": "2026-08-18",
+      "ligacoes": 1507.0,
+      "participantes": [
+        "Christian Costa",
+        "Rairan Nascimento",
+        "marcus_levi"
+      ]
+    },
+    {
+      "id": 1052,
+      "data": "2026-08-18",
+      "ligacoes": 1507.0,
+      "participantes": [
+        "Christian Costa",
+        "Rairan Nascimento",
+        "marcus_levi"
+      ]
+    },
+    {
+      "id": 1053,
+      "data": "2026-08-19",
+      "ligacoes": 31.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa",
+        "marcus_levi"
+      ]
+    },
+    {
+      "id": 1054,
+      "data": "2026-08-19",
+      "ligacoes": 1426.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1055,
+      "data": "2026-08-20",
+      "ligacoes": 621.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1056,
+      "data": "2026-08-19",
+      "ligacoes": 1960.0,
+      "participantes": [
+        "Christian Costa",
+        "Rairan Nascimento",
+        "marcus_levi"
+      ]
+    },
+    {
+      "id": 1057,
+      "data": "2026-08-20",
+      "ligacoes": 2001.0,
+      "participantes": [
+        "Christian Costa",
+        "marcus_levi",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1058,
+      "data": "2026-08-20",
+      "ligacoes": 788.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1059,
+      "data": "2026-08-21",
+      "ligacoes": 1372.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1060,
+      "data": "2026-08-24",
+      "ligacoes": 1350.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1061,
+      "data": "2026-08-25",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 1062,
+      "data": "2026-08-25",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 1063,
+      "data": "2026-08-25",
+      "ligacoes": 6.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1064,
+      "data": "2026-08-25",
+      "ligacoes": 1442.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1065,
+      "data": "2026-08-25",
+      "ligacoes": 1402.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1066,
+      "data": "2026-08-25",
+      "ligacoes": 702.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1067,
+      "data": "2026-08-26",
+      "ligacoes": 5.0,
+      "participantes": [
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1068,
+      "data": "2026-08-26",
+      "ligacoes": 1422.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1069,
+      "data": "2026-08-26",
+      "ligacoes": 1336.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1070,
+      "data": "2026-08-26",
+      "ligacoes": 889.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1071,
+      "data": "2026-08-27",
+      "ligacoes": 1445.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1072,
+      "data": "2026-08-27",
+      "ligacoes": 1388.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    }
+  ]
+}
