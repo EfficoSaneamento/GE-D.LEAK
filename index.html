@@ -11,9 +11,14 @@
   :root {
     --header-bg: #5B6B4A;
     --gold: #8C6D1F;
-    --card-border: #e0e0e0;
-    --text-dark: #333;
-    --text-muted: #666;
+    --gold-track: #f0e6d2;
+    --status-good: #0ca30c;
+    --card-border: rgba(11,11,11,0.08);
+    --card-shadow: 0 1px 2px rgba(11,11,11,0.04), 0 2px 8px rgba(11,11,11,0.06);
+    --text-dark: #1a1a1a;
+    --text-secondary: #52514e;
+    --text-muted: #898781;
+    --gridline: #e6e5df;
     --bg-page: #f4f4f2;
   }
   * { box-sizing: border-box; }
@@ -22,6 +27,7 @@
     font-family: "Segoe UI", Arial, sans-serif;
     background: var(--bg-page);
     color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
   }
   header {
     background: var(--header-bg);
@@ -44,32 +50,41 @@
     flex-wrap: wrap;
   }
   .filtro-box {
-    background: rgba(255,255,255,0.12);
-    border-radius: 4px;
-    padding: 6px 12px;
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 999px;
+    padding: 6px 16px;
     display: flex;
     flex-direction: column;
-    min-width: 160px;
+    min-width: 150px;
+    transition: background 0.15s ease;
+  }
+  .filtro-box:focus-within, .filtro-box:hover {
+    background: rgba(255,255,255,0.22);
   }
   .filtro-box label {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
-    opacity: 0.85;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
   }
   .filtro-box input, .filtro-box select {
     border: none;
     background: transparent;
     color: #fff;
     font-size: 0.85rem;
+    font-weight: 600;
     padding: 2px 0;
   }
-  .filtro-box input::-webkit-calendar-picker-indicator { filter: invert(1); }
+  .filtro-box input:focus, .filtro-box select:focus { outline: none; }
+  .filtro-box input::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+  .filtro-box select option { color: #333; }
 
   .layout {
     display: grid;
     grid-template-columns: 300px 1fr;
-    gap: 16px;
-    padding: 16px;
+    gap: 18px;
+    padding: 20px;
     align-items: start;
   }
   @media (max-width: 900px) {
@@ -79,71 +94,110 @@
   .card {
     background: #fff;
     border: 1px solid var(--card-border);
-    border-radius: 4px;
-    padding: 14px;
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    padding: 16px;
   }
   .card-title {
     text-transform: uppercase;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    color: #555;
-    margin: 0 0 10px 0;
-    letter-spacing: 0.02em;
+    color: var(--text-secondary);
+    margin: 0 0 12px 0;
+    letter-spacing: 0.04em;
   }
 
-  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
 
-  .stat-row { display: flex; gap: 10px; }
+  .stat-row { display: flex; gap: 12px; }
   .stat-card {
     flex: 1;
+    position: relative;
     background: #fff;
     border: 1px solid var(--card-border);
-    border-radius: 4px;
-    padding: 12px;
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    padding: 14px 16px 16px;
+    overflow: hidden;
   }
+  .stat-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--header-bg);
+  }
+  .stat-card.bonificacao::before { background: var(--gold); }
   .stat-card .label {
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     text-transform: uppercase;
+    letter-spacing: 0.04em;
     font-weight: 700;
-    color: #555;
+    color: var(--text-secondary);
   }
   .stat-card .value {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 700;
+    line-height: 1.15;
     color: var(--text-dark);
-    margin-top: 4px;
+    margin-top: 6px;
     white-space: nowrap;
   }
   .stat-card.bonificacao .value { color: var(--gold); }
-  .stat-card .sub { font-size: 0.68rem; color: var(--text-muted); }
+  .stat-card .sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
 
   table.indicadores {
     width: 100%;
     border-collapse: collapse;
   }
   table.indicadores td {
-    padding: 6px 0;
-    border-bottom: 1px solid #f0f0f0;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f0ee;
     font-size: 0.82rem;
+    color: var(--text-secondary);
     white-space: nowrap;
   }
+  table.indicadores tr:last-child td { border-bottom: none; }
   table.indicadores td:last-child {
     text-align: right;
     font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dark);
   }
 
-  .tecnico-item { margin-bottom: 10px; }
+  .tecnico-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
   .tecnico-item:last-child { margin-bottom: 0; }
+  .rank {
+    flex: 0 0 auto;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #eeede8;
+    color: var(--text-secondary);
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rank.top { background: var(--gold); color: #fff; }
+  .tecnico-body { flex: 1; min-width: 0; }
   .tecnico-item .top-row {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
     font-size: 0.8rem;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
+    gap: 8px;
   }
-  .tecnico-item .nome { font-weight: 600; }
-  .tecnico-item .valor { color: var(--gold); font-weight: 700; }
+  .tecnico-item .nome { font-weight: 600; color: var(--text-dark); }
+  .tecnico-item .valor {
+    color: var(--gold);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
   .barra-bg {
-    background: #eee;
+    background: var(--gold-track);
     border-radius: 3px;
     height: 6px;
     overflow: hidden;
@@ -151,18 +205,20 @@
   .barra-fill {
     background: var(--gold);
     height: 100%;
+    border-radius: 3px;
   }
 
   .charts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 14px;
+    gap: 16px;
   }
   .chart-card {
     background: #fff;
     border: 1px solid var(--card-border);
-    border-radius: 4px;
-    padding: 12px;
+    box-shadow: var(--card-shadow);
+    border-radius: 8px;
+    padding: 14px;
   }
   .chart-card canvas { max-height: 230px; }
 
@@ -170,7 +226,7 @@
     text-align: center;
     font-size: 0.72rem;
     color: var(--text-muted);
-    padding: 10px;
+    padding: 14px;
   }
 
   #status-msg {
@@ -390,16 +446,20 @@ function renderBonificacaoPorTecnico(lista) {
   const container = document.getElementById("lista-bonificacao");
   container.innerHTML = "";
   const maxBonificacao = lista.length > 0 ? lista[0].bonificacao : 0;
-  lista.forEach(item => {
-    const badge = item.bonificacao > 0 && item.bonificacao === maxBonificacao ? " 🏆" : "";
+  lista.forEach((item, i) => {
+    const posicao = i + 1;
+    const isTop = item.bonificacao > 0 && item.bonificacao === maxBonificacao;
     const div = document.createElement("div");
     div.className = "tecnico-item";
     div.innerHTML = `
-      <div class="top-row">
-        <span class="nome">${item.canon}${badge}</span>
-        <span class="valor">${BRL.format(item.bonificacao)}</span>
+      <span class="rank${isTop ? " top" : ""}">${posicao}</span>
+      <div class="tecnico-body">
+        <div class="top-row">
+          <span class="nome">${item.canon}${isTop ? " 🏆" : ""}</span>
+          <span class="valor">${BRL.format(item.bonificacao)}</span>
+        </div>
+        <div class="barra-bg"><div class="barra-fill" style="width:${item.percentual}%;"></div></div>
       </div>
-      <div class="barra-bg"><div class="barra-fill" style="width:${item.percentual}%;"></div></div>
     `;
     container.appendChild(div);
   });
@@ -431,13 +491,19 @@ function renderCharts(registros, tecnicoSelecionado) {
           data: pontos,
           borderColor: "#5B6B4A",
           backgroundColor: "#5B6B4A",
-          pointRadius: 3,
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: "#5B6B4A",
+          pointBorderColor: "#fff",
+          pointBorderWidth: 1.5,
+          pointHoverRadius: 6,
           tension: 0.15,
         }],
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: { mode: "nearest", intersect: false },
         plugins: {
           legend: { display: false },
           title: {
@@ -445,6 +511,16 @@ function renderCharts(registros, tecnicoSelecionado) {
             text: `PRODUTIVIDADE  -  ${t.canon.toUpperCase()}  -  (BONIFICAÇÃO)`,
             font: { size: 11, weight: "bold" },
             color: "#444",
+            padding: { bottom: 10 },
+          },
+          tooltip: {
+            backgroundColor: "#1a1a1a",
+            titleFont: { size: 11 },
+            bodyFont: { size: 11 },
+            padding: 8,
+            callbacks: {
+              label: (ctx) => `Ligações: ${NUM.format(Math.round(ctx.parsed.y))}`,
+            },
           },
           annotation: {
             annotations: {
@@ -452,30 +528,34 @@ function renderCharts(registros, tecnicoSelecionado) {
                 type: "line",
                 yMin: 650,
                 yMax: 650,
-                borderColor: "#2e7d32",
-                borderWidth: 1,
+                borderColor: "#0ca30c",
+                borderWidth: 1.5,
                 label: {
                   display: true,
-                  content: "Bonificações R$ 0,05",
+                  content: "R$ 0,005 / ligação",
                   position: "start",
-                  font: { size: 9 },
-                  backgroundColor: "rgba(255,255,255,0.85)",
-                  color: "#2e7d32",
+                  yAdjust: -10,
+                  font: { size: 9, weight: "600" },
+                  backgroundColor: "rgba(252,252,251,0.92)",
+                  color: "#0ca30c",
+                  padding: 4,
                 },
               },
               linha700: {
                 type: "line",
                 yMin: 700,
                 yMax: 700,
-                borderColor: "#c62828",
-                borderWidth: 1,
+                borderColor: "#8C6D1F",
+                borderWidth: 1.5,
                 label: {
                   display: true,
-                  content: "Bonificações R$ 0,10",
+                  content: "R$ 0,01 / ligação",
                   position: "end",
-                  font: { size: 9 },
-                  backgroundColor: "rgba(255,255,255,0.85)",
-                  color: "#c62828",
+                  yAdjust: 12,
+                  font: { size: 9, weight: "600" },
+                  backgroundColor: "rgba(252,252,251,0.92)",
+                  color: "#8C6D1F",
+                  padding: 4,
                 },
               },
             },
@@ -486,9 +566,17 @@ function renderCharts(registros, tecnicoSelecionado) {
             type: "time",
             time: { unit: "month", tooltipFormat: "dd/MM/yyyy" },
             title: { display: false },
+            grid: { color: "#e6e5df", drawTicks: false },
+            ticks: { color: "#898781", font: { size: 10 } },
           },
           y: {
             beginAtZero: true,
+            grid: { color: "#e6e5df", drawTicks: false },
+            ticks: {
+              color: "#898781",
+              font: { size: 10 },
+              callback: (v) => NUM.format(v),
+            },
           },
         },
       },
