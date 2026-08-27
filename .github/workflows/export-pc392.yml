@@ -4,6 +4,13 @@ on:
   schedule:
     - cron: "0 6 * * *"   # todo dia às 06:00 UTC (~03:00 horário de Brasília)
   workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "scripts/**"
+      - "requirements.txt"
+      - ".github/workflows/export-pc392.yml"
 
 permissions:
   contents: write

@@ -7,14 +7,18 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2/dist/chartjs-plugin-datalabels.min.js"></script>
 <style>
   :root {
     --header-bg: #5B6B4A;
+    --header-bg-dark: #4a5a3b;
     --gold: #8C6D1F;
     --gold-track: #f0e6d2;
+    --gold-tint: #faf3e4;
+    --olive-tint: #eef1ea;
     --status-good: #0ca30c;
     --card-border: rgba(11,11,11,0.08);
-    --card-shadow: 0 1px 2px rgba(11,11,11,0.04), 0 2px 8px rgba(11,11,11,0.06);
+    --card-shadow: 0 1px 2px rgba(11,11,11,0.04), 0 2px 10px rgba(11,11,11,0.06);
     --text-dark: #1a1a1a;
     --text-secondary: #52514e;
     --text-muted: #898781;
@@ -29,26 +33,37 @@
     color: var(--text-dark);
     -webkit-font-smoothing: antialiased;
   }
+
   header {
-    background: var(--header-bg);
+    background: linear-gradient(135deg, var(--header-bg), var(--header-bg-dark));
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: 14px 24px;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 14px;
   }
+  .header-title { display: flex; flex-direction: column; gap: 4px; }
   header h1 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     margin: 0;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.01em;
   }
-  .filtros {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
+  .atualizado-badge {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.75);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
   }
+  .atualizado-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #7fd97f;
+    display: inline-block;
+  }
+  .filtros { display: flex; gap: 12px; flex-wrap: wrap; }
   .filtro-box {
     background: rgba(255,255,255,0.14);
     border: 1px solid rgba(255,255,255,0.18);
@@ -59,9 +74,7 @@
     min-width: 150px;
     transition: background 0.15s ease;
   }
-  .filtro-box:focus-within, .filtro-box:hover {
-    background: rgba(255,255,255,0.22);
-  }
+  .filtro-box:focus-within, .filtro-box:hover { background: rgba(255,255,255,0.22); }
   .filtro-box label {
     font-size: 0.62rem;
     text-transform: uppercase;
@@ -80,134 +93,135 @@
   .filtro-box input::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
   .filtro-box select option { color: #333; }
 
-  .layout {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 18px;
-    padding: 20px;
-    align-items: start;
-  }
-  @media (max-width: 900px) {
-    .layout { grid-template-columns: 1fr; }
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    padding: 22px 24px 32px;
+    max-width: 1500px;
+    margin: 0 auto;
   }
 
-  .card {
-    background: #fff;
-    border: 1px solid var(--card-border);
-    box-shadow: var(--card-shadow);
-    border-radius: 8px;
-    padding: 16px;
-  }
-  .card-title {
-    text-transform: uppercase;
-    font-size: 0.7rem;
+  .section-title {
+    font-size: 0.78rem;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: var(--text-secondary);
     margin: 0 0 12px 0;
-    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--gridline);
   }
 
-  .sidebar { display: flex; flex-direction: column; gap: 16px; }
-
-  .stat-row { display: flex; gap: 12px; }
-  .stat-card {
-    flex: 1;
+  /* --- KPI strip --- */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+  }
+  .kpi-tile {
     position: relative;
     background: #fff;
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
-    border-radius: 8px;
-    padding: 14px 16px 16px;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
     overflow: hidden;
   }
-  .stat-card::before {
+  .kpi-tile::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
     background: var(--header-bg);
   }
-  .stat-card.bonificacao::before { background: var(--gold); }
-  .stat-card .label {
+  .kpi-tile.destaque::before { background: var(--gold); }
+  .kpi-icon {
+    flex: 0 0 auto;
+    width: 38px; height: 38px;
+    border-radius: 9px;
+    background: var(--olive-tint);
+    color: var(--header-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .kpi-tile.destaque .kpi-icon { background: var(--gold-tint); color: var(--gold); }
+  .kpi-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .kpi-body { min-width: 0; }
+  .kpi-label {
     font-size: 0.66rem;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     font-weight: 700;
     color: var(--text-secondary);
   }
-  .stat-card .value {
-    font-size: 2rem;
+  .kpi-value {
+    font-size: 1.7rem;
     font-weight: 700;
-    line-height: 1.15;
+    line-height: 1.2;
     color: var(--text-dark);
-    margin-top: 6px;
+    margin-top: 2px;
     white-space: nowrap;
   }
-  .stat-card.bonificacao .value { color: var(--gold); }
-  .stat-card .sub { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+  .kpi-tile.destaque .kpi-value { color: var(--gold); }
+  .kpi-sub { font-size: 0.68rem; color: var(--text-muted); margin-top: 1px; }
 
-  table.indicadores {
-    width: 100%;
-    border-collapse: collapse;
+  /* --- linha secundaria: ranking + indicadores --- */
+  .row-secundaria {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 16px;
+    align-items: stretch;
   }
-  table.indicadores td {
-    padding: 7px 0;
-    border-bottom: 1px solid #f0f0ee;
-    font-size: 0.82rem;
-    color: var(--text-secondary);
-    white-space: nowrap;
+  @media (max-width: 900px) {
+    .row-secundaria { grid-template-columns: 1fr; }
   }
-  table.indicadores tr:last-child td { border-bottom: none; }
-  table.indicadores td:last-child {
-    text-align: right;
+  .card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .card-title {
+    text-transform: uppercase;
+    font-size: 0.7rem;
     font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--text-dark);
+    color: var(--text-secondary);
+    margin: 0 0 14px 0;
+    letter-spacing: 0.04em;
   }
+  .card-ranking canvas { max-height: 260px; }
 
-  .tecnico-item { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .tecnico-item:last-child { margin-bottom: 0; }
-  .rank {
-    flex: 0 0 auto;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: #eeede8;
-    color: var(--text-secondary);
-    font-size: 0.65rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .rank.top { background: var(--gold); color: #fff; }
-  .tecnico-body { flex: 1; min-width: 0; }
-  .tecnico-item .top-row {
+  .indic-grid { display: flex; flex-direction: column; }
+  .indic-row {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 0.8rem;
-    margin-bottom: 4px;
-    gap: 8px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f0ee;
   }
-  .tecnico-item .nome { font-weight: 600; color: var(--text-dark); }
-  .tecnico-item .valor {
-    color: var(--gold);
+  .indic-row:last-child { border-bottom: none; }
+  .indic-row .indic-label { font-size: 0.82rem; color: var(--text-secondary); }
+  .indic-row .indic-value {
+    font-size: 0.95rem;
     font-weight: 700;
+    color: var(--text-dark);
     font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-  .barra-bg {
-    background: var(--gold-track);
-    border-radius: 3px;
-    height: 6px;
-    overflow: hidden;
-  }
-  .barra-fill {
-    background: var(--gold);
-    height: 100%;
-    border-radius: 3px;
   }
 
+  /* --- grade de graficos por tecnico --- */
   .charts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -217,7 +231,7 @@
     background: #fff;
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 14px;
   }
   .chart-card canvas { max-height: 230px; }
@@ -226,13 +240,16 @@
     text-align: center;
     font-size: 0.72rem;
     color: var(--text-muted);
-    padding: 14px;
+    padding: 4px 24px 20px;
+    max-width: 1500px;
+    margin: 0 auto;
   }
 
   #status-msg {
-    padding: 10px 20px;
+    padding: 40px 24px;
     font-size: 0.85rem;
     color: var(--text-muted);
+    text-align: center;
   }
   #status-msg.erro { color: #a33; }
 </style>
@@ -240,7 +257,10 @@
 <body>
 
 <header>
-  <h1>PC 392 - GE D.LEAK (SBESP-NORTE)</h1>
+  <div class="header-title">
+    <h1>PC 392 - GE D.LEAK (SBESP-NORTE)</h1>
+    <span class="atualizado-badge"><span class="dot"></span><span id="header-atualizado">Carregando…</span></span>
+  </div>
   <div class="filtros">
     <div class="filtro-box">
       <label>Período - início</label>
@@ -261,42 +281,83 @@
 
 <div id="status-msg">Carregando dados...</div>
 
-<div class="layout" id="layout" style="display:none;">
-  <div class="sidebar">
-    <div class="stat-row">
-      <div class="stat-card">
-        <div class="label">Total de vistorias</div>
-        <div class="value" id="stat-vistorias">-</div>
-        <div class="sub">Vistorias realizadas</div>
+<main id="layout" style="display:none;">
+
+  <section class="kpi-strip">
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></svg>
       </div>
-      <div class="stat-card bonificacao">
-        <div class="label">Bonificação total</div>
-        <div class="value" id="stat-bonificacao">-</div>
-        <div class="sub">Valor acumulado</div>
+      <div class="kpi-body">
+        <div class="kpi-label">Total de vistorias</div>
+        <div class="kpi-value" id="kpi-vistorias">-</div>
+        <div class="kpi-sub">Vistorias realizadas</div>
       </div>
     </div>
+    <div class="kpi-tile destaque">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.3 9.6c0-1.4 1.3-2.5 2.7-2.5s2.7.9 2.7 2c0 2.9-5.4 1.5-5.4 4.5 0 1.1 1.2 2 2.7 2s2.7-1 2.7-2.4"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Bonificação total</div>
+        <div class="kpi-value" id="kpi-bonificacao">-</div>
+        <div class="kpi-sub">Valor acumulado no período</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15.8 14.3c2.5.4 4.7 2.3 4.7 5.7"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Técnicos envolvidos</div>
+        <div class="kpi-value" id="kpi-tecnicos">-</div>
+        <div class="kpi-sub">No período selecionado</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Dias com atividade</div>
+        <div class="kpi-value" id="kpi-dias">-</div>
+        <div class="kpi-sub">Dias distintos com registro</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Maior registro</div>
+        <div class="kpi-value" id="kpi-maior-registro">-</div>
+        <div class="kpi-sub">Ligações em um único registro</div>
+      </div>
+    </div>
+  </section>
 
+  <section class="row-secundaria">
+    <div class="card card-ranking">
+      <div class="card-title">Bonificação por técnico</div>
+      <canvas id="chart-ranking"></canvas>
+    </div>
     <div class="card">
       <div class="card-title">Indicadores de produção</div>
-      <table class="indicadores">
-        <tr><td>Total de registros</td><td id="ind-registros">-</td></tr>
-        <tr><td>Técnicos envolvidos</td><td id="ind-tecnicos">-</td></tr>
-        <tr><td>Dias com atividade</td><td id="ind-dias">-</td></tr>
-        <tr><td>Média de vistorias / dia</td><td id="ind-media-vistorias-dia">-</td></tr>
-        <tr><td>Média de ligações / vistoria</td><td id="ind-media-ligacoes-vistoria">-</td></tr>
-        <tr><td>Média de ligações / dia</td><td id="ind-media-ligacoes-dia">-</td></tr>
-        <tr><td>Maior registro</td><td id="ind-maior-registro">-</td></tr>
-      </table>
+      <div class="indic-grid">
+        <div class="indic-row"><span class="indic-label">Total de registros</span><span class="indic-value" id="ind-registros">-</span></div>
+        <div class="indic-row"><span class="indic-label">Média de vistorias / dia</span><span class="indic-value" id="ind-media-vistorias-dia">-</span></div>
+        <div class="indic-row"><span class="indic-label">Média de ligações / vistoria</span><span class="indic-value" id="ind-media-ligacoes-vistoria">-</span></div>
+        <div class="indic-row"><span class="indic-label">Média de ligações / dia</span><span class="indic-value" id="ind-media-ligacoes-dia">-</span></div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <div class="card-title">Bonificação por técnico</div>
-      <div id="lista-bonificacao"></div>
-    </div>
-  </div>
+  <section>
+    <div class="section-title">Produtividade por técnico</div>
+    <div class="charts-grid" id="charts-grid"></div>
+  </section>
 
-  <div class="charts-grid" id="charts-grid"></div>
-</div>
+</main>
 
 <footer id="footer-periodo"></footer>
 
@@ -321,7 +382,11 @@ const EX_FUNCIONARIOS = [
 const PERIODO_INICIO_PADRAO = "2025-12-31";
 
 const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+const BRL_COMPACTO = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1 });
 const NUM = new Intl.NumberFormat("pt-BR");
+
+Chart.register(ChartDataLabels);
+Chart.defaults.set("plugins.datalabels", { display: false });
 
 function primeiroNome(nome) {
   return nome.trim().split(/\s+/)[0].toLowerCase();
@@ -429,39 +494,78 @@ function computeSeriePorTecnico(registros, canon) {
 
 // --- render ---
 let charts = {};
+let rankingChart = null;
 
 function renderResumo(resumo) {
-  document.getElementById("stat-vistorias").textContent = NUM.format(resumo.totalVistorias);
-  document.getElementById("stat-bonificacao").textContent = BRL.format(resumo.totalBonificacao);
+  document.getElementById("kpi-vistorias").textContent = NUM.format(resumo.totalVistorias);
+  document.getElementById("kpi-bonificacao").textContent = BRL.format(resumo.totalBonificacao);
+  document.getElementById("kpi-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
+  document.getElementById("kpi-dias").textContent = NUM.format(resumo.diasAtividade);
+  document.getElementById("kpi-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
+
   document.getElementById("ind-registros").textContent = NUM.format(resumo.totalRegistros);
-  document.getElementById("ind-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
-  document.getElementById("ind-dias").textContent = NUM.format(resumo.diasAtividade);
   document.getElementById("ind-media-vistorias-dia").textContent = resumo.mediaVistoriasDia.toFixed(2).replace(".", ",");
   document.getElementById("ind-media-ligacoes-vistoria").textContent = resumo.mediaLigacoesVistoria.toFixed(2).replace(".", ",");
   document.getElementById("ind-media-ligacoes-dia").textContent = resumo.mediaLigacoesDia.toFixed(2).replace(".", ",");
-  document.getElementById("ind-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
 }
 
-function renderBonificacaoPorTecnico(lista) {
-  const container = document.getElementById("lista-bonificacao");
-  container.innerHTML = "";
-  const maxBonificacao = lista.length > 0 ? lista[0].bonificacao : 0;
-  lista.forEach((item, i) => {
-    const posicao = i + 1;
-    const isTop = item.bonificacao > 0 && item.bonificacao === maxBonificacao;
-    const div = document.createElement("div");
-    div.className = "tecnico-item";
-    div.innerHTML = `
-      <span class="rank${isTop ? " top" : ""}">${posicao}</span>
-      <div class="tecnico-body">
-        <div class="top-row">
-          <span class="nome">${item.canon}${isTop ? " 🏆" : ""}</span>
-          <span class="valor">${BRL.format(item.bonificacao)}</span>
-        </div>
-        <div class="barra-bg"><div class="barra-fill" style="width:${item.percentual}%;"></div></div>
-      </div>
-    `;
-    container.appendChild(div);
+function renderRankingChart(lista) {
+  const canvas = document.getElementById("chart-ranking");
+  const maxValor = lista.length > 0 ? Math.max(...lista.map(i => i.bonificacao)) : 0;
+
+  if (rankingChart) rankingChart.destroy();
+  rankingChart = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: lista.map(i => i.canon),
+      datasets: [{
+        data: lista.map(i => i.bonificacao),
+        backgroundColor: "#8C6D1F",
+        borderRadius: 4,
+        maxBarThickness: 22,
+      }],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { right: 60 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#1a1a1a",
+          padding: 8,
+          callbacks: { label: (ctx) => BRL.format(ctx.parsed.x) },
+        },
+        datalabels: {
+          display: true,
+          anchor: "end",
+          align: "end",
+          color: "#1a1a1a",
+          font: { size: 11, weight: "700" },
+          formatter: (v) => BRL_COMPACTO.format(v),
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          suggestedMax: maxValor * 1.3 || 1,
+          grid: { color: "#e6e5df", drawTicks: false },
+          ticks: { display: false },
+        },
+        y: {
+          grid: { display: false },
+          ticks: {
+            color: "#1a1a1a",
+            font: { size: 12, weight: "600" },
+            callback: function (value, index) {
+              const nome = lista[index] ? lista[index].canon : "";
+              return index === 0 && maxValor > 0 ? `🏆 ${nome}` : nome;
+            },
+          },
+        },
+      },
+    },
   });
 }
 
@@ -490,8 +594,9 @@ function renderCharts(registros, tecnicoSelecionado) {
           label: "Ligações",
           data: pontos,
           borderColor: "#5B6B4A",
-          backgroundColor: "#5B6B4A",
+          backgroundColor: "rgba(91,107,74,0.08)",
           borderWidth: 2,
+          fill: true,
           pointRadius: 4,
           pointBackgroundColor: "#5B6B4A",
           pointBorderColor: "#fff",
@@ -506,6 +611,7 @@ function renderCharts(registros, tecnicoSelecionado) {
         interaction: { mode: "nearest", intersect: false },
         plugins: {
           legend: { display: false },
+          datalabels: { display: false },
           title: {
             display: true,
             text: `PRODUTIVIDADE  -  ${t.canon.toUpperCase()}  -  (BONIFICAÇÃO)`,
@@ -603,7 +709,7 @@ function renderTudo() {
   }
 
   renderResumo(computeResumo(registrosResumo));
-  renderBonificacaoPorTecnico(computeBonificacaoPorTecnico(registrosPeriodo));
+  renderRankingChart(computeBonificacaoPorTecnico(registrosPeriodo));
   renderCharts(registrosPeriodo, tecnico || null);
 
   document.getElementById("footer-periodo").textContent =
@@ -627,6 +733,12 @@ async function init() {
     const json = await resp.json();
     REGISTROS = json.registros || [];
 
+    if (json.gerado_em) {
+      const dt = new Date(json.gerado_em);
+      document.getElementById("header-atualizado").textContent =
+        `Atualizado em ${dt.toLocaleDateString("pt-BR")} às ${dt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+    }
+
     popularFiltroTecnico();
 
     const hoje = new Date().toISOString().slice(0, 10);
@@ -638,7 +750,7 @@ async function init() {
     );
 
     document.getElementById("status-msg").style.display = "none";
-    document.getElementById("layout").style.display = "grid";
+    document.getElementById("layout").style.display = "flex";
     renderTudo();
   } catch (err) {
     const msg = document.getElementById("status-msg");

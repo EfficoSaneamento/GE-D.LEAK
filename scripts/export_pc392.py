@@ -1,18 +1,3 @@
-"""
-Exporta os registros de produtividade do PC 392 (GE D.LEAK / SBESP-NORTE)
-do FeatureServer no ArcGIS e gera data/pc392.json, consumido pelo
-dashboard estático (index.html).
-
-Credenciais: lidas exclusivamente das variáveis de ambiente
-ARCGIS_USERNAME e ARCGIS_PASSWORD (nunca de arquivo). No GitHub Actions,
-vêm de Settings > Secrets and variables > Actions.
-
-Toda a lógica de negócio (rateio, faixas de bonificação, filtro de
-técnicos ativos, exclusão de ex-funcionários) fica no JS do index.html,
-não aqui — este script só autentica, resolve os domínios e exporta os
-registros brutos.
-"""
-
 import json
 import os
 import sys
