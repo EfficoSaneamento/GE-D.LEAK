@@ -221,6 +221,24 @@
     font-variant-numeric: tabular-nums;
   }
 
+  .legenda-graficos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: -4px 0 14px 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+  .legenda-item { display: inline-flex; align-items: center; gap: 6px; }
+  .legenda-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(91,107,74,0.65);
+    border: 1px solid #fff;
+    box-shadow: 0 0 0 1px rgba(91,107,74,0.65);
+  }
+  .legenda-linha { width: 14px; height: 2px; display: inline-block; }
+
   /* --- grade de graficos por tecnico --- */
   .charts-grid {
     display: grid;
@@ -234,7 +252,7 @@
     border-radius: 10px;
     padding: 14px;
   }
-  .chart-card canvas { max-height: 210px; }
+  .chart-card canvas { max-height: 250px; }
   .chart-card-header { margin-bottom: 10px; }
   .chart-card-title-row {
     display: flex;
@@ -406,6 +424,11 @@
 
   <section>
     <div class="section-title">Produtividade por técnico</div>
+    <div class="legenda-graficos">
+      <span class="legenda-item"><span class="legenda-dot"></span>1 visita (ligações rateadas)</span>
+      <span class="legenda-item"><span class="legenda-linha" style="background:#0ca30c"></span>650+ ligações · R$ 0,005/ligação</span>
+      <span class="legenda-item"><span class="legenda-linha" style="background:#8C6D1F"></span>700+ ligações · R$ 0,01/ligação</span>
+    </div>
     <div class="charts-grid" id="charts-grid"></div>
   </section>
 
@@ -688,16 +711,13 @@ function renderCharts(registros, tecnicoSelecionado, rankingLista) {
         datasets: [{
           label: "Ligações",
           data: pontos,
-          borderColor: "#5B6B4A",
-          backgroundColor: "rgba(91,107,74,0.08)",
-          borderWidth: 2,
-          fill: true,
-          pointRadius: 4,
-          pointBackgroundColor: "#5B6B4A",
+          showLine: false,
+          pointRadius: 3.5,
+          pointBackgroundColor: "rgba(91,107,74,0.65)",
           pointBorderColor: "#fff",
-          pointBorderWidth: 1.5,
+          pointBorderWidth: 1,
           pointHoverRadius: 6,
-          tension: 0.15,
+          pointHoverBackgroundColor: "#5B6B4A",
         }],
       },
       options: {
@@ -725,16 +745,8 @@ function renderCharts(registros, tecnicoSelecionado, rankingLista) {
                 yMax: 650,
                 borderColor: "#0ca30c",
                 borderWidth: 1.5,
-                label: {
-                  display: true,
-                  content: "R$ 0,005 / ligação",
-                  position: "start",
-                  yAdjust: -10,
-                  font: { size: 9, weight: "600" },
-                  backgroundColor: "rgba(252,252,251,0.92)",
-                  color: "#0ca30c",
-                  padding: 4,
-                },
+                borderDash: [4, 3],
+                label: { display: false },
               },
               linha700: {
                 type: "line",
@@ -742,16 +754,8 @@ function renderCharts(registros, tecnicoSelecionado, rankingLista) {
                 yMax: 700,
                 borderColor: "#8C6D1F",
                 borderWidth: 1.5,
-                label: {
-                  display: true,
-                  content: "R$ 0,01 / ligação",
-                  position: "end",
-                  yAdjust: 12,
-                  font: { size: 9, weight: "600" },
-                  backgroundColor: "rgba(252,252,251,0.92)",
-                  color: "#8C6D1F",
-                  padding: 4,
-                },
+                borderDash: [4, 3],
+                label: { display: false },
               },
             },
           },
@@ -759,10 +763,10 @@ function renderCharts(registros, tecnicoSelecionado, rankingLista) {
         scales: {
           x: {
             type: "time",
-            time: { unit: "month", tooltipFormat: "dd/MM/yyyy" },
+            time: { unit: "month", tooltipFormat: "dd/MM/yyyy", displayFormats: { month: "MMM/yy" } },
             title: { display: false },
             grid: { color: "#e6e5df", drawTicks: false },
-            ticks: { color: "#898781", font: { size: 10 } },
+            ticks: { color: "#898781", font: { size: 10 }, maxRotation: 0 },
           },
           y: {
             beginAtZero: true,
