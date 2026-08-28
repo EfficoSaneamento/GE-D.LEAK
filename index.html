@@ -221,90 +221,31 @@
     font-variant-numeric: tabular-nums;
   }
 
-  .legenda-graficos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin: -4px 0 14px 0;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-  }
-  .legenda-item { display: inline-flex; align-items: center; gap: 6px; }
-  .legenda-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(91,107,74,0.65);
-    border: 1px solid #fff;
-    box-shadow: 0 0 0 1px rgba(91,107,74,0.65);
-  }
-  .legenda-linha { width: 14px; height: 2px; display: inline-block; }
-
-  /* --- grade de graficos por tecnico --- */
-  .charts-grid {
+  /* --- comparativo por tecnico + insights --- */
+  .comparativo-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: 1.6fr 1fr;
     gap: 16px;
+    align-items: stretch;
   }
-  .chart-card {
-    background: #fff;
-    border: 1px solid var(--card-border);
-    box-shadow: var(--card-shadow);
-    border-radius: 10px;
-    padding: 14px;
+  @media (max-width: 900px) {
+    .comparativo-row { grid-template-columns: 1fr; }
   }
-  .chart-card canvas { max-height: 250px; }
-  .chart-card-header { margin-bottom: 10px; }
-  .chart-card-title-row {
+  .card-comparativo canvas { max-height: 300px; }
+
+  .insight-item {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 5px;
-  }
-  .chart-card-nome {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .chart-card-rank {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: #fff;
-    background: var(--header-bg);
-    width: 17px; height: 17px;
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 auto;
-  }
-  .chart-card-rank.top { background: var(--gold); }
-  .tier-badge {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    padding: 3px 9px;
-    border-radius: 999px;
-    white-space: nowrap;
-  }
-  .tier-badge.tier-top { background: var(--gold-tint); color: var(--gold); }
-  .tier-badge.tier-mid { background: #e6f5e6; color: var(--status-good); }
-  .tier-badge.tier-low { background: #f0f0ee; color: var(--text-muted); }
-  .chart-card-stats {
-    font-size: 0.72rem;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f0ee;
+    font-size: 0.82rem;
+    line-height: 1.45;
     color: var(--text-secondary);
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    align-items: baseline;
   }
-  .chart-card-stats .valor-gold { color: var(--gold); font-weight: 700; }
-  .chart-card-stats .dot-sep { color: var(--text-muted); }
+  .insight-item:last-child { border-bottom: none; }
+  .insight-icon { flex: 0 0 auto; font-size: 0.95rem; line-height: 1.4; }
+  .insight-item strong { color: var(--text-dark); }
 
   footer {
     text-align: center;
@@ -424,12 +365,16 @@
 
   <section>
     <div class="section-title">Produtividade por técnico</div>
-    <div class="legenda-graficos">
-      <span class="legenda-item"><span class="legenda-dot"></span>1 visita (ligações rateadas)</span>
-      <span class="legenda-item"><span class="legenda-linha" style="background:#0ca30c"></span>650+ ligações · R$ 0,005/ligação</span>
-      <span class="legenda-item"><span class="legenda-linha" style="background:#8C6D1F"></span>700+ ligações · R$ 0,01/ligação</span>
+    <div class="comparativo-row">
+      <div class="card card-comparativo">
+        <div class="card-title">Ligações no período, por técnico</div>
+        <canvas id="chart-comparativo"></canvas>
+      </div>
+      <div class="card">
+        <div class="card-title">Insights</div>
+        <div id="lista-insights"></div>
+      </div>
     </div>
-    <div class="charts-grid" id="charts-grid"></div>
   </section>
 
 </main>
@@ -549,27 +494,22 @@ function computeBonificacaoPorTecnico(registros) {
   return lista;
 }
 
-function computeSeriePorTecnico(registros, canon) {
-  const pontos = [];
+function computeRecordeRaw(registros, canon) {
+  let recorde = 0;
   registros.forEach(r => {
-    const n = r.participantes.length;
-    if (n === 0) return;
     const participa = r.participantes.some(nome => {
       if (isExFuncionario(nome)) return false;
       const tec = matchTecnicoAtivo(nome);
       return tec && tec.canon === canon;
     });
-    if (participa) {
-      pontos.push({ x: r.data, y: r.ligacoes / n });
-    }
+    if (participa) recorde = Math.max(recorde, r.ligacoes);
   });
-  pontos.sort((a, b) => a.x.localeCompare(b.x));
-  return pontos;
+  return recorde;
 }
 
 // --- render ---
-let charts = {};
 let rankingChart = null;
+let comparativoChart = null;
 
 function renderResumo(resumo) {
   document.getElementById("kpi-vistorias").textContent = NUM.format(resumo.totalVistorias);
@@ -644,142 +584,138 @@ function renderRankingChart(lista) {
   });
 }
 
-function computeRecordeRaw(registros, canon) {
-  let recorde = 0;
-  registros.forEach(r => {
-    const participa = r.participantes.some(nome => {
-      if (isExFuncionario(nome)) return false;
-      const tec = matchTecnicoAtivo(nome);
-      return tec && tec.canon === canon;
-    });
-    if (participa) recorde = Math.max(recorde, r.ligacoes);
+function renderComparativoChart(rankingLista) {
+  const canvas = document.getElementById("chart-comparativo");
+  const ordenado = [...rankingLista].sort((a, b) => b.ligacoes - a.ligacoes);
+  const media = ordenado.length > 0 ? ordenado.reduce((s, i) => s + i.ligacoes, 0) / ordenado.length : 0;
+  const maiorValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => i.ligacoes)) : 0;
+
+  if (comparativoChart) comparativoChart.destroy();
+  comparativoChart = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: ordenado.map(i => i.canon),
+      datasets: [{
+        data: ordenado.map(i => Math.round(i.ligacoes)),
+        backgroundColor: ordenado.map(i => i.ligacoes >= media ? "#5B6B4A" : "#c9d2bc"),
+        borderRadius: 4,
+        maxBarThickness: 46,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 26 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#1a1a1a",
+          padding: 8,
+          callbacks: { label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações` },
+        },
+        datalabels: {
+          display: true,
+          anchor: "end",
+          align: "end",
+          color: "#1a1a1a",
+          font: { size: 11, weight: "700" },
+          formatter: (v) => NUM.format(v),
+        },
+        annotation: {
+          annotations: {
+            media: {
+              type: "line",
+              yMin: media,
+              yMax: media,
+              borderColor: "#898781",
+              borderWidth: 1.5,
+              borderDash: [5, 4],
+              label: {
+                display: media > 0,
+                content: `Média da equipe: ${NUM.format(Math.round(media))}`,
+                position: "end",
+                yAdjust: -12,
+                font: { size: 10, weight: "600" },
+                backgroundColor: "rgba(252,252,251,0.92)",
+                color: "#52514e",
+                padding: 4,
+              },
+            },
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: "#1a1a1a", font: { size: 11, weight: "600" } },
+        },
+        y: {
+          beginAtZero: true,
+          suggestedMax: maiorValor > 0 ? maiorValor * 1.25 : 1,
+          grid: { color: "#e6e5df", drawTicks: false },
+          ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
+        },
+      },
+    },
   });
-  return recorde;
 }
 
-function tierBadge(recordeRaw) {
-  const tier = bonusRate(recordeRaw);
-  if (tier === 0.01) return { label: "Nível R$ 0,01", cls: "tier-top" };
-  if (tier === 0.005) return { label: "Nível R$ 0,005", cls: "tier-mid" };
-  return { label: "Abaixo do bônus", cls: "tier-low" };
-}
+function renderInsights(rankingLista, registros) {
+  const container = document.getElementById("lista-insights");
+  container.innerHTML = "";
 
-function renderCharts(registros, tecnicoSelecionado, rankingLista) {
-  const grid = document.getElementById("charts-grid");
-  grid.innerHTML = "";
-  charts = {};
+  const comAtividade = rankingLista.filter(i => i.ligacoes > 0);
+  if (comAtividade.length === 0) {
+    container.innerHTML = `<div class="insight-item"><span class="insight-icon">ℹ️</span><span>Sem registros de atividade no período selecionado.</span></div>`;
+    return;
+  }
 
-  // ordena a grade pela mesma classificação do gráfico de bonificação,
-  // pra quem está na frente no ranking aparecer primeiro na grade
-  const ordem = rankingLista.map(r => r.canon);
-  let lista = [...TECNICOS_ATIVOS].sort((a, b) => ordem.indexOf(a.canon) - ordem.indexOf(b.canon));
-  if (tecnicoSelecionado) lista = lista.filter(t => t.canon === tecnicoSelecionado);
+  const porLigacoes = [...comAtividade].sort((a, b) => b.ligacoes - a.ligacoes);
+  const lider = porLigacoes[0];
+  const seguidores = porLigacoes.slice(1, 3);
 
-  lista.forEach((t, i) => {
-    const resumoTec = rankingLista.find(r => r.canon === t.canon) || { ligacoes: 0, bonificacao: 0 };
-    const recordeRaw = computeRecordeRaw(registros, t.canon);
-    const badge = tierBadge(recordeRaw);
-    const posicao = i + 1;
-    const isTop = i === 0 && resumoTec.bonificacao > 0;
+  const itens = [];
 
-    const card = document.createElement("div");
-    card.className = "chart-card";
-    const canvasId = `chart-${t.canon}`;
-    card.innerHTML = `
-      <div class="chart-card-header">
-        <div class="chart-card-title-row">
-          <span class="chart-card-nome"><span class="chart-card-rank${isTop ? " top" : ""}">${posicao}</span>${t.canon}</span>
-          <span class="tier-badge ${badge.cls}">${badge.label}</span>
-        </div>
-        <div class="chart-card-stats">
-          <span>${NUM.format(Math.round(resumoTec.ligacoes))} ligações</span>
-          <span class="dot-sep">·</span>
-          <span class="valor-gold">${BRL.format(resumoTec.bonificacao)}</span>
-          <span class="dot-sep">·</span>
-          <span>recorde: ${NUM.format(recordeRaw)}</span>
-        </div>
-      </div>
-      <canvas id="${canvasId}"></canvas>
-    `;
-    grid.appendChild(card);
+  itens.push({
+    icon: "🏆",
+    texto: `<strong>${lider.canon}</strong> lidera o período com ${NUM.format(Math.round(lider.ligacoes))} ligações e ${BRL.format(lider.bonificacao)} em bonificação.`,
+  });
 
-    const pontos = computeSeriePorTecnico(registros, t.canon);
-    const ctx = document.getElementById(canvasId).getContext("2d");
-    charts[t.canon] = new Chart(ctx, {
-      type: "line",
-      data: {
-        datasets: [{
-          label: "Ligações",
-          data: pontos,
-          showLine: false,
-          pointRadius: 3.5,
-          pointBackgroundColor: "rgba(91,107,74,0.65)",
-          pointBorderColor: "#fff",
-          pointBorderWidth: 1,
-          pointHoverRadius: 6,
-          pointHoverBackgroundColor: "#5B6B4A",
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: { mode: "nearest", intersect: false },
-        plugins: {
-          legend: { display: false },
-          datalabels: { display: false },
-          title: { display: false },
-          tooltip: {
-            backgroundColor: "#1a1a1a",
-            titleFont: { size: 11 },
-            bodyFont: { size: 11 },
-            padding: 8,
-            callbacks: {
-              label: (ctx) => `Ligações: ${NUM.format(Math.round(ctx.parsed.y))}`,
-            },
-          },
-          annotation: {
-            annotations: {
-              linha650: {
-                type: "line",
-                yMin: 650,
-                yMax: 650,
-                borderColor: "#0ca30c",
-                borderWidth: 1.5,
-                borderDash: [4, 3],
-                label: { display: false },
-              },
-              linha700: {
-                type: "line",
-                yMin: 700,
-                yMax: 700,
-                borderColor: "#8C6D1F",
-                borderWidth: 1.5,
-                borderDash: [4, 3],
-                label: { display: false },
-              },
-            },
-          },
-        },
-        scales: {
-          x: {
-            type: "time",
-            time: { unit: "month", tooltipFormat: "dd/MM/yyyy", displayFormats: { month: "MMM/yy" } },
-            title: { display: false },
-            grid: { color: "#e6e5df", drawTicks: false },
-            ticks: { color: "#898781", font: { size: 10 }, maxRotation: 0 },
-          },
-          y: {
-            beginAtZero: true,
-            grid: { color: "#e6e5df", drawTicks: false },
-            ticks: {
-              color: "#898781",
-              font: { size: 10 },
-              callback: (v) => NUM.format(v),
-            },
-          },
-        },
-      },
+  if (seguidores.length > 0) {
+    const nomes = seguidores.map(s => `<strong>${s.canon}</strong>`).join(" e ");
+    const valores = seguidores.map(s => NUM.format(Math.round(s.ligacoes))).join(" e ");
+    itens.push({
+      icon: "📈",
+      texto: `${nomes} também se destacam, com ${valores} ligações respectivamente.`,
     });
+  }
+
+  const semBonus = rankingLista.filter(i => {
+    const recorde = computeRecordeRaw(registros, i.canon);
+    return recorde > 0 && bonusRate(recorde) === 0;
+  });
+  if (semBonus.length > 0) {
+    const nomes = semBonus.map(s => `<strong>${s.canon}</strong>`).join(", ");
+    itens.push({
+      icon: "⚠️",
+      texto: `${nomes} não atingiu o patamar mínimo de bonificação (650 ligações em uma visita) no período.`,
+    });
+  }
+
+  const semRegistro = rankingLista.filter(i => i.ligacoes === 0);
+  if (semRegistro.length > 0) {
+    const nomes = semRegistro.map(s => `<strong>${s.canon}</strong>`).join(", ");
+    itens.push({
+      icon: "ℹ️",
+      texto: `${nomes} sem registros no período selecionado.`,
+    });
+  }
+
+  itens.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "insight-item";
+    div.innerHTML = `<span class="insight-icon">${item.icon}</span><span>${item.texto}</span>`;
+    container.appendChild(div);
   });
 }
 
@@ -804,7 +740,8 @@ function renderTudo() {
   const rankingLista = computeBonificacaoPorTecnico(registrosPeriodo);
   renderResumo(computeResumo(registrosResumo));
   renderRankingChart(rankingLista);
-  renderCharts(registrosPeriodo, tecnico || null, rankingLista);
+  renderComparativoChart(rankingLista);
+  renderInsights(rankingLista, registrosPeriodo);
 
   document.getElementById("footer-periodo").textContent =
     `Período: ${inicio.split("-").reverse().join("/")} a ${fim.split("-").reverse().join("/")}`;
