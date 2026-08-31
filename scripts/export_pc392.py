@@ -31,6 +31,7 @@ DOMAIN_FIELDS = ["lider_tecnico", "equipe_1", "equipe_2"]
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_PATH = os.path.join(SCRIPT_DIR, "..", "data", "pc392.json")
+DOMAIN_DEBUG_PATH = os.path.join(SCRIPT_DIR, "..", "data", "dominio_debug.json")
 
 
 # =====================================================================
@@ -118,6 +119,38 @@ def resolve_name(domain_map, code):
     return resolved or None
 
 
+def primeiro_nome(nome):
+    return nome.strip().split()[0].lower() if nome and nome.strip() else ""
+
+
+def build_domain_debug(domain_maps):
+    """
+    Diagnostico: agrupa todos os nomes distintos de cada dominio (lider_tecnico,
+    equipe_1, equipe_2) pelo primeiro nome, pra achar colisoes -- dois nomes
+    completos diferentes que comecam com o mesmo primeiro nome e por isso caem
+    no mesmo "balde" na logica de match por primeiro nome do dashboard.
+    """
+    por_primeiro_nome = {}
+    for mapa in domain_maps.values():
+        for nome in mapa.values():
+            nome = (nome or "").strip()
+            if not nome:
+                continue
+            pn = primeiro_nome(nome)
+            por_primeiro_nome.setdefault(pn, set()).add(nome)
+
+    colisoes = {
+        pn: sorted(nomes)
+        for pn, nomes in por_primeiro_nome.items()
+        if len(nomes) > 1
+    }
+
+    return {
+        "por_campo": domain_maps,
+        "colisoes_primeiro_nome": colisoes,
+    }
+
+
 # =====================================================================
 # BUSCA DE DADOS (com paginação)
 # =====================================================================
@@ -199,8 +232,13 @@ def main():
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-
     print(f"OK: {len(registros)} registros salvos em {os.path.abspath(OUTPUT_PATH)}")
+
+    domain_debug = build_domain_debug(domain_maps)
+    with open(DOMAIN_DEBUG_PATH, "w", encoding="utf-8") as f:
+        json.dump(domain_debug, f, ensure_ascii=False, indent=2)
+    n_colisoes = len(domain_debug["colisoes_primeiro_nome"])
+    print(f"OK: diagnostico de dominio salvo em {os.path.abspath(DOMAIN_DEBUG_PATH)} ({n_colisoes} colisao(oes) de primeiro nome encontrada(s))")
 
 
 if __name__ == "__main__":
