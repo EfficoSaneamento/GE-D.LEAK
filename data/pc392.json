@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-08-27T20:41:35Z",
+  "gerado_em": "2026-08-31T12:05:22Z",
   "registros": [
     {
       "id": 1,
@@ -9744,6 +9744,50 @@
       "data": "2026-08-27",
       "ligacoes": 1388.0,
       "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1073,
+      "data": "2026-08-27",
+      "ligacoes": 1302.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1074,
+      "data": "2026-08-28",
+      "ligacoes": 264.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1075,
+      "data": "2026-08-28",
+      "ligacoes": 1126.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1076,
+      "data": "2026-08-28",
+      "ligacoes": 10.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1077,
+      "data": "2026-08-28",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Oldair Luciano",
         "Carlos Alberto",
         "Gisclayton Arruda"
       ]
