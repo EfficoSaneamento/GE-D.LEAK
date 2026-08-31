@@ -494,6 +494,93 @@ function computeBonificacaoPorTecnico(registros) {
   return lista;
 }
 
+// segunda-feira (UTC) da semana ISO daquela data, usada como chave da semana
+function chaveSemana(dataStr) {
+  const d = new Date(dataStr + "T00:00:00Z");
+  const diaSemana = d.getUTCDay() || 7; // domingo (0) -> 7
+  const segunda = new Date(d);
+  segunda.setUTCDate(d.getUTCDate() - diaSemana + 1);
+  return segunda.toISOString().slice(0, 10);
+}
+
+// Regra da "célula azul": quando um técnico tem pelo menos 1 registro numa
+// semana (prova que estava trabalhando) mas fica sem registro num dia em que
+// pelo menos outro dos 7 teve, preenche esse dia com a média da equipe
+// naquela semana (só com base nos OUTROS técnicos), em vez de zero.
+// Confirmado com o usuário em 2026-08-31 como reflexo fiel do critério manual
+// usado na planilha (ver memória do projeto).
+function computeEstimativasPorTecnico(registros) {
+  const semanas = {}; // chave -> { porTecnicoDia: {canon: {data: valor}}, diasComEquipe: Set }
+
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    const semana = chaveSemana(r.data);
+    if (!semanas[semana]) semanas[semana] = { porTecnicoDia: {}, diasComEquipe: new Set() };
+    semanas[semana].diasComEquipe.add(r.data);
+    r.participantes.forEach(nome => {
+      if (isExFuncionario(nome)) return;
+      const tec = matchTecnicoAtivo(nome);
+      if (!tec) return;
+      const porTecnico = semanas[semana].porTecnicoDia;
+      if (!porTecnico[tec.canon]) porTecnico[tec.canon] = {};
+      porTecnico[tec.canon][r.data] = (porTecnico[tec.canon][r.data] || 0) + r.ligacoes / n;
+    });
+  });
+
+  const estimativasPorTecnico = {};
+  TECNICOS_ATIVOS.forEach(t => { estimativasPorTecnico[t.canon] = { ligacoes: 0, bonificacao: 0, dias: 0 }; });
+
+  Object.values(semanas).forEach(({ porTecnicoDia, diasComEquipe }) => {
+    const tecnicosDaSemana = Object.keys(porTecnicoDia);
+
+    tecnicosDaSemana.forEach(canon => {
+      const diasDoTecnico = new Set(Object.keys(porTecnicoDia[canon]));
+      const diasFaltando = [...diasComEquipe].filter(d => !diasDoTecnico.has(d));
+      if (diasFaltando.length === 0) return;
+
+      let soma = 0, count = 0;
+      tecnicosDaSemana.forEach(outro => {
+        if (outro === canon) return;
+        Object.values(porTecnicoDia[outro]).forEach(v => { soma += v; count++; });
+      });
+      if (count === 0) return;
+      const media = soma / count;
+
+      diasFaltando.forEach(() => {
+        estimativasPorTecnico[canon].ligacoes += media;
+        estimativasPorTecnico[canon].bonificacao += media * bonusRate(media);
+        estimativasPorTecnico[canon].dias += 1;
+      });
+    });
+  });
+
+  return estimativasPorTecnico;
+}
+
+// Combina os totais reais (computeBonificacaoPorTecnico) com as estimativas
+// da regra da media semanal, e reordena pelo novo total.
+function aplicarEstimativas(listaReal, registros) {
+  const estimativas = computeEstimativasPorTecnico(registros);
+  const combinada = listaReal.map(item => {
+    const est = estimativas[item.canon] || { ligacoes: 0, bonificacao: 0, dias: 0 };
+    return {
+      ...item,
+      ligacoesReais: item.ligacoes,
+      bonificacaoReal: item.bonificacao,
+      ligacoesEstimadas: est.ligacoes,
+      bonificacaoEstimada: est.bonificacao,
+      diasEstimados: est.dias,
+      ligacoes: item.ligacoes + est.ligacoes,
+      bonificacao: item.bonificacao + est.bonificacao,
+    };
+  }).sort((a, b) => b.bonificacao - a.bonificacao);
+
+  const max = combinada.length > 0 ? combinada[0].bonificacao : 0;
+  combinada.forEach(item => { item.percentual = max > 0 ? (item.bonificacao / max) * 100 : 0; });
+  return combinada;
+}
+
 function computeRecordeRaw(registros, canon) {
   let recorde = 0;
   registros.forEach(r => {
@@ -527,18 +614,37 @@ function renderResumo(resumo) {
 function renderRankingChart(lista) {
   const canvas = document.getElementById("chart-ranking");
   const maxValor = lista.length > 0 ? Math.max(...lista.map(i => i.bonificacao)) : 0;
+  const temEstimativa = lista.some(i => i.bonificacaoEstimada > 0);
 
   if (rankingChart) rankingChart.destroy();
   rankingChart = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
       labels: lista.map(i => i.canon),
-      datasets: [{
-        data: lista.map(i => i.bonificacao),
-        backgroundColor: "#8C6D1F",
-        borderRadius: 4,
-        maxBarThickness: 22,
-      }],
+      datasets: [
+        {
+          label: "Bonificação registrada",
+          data: lista.map(i => i.bonificacaoReal),
+          backgroundColor: "#8C6D1F",
+          stack: "total",
+          maxBarThickness: 22,
+        },
+        {
+          label: "Estimado (média semanal)",
+          data: lista.map(i => i.bonificacaoEstimada),
+          backgroundColor: "rgba(140,109,31,0.35)",
+          stack: "total",
+          maxBarThickness: 22,
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            color: "#1a1a1a",
+            font: { size: 11, weight: "700" },
+            formatter: (_, ctx) => BRL_COMPACTO.format(lista[ctx.dataIndex].bonificacao),
+          },
+        },
+      ],
     },
     options: {
       indexAxis: "y",
@@ -546,29 +652,28 @@ function renderRankingChart(lista) {
       maintainAspectRatio: false,
       layout: { padding: { right: 60 } },
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: temEstimativa,
+          position: "bottom",
+          labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" },
+        },
+        datalabels: { display: false },
         tooltip: {
           backgroundColor: "#1a1a1a",
           padding: 8,
-          callbacks: { label: (ctx) => BRL.format(ctx.parsed.x) },
-        },
-        datalabels: {
-          display: true,
-          anchor: "end",
-          align: "end",
-          color: "#1a1a1a",
-          font: { size: 11, weight: "700" },
-          formatter: (v) => BRL_COMPACTO.format(v),
+          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${BRL.format(ctx.parsed.x)}` },
         },
       },
       scales: {
         x: {
+          stacked: true,
           beginAtZero: true,
           suggestedMax: maxValor * 1.3 || 1,
           grid: { color: "#e6e5df", drawTicks: false },
           ticks: { display: false },
         },
         y: {
+          stacked: true,
           grid: { display: false },
           ticks: {
             color: "#1a1a1a",
@@ -589,38 +694,54 @@ function renderComparativoChart(rankingLista) {
   const ordenado = [...rankingLista].sort((a, b) => b.ligacoes - a.ligacoes);
   const media = ordenado.length > 0 ? ordenado.reduce((s, i) => s + i.ligacoes, 0) / ordenado.length : 0;
   const maiorValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => i.ligacoes)) : 0;
+  const temEstimativa = ordenado.some(i => i.ligacoesEstimadas > 0);
 
   if (comparativoChart) comparativoChart.destroy();
   comparativoChart = new Chart(canvas.getContext("2d"), {
     type: "bar",
     data: {
       labels: ordenado.map(i => i.canon),
-      datasets: [{
-        data: ordenado.map(i => Math.round(i.ligacoes)),
-        backgroundColor: ordenado.map(i => i.ligacoes >= media ? "#5B6B4A" : "#c9d2bc"),
-        borderRadius: 4,
-        maxBarThickness: 46,
-      }],
+      datasets: [
+        {
+          label: "Ligações registradas",
+          data: ordenado.map(i => Math.round(i.ligacoesReais)),
+          backgroundColor: "#5B6B4A",
+          stack: "total",
+          maxBarThickness: 46,
+        },
+        {
+          label: "Estimado (média semanal)",
+          data: ordenado.map(i => Math.round(i.ligacoesEstimadas)),
+          backgroundColor: "rgba(91,107,74,0.35)",
+          stack: "total",
+          maxBarThickness: 46,
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            color: "#1a1a1a",
+            font: { size: 11, weight: "700" },
+            formatter: (_, ctx) => NUM.format(Math.round(ordenado[ctx.dataIndex].ligacoes)),
+          },
+        },
+      ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
       layout: { padding: { top: 26 } },
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: temEstimativa,
+          position: "bottom",
+          labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" },
+        },
         tooltip: {
           backgroundColor: "#1a1a1a",
           padding: 8,
-          callbacks: { label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações` },
+          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)} ligações` },
         },
-        datalabels: {
-          display: true,
-          anchor: "end",
-          align: "end",
-          color: "#1a1a1a",
-          font: { size: 11, weight: "700" },
-          formatter: (v) => NUM.format(v),
-        },
+        datalabels: { display: false },
         annotation: {
           annotations: {
             media: {
@@ -646,10 +767,12 @@ function renderComparativoChart(rankingLista) {
       },
       scales: {
         x: {
+          stacked: true,
           grid: { display: false },
           ticks: { color: "#1a1a1a", font: { size: 11, weight: "600" } },
         },
         y: {
+          stacked: true,
           beginAtZero: true,
           suggestedMax: maiorValor > 0 ? maiorValor * 1.25 : 1,
           grid: { color: "#e6e5df", drawTicks: false },
@@ -711,6 +834,16 @@ function renderInsights(rankingLista, registros) {
     });
   }
 
+  const totalEstimado = rankingLista.reduce((s, i) => s + i.ligacoesEstimadas, 0);
+  const tecnicosComEstimativa = rankingLista.filter(i => i.ligacoesEstimadas > 0);
+  if (totalEstimado > 0) {
+    const nomes = tecnicosComEstimativa.map(s => `<strong>${s.canon}</strong>`).join(", ");
+    itens.push({
+      icon: "🧮",
+      texto: `Inclui ${NUM.format(Math.round(totalEstimado))} ligações estimadas (média semanal da equipe, aplicada em dias sem registro) para ${nomes}.`,
+    });
+  }
+
   itens.forEach(item => {
     const div = document.createElement("div");
     div.className = "insight-item";
@@ -737,7 +870,7 @@ function renderTudo() {
     );
   }
 
-  const rankingLista = computeBonificacaoPorTecnico(registrosPeriodo);
+  const rankingLista = aplicarEstimativas(computeBonificacaoPorTecnico(registrosPeriodo), registrosPeriodo);
   renderResumo(computeResumo(registrosResumo));
   renderRankingChart(rankingLista);
   renderComparativoChart(rankingLista);
