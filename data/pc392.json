@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-08-31T13:36:03Z",
+  "gerado_em": "2026-09-01T10:43:28Z",
   "registros": [
     {
       "id": 1,
@@ -9790,6 +9790,41 @@
         "Oldair Luciano",
         "Carlos Alberto",
         "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1078,
+      "data": "2026-08-31",
+      "ligacoes": 2060.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
+      ]
+    },
+    {
+      "id": 1079,
+      "data": "2026-08-31",
+      "ligacoes": 43.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1080,
+      "data": "2026-08-31",
+      "ligacoes": 2.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1081,
+      "data": "2026-08-31",
+      "ligacoes": 1014.0,
+      "participantes": [
+        "Oldair Luciano",
+        "carlos_henrique"
       ]
     }
   ]
