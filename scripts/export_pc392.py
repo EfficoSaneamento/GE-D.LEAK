@@ -111,12 +111,12 @@ def get_domain_maps(token, service_url, layer_index, fields):
     return domain_maps
 
 
-# Contorno temporário pra códigos brutos que não têm entrada correspondente
-# no domínio do ArcGIS (cadastro incompleto/errado na origem). Remover daqui
-# assim que o registro for corrigido no ArcGIS -- confirmado com o usuário
-# em 2026-09-01 que "marcus_levi" é o Marcos Levi, o 8º técnico ativo.
+# Rede de segurança: o dominio do ArcGIS ja tem "marcus_levi" -> "Marcus Levi
+# da Silva" cadastrado (confirmado pelo usuario em 2026-09-01), mas caso o
+# export rode antes do dominio_maps refletir isso (cache/atraso), garante que
+# o nome resolve certo mesmo assim.
 CODIGOS_ORFAOS = {
-    "marcus_levi": "Marcos Levi",
+    "marcus_levi": "Marcus Levi da Silva",
 }
 
 
