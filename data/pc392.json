@@ -9382,6 +9382,15 @@
       ]
     },
     {
+      "id": 100920,
+      "data": "2026-08-03",
+      "ligacoes": 712.444444,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
       "id": 1026,
       "data": "2026-08-04",
       "ligacoes": 1082.0,
@@ -9402,7 +9411,8 @@
     {
       "id": 1028,
       "data": "2026-08-04",
-      "ligacoes": 4.0,
+      "ligacoes": 712.444444,
+      "estimado": true,
       "participantes": [
         "Ronaldo De Oliveira Barbosa"
       ]
@@ -9417,12 +9427,30 @@
       ]
     },
     {
+      "id": 100921,
+      "data": "2026-08-05",
+      "ligacoes": 712.444444,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
       "id": 1030,
       "data": "2026-08-06",
       "ligacoes": 1430.0,
       "participantes": [
         "Adeilson da Silva",
         "Christian Costa"
+      ]
+    },
+    {
+      "id": 100922,
+      "data": "2026-08-06",
+      "ligacoes": 712.444444,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9462,6 +9490,15 @@
       ]
     },
     {
+      "id": 100923,
+      "data": "2026-08-07",
+      "ligacoes": 712.444444,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
       "id": 1033,
       "data": "2026-08-10",
       "ligacoes": 1240.0,
@@ -9486,6 +9523,15 @@
       "participantes": [
         "Adeilson da Silva",
         "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 100930,
+      "data": "2026-08-10",
+      "ligacoes": 701.466667,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9536,15 +9582,8 @@
     {
       "id": 1041,
       "data": "2026-08-13",
-      "ligacoes": 1.0,
-      "participantes": [
-        "Adeilson da Silva"
-      ]
-    },
-    {
-      "id": 1042,
-      "data": "2026-08-13",
-      "ligacoes": 1.0,
+      "ligacoes": 701.466667,
+      "estimado": true,
       "participantes": [
         "Adeilson da Silva"
       ]
@@ -9565,6 +9604,15 @@
       "participantes": [
         "Rairan Nascimento",
         "Christian Costa"
+      ]
+    },
+    {
+      "id": 100931,
+      "data": "2026-08-13",
+      "ligacoes": 701.466667,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9597,28 +9645,52 @@
     {
       "id": 1048,
       "data": "2026-08-14",
-      "ligacoes": 5.0,
+      "ligacoes": 3.333334,
       "participantes": [
         "Oldair Luciano",
-        "Marcus Levi da Silva",
         "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 100933,
+      "data": "2026-08-14",
+      "ligacoes": 701.466667,
+      "estimado": true,
+      "participantes": [
+        "Marcus Levi da Silva"
+      ]
+    },
+    {
+      "id": 100932,
+      "data": "2026-08-14",
+      "ligacoes": 701.466667,
+      "estimado": true,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
       "id": 1049,
       "data": "2026-08-17",
-      "ligacoes": 70.0,
+      "ligacoes": 35.0,
       "participantes": [
-        "Oldair Luciano",
-        "Adeilson da Silva"
+        "Oldair Luciano"
       ]
     },
     {
       "id": 1050,
       "data": "2026-08-17",
-      "ligacoes": 13.0,
+      "ligacoes": 6.5,
       "participantes": [
-        "Oldair Luciano",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 100940,
+      "data": "2026-08-17",
+      "ligacoes": 531.8823529,
+      "estimado": true,
+      "participantes": [
         "Adeilson da Silva"
       ]
     },

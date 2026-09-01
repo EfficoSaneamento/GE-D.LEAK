@@ -470,11 +470,80 @@ function computeResumo(registros) {
   };
 }
 
+// Regra fixa: no período 31/07–31/08/2026, sempre que o Adeilson tiver um
+// dia com produção muito abaixo do normal (< 100 ligações — claramente erro
+// de sistema, não um dia real de trabalho), o valor daquele dia é trocado
+// automaticamente pela média "limpa" da equipe naquela semana (segunda a
+// domingo), em vez do lixo do ArcGIS. Roda em cima de qualquer dado que
+// vier do export, então sobrevive a re-exports futuros sem precisar de
+// correção manual. Confirmado com o usuário em 2026-09-01.
+const REGRA_MEDIA_ADEILSON = {
+  tecnico: "Adeilson",
+  inicio: "2026-07-31",
+  fim: "2026-08-31",
+  limiarLixo: 100,
+};
+
+// ligações reais (não "estimado") por técnico por dia — base tanto pra essa
+// regra quanto pra média "limpa" de cada semana.
+function computeLigacoesReaisPorPessoaDia(registros) {
+  const porPessoaDia = {};
+  registros.forEach(r => {
+    if (r.estimado) return;
+    const n = r.participantes.length;
+    if (n === 0) return;
+    r.participantes.forEach(nome => {
+      if (isExFuncionario(nome)) return;
+      const tec = matchTecnicoAtivo(nome);
+      if (!tec) return;
+      if (!porPessoaDia[tec.canon]) porPessoaDia[tec.canon] = {};
+      porPessoaDia[tec.canon][r.data] = (porPessoaDia[tec.canon][r.data] || 0) + r.ligacoes / n;
+    });
+  });
+  return porPessoaDia;
+}
+
+function mediaSemanaLimpa(porPessoaDia, semanaChave, limiar) {
+  const valores = [];
+  Object.keys(porPessoaDia).forEach(canon => {
+    Object.entries(porPessoaDia[canon]).forEach(([data, valor]) => {
+      if (chaveSemana(data) === semanaChave && valor >= limiar) valores.push(valor);
+    });
+  });
+  if (valores.length === 0) return 0;
+  return valores.reduce((a, b) => a + b, 0) / valores.length;
+}
+
+// Retorna { [canon]: { ligacoes, bonificacao, diasAfetados: Set<data> } }
+// pros dias que a regra acima substituiu.
+function computeCorrecaoAutomatica(registros) {
+  const { tecnico, inicio, fim, limiarLixo } = REGRA_MEDIA_ADEILSON;
+  const porPessoaDia = computeLigacoesReaisPorPessoaDia(registros);
+  const diasDoTecnico = porPessoaDia[tecnico] || {};
+
+  const diasAfetados = new Set();
+  Object.entries(diasDoTecnico).forEach(([data, valor]) => {
+    if (data < inicio || data > fim) return;
+    if (valor < limiarLixo) diasAfetados.add(data);
+  });
+
+  let ligacoes = 0, bonificacao = 0;
+  diasAfetados.forEach(data => {
+    const media = mediaSemanaLimpa(porPessoaDia, chaveSemana(data), limiarLixo);
+    ligacoes += media;
+    bonificacao += media * bonusRate(media);
+  });
+
+  return { [tecnico]: { ligacoes, bonificacao, diasAfetados } };
+}
+
 function computeBonificacaoPorTecnico(registros) {
   const totals = {};
   TECNICOS_ATIVOS.forEach(t => {
     totals[t.canon] = { bonificacao: 0, ligacoes: 0, vistorias: 0, bonificacaoManual: 0, ligacoesManual: 0 };
   });
+
+  const correcaoAuto = computeCorrecaoAutomatica(registros);
 
   registros.forEach(r => {
     const n = r.participantes.length;
@@ -484,6 +553,8 @@ function computeBonificacaoPorTecnico(registros) {
       if (isExFuncionario(nome)) return;
       const tec = matchTecnicoAtivo(nome);
       if (!tec) return;
+      const corrigido = correcaoAuto[tec.canon];
+      if (corrigido && corrigido.diasAfetados.has(r.data)) return; // ja contabilizado como estimado abaixo
       // Registros marcados "estimado" são preenchimentos manuais (média da
       // semana aplicada num dia sem dado real do ArcGIS) e entram na conta
       // separada de "estimado", não em "registrado" nem em vistorias.
@@ -496,6 +567,11 @@ function computeBonificacaoPorTecnico(registros) {
         totals[tec.canon].vistorias += 1 / n;
       }
     });
+  });
+
+  Object.entries(correcaoAuto).forEach(([canon, c]) => {
+    totals[canon].bonificacaoManual += c.bonificacao;
+    totals[canon].ligacoesManual += c.ligacoes;
   });
 
   const lista = TECNICOS_ATIVOS.map(t => ({ canon: t.canon, ...totals[t.canon] }))
