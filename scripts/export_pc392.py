@@ -214,7 +214,15 @@ def build_registros(df, domain_maps):
         data_relatorio = row.get("data_relatorio")
         if pd.isna(data_relatorio):
             continue
-        data_str = pd.to_datetime(data_relatorio, unit="ms", utc=True).strftime("%Y-%m-%d")
+        # data_relatorio vem em epoch UTC; converter para o horário de
+        # Brasília antes de extrair a data, senão um lançamento no fim do
+        # dia local (ex.: 22h-23h59) vira o dia seguinte em UTC e o
+        # registro "some" do dia correto na exportação.
+        data_str = (
+            pd.to_datetime(data_relatorio, unit="ms", utc=True)
+            .tz_convert("America/Sao_Paulo")
+            .strftime("%Y-%m-%d")
+        )
 
         ligacoes = row.get("ligacao_total")
         ligacoes = float(ligacoes) if pd.notna(ligacoes) else 0.0
