@@ -472,7 +472,9 @@ function computeResumo(registros) {
 
 function computeBonificacaoPorTecnico(registros) {
   const totals = {};
-  TECNICOS_ATIVOS.forEach(t => { totals[t.canon] = { bonificacao: 0, ligacoes: 0, vistorias: 0 }; });
+  TECNICOS_ATIVOS.forEach(t => {
+    totals[t.canon] = { bonificacao: 0, ligacoes: 0, vistorias: 0, bonificacaoManual: 0, ligacoesManual: 0 };
+  });
 
   registros.forEach(r => {
     const n = r.participantes.length;
@@ -482,16 +484,24 @@ function computeBonificacaoPorTecnico(registros) {
       if (isExFuncionario(nome)) return;
       const tec = matchTecnicoAtivo(nome);
       if (!tec) return;
-      totals[tec.canon].bonificacao += bonusRegistro / n;
-      totals[tec.canon].ligacoes += r.ligacoes / n;
-      totals[tec.canon].vistorias += 1 / n;
+      // Registros marcados "estimado" são preenchimentos manuais (média da
+      // semana aplicada num dia sem dado real do ArcGIS) e entram na conta
+      // separada de "estimado", não em "registrado" nem em vistorias.
+      if (r.estimado) {
+        totals[tec.canon].bonificacaoManual += bonusRegistro / n;
+        totals[tec.canon].ligacoesManual += r.ligacoes / n;
+      } else {
+        totals[tec.canon].bonificacao += bonusRegistro / n;
+        totals[tec.canon].ligacoes += r.ligacoes / n;
+        totals[tec.canon].vistorias += 1 / n;
+      }
     });
   });
 
   const lista = TECNICOS_ATIVOS.map(t => ({ canon: t.canon, ...totals[t.canon] }))
-    .sort((a, b) => b.bonificacao - a.bonificacao);
-  const max = lista.length > 0 ? lista[0].bonificacao : 0;
-  lista.forEach(item => { item.percentual = max > 0 ? (item.bonificacao / max) * 100 : 0; });
+    .sort((a, b) => (b.bonificacao + b.bonificacaoManual) - (a.bonificacao + a.bonificacaoManual));
+  const max = lista.length > 0 ? lista[0].bonificacao + lista[0].bonificacaoManual : 0;
+  lista.forEach(item => { item.percentual = max > 0 ? ((item.bonificacao + item.bonificacaoManual) / max) * 100 : 0; });
   return lista;
 }
 
@@ -516,6 +526,10 @@ function computeEstimativasPorTecnico(registros) {
   registros.forEach(r => {
     const n = r.participantes.length;
     if (n === 0) return;
+    // Registros já marcados "estimado" (preenchimento manual) não contam
+    // como "a equipe trabalhou esse dia" nem entram na média dos outros
+    // técnicos — são tratados só pelo computeBonificacaoPorTecnico.
+    if (r.estimado) return;
     const semana = chaveSemana(r.data);
     if (!semanas[semana]) semanas[semana] = { porTecnicoDia: {}, diasComEquipe: new Set() };
     semanas[semana].diasComEquipe.add(r.data);
@@ -565,15 +579,20 @@ function aplicarEstimativas(listaReal, registros) {
   const estimativas = computeEstimativasPorTecnico(registros);
   const combinada = listaReal.map(item => {
     const est = estimativas[item.canon] || { ligacoes: 0, bonificacao: 0, dias: 0 };
+    // Soma a estimativa automática (regra da média semanal, calculada em
+    // cima dos dias faltantes) com os registros marcados manualmente como
+    // "estimado" no próprio data/pc392.json.
+    const ligacoesEstimadas = est.ligacoes + (item.ligacoesManual || 0);
+    const bonificacaoEstimada = est.bonificacao + (item.bonificacaoManual || 0);
     return {
       ...item,
       ligacoesReais: item.ligacoes,
       bonificacaoReal: item.bonificacao,
-      ligacoesEstimadas: est.ligacoes,
-      bonificacaoEstimada: est.bonificacao,
+      ligacoesEstimadas,
+      bonificacaoEstimada,
       diasEstimados: est.dias,
-      ligacoes: item.ligacoes + est.ligacoes,
-      bonificacao: item.bonificacao + est.bonificacao,
+      ligacoes: item.ligacoes + ligacoesEstimadas,
+      bonificacao: item.bonificacao + bonificacaoEstimada,
     };
   }).sort((a, b) => b.bonificacao - a.bonificacao);
 

@@ -9227,18 +9227,36 @@
     {
       "id": 1015,
       "data": "2026-07-28",
-      "ligacoes": 9.0,
+      "ligacoes": 645.666667,
+      "estimado": true,
       "participantes": [
-        "Oldair Luciano",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 100901,
+      "data": "2026-07-28",
+      "ligacoes": 645.666667,
+      "estimado": true,
+      "participantes": [
         "Rairan Nascimento"
       ]
     },
     {
       "id": 1016,
       "data": "2026-07-29",
-      "ligacoes": 1.0,
+      "ligacoes": 645.666667,
+      "estimado": true,
       "participantes": [
-        "Oldair Luciano",
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 100902,
+      "data": "2026-07-29",
+      "ligacoes": 645.666667,
+      "estimado": true,
+      "participantes": [
         "Rairan Nascimento"
       ]
     },
@@ -9282,10 +9300,10 @@
     {
       "id": 1021,
       "data": "2026-07-31",
-      "ligacoes": 1.0,
+      "ligacoes": 645.666667,
+      "estimado": true,
       "participantes": [
-        "Oldair Luciano",
-        "Rairan Nascimento"
+        "Oldair Luciano"
       ]
     },
     {
@@ -9300,9 +9318,9 @@
     {
       "id": 1023,
       "data": "2026-07-31",
-      "ligacoes": 1.0,
+      "ligacoes": 645.666667,
+      "estimado": true,
       "participantes": [
-        "Oldair Luciano",
         "Rairan Nascimento"
       ]
     },
@@ -9373,6 +9391,7 @@
       "id": 100701,
       "data": "2026-08-07",
       "ligacoes": 712.444444,
+      "estimado": true,
       "participantes": [
         "Adeilson da Silva"
       ]
@@ -9381,6 +9400,7 @@
       "id": 100702,
       "data": "2026-08-07",
       "ligacoes": 712.444444,
+      "estimado": true,
       "participantes": [
         "Christian Costa"
       ]
@@ -9389,6 +9409,7 @@
       "id": 100703,
       "data": "2026-08-07",
       "ligacoes": 712.444444,
+      "estimado": true,
       "participantes": [
         "Oldair Luciano"
       ]
@@ -9397,6 +9418,7 @@
       "id": 100704,
       "data": "2026-08-07",
       "ligacoes": 712.444444,
+      "estimado": true,
       "participantes": [
         "Rairan Nascimento"
       ]
@@ -9792,6 +9814,7 @@
       "id": 1076,
       "data": "2026-08-28",
       "ligacoes": 1351.703703,
+      "estimado": true,
       "participantes": [
         "Oldair Luciano",
         "Rairan Nascimento"
@@ -9843,6 +9866,7 @@
       "id": 100801,
       "data": "2026-08-29",
       "ligacoes": 1351.703703,
+      "estimado": true,
       "participantes": [
         "Oldair Luciano",
         "Rairan Nascimento"
@@ -9852,6 +9876,7 @@
       "id": 100802,
       "data": "2026-08-30",
       "ligacoes": 1351.703703,
+      "estimado": true,
       "participantes": [
         "Oldair Luciano",
         "Rairan Nascimento"
@@ -9861,6 +9886,7 @@
       "id": 100803,
       "data": "2026-08-31",
       "ligacoes": 1351.703703,
+      "estimado": true,
       "participantes": [
         "Oldair Luciano",
         "Rairan Nascimento"
