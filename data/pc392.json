@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-01T19:53:27Z",
+  "gerado_em": "2026-09-01T20:32:47Z",
   "registros": [
     {
       "id": 1,
@@ -9084,8 +9084,15 @@
     {
       "id": 999,
       "data": "2026-07-23",
-      "ligacoes": 656.0,
-      "estimado": true,
+      "ligacoes": 1.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1000,
+      "data": "2026-07-23",
+      "ligacoes": 1.0,
       "participantes": [
         "Ronaldo De Oliveira Barbosa"
       ]
@@ -9182,15 +9189,6 @@
       ]
     },
     {
-      "id": 100910,
-      "data": "2026-07-27",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
       "id": 1011,
       "data": "2026-07-28",
       "ligacoes": 785.0,
@@ -9229,45 +9227,18 @@
     {
       "id": 1015,
       "data": "2026-07-28",
-      "ligacoes": 645.666667,
-      "estimado": true,
+      "ligacoes": 9.0,
       "participantes": [
-        "Oldair Luciano"
-      ]
-    },
-    {
-      "id": 100901,
-      "data": "2026-07-28",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
+        "Oldair Luciano",
         "Rairan Nascimento"
-      ]
-    },
-    {
-      "id": 100911,
-      "data": "2026-07-28",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
       "id": 1016,
       "data": "2026-07-29",
-      "ligacoes": 645.666667,
-      "estimado": true,
+      "ligacoes": 1.0,
       "participantes": [
-        "Oldair Luciano"
-      ]
-    },
-    {
-      "id": 100902,
-      "data": "2026-07-29",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
+        "Oldair Luciano",
         "Rairan Nascimento"
       ]
     },
@@ -9299,15 +9270,6 @@
       ]
     },
     {
-      "id": 100912,
-      "data": "2026-07-29",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
       "id": 1020,
       "data": "2026-07-30",
       "ligacoes": 1963.0,
@@ -9318,21 +9280,12 @@
       ]
     },
     {
-      "id": 100913,
-      "data": "2026-07-30",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
       "id": 1021,
       "data": "2026-07-31",
-      "ligacoes": 645.666667,
-      "estimado": true,
+      "ligacoes": 1.0,
       "participantes": [
-        "Oldair Luciano"
+        "Oldair Luciano",
+        "Rairan Nascimento"
       ]
     },
     {
@@ -9347,9 +9300,9 @@
     {
       "id": 1023,
       "data": "2026-07-31",
-      "ligacoes": 645.666667,
-      "estimado": true,
+      "ligacoes": 1.0,
       "participantes": [
+        "Oldair Luciano",
         "Rairan Nascimento"
       ]
     },
@@ -9363,15 +9316,6 @@
       ]
     },
     {
-      "id": 100914,
-      "data": "2026-07-31",
-      "ligacoes": 645.666667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
       "id": 1025,
       "data": "2026-08-03",
       "ligacoes": 2083.0,
@@ -9379,15 +9323,6 @@
         "Adeilson da Silva",
         "Christian Costa",
         "Rairan Nascimento"
-      ]
-    },
-    {
-      "id": 100920,
-      "data": "2026-08-03",
-      "ligacoes": 712.444444,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9411,8 +9346,7 @@
     {
       "id": 1028,
       "data": "2026-08-04",
-      "ligacoes": 712.444444,
-      "estimado": true,
+      "ligacoes": 4.0,
       "participantes": [
         "Ronaldo De Oliveira Barbosa"
       ]
@@ -9427,15 +9361,6 @@
       ]
     },
     {
-      "id": 100921,
-      "data": "2026-08-05",
-      "ligacoes": 712.444444,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
       "id": 1030,
       "data": "2026-08-06",
       "ligacoes": 1430.0,
@@ -9445,57 +9370,21 @@
       ]
     },
     {
-      "id": 100922,
-      "data": "2026-08-06",
-      "ligacoes": 712.444444,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
       "id": 1031,
       "data": "2026-08-07",
-      "ligacoes": 712.444444,
-      "estimado": true,
+      "ligacoes": 6.0,
       "participantes": [
-        "Adeilson da Silva"
-      ]
-    },
-    {
-      "id": 100702,
-      "data": "2026-08-07",
-      "ligacoes": 712.444444,
-      "estimado": true,
-      "participantes": [
+        "Adeilson da Silva",
         "Christian Costa"
       ]
     },
     {
       "id": 1032,
       "data": "2026-08-07",
-      "ligacoes": 712.444444,
-      "estimado": true,
+      "ligacoes": 2.0,
       "participantes": [
-        "Oldair Luciano"
-      ]
-    },
-    {
-      "id": 100704,
-      "data": "2026-08-07",
-      "ligacoes": 712.444444,
-      "estimado": true,
-      "participantes": [
+        "Oldair Luciano",
         "Rairan Nascimento"
-      ]
-    },
-    {
-      "id": 100923,
-      "data": "2026-08-07",
-      "ligacoes": 712.444444,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9523,15 +9412,6 @@
       "participantes": [
         "Adeilson da Silva",
         "Oldair Luciano"
-      ]
-    },
-    {
-      "id": 100930,
-      "data": "2026-08-10",
-      "ligacoes": 701.466667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9582,8 +9462,15 @@
     {
       "id": 1041,
       "data": "2026-08-13",
-      "ligacoes": 701.466667,
-      "estimado": true,
+      "ligacoes": 1.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1042,
+      "data": "2026-08-13",
+      "ligacoes": 1.0,
       "participantes": [
         "Adeilson da Silva"
       ]
@@ -9604,15 +9491,6 @@
       "participantes": [
         "Rairan Nascimento",
         "Christian Costa"
-      ]
-    },
-    {
-      "id": 100931,
-      "data": "2026-08-13",
-      "ligacoes": 701.466667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
       ]
     },
     {
@@ -9645,52 +9523,28 @@
     {
       "id": 1048,
       "data": "2026-08-14",
-      "ligacoes": 3.333334,
+      "ligacoes": 5.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Marcus Levi da Silva",
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1049,
+      "data": "2026-08-17",
+      "ligacoes": 70.0,
       "participantes": [
         "Oldair Luciano",
         "Adeilson da Silva"
       ]
     },
     {
-      "id": 100933,
-      "data": "2026-08-14",
-      "ligacoes": 701.466667,
-      "estimado": true,
-      "participantes": [
-        "Marcus Levi da Silva"
-      ]
-    },
-    {
-      "id": 100932,
-      "data": "2026-08-14",
-      "ligacoes": 701.466667,
-      "estimado": true,
-      "participantes": [
-        "Ronaldo De Oliveira Barbosa"
-      ]
-    },
-    {
-      "id": 1049,
-      "data": "2026-08-17",
-      "ligacoes": 35.0,
-      "participantes": [
-        "Oldair Luciano"
-      ]
-    },
-    {
       "id": 1050,
       "data": "2026-08-17",
-      "ligacoes": 6.5,
+      "ligacoes": 13.0,
       "participantes": [
-        "Oldair Luciano"
-      ]
-    },
-    {
-      "id": 100940,
-      "data": "2026-08-17",
-      "ligacoes": 531.8823529,
-      "estimado": true,
-      "participantes": [
+        "Oldair Luciano",
         "Adeilson da Silva"
       ]
     },
@@ -9913,11 +9767,9 @@
     {
       "id": 1076,
       "data": "2026-08-28",
-      "ligacoes": 1351.703703,
-      "estimado": true,
+      "ligacoes": 10.0,
       "participantes": [
-        "Oldair Luciano",
-        "Rairan Nascimento"
+        "Oldair Luciano"
       ]
     },
     {
@@ -9925,6 +9777,7 @@
       "data": "2026-08-28",
       "ligacoes": 1.0,
       "participantes": [
+        "Oldair Luciano",
         "Carlos Alberto",
         "Gisclayton Arruda"
       ]
@@ -9932,10 +9785,11 @@
     {
       "id": 1078,
       "data": "2026-08-31",
-      "ligacoes": 1373.333333,
+      "ligacoes": 2060.0,
       "participantes": [
         "Carlos Alberto",
-        "Gisclayton Arruda"
+        "Gisclayton Arruda",
+        "Rairan Nascimento"
       ]
     },
     {
@@ -9957,39 +9811,10 @@
     {
       "id": 1081,
       "data": "2026-08-31",
-      "ligacoes": 507.0,
+      "ligacoes": 1014.0,
       "participantes": [
+        "Oldair Luciano",
         "carlos_henrique"
-      ]
-    },
-    {
-      "id": 100803,
-      "data": "2026-08-31",
-      "ligacoes": 1351.703703,
-      "estimado": true,
-      "participantes": [
-        "Oldair Luciano",
-        "Rairan Nascimento"
-      ]
-    },
-    {
-      "id": 100801,
-      "data": "2026-08-29",
-      "ligacoes": 1351.703703,
-      "estimado": true,
-      "participantes": [
-        "Oldair Luciano",
-        "Rairan Nascimento"
-      ]
-    },
-    {
-      "id": 100802,
-      "data": "2026-08-30",
-      "ligacoes": 1351.703703,
-      "estimado": true,
-      "participantes": [
-        "Oldair Luciano",
-        "Rairan Nascimento"
       ]
     }
   ]
