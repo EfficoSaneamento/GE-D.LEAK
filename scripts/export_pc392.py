@@ -111,11 +111,22 @@ def get_domain_maps(token, service_url, layer_index, fields):
     return domain_maps
 
 
+# Contorno temporário pra códigos brutos que não têm entrada correspondente
+# no domínio do ArcGIS (cadastro incompleto/errado na origem). Remover daqui
+# assim que o registro for corrigido no ArcGIS -- confirmado com o usuário
+# em 2026-09-01 que "marcus_levi" é o Marcos Levi, o 8º técnico ativo.
+CODIGOS_ORFAOS = {
+    "marcus_levi": "Marcos Levi",
+}
+
+
 def resolve_name(domain_map, code):
     if code is None or (isinstance(code, float) and pd.isna(code)):
         return None
     resolved = domain_map.get(str(code), str(code)) if domain_map else str(code)
     resolved = resolved.strip() if resolved else None
+    if resolved and resolved in CODIGOS_ORFAOS:
+        resolved = CODIGOS_ORFAOS[resolved]
     return resolved or None
 
 
