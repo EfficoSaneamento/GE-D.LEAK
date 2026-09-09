@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-09T10:20:12Z",
+  "gerado_em": "2026-09-09T18:47:34Z",
   "registros": [
     {
       "id": 1,
@@ -9640,7 +9640,8 @@
       "ligacoes": 10.0,
       "participantes": [
         "Rairan Nascimento",
-        "Carlos Alberto"
+        "Carlos Alberto",
+        "Gisclayton Arruda"
       ]
     },
     {
@@ -9649,7 +9650,8 @@
       "ligacoes": 10.0,
       "participantes": [
         "Rairan Nascimento",
-        "Carlos Alberto"
+        "Carlos Alberto",
+        "Gisclayton Arruda"
       ]
     },
     {
@@ -9683,7 +9685,8 @@
       "data": "2026-08-25",
       "ligacoes": 702.0,
       "participantes": [
-        "Oldair Luciano"
+        "Oldair Luciano",
+        "carlos_henrique"
       ]
     },
     {
@@ -9717,7 +9720,8 @@
       "data": "2026-08-26",
       "ligacoes": 889.0,
       "participantes": [
-        "Oldair Luciano"
+        "Oldair Luciano",
+        "carlos_henrique"
       ]
     },
     {
@@ -9769,7 +9773,8 @@
       "data": "2026-08-28",
       "ligacoes": 10.0,
       "participantes": [
-        "Oldair Luciano"
+        "Oldair Luciano",
+        "carlos_henrique"
       ]
     },
     {
@@ -9922,6 +9927,14 @@
       "participantes": [
         "Rairan Nascimento",
         "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1094,
+      "data": "2026-09-08",
+      "ligacoes": 1.0,
+      "participantes": [
+        "Adeilson da Silva"
       ]
     }
   ]

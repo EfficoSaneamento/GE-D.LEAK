@@ -63,35 +63,217 @@
     background: #7fd97f;
     display: inline-block;
   }
-  .filtros { display: flex; gap: 12px; flex-wrap: wrap; }
+  .filtros { display: flex; gap: 10px; flex-wrap: wrap; }
   .filtro-box {
-    background: rgba(255,255,255,0.14);
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 999px;
-    padding: 6px 16px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 7px 14px;
     display: flex;
-    flex-direction: column;
-    min-width: 150px;
-    transition: background 0.15s ease;
+    align-items: center;
+    gap: 10px;
+    min-width: 156px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.06);
+    transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   }
-  .filtro-box:focus-within, .filtro-box:hover { background: rgba(255,255,255,0.22); }
+  .filtro-box:hover {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.32);
+  }
+  .filtro-box:focus-within {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.45);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.14), 0 0 0 3px rgba(255,255,255,0.16);
+  }
+  .filtro-icon {
+    flex: 0 0 auto;
+    width: 15px; height: 15px;
+    stroke: rgba(255,255,255,0.8);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .filtro-texto { display: flex; flex-direction: column; min-width: 0; flex: 1; }
   .filtro-box label {
-    font-size: 0.62rem;
+    font-size: 0.6rem;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
-    opacity: 0.8;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: rgba(255,255,255,0.72);
   }
   .filtro-box input, .filtro-box select {
     border: none;
     background: transparent;
     color: #fff;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 2px 0;
+    font-size: 0.86rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    padding: 1px 0 0;
+    min-width: 0;
   }
   .filtro-box input:focus, .filtro-box select:focus { outline: none; }
-  .filtro-box input::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+  .filtro-box input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.8;
+    cursor: pointer;
+    margin-left: 6px;
+    border-radius: 4px;
+    transition: opacity 0.15s ease;
+  }
+  .filtro-box input::-webkit-calendar-picker-indicator:hover { opacity: 1; }
+  .filtro-box select { cursor: pointer; white-space: nowrap; }
   .filtro-box select option { color: #333; }
+
+  /* --- seletor de período (botão + painel com calendário) --- */
+  .periodo-picker { position: relative; }
+  .periodo-toggle {
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+  }
+  .periodo-toggle #periodo-resumo {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .periodo-picker.aberto .periodo-toggle {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.45);
+  }
+
+  .periodo-painel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 40;
+    width: 264px;
+    background: linear-gradient(160deg, var(--header-bg), var(--header-bg-dark));
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+    padding: 14px;
+  }
+  .periodo-campos { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  .periodo-campo label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    display: block;
+    margin-bottom: 3px;
+  }
+  .periodo-input-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 8px;
+    padding: 7px 10px;
+  }
+  .periodo-input-icon {
+    flex: 0 0 auto;
+    width: 14px; height: 14px;
+    stroke: rgba(255,255,255,0.75);
+    fill: none;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .periodo-input-box span {
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .periodo-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .periodo-cal-header span {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-transform: capitalize;
+  }
+  .periodo-cal-nav {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #fff;
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+  }
+  .periodo-cal-nav:hover { background: rgba(255,255,255,0.24); }
+
+  .periodo-cal-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+  }
+  .periodo-cal-semana span {
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.6);
+  }
+  .periodo-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 2px;
+  }
+  .periodo-cal-dia {
+    position: relative;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.92);
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    font-variant-numeric: tabular-nums;
+  }
+  .periodo-cal-dia:hover:not(:disabled):not(.selecionado) .periodo-cal-dia-num { background: rgba(255,255,255,0.2); }
+  .periodo-cal-dia-num {
+    position: relative;
+    z-index: 1;
+    width: 24px; height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .periodo-cal-dia.fora-mes { color: rgba(255,255,255,0.32); }
+  .periodo-cal-dia:disabled { cursor: default; opacity: 0.3; }
+  .periodo-cal-dia.no-intervalo::before {
+    content: "";
+    position: absolute;
+    inset: 2px 0;
+    background: rgba(255,255,255,0.14);
+  }
+  .periodo-cal-dia.extremo-inicio::before { left: 50%; border-radius: 0; }
+  .periodo-cal-dia.extremo-fim::before { right: 50%; border-radius: 0; }
+  .periodo-cal-dia.selecionado .periodo-cal-dia-num {
+    background: #fff;
+    color: var(--header-bg-dark);
+  }
+  .periodo-cal-dia.hoje:not(.selecionado) .periodo-cal-dia-num { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.6); }
 
   main {
     display: flex;
@@ -202,7 +384,7 @@
     margin: 0 0 14px 0;
     letter-spacing: 0.04em;
   }
-  .card-ranking canvas { max-height: 260px; }
+  .card-ranking canvas { min-height: 260px; max-height: 900px; }
 
   .indic-grid { display: flex; flex-direction: column; }
   .indic-row {
@@ -232,6 +414,190 @@
     .comparativo-row { grid-template-columns: 1fr; }
   }
   .card-comparativo canvas { max-height: 300px; }
+
+  .meta-legenda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0ee;
+  }
+  .meta-legenda-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+  .lista-insights-inline {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #f0f0ee;
+  }
+  .lista-insights-inline:empty { display: none; }
+  .meta-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .meta-dot-0 { background: var(--text-muted); }
+  .meta-dot-1 { background: var(--header-bg); }
+  .meta-dot-2 { background: var(--gold); }
+
+  /* --- top 3 produtividade --- */
+  .top3-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .top3-grid { grid-template-columns: 1fr; }
+  }
+  .top3-card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    border-radius: 10px;
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .top3-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--header-bg);
+  }
+  .top3-card.top3-1::before { background: var(--gold); height: 4px; }
+  .top3-card.top3-1 { border-color: rgba(140,109,31,0.35); }
+  .top3-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .top3-medalha { font-size: 1.6rem; line-height: 1; }
+  .top3-nome { font-size: 1rem; font-weight: 700; color: var(--text-dark); }
+  .top3-posicao {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .top3-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 2px 0 12px;
+  }
+  .top3-valor-label {
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-top: -10px;
+  }
+
+  /* --- valores a receber --- */
+  .card-title-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .card-title-row .card-title { margin: 0; }
+  .valores-total {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+  }
+  .valores-total strong { color: var(--gold); font-size: 0.92rem; }
+  .chart-valores-wrap { position: relative; width: 100%; height: 260px; }
+  .chart-valores-wrap canvas { max-width: 100%; }
+
+  #calendario-meses {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .mes-calendario {
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #fbfaf7, #fff 90px);
+  }
+  .mes-calendario-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 14px 16px 10px;
+  }
+  .mes-calendario-titulo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--header-bg);
+    text-transform: capitalize;
+  }
+  .mes-calendario-total {
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+  .mes-calendario-total strong { color: var(--gold); font-size: 0.85rem; }
+  .mes-calendario-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0 10px;
+  }
+  .mes-calendario-semana span {
+    text-align: center;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    padding-bottom: 6px;
+  }
+  .mes-calendario-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    padding: 0 10px 14px;
+  }
+  .mes-calendario-dia {
+    min-height: 54px;
+    border-radius: 8px;
+    background: #f4f4f2;
+    padding: 5px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .mes-calendario-dia.fora-mes { visibility: hidden; }
+  .mes-calendario-dia .dia-num {
+    font-size: 0.66rem;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+  .mes-calendario-dia .dia-valor {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .mes-calendario-dia.com-dado {
+    background: var(--gold-tint);
+  }
+  .mes-calendario-dia.com-dado .dia-num { color: #9c7a25; }
+  .mes-calendario-dia.com-dado .dia-valor { color: #6b5217; }
+  .mes-calendario-dia.tier-2 { background: var(--gold); }
+  .mes-calendario-dia.tier-2 .dia-num,
+  .mes-calendario-dia.tier-2 .dia-valor { color: #fff; }
+  .mes-calendario-dia.fim-semana:not(.com-dado) { background: #ececea; }
+
+  .indic-grid-wide { flex-direction: row; flex-wrap: wrap; gap: 0 32px; }
+  .indic-grid-wide .indic-row { flex: 1 1 200px; }
 
   .insight-item {
     display: flex;
@@ -263,6 +629,132 @@
     text-align: center;
   }
   #status-msg.erro { color: #a33; }
+
+  /* --- abas (Automático / Manual / Gerencial) --- */
+  .tabs-nav {
+    display: flex;
+    gap: 4px;
+    padding: 10px 24px 0;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+  .tab-btn {
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 14px 12px;
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tab-btn:hover { color: var(--text-dark); }
+  .tab-btn.active {
+    color: var(--header-bg);
+    border-bottom-color: var(--header-bg);
+  }
+
+  .calendario-scroll { overflow: auto; max-height: 520px; border-radius: 8px; }
+
+  /* --- tabela editável (lançamento manual / gerencial) --- */
+  .tabela-manual {
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    white-space: nowrap;
+    width: auto;
+  }
+  .tabela-manual th, .tabela-manual td {
+    padding: 5px 8px;
+    text-align: right;
+    border-bottom: 1px solid #f0f0ee;
+    font-variant-numeric: tabular-nums;
+  }
+  .tabela-manual thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--gridline);
+    z-index: 1;
+  }
+  .tabela-manual th.col-data, .tabela-manual td.col-data {
+    position: sticky;
+    left: 0;
+    background: #fff;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-dark);
+    border-right: 1px solid var(--gridline);
+    z-index: 2;
+  }
+  .tabela-manual thead th.col-data { z-index: 3; }
+  .tabela-manual input.celula-manual {
+    width: 64px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 4px 6px;
+    text-align: right;
+    font: inherit;
+    font-size: 0.78rem;
+    font-variant-numeric: tabular-nums;
+    background: #f7f7f5;
+    color: var(--text-dark);
+  }
+  .tabela-manual input.celula-manual:hover { border-color: var(--gridline); }
+  .tabela-manual input.celula-manual:focus {
+    outline: none;
+    border-color: var(--header-bg);
+    background: #fff;
+    box-shadow: 0 0 0 2px rgba(91,107,74,0.15);
+  }
+  .tabela-manual td.col-remover button {
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    line-height: 1;
+    padding: 2px 6px;
+  }
+  .tabela-manual td.col-remover button:hover { color: #a33; }
+  .tabela-manual tr.linha-diff-pos td.col-diff { color: var(--header-bg); font-weight: 700; }
+  .tabela-manual tr.linha-diff-neg td.col-diff { color: #a33; font-weight: 700; }
+
+  .manual-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .manual-input-nome {
+    font: inherit;
+    font-size: 0.8rem;
+    padding: 7px 10px;
+    border: 1px solid var(--gridline);
+    border-radius: 8px;
+    background: #f7f7f5;
+    min-width: 160px;
+  }
+  .btn-manual {
+    font: inherit;
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--header-bg);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  .btn-manual:hover { background: var(--header-bg-dark); }
+  .btn-manual-secundario { background: #fff; color: var(--header-bg); border: 1px solid var(--header-bg); }
+  .btn-manual-secundario:hover { background: var(--olive-tint); }
+  .manual-aviso {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin: 10px 0 14px;
+  }
 </style>
 </head>
 <body>
@@ -274,45 +766,97 @@
   </div>
   <div class="filtros">
     <div class="filtro-box">
-      <label>Período - início</label>
-      <input type="date" id="filtro-data-inicio">
+      <svg class="filtro-icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      <div class="filtro-texto">
+        <label>Mês</label>
+        <select id="filtro-mes">
+          <option value="">Personalizado</option>
+        </select>
+      </div>
     </div>
-    <div class="filtro-box">
-      <label>Período - fim</label>
-      <input type="date" id="filtro-data-fim">
+
+    <div class="periodo-picker">
+      <button type="button" class="filtro-box periodo-toggle" id="periodo-toggle">
+        <svg class="filtro-icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+        <div class="filtro-texto">
+          <label>Período</label>
+          <span id="periodo-resumo">Selecione o período</span>
+        </div>
+      </button>
+
+      <div class="periodo-painel" id="periodo-painel" hidden>
+        <div class="periodo-campos">
+          <div class="periodo-campo">
+            <label>de</label>
+            <div class="periodo-input-box">
+              <svg class="periodo-input-icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              <span id="periodo-de-txt">DD/MM/AAAA</span>
+            </div>
+          </div>
+          <div class="periodo-campo">
+            <label>até</label>
+            <div class="periodo-input-box">
+              <svg class="periodo-input-icon" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+              <span id="periodo-ate-txt">DD/MM/AAAA</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="periodo-cal-header">
+          <button type="button" class="periodo-cal-nav" id="periodo-cal-prev" aria-label="Mês anterior">‹</button>
+          <span id="periodo-cal-titulo"></span>
+          <button type="button" class="periodo-cal-nav" id="periodo-cal-next" aria-label="Próximo mês">›</button>
+        </div>
+        <div class="periodo-cal-semana"><span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span></div>
+        <div class="periodo-cal-grid" id="periodo-cal-grid"></div>
+      </div>
+
+      <input type="date" id="filtro-data-inicio" style="display:none">
+      <input type="date" id="filtro-data-fim" style="display:none">
     </div>
+
     <div class="filtro-box">
-      <label>Técnico</label>
-      <select id="filtro-tecnico">
-        <option value="">Todos</option>
-      </select>
+      <svg class="filtro-icon" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15.8 14.3c2.5.4 4.7 2.3 4.7 5.7"/></svg>
+      <div class="filtro-texto">
+        <label>Técnico</label>
+        <select id="filtro-tecnico">
+          <option value="">Todos</option>
+        </select>
+      </div>
     </div>
   </div>
 </header>
 
+<nav class="tabs-nav" id="tabs-nav">
+  <button type="button" class="tab-btn active" data-view="automatico">ArcGIS</button>
+  <button type="button" class="tab-btn" data-view="manual">ArcGis + Medias</button>
+  <button type="button" class="tab-btn" data-view="gerencial">Gerencial (Em desenvolvimento)
+  </button>
+</nav>
+
 <div id="status-msg">Carregando dados...</div>
 
-<main id="layout" style="display:none;">
+<main id="layout" class="view-panel" data-view="automatico" style="display:none;">
 
   <section class="kpi-strip">
     <div class="kpi-tile">
       <div class="kpi-icon">
-        <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 13l2 2 4-4"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2.2z"/></svg>
       </div>
       <div class="kpi-body">
-        <div class="kpi-label">Total de vistorias</div>
-        <div class="kpi-value" id="kpi-vistorias">-</div>
-        <div class="kpi-sub">Vistorias realizadas</div>
+        <div class="kpi-label">Total de ligações</div>
+        <div class="kpi-value" id="kpi-ligacoes">-</div>
+        <div class="kpi-sub">Ligações feitas no período</div>
       </div>
     </div>
-    <div class="kpi-tile destaque">
+    <div class="kpi-tile">
       <div class="kpi-icon">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.3 9.6c0-1.4 1.3-2.5 2.7-2.5s2.7.9 2.7 2c0 2.9-5.4 1.5-5.4 4.5 0 1.1 1.2 2 2.7 2s2.7-1 2.7-2.4"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
       </div>
       <div class="kpi-body">
-        <div class="kpi-label">Bonificação total</div>
-        <div class="kpi-value" id="kpi-bonificacao">-</div>
-        <div class="kpi-sub">Valor acumulado no período</div>
+        <div class="kpi-label">Ligações por técnico</div>
+        <div class="kpi-value" id="kpi-media-tecnico">-</div>
+        <div class="kpi-sub">Média no período selecionado</div>
       </div>
     </div>
     <div class="kpi-tile">
@@ -347,14 +891,71 @@
     </div>
   </section>
 
-  <section class="row-secundaria">
-    <div class="card card-ranking">
-      <div class="card-title">Bonificação por técnico</div>
-      <canvas id="chart-ranking"></canvas>
+  <section>
+    <div class="section-title">Produtividade por técnico</div>
+    <div class="comparativo-row">
+      <div class="card card-comparativo">
+        <div class="card-title">Ligações no período, por técnico</div>
+        <canvas id="chart-comparativo"></canvas>
+        <div class="meta-legenda">
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-0"></span>&lt; 650/dia — sem meta</span>
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-1"></span>= 650/dia — R$ 0,05/ligação</span>
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-2"></span>&gt; 650/dia — R$ 0,10/ligação</span>
+        </div>
+        <div id="lista-insights" class="lista-insights-inline"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Previsão para bater a meta</div>
+        <div id="lista-previsao-meta"></div>
+      </div>
     </div>
+  </section>
+
+  <section>
+    <div class="section-title">Top 3 produtividade</div>
+    <div class="top3-grid" id="top3-grid"></div>
+  </section>
+
+  <section>
+    <div class="section-title">Evolução mensal — Top 3</div>
+    <div class="card card-comparativo">
+      <div class="card-title">Ligações por mês, Top 3 do período</div>
+      <canvas id="chart-top3-mensal"></canvas>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Progressão mensal</div>
+    <div class="card card-comparativo">
+      <div class="card-title">Ligações por mês</div>
+      <canvas id="chart-progressao"></canvas>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Valores a receber por técnico</div>
+    <div class="card card-valores">
+      <div class="card-title-row">
+        <div class="card-title">Estimativa no período selecionado</div>
+        <div class="valores-total">Total: <strong id="valores-total-periodo">-</strong></div>
+      </div>
+      <div class="chart-valores-wrap" id="chart-valores-wrap">
+        <canvas id="chart-valores"></canvas>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title-row">
+        <div class="card-title">Calendário de ligações</div>
+        <div class="valores-total" id="calendario-legenda">Total da equipe por dia</div>
+      </div>
+      <div id="calendario-meses"></div>
+    </div>
+  </section>
+
+  <section>
     <div class="card">
       <div class="card-title">Indicadores de produção</div>
-      <div class="indic-grid">
+      <div class="indic-grid indic-grid-wide">
         <div class="indic-row"><span class="indic-label">Total de registros</span><span class="indic-value" id="ind-registros">-</span></div>
         <div class="indic-row"><span class="indic-label">Média de vistorias / dia</span><span class="indic-value" id="ind-media-vistorias-dia">-</span></div>
         <div class="indic-row"><span class="indic-label">Média de ligações / vistoria</span><span class="indic-value" id="ind-media-ligacoes-vistoria">-</span></div>
@@ -363,16 +964,143 @@
     </div>
   </section>
 
+</main>
+
+<main id="view-manual-panel" class="view-panel" data-view="manual" style="display:none;">
+
+  <section class="kpi-strip">
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.4-1.4a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.8 2.2z"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Total de ligações</div>
+        <div class="kpi-value" id="kpi-ligacoes-manual">-</div>
+        <div class="kpi-sub">Automático + manual</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Ligações por técnico</div>
+        <div class="kpi-value" id="kpi-media-tecnico-manual">-</div>
+        <div class="kpi-sub">Média no período selecionado</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17.5" cy="9" r="2.4"/><path d="M15.8 14.3c2.5.4 4.7 2.3 4.7 5.7"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Técnicos envolvidos</div>
+        <div class="kpi-value" id="kpi-tecnicos-manual">-</div>
+        <div class="kpi-sub">No período selecionado</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Dias com atividade</div>
+        <div class="kpi-value" id="kpi-dias-manual">-</div>
+        <div class="kpi-sub">Automático + manual</div>
+      </div>
+    </div>
+  </section>
+
   <section>
-    <div class="section-title">Produtividade por técnico</div>
+    <div class="section-title">Produtividade por técnico (automático + manual)</div>
     <div class="comparativo-row">
       <div class="card card-comparativo">
         <div class="card-title">Ligações no período, por técnico</div>
-        <canvas id="chart-comparativo"></canvas>
+        <p class="manual-aviso" style="margin-top:-6px;">Soma o total automático (ArcGIS) com o que foi digitado manualmente pra cada técnico.</p>
+        <canvas id="chart-comparativo-manual"></canvas>
+        <div class="meta-legenda">
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-0"></span>&lt; 650/dia — sem meta</span>
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-1"></span>= 650/dia — R$ 0,05/ligação</span>
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-2"></span>&gt; 650/dia — R$ 0,10/ligação</span>
+        </div>
+        <div id="lista-insights-manual" class="lista-insights-inline"></div>
       </div>
       <div class="card">
-        <div class="card-title">Insights</div>
-        <div id="lista-insights"></div>
+        <div class="card-title">Previsão para bater a meta</div>
+        <div id="lista-previsao-meta-manual"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Top 3 produtividade</div>
+    <div class="top3-grid" id="top3-grid-manual"></div>
+  </section>
+
+  <section>
+    <div class="section-title">Valores a receber por técnico</div>
+    <div class="card card-valores">
+      <div class="card-title-row">
+        <div class="card-title">Estimativa no período selecionado</div>
+        <div class="valores-total">Total: <strong id="valores-total-periodo-manual">-</strong></div>
+      </div>
+      <div class="chart-valores-wrap" id="chart-valores-wrap-manual">
+        <canvas id="chart-valores-manual"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Lançamento manual</div>
+    <div class="card">
+      <div class="card-title-row">
+        <div class="card-title">Ligações por dia, por técnico</div>
+        <div class="manual-acoes">
+          <input type="text" id="manual-novo-tecnico" class="manual-input-nome" placeholder="Nome do técnico">
+          <button type="button" id="manual-add-tecnico" class="btn-manual">+ Técnico</button>
+          <button type="button" id="manual-exportar" class="btn-manual btn-manual-secundario">Exportar</button>
+          <label class="btn-manual btn-manual-secundario" for="manual-importar-arquivo">Importar</label>
+          <input type="file" id="manual-importar-arquivo" accept="application/json" style="display:none">
+        </div>
+      </div>
+      <p class="manual-aviso">Os dados digitados aqui ficam salvos só neste navegador (localStorage) — use "Exportar" pra guardar um arquivo e "Importar" pra levar pra outro computador/navegador. As linhas mostradas seguem o período selecionado no filtro do topo.</p>
+      <div class="calendario-scroll">
+        <table class="tabela-manual" id="tabela-manual"></table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">Média da semana por fiscal</div>
+      <p class="manual-aviso" style="margin-top:0;">Média de todos os lançamentos digitados em cada semana (segunda a domingo) do período selecionado — é o número usado pra preencher dias de FISCAL/LOC. VAZ/OUTRO PC pela média da equipe daquela semana.</p>
+      <div class="calendario-scroll" style="max-height:320px;">
+        <table class="tabela-manual" id="tabela-media-semanal"></table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <div class="card-title">Indicadores de produção (manual)</div>
+      <div class="indic-grid indic-grid-wide">
+        <div class="indic-row"><span class="indic-label">Total de lançamentos</span><span class="indic-value" id="ind-lancamentos-manual">-</span></div>
+        <div class="indic-row"><span class="indic-label">Maior lançamento</span><span class="indic-value" id="ind-maior-manual">-</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<main id="view-gerencial-panel" class="view-panel" data-view="gerencial" style="display:none;">
+
+  <section>
+    <div class="section-title">Gerencial — Automático (ArcGIS) × Manual</div>
+    <div class="card">
+      <div class="card-title-row">
+        <div class="card-title">Comparativo por técnico no período selecionado</div>
+        <div class="valores-total">Diferença total: <strong id="gerencial-diff-total">-</strong></div>
+      </div>
+      <div class="calendario-scroll">
+        <table class="tabela-manual" id="tabela-gerencial"></table>
       </div>
     </div>
   </section>
@@ -384,48 +1112,78 @@
 <script>
 const DATA_URL = "data/pc392.json";
 
-const TECNICOS_ATIVOS = [
-  { canon: "Adeilson",   aliases: ["adeilson"] },
-  { canon: "Oldair",     aliases: ["oldair"] },
-  { canon: "Rairan",     aliases: ["rairan"] },
-  { canon: "Carlos",     aliases: ["carlos"] },
-  { canon: "Gisclayton", aliases: ["gisclayton", "giscalyton"] },
-  { canon: "Christian",  aliases: ["christian", "christin"] },
-  { canon: "Ronaldo",    aliases: ["ronaldo"] },
-  { canon: "Levi",       aliases: ["levi", "marcus"] },
-];
+const PERIODO_INICIO_PADRAO = "2026-01-01";
 
-const EX_FUNCIONARIOS = [
-  "gabriel hariel", "igor aquino", "aparecido valentim",
-  "jackson zanetti", "ailton ramos rocha jr.", "mykael antonio",
-];
-
-const PERIODO_INICIO_PADRAO = "2025-12-31";
-
-const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
-const BRL_COMPACTO = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1 });
 const NUM = new Intl.NumberFormat("pt-BR");
+const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
 
 Chart.register(ChartDataLabels);
 Chart.defaults.set("plugins.datalabels", { display: false });
 
-function primeiroNome(nome) {
-  return nome.trim().split(/\s+/)[0].toLowerCase();
+// Nenhuma lista fixa de "ativos"/"demitidos" -- vendo do zero, todo mundo
+// que aparece num registro do ArcGIS conta, exatamente com o nome resolvido
+// pelo dominio (já normalizado pelo export_pc392.py). Alguns códigos do
+// domínio não têm nome cadastrado (ex.: "carlos_henrique", código cru sem
+// entrada no domínio -- ver [[project_pc392_dashboard]]) -- em vez de
+// esconder esses registros, formata pra "Carlos Henrique" igual um nome
+// normal, pra virar a MESMA identidade que usamos na correção verificada
+// abaixo (senão "Carlos Henrique" e "carlos_henrique" contam como pessoas
+// diferentes no ranking/filtro).
+function normalizarNome(nome) {
+  const limpo = nome.trim();
+  if (!limpo.includes("_")) return limpo;
+  return limpo.split("_").map(w => w ? w[0].toUpperCase() + w.slice(1) : w).join(" ");
 }
 
-function matchTecnicoAtivo(nome) {
-  const primeiro = primeiroNome(nome);
-  return TECNICOS_ATIVOS.find(t => t.aliases.includes(primeiro)) || null;
+// normalizarNome já deixa o texto pronto pra exibição -- mantido como alias
+// pra deixar claro, nos pontos de render, que o texto já é o exibível.
+function nomeExibicao(nome) {
+  return nome;
 }
 
-function isExFuncionario(nome) {
-  return EX_FUNCIONARIOS.includes(nome.trim().toLowerCase());
-}
+// Meta fixa de produtividade (confirmada com o usuário em 2026-09-09, e
+// ajustada no mesmo dia: a faixa intermediária 650-700 foi removida --
+// agora é só um degrau em 650):
+//   média < 650  -> R$ 0,00 / ligação (sem meta batida)
+//   média == 650 -> R$ 0,05 / ligação
+//   média > 650  -> R$ 0,10 / ligação
+// "Média" aqui NÃO é ligações ÷ dias que a pessoa trabalhou -- é ligações ÷
+// dias do PERÍODO FILTRADO (mesmo denominador pra todo mundo, ver
+// contarDiasPeriodo). "Dias trabalhados" continua existindo como métrica à
+// parte (quantos dias distintos a pessoa teve registro), só não entra mais
+// nessa conta.
+const LIGACOES_BASE_DIA = 650;
 
-function bonusRate(ligacoes) {
-  if (ligacoes > 700) return 0.01;
-  if (ligacoes >= 650) return 0.005;
+function valorPorLigacaoMediaDia(mediaDia) {
+  if (mediaDia > LIGACOES_BASE_DIA) return 0.10;
+  if (mediaDia >= LIGACOES_BASE_DIA) return 0.05;
   return 0;
+}
+
+// Dias ÚTEIS (seg-sex) do período filtrado -- base da média usada na meta
+// de produtividade, igual pra todo mundo (confirmado com o usuário em
+// 2026-09-09: dias corridos incluindo fim de semana zerava a bonificação de
+// todo mundo no período de teste 21/07-31/08).
+function contarDiasPeriodo(inicio, fim) {
+  if (!inicio || !fim) return 0;
+  let count = 0;
+  const d = new Date(inicio + "T00:00:00Z");
+  const fimDate = new Date(fim + "T00:00:00Z");
+  while (d <= fimDate) {
+    const diaSemana = d.getUTCDay(); // 0 = domingo, 6 = sábado
+    if (diaSemana !== 0 && diaSemana !== 6) count++;
+    d.setUTCDate(d.getUTCDate() + 1);
+  }
+  return count;
+}
+
+// Nomes distintos presentes num conjunto de registros, ordenados
+// alfabeticamente -- usado pra popular o filtro "Técnico" e pra saber quem
+// entra nos gráficos/insights por técnico.
+function nomesDistintos(registros) {
+  const nomes = new Set();
+  registros.forEach(r => r.participantes.forEach(p => nomes.add(normalizarNome(p))));
+  return [...nomes].sort((a, b) => a.localeCompare(b, "pt-BR"));
 }
 
 // --- estado global ---
@@ -438,7 +1196,6 @@ function filtrarPorData(registros, inicio, fim) {
 function computeResumo(registros) {
   const nomes = new Set();
   let totalLigacoes = 0;
-  let totalBonificacao = 0;
   let maiorRegistro = 0;
   const dias = new Set();
 
@@ -447,7 +1204,6 @@ function computeResumo(registros) {
     if (n === 0) return;
     r.participantes.forEach(p => nomes.add(p.toLowerCase()));
     totalLigacoes += r.ligacoes;
-    totalBonificacao += r.ligacoes * bonusRate(r.ligacoes);
     maiorRegistro = Math.max(maiorRegistro, r.ligacoes);
     dias.add(r.data);
   });
@@ -461,7 +1217,6 @@ function computeResumo(registros) {
     totalVistorias,
     totalLigacoes,
     totalTecnicos: nomes.size,
-    totalBonificacao,
     diasAtividade,
     mediaLigacoesVistoria: totalVistorias > 0 ? totalLigacoes / totalVistorias : 0,
     mediaLigacoesDia: diasAtividade > 0 ? totalLigacoes / diasAtividade : 0,
@@ -470,233 +1225,76 @@ function computeResumo(registros) {
   };
 }
 
-// Regra fixa: no período 31/07–31/08/2026, sempre que o Adeilson tiver um
-// dia com produção muito abaixo do normal (< 100 ligações — claramente erro
-// de sistema, não um dia real de trabalho), o valor daquele dia é trocado
-// automaticamente pela média "limpa" da equipe naquela semana (segunda a
-// domingo), em vez do lixo do ArcGIS. Roda em cima de qualquer dado que
-// vier do export, então sobrevive a re-exports futuros sem precisar de
-// correção manual. Confirmado com o usuário em 2026-09-01.
-const REGRA_MEDIA_ADEILSON = {
-  tecnico: "Adeilson",
-  inicio: "2026-07-31",
-  fim: "2026-08-31",
-  limiarLixo: 100,
-};
-
-// ligações reais (não "estimado") por técnico por dia — base tanto pra essa
-// regra quanto pra média "limpa" de cada semana.
-function computeLigacoesReaisPorPessoaDia(registros) {
-  const porPessoaDia = {};
-  registros.forEach(r => {
-    if (r.estimado) return;
-    const n = r.participantes.length;
-    if (n === 0) return;
-    r.participantes.forEach(nome => {
-      if (isExFuncionario(nome)) return;
-      const tec = matchTecnicoAtivo(nome);
-      if (!tec) return;
-      if (!porPessoaDia[tec.canon]) porPessoaDia[tec.canon] = {};
-      porPessoaDia[tec.canon][r.data] = (porPessoaDia[tec.canon][r.data] || 0) + r.ligacoes / n;
-    });
-  });
-  return porPessoaDia;
-}
-
-function mediaSemanaLimpa(porPessoaDia, semanaChave, limiar) {
-  const valores = [];
-  Object.keys(porPessoaDia).forEach(canon => {
-    Object.entries(porPessoaDia[canon]).forEach(([data, valor]) => {
-      if (chaveSemana(data) === semanaChave && valor >= limiar) valores.push(valor);
-    });
-  });
-  if (valores.length === 0) return 0;
-  return valores.reduce((a, b) => a + b, 0) / valores.length;
-}
-
-// Retorna { [canon]: { ligacoes, bonificacao, diasAfetados: Set<data> } }
-// pros dias que a regra acima substituiu.
-function computeCorrecaoAutomatica(registros) {
-  const { tecnico, inicio, fim, limiarLixo } = REGRA_MEDIA_ADEILSON;
-  const porPessoaDia = computeLigacoesReaisPorPessoaDia(registros);
-  const diasDoTecnico = porPessoaDia[tecnico] || {};
-
-  const diasAfetados = new Set();
-  Object.entries(diasDoTecnico).forEach(([data, valor]) => {
-    if (data < inicio || data > fim) return;
-    if (valor < limiarLixo) diasAfetados.add(data);
-  });
-
-  let ligacoes = 0, bonificacao = 0;
-  diasAfetados.forEach(data => {
-    const media = mediaSemanaLimpa(porPessoaDia, chaveSemana(data), limiarLixo);
-    ligacoes += media;
-    bonificacao += media * bonusRate(media);
-  });
-
-  return { [tecnico]: { ligacoes, bonificacao, diasAfetados } };
-}
-
-function computeBonificacaoPorTecnico(registros) {
+// Ligações por pessoa no período: soma rateada (ligações do registro / nº de
+// participantes reais) para todo mundo que aparece em pelo menos 1 registro
+// -- sem lista fixa de ativos/demitidos. Dado bruto do ArcGIS, sem correção,
+// override ou estimativa — só o rateio, que é a única forma de atribuir um
+// registro compartilhado a cada pessoa individualmente.
+function computeLigacoesPorTecnico(registros, diasPeriodo) {
+  const nomes = nomesDistintos(registros);
   const totals = {};
-  TECNICOS_ATIVOS.forEach(t => {
-    totals[t.canon] = { bonificacao: 0, ligacoes: 0, vistorias: 0, bonificacaoManual: 0, ligacoesManual: 0 };
-  });
-
-  const correcaoAuto = computeCorrecaoAutomatica(registros);
+  nomes.forEach(nome => { totals[nome] = { ligacoesPorDia: {}, vistorias: 0 }; });
 
   registros.forEach(r => {
     const n = r.participantes.length;
     if (n === 0) return;
-    const bonusRegistro = r.ligacoes * bonusRate(r.ligacoes);
-    r.participantes.forEach(nome => {
-      if (isExFuncionario(nome)) return;
-      const tec = matchTecnicoAtivo(nome);
-      if (!tec) return;
-      const corrigido = correcaoAuto[tec.canon];
-      if (corrigido && corrigido.diasAfetados.has(r.data)) return; // ja contabilizado como estimado abaixo
-      // Registros marcados "estimado" são preenchimentos manuais (média da
-      // semana aplicada num dia sem dado real do ArcGIS) e entram na conta
-      // separada de "estimado", não em "registrado" nem em vistorias.
-      if (r.estimado) {
-        totals[tec.canon].bonificacaoManual += bonusRegistro / n;
-        totals[tec.canon].ligacoesManual += r.ligacoes / n;
-      } else {
-        totals[tec.canon].bonificacao += bonusRegistro / n;
-        totals[tec.canon].ligacoes += r.ligacoes / n;
-        totals[tec.canon].vistorias += 1 / n;
-      }
+    r.participantes.forEach(p => {
+      const nome = normalizarNome(p);
+      const t = totals[nome];
+      t.ligacoesPorDia[r.data] = (t.ligacoesPorDia[r.data] || 0) + r.ligacoes / n;
+      t.vistorias += 1 / n;
     });
   });
 
-  Object.entries(correcaoAuto).forEach(([canon, c]) => {
-    totals[canon].bonificacaoManual += c.bonificacao;
-    totals[canon].ligacoesManual += c.ligacoes;
-  });
+  const lista = nomes.map(nome => {
+    const tt = totals[nome];
+    // Soma o dia já arredondado (não o valor exato) -- é assim que a
+    // planilha externa do usuário totaliza o período, e é o que faz o
+    // calendário (que arredonda por dia pra exibir) bater com o total
+    // mostrado aqui. Confirmado com o usuário em 2026-09-09: a pequena
+    // diferença de "arredondamento" que ele via era só isso -- somar exato
+    // e arredondar 1x no fim (mais preciso matematicamente) vs. arredondar
+    // cada dia e depois somar (o que a planilha faz). Ambos corretos, mas
+    // só um bate célula a célula com a planilha pra validação.
+    const dias = Object.keys(tt.ligacoesPorDia);
+    const diasTrabalhados = dias.length;
+    const ligacoesTotal = dias.reduce((soma, data) => soma + Math.round(tt.ligacoesPorDia[data]), 0);
+    tt.ligacoes = ligacoesTotal;
+    const mediaDia = diasPeriodo > 0 ? tt.ligacoes / diasPeriodo : 0;
+    const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
+    return {
+      nome,
+      ligacoes: tt.ligacoes,
+      vistorias: tt.vistorias,
+      diasTrabalhados,
+      mediaDia,
+      valorPorLigacao,
+      valorReceber: tt.ligacoes * valorPorLigacao,
+    };
+  }).sort((a, b) => b.ligacoes - a.ligacoes);
 
-  const lista = TECNICOS_ATIVOS.map(t => ({ canon: t.canon, ...totals[t.canon] }))
-    .sort((a, b) => (b.bonificacao + b.bonificacaoManual) - (a.bonificacao + a.bonificacaoManual));
-  const max = lista.length > 0 ? lista[0].bonificacao + lista[0].bonificacaoManual : 0;
-  lista.forEach(item => { item.percentual = max > 0 ? ((item.bonificacao + item.bonificacaoManual) / max) * 100 : 0; });
+  const max = lista.length > 0 ? lista[0].ligacoes : 0;
+  lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
   return lista;
 }
 
-// segunda-feira (UTC) da semana ISO daquela data, usada como chave da semana
-function chaveSemana(dataStr) {
-  const d = new Date(dataStr + "T00:00:00Z");
-  const diaSemana = d.getUTCDay() || 7; // domingo (0) -> 7
-  const segunda = new Date(d);
-  segunda.setUTCDate(d.getUTCDate() - diaSemana + 1);
-  return segunda.toISOString().slice(0, 10);
-}
-
-// Regra da "célula azul": quando um técnico tem pelo menos 1 registro numa
-// semana (prova que estava trabalhando) mas fica sem registro num dia em que
-// pelo menos outro dos 7 teve, preenche esse dia com a média da equipe
-// naquela semana (só com base nos OUTROS técnicos), em vez de zero.
-// Confirmado com o usuário em 2026-08-31 como reflexo fiel do critério manual
-// usado na planilha (ver memória do projeto).
-function computeEstimativasPorTecnico(registros) {
-  const semanas = {}; // chave -> { porTecnicoDia: {canon: {data: valor}}, diasComEquipe: Set }
-
-  registros.forEach(r => {
-    const n = r.participantes.length;
-    if (n === 0) return;
-    // Registros já marcados "estimado" (preenchimento manual) não contam
-    // como "a equipe trabalhou esse dia" nem entram na média dos outros
-    // técnicos — são tratados só pelo computeBonificacaoPorTecnico.
-    if (r.estimado) return;
-    const semana = chaveSemana(r.data);
-    if (!semanas[semana]) semanas[semana] = { porTecnicoDia: {}, diasComEquipe: new Set() };
-    semanas[semana].diasComEquipe.add(r.data);
-    r.participantes.forEach(nome => {
-      if (isExFuncionario(nome)) return;
-      const tec = matchTecnicoAtivo(nome);
-      if (!tec) return;
-      const porTecnico = semanas[semana].porTecnicoDia;
-      if (!porTecnico[tec.canon]) porTecnico[tec.canon] = {};
-      porTecnico[tec.canon][r.data] = (porTecnico[tec.canon][r.data] || 0) + r.ligacoes / n;
-    });
-  });
-
-  const estimativasPorTecnico = {};
-  TECNICOS_ATIVOS.forEach(t => { estimativasPorTecnico[t.canon] = { ligacoes: 0, bonificacao: 0, dias: 0 }; });
-
-  Object.values(semanas).forEach(({ porTecnicoDia, diasComEquipe }) => {
-    const tecnicosDaSemana = Object.keys(porTecnicoDia);
-
-    tecnicosDaSemana.forEach(canon => {
-      const diasDoTecnico = new Set(Object.keys(porTecnicoDia[canon]));
-      const diasFaltando = [...diasComEquipe].filter(d => !diasDoTecnico.has(d));
-      if (diasFaltando.length === 0) return;
-
-      let soma = 0, count = 0;
-      tecnicosDaSemana.forEach(outro => {
-        if (outro === canon) return;
-        Object.values(porTecnicoDia[outro]).forEach(v => { soma += v; count++; });
-      });
-      if (count === 0) return;
-      const media = soma / count;
-
-      diasFaltando.forEach(() => {
-        estimativasPorTecnico[canon].ligacoes += media;
-        estimativasPorTecnico[canon].bonificacao += media * bonusRate(media);
-        estimativasPorTecnico[canon].dias += 1;
-      });
-    });
-  });
-
-  return estimativasPorTecnico;
-}
-
-// Combina os totais reais (computeBonificacaoPorTecnico) com as estimativas
-// da regra da media semanal, e reordena pelo novo total.
-function aplicarEstimativas(listaReal, registros) {
-  const estimativas = computeEstimativasPorTecnico(registros);
-  const combinada = listaReal.map(item => {
-    const est = estimativas[item.canon] || { ligacoes: 0, bonificacao: 0, dias: 0 };
-    // Soma a estimativa automática (regra da média semanal, calculada em
-    // cima dos dias faltantes) com os registros marcados manualmente como
-    // "estimado" no próprio data/pc392.json.
-    const ligacoesEstimadas = est.ligacoes + (item.ligacoesManual || 0);
-    const bonificacaoEstimada = est.bonificacao + (item.bonificacaoManual || 0);
-    return {
-      ...item,
-      ligacoesReais: item.ligacoes,
-      bonificacaoReal: item.bonificacao,
-      ligacoesEstimadas,
-      bonificacaoEstimada,
-      diasEstimados: est.dias,
-      ligacoes: item.ligacoes + ligacoesEstimadas,
-      bonificacao: item.bonificacao + bonificacaoEstimada,
-    };
-  }).sort((a, b) => b.bonificacao - a.bonificacao);
-
-  const max = combinada.length > 0 ? combinada[0].bonificacao : 0;
-  combinada.forEach(item => { item.percentual = max > 0 ? (item.bonificacao / max) * 100 : 0; });
-  return combinada;
-}
-
-function computeRecordeRaw(registros, canon) {
-  let recorde = 0;
-  registros.forEach(r => {
-    const participa = r.participantes.some(nome => {
-      if (isExFuncionario(nome)) return false;
-      const tec = matchTecnicoAtivo(nome);
-      return tec && tec.canon === canon;
-    });
-    if (participa) recorde = Math.max(recorde, r.ligacoes);
-  });
-  return recorde;
-}
-
 // --- render ---
-let rankingChart = null;
-let comparativoChart = null;
+let top3MensalChart = null;
+// Registro genérico de instâncias Chart.js por id de canvas -- usado pelos
+// gráficos que existem tanto na aba Automático quanto na aba Manual
+// (mesma função de render, canvas diferente por causa do sufixo).
+const CHARTS = {};
+function renderizarChart(canvasId, config) {
+  if (CHARTS[canvasId]) CHARTS[canvasId].destroy();
+  const canvas = document.getElementById(canvasId);
+  CHARTS[canvasId] = new Chart(canvas.getContext("2d"), config);
+  return CHARTS[canvasId];
+}
 
 function renderResumo(resumo) {
-  document.getElementById("kpi-vistorias").textContent = NUM.format(resumo.totalVistorias);
-  document.getElementById("kpi-bonificacao").textContent = BRL.format(resumo.totalBonificacao);
+  document.getElementById("kpi-ligacoes").textContent = NUM.format(Math.round(resumo.totalLigacoes));
+  const mediaPorTecnico = resumo.totalTecnicos > 0 ? resumo.totalLigacoes / resumo.totalTecnicos : 0;
+  document.getElementById("kpi-media-tecnico").textContent = NUM.format(Math.round(mediaPorTecnico));
   document.getElementById("kpi-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
   document.getElementById("kpi-dias").textContent = NUM.format(resumo.diasAtividade);
   document.getElementById("kpi-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
@@ -707,109 +1305,31 @@ function renderResumo(resumo) {
   document.getElementById("ind-media-ligacoes-dia").textContent = resumo.mediaLigacoesDia.toFixed(2).replace(".", ",");
 }
 
-function renderRankingChart(lista) {
-  const canvas = document.getElementById("chart-ranking");
-  const maxValor = lista.length > 0 ? Math.max(...lista.map(i => i.bonificacao)) : 0;
-  const temEstimativa = lista.some(i => i.bonificacaoEstimada > 0);
-
-  if (rankingChart) rankingChart.destroy();
-  rankingChart = new Chart(canvas.getContext("2d"), {
-    type: "bar",
-    data: {
-      labels: lista.map(i => i.canon),
-      datasets: [
-        {
-          label: "Bonificação registrada",
-          data: lista.map(i => i.bonificacaoReal),
-          backgroundColor: "#8C6D1F",
-          stack: "total",
-          maxBarThickness: 22,
-        },
-        {
-          label: "Estimado (média semanal)",
-          data: lista.map(i => i.bonificacaoEstimada),
-          backgroundColor: "rgba(140,109,31,0.35)",
-          stack: "total",
-          maxBarThickness: 22,
-          datalabels: {
-            display: true,
-            anchor: "end",
-            align: "end",
-            color: "#1a1a1a",
-            font: { size: 11, weight: "700" },
-            formatter: (_, ctx) => BRL_COMPACTO.format(lista[ctx.dataIndex].bonificacao),
-          },
-        },
-      ],
-    },
-    options: {
-      indexAxis: "y",
-      responsive: true,
-      maintainAspectRatio: false,
-      layout: { padding: { right: 60 } },
-      plugins: {
-        legend: {
-          display: temEstimativa,
-          position: "bottom",
-          labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" },
-        },
-        datalabels: { display: false },
-        tooltip: {
-          backgroundColor: "#1a1a1a",
-          padding: 8,
-          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${BRL.format(ctx.parsed.x)}` },
-        },
-      },
-      scales: {
-        x: {
-          stacked: true,
-          beginAtZero: true,
-          suggestedMax: maxValor * 1.3 || 1,
-          grid: { color: "#e6e5df", drawTicks: false },
-          ticks: { display: false },
-        },
-        y: {
-          stacked: true,
-          grid: { display: false },
-          ticks: {
-            color: "#1a1a1a",
-            font: { size: 12, weight: "600" },
-            callback: function (value, index) {
-              const nome = lista[index] ? lista[index].canon : "";
-              return index === 0 && maxValor > 0 ? `🏆 ${nome}` : nome;
-            },
-          },
-        },
-      },
-    },
-  });
-}
-
-function renderComparativoChart(rankingLista) {
-  const canvas = document.getElementById("chart-comparativo");
+function renderComparativoChart(rankingLista, diasPeriodo, sufixo) {
+  sufixo = sufixo || "";
   const ordenado = [...rankingLista].sort((a, b) => b.ligacoes - a.ligacoes);
-  const media = ordenado.length > 0 ? ordenado.reduce((s, i) => s + i.ligacoes, 0) / ordenado.length : 0;
+  // Linha de corte = meta de ligações do período inteiro (650/dia útil x
+  // dias úteis do período filtrado), não a média da equipe -- confirmado
+  // com o usuário em 2026-09-09: é o alvo fixo que cada técnico precisaria
+  // bater no total do período pra alcançar a 1ª faixa da meta.
+  const meta = LIGACOES_BASE_DIA * diasPeriodo;
   const maiorValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => i.ligacoes)) : 0;
-  const temEstimativa = ordenado.some(i => i.ligacoesEstimadas > 0);
 
-  if (comparativoChart) comparativoChart.destroy();
-  comparativoChart = new Chart(canvas.getContext("2d"), {
+  const corPorTier = (valorPorLigacao) => {
+    if (valorPorLigacao >= 0.10) return "#8C6D1F";
+    if (valorPorLigacao >= 0.05) return "#5B6B4A";
+    return "#b9b8b2";
+  };
+
+  renderizarChart("chart-comparativo" + sufixo, {
     type: "bar",
     data: {
-      labels: ordenado.map(i => i.canon),
+      labels: ordenado.map(i => nomeExibicao(i.nome)),
       datasets: [
         {
-          label: "Ligações registradas",
-          data: ordenado.map(i => Math.round(i.ligacoesReais)),
-          backgroundColor: "#5B6B4A",
-          stack: "total",
-          maxBarThickness: 46,
-        },
-        {
-          label: "Estimado (média semanal)",
-          data: ordenado.map(i => Math.round(i.ligacoesEstimadas)),
-          backgroundColor: "rgba(91,107,74,0.35)",
-          stack: "total",
+          label: "Ligações",
+          data: ordenado.map(i => Math.round(i.ligacoes)),
+          backgroundColor: ordenado.map(i => corPorTier(i.valorPorLigacao)),
           maxBarThickness: 46,
           datalabels: {
             display: true,
@@ -817,7 +1337,7 @@ function renderComparativoChart(rankingLista) {
             align: "end",
             color: "#1a1a1a",
             font: { size: 11, weight: "700" },
-            formatter: (_, ctx) => NUM.format(Math.round(ordenado[ctx.dataIndex].ligacoes)),
+            formatter: (v) => NUM.format(v),
           },
         },
       ],
@@ -827,29 +1347,34 @@ function renderComparativoChart(rankingLista) {
       maintainAspectRatio: false,
       layout: { padding: { top: 26 } },
       plugins: {
-        legend: {
-          display: temEstimativa,
-          position: "bottom",
-          labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" },
-        },
+        legend: { display: false },
         tooltip: {
           backgroundColor: "#1a1a1a",
           padding: 8,
-          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)} ligações` },
+          callbacks: {
+            label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações`,
+            afterLabel: (ctx) => {
+              const item = ordenado[ctx.dataIndex];
+              return [
+                `Média/dia: ${NUM.format(Math.round(item.mediaDia))}`,
+                `Valor/ligação: ${BRL.format(item.valorPorLigacao)}`,
+              ];
+            },
+          },
         },
         datalabels: { display: false },
         annotation: {
           annotations: {
-            media: {
+            meta: {
               type: "line",
-              yMin: media,
-              yMax: media,
+              yMin: meta,
+              yMax: meta,
               borderColor: "#898781",
               borderWidth: 1.5,
               borderDash: [5, 4],
               label: {
-                display: media > 0,
-                content: `Média da equipe: ${NUM.format(Math.round(media))}`,
+                display: meta > 0,
+                content: `Meta do período: ${NUM.format(Math.round(meta))} (${LIGACOES_BASE_DIA}/dia útil × ${diasPeriodo} dias)`,
                 position: "end",
                 yAdjust: -12,
                 font: { size: 10, weight: "600" },
@@ -863,14 +1388,12 @@ function renderComparativoChart(rankingLista) {
       },
       scales: {
         x: {
-          stacked: true,
           grid: { display: false },
           ticks: { color: "#1a1a1a", font: { size: 11, weight: "600" } },
         },
         y: {
-          stacked: true,
           beginAtZero: true,
-          suggestedMax: maiorValor > 0 ? maiorValor * 1.25 : 1,
+          suggestedMax: Math.max(maiorValor, meta) > 0 ? Math.max(maiorValor, meta) * 1.25 : 1,
           grid: { color: "#e6e5df", drawTicks: false },
           ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
         },
@@ -879,8 +1402,11 @@ function renderComparativoChart(rankingLista) {
   });
 }
 
-function renderInsights(rankingLista, registros) {
-  const container = document.getElementById("lista-insights");
+// Resumo textual curto (líder do período, destaques, quem ficou sem
+// registro) -- fica dentro do próprio card do gráfico "Ligações no
+// período, por técnico", embaixo da legenda de meta.
+function renderInsights(rankingLista, sufixo) {
+  const container = document.getElementById("lista-insights" + (sufixo || ""));
   container.innerHTML = "";
 
   const comAtividade = rankingLista.filter(i => i.ligacoes > 0);
@@ -897,11 +1423,11 @@ function renderInsights(rankingLista, registros) {
 
   itens.push({
     icon: "🏆",
-    texto: `<strong>${lider.canon}</strong> lidera o período com ${NUM.format(Math.round(lider.ligacoes))} ligações e ${BRL.format(lider.bonificacao)} em bonificação.`,
+    texto: `<strong>${nomeExibicao(lider.nome)}</strong> lidera o período com ${NUM.format(Math.round(lider.ligacoes))} ligações em ${NUM.format(lider.diasTrabalhados)} dia(s) trabalhado(s).`,
   });
 
   if (seguidores.length > 0) {
-    const nomes = seguidores.map(s => `<strong>${s.canon}</strong>`).join(" e ");
+    const nomes = seguidores.map(s => `<strong>${nomeExibicao(s.nome)}</strong>`).join(" e ");
     const valores = seguidores.map(s => NUM.format(Math.round(s.ligacoes))).join(" e ");
     itens.push({
       icon: "📈",
@@ -909,34 +1435,12 @@ function renderInsights(rankingLista, registros) {
     });
   }
 
-  const semBonus = rankingLista.filter(i => {
-    const recorde = computeRecordeRaw(registros, i.canon);
-    return recorde > 0 && bonusRate(recorde) === 0;
-  });
-  if (semBonus.length > 0) {
-    const nomes = semBonus.map(s => `<strong>${s.canon}</strong>`).join(", ");
-    itens.push({
-      icon: "⚠️",
-      texto: `${nomes} não atingiu o patamar mínimo de bonificação (650 ligações em uma visita) no período.`,
-    });
-  }
-
   const semRegistro = rankingLista.filter(i => i.ligacoes === 0);
   if (semRegistro.length > 0) {
-    const nomes = semRegistro.map(s => `<strong>${s.canon}</strong>`).join(", ");
+    const nomes = semRegistro.map(s => `<strong>${nomeExibicao(s.nome)}</strong>`).join(", ");
     itens.push({
       icon: "ℹ️",
       texto: `${nomes} sem registros no período selecionado.`,
-    });
-  }
-
-  const totalEstimado = rankingLista.reduce((s, i) => s + i.ligacoesEstimadas, 0);
-  const tecnicosComEstimativa = rankingLista.filter(i => i.ligacoesEstimadas > 0);
-  if (totalEstimado > 0) {
-    const nomes = tecnicosComEstimativa.map(s => `<strong>${s.canon}</strong>`).join(", ");
-    itens.push({
-      icon: "🧮",
-      texto: `Inclui ${NUM.format(Math.round(totalEstimado))} ligações estimadas (média semanal da equipe, aplicada em dias sem registro) para ${nomes}.`,
     });
   }
 
@@ -948,7 +1452,515 @@ function renderInsights(rankingLista, registros) {
   });
 }
 
+// Previsão de quanto falta pra cada técnico bater a meta do período
+// filtrado -- meta = LIGACOES_BASE_DIA x dias úteis do período selecionado
+// (a mesma meta usada na linha de referência do gráfico "Ligações no
+// período, por técnico"), então muda junto com o filtro de período/mês.
+function renderPrevisaoMeta(rankingLista, meta, sufixo) {
+  const container = document.getElementById("lista-previsao-meta" + (sufixo || ""));
+  container.innerHTML = "";
+
+  const comAtividade = rankingLista.filter(i => i.ligacoes > 0);
+  if (comAtividade.length === 0) {
+    container.innerHTML = `<div class="insight-item"><span class="insight-icon">ℹ️</span><span>Sem registros de atividade no período selecionado.</span></div>`;
+    return;
+  }
+
+  // Mais perto de bater a meta primeiro (quem já bateu, no topo).
+  const ordenado = [...comAtividade].sort((a, b) => (meta - a.ligacoes) - (meta - b.ligacoes));
+
+  ordenado.forEach(item => {
+    const faltam = meta - item.ligacoes;
+    const div = document.createElement("div");
+    div.className = "insight-item";
+    if (faltam <= 0) {
+      div.innerHTML = `<span class="insight-icon">✅</span><span><strong>${nomeExibicao(item.nome)}</strong> já bateu a meta do período (excedente de ${NUM.format(Math.round(-faltam))} ligações).</span>`;
+    } else {
+      div.innerHTML = `<span class="insight-icon">🎯</span><span><strong>${nomeExibicao(item.nome)}</strong> precisa de mais <strong>${NUM.format(Math.round(faltam))}</strong> ligações pra bater a meta (${NUM.format(Math.round(item.ligacoes))} de ${NUM.format(Math.round(meta))}).</span>`;
+    }
+    container.appendChild(div);
+  });
+}
+
+const MESES_ABREV = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+
+function chaveMes(dataStr) {
+  return dataStr.slice(0, 7); // "YYYY-MM"
+}
+
+function rotuloMes(chave) {
+  const [ano, mes] = chave.split("-").map(Number);
+  return `${MESES_ABREV[mes - 1]}/${String(ano).slice(2)}`;
+}
+
+// Agrupa ligações por mês. Se um técnico estiver selecionado, conta só a
+// fatia dele (rateada); senão, conta o total de cada registro.
+function computeProgressaoMensal(registros, tecnico) {
+  const porMes = {};
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    const mes = chaveMes(r.data);
+    if (!porMes[mes]) porMes[mes] = { ligacoes: 0 };
+    if (tecnico) {
+      r.participantes.forEach(nome => {
+        if (normalizarNome(nome) !== tecnico) return;
+        porMes[mes].ligacoes += r.ligacoes / n;
+      });
+    } else {
+      porMes[mes].ligacoes += r.ligacoes;
+    }
+  });
+  return Object.keys(porMes).sort().map(mes => ({ mes, ...porMes[mes] }));
+}
+
+let progressaoChart = null;
+
+function renderProgressaoChart(progressao) {
+  const canvas = document.getElementById("chart-progressao");
+  if (progressaoChart) progressaoChart.destroy();
+  progressaoChart = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: progressao.map(p => rotuloMes(p.mes)),
+      datasets: [
+        {
+          label: "Ligações",
+          data: progressao.map(p => Math.round(p.ligacoes)),
+          backgroundColor: "#5B6B4A",
+          borderRadius: 4,
+          maxBarThickness: 56,
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            color: "#1a1a1a",
+            font: { size: 11, weight: "700" },
+            formatter: (v) => NUM.format(v),
+          },
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 22 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: { display: false },
+        tooltip: {
+          backgroundColor: "#1a1a1a",
+          padding: 8,
+          callbacks: { label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações` },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: "#1a1a1a", font: { size: 11, weight: "600" } } },
+        y: {
+          beginAtZero: true,
+          grid: { color: "#e6e5df", drawTicks: false },
+          ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
+        },
+      },
+    },
+  });
+}
+
+// --- Top 3 produtividade ---
+// Recebe a mesma lista usada no gráfico comparativo (já respeita
+// período/mês/técnico) e retorna os 3 primeiros por ligações, pra reusar em
+// quem chamar (evolução mensal do Top 3 usa o retorno).
+function renderTop3(rankingLista, sufixo) {
+  const container = document.getElementById("top3-grid" + (sufixo || ""));
+  container.innerHTML = "";
+  const top3 = rankingLista.filter(i => i.ligacoes > 0).slice(0, 3);
+  const medalhas = ["🥇", "🥈", "🥉"];
+  const posicoes = ["1º lugar", "2º lugar", "3º lugar"];
+
+  if (top3.length === 0) {
+    container.innerHTML = `<div class="card"><p style="margin:0;color:var(--text-muted);font-size:0.85rem;">Sem registros de atividade no período selecionado.</p></div>`;
+    return top3;
+  }
+
+  top3.forEach((item, idx) => {
+    const div = document.createElement("div");
+    div.className = `top3-card top3-${idx + 1}`;
+    div.innerHTML = `
+      <div class="top3-header">
+        <span class="top3-medalha">${medalhas[idx]}</span>
+        <div>
+          <div class="top3-posicao">${posicoes[idx]}</div>
+          <div class="top3-nome">${nomeExibicao(item.nome)}</div>
+        </div>
+      </div>
+      <div class="top3-valor-label">Valor estimado a receber</div>
+      <div class="top3-valor">${BRL.format(item.valorReceber)}</div>
+      <div class="indic-grid">
+        <div class="indic-row"><span class="indic-label">Total de ligações</span><span class="indic-value">${NUM.format(Math.round(item.ligacoes))}</span></div>
+        <div class="indic-row"><span class="indic-label">Média de ligações / dia</span><span class="indic-value">${NUM.format(Math.round(item.mediaDia))}</span></div>
+        <div class="indic-row"><span class="indic-label">Dias trabalhados</span><span class="indic-value">${NUM.format(item.diasTrabalhados)}</span></div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+
+  return top3;
+}
+
+// --- evolução mensal do Top 3 ---
+// Mesma lógica de computeProgressaoMensal, mas rateando só pros nomes do
+// Top 3, um mês por coluna do período filtrado.
+function computeEvolucaoMensalTop3(registros, nomesTop3) {
+  const porMes = {};
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    const mes = chaveMes(r.data);
+    r.participantes.forEach(p => {
+      const nome = normalizarNome(p);
+      if (!nomesTop3.includes(nome)) return;
+      if (!porMes[mes]) porMes[mes] = {};
+      porMes[mes][nome] = (porMes[mes][nome] || 0) + r.ligacoes / n;
+    });
+  });
+  const meses = Object.keys(porMes).sort();
+  const series = nomesTop3.map(nome => ({
+    nome,
+    valores: meses.map(mes => Math.round((porMes[mes] && porMes[mes][nome]) || 0)),
+  }));
+  return { meses, series };
+}
+
+const CORES_TOP3 = ["#8C6D1F", "#5B6B4A", "#9fb08c"];
+
+function renderTop3MensalChart(evolucao) {
+  const canvas = document.getElementById("chart-top3-mensal");
+  if (top3MensalChart) top3MensalChart.destroy();
+  top3MensalChart = new Chart(canvas.getContext("2d"), {
+    type: "bar",
+    data: {
+      labels: evolucao.meses.map(rotuloMes),
+      datasets: evolucao.series.map((s, idx) => ({
+        label: nomeExibicao(s.nome),
+        data: s.valores,
+        backgroundColor: CORES_TOP3[idx % CORES_TOP3.length],
+        maxBarThickness: 34,
+      })),
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 22 } },
+      plugins: {
+        legend: { display: true, position: "bottom", labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" } },
+        datalabels: { display: false },
+        tooltip: {
+          backgroundColor: "#1a1a1a",
+          padding: 8,
+          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)} ligações` },
+        },
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: "#1a1a1a", font: { size: 11, weight: "600" } } },
+        y: {
+          beginAtZero: true,
+          grid: { color: "#e6e5df", drawTicks: false },
+          ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
+        },
+      },
+    },
+  });
+}
+
+// --- valores a receber por técnico ---
+function renderValoresChart(rankingLista, sufixo) {
+  sufixo = sufixo || "";
+  const ordenado = [...rankingLista].filter(i => i.valorReceber > 0).sort((a, b) => b.valorReceber - a.valorReceber);
+  // Altura no próprio wrapper (não só no canvas) -- o Chart.js com
+  // responsive:true redimensiona o canvas pro tamanho do pai a cada
+  // render, então só setar canvas.style.height não bastava e o gráfico
+  // esticava vazio quando tinha poucos técnicos.
+  document.getElementById("chart-valores-wrap" + sufixo).style.height =
+    Math.min(360, Math.max(90, ordenado.length * 30 + 40)) + "px";
+
+  const totalPeriodo = ordenado.reduce((s, i) => s + i.valorReceber, 0);
+  document.getElementById("valores-total-periodo" + sufixo).textContent = BRL.format(totalPeriodo);
+
+  const maxValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => i.valorReceber)) : 0;
+
+  renderizarChart("chart-valores" + sufixo, {
+    type: "bar",
+    data: {
+      labels: ordenado.map(i => nomeExibicao(i.nome)),
+      datasets: [
+        {
+          label: "Valor a receber",
+          data: ordenado.map(i => Number(i.valorReceber.toFixed(2))),
+          backgroundColor: "#8C6D1F",
+          maxBarThickness: 22,
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            color: "#1a1a1a",
+            font: { size: 11, weight: "700" },
+            formatter: (v) => BRL.format(v),
+          },
+        },
+      ],
+    },
+    options: {
+      indexAxis: "y",
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { right: 95 } },
+      plugins: {
+        legend: { display: false },
+        datalabels: { display: false },
+        tooltip: {
+          backgroundColor: "#1a1a1a",
+          padding: 8,
+          callbacks: { label: (ctx) => BRL.format(ctx.parsed.x) },
+        },
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          suggestedMax: maxValor * 1.3 || 1,
+          grid: { color: "#e6e5df", drawTicks: false },
+          ticks: { display: false },
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: "#1a1a1a", font: { size: 12, weight: "600" } },
+        },
+      },
+    },
+  });
+}
+
+// --- calendário de ligações por técnico (validação dia a dia) ---
+// Mesmo formato da planilha externa do usuário (uma linha por dia, uma
+// coluna por técnico, valor já rateado) -- serve pra comparar célula a
+// célula contra a planilha, sem precisar confiar só nos totais agregados.
+// --- calendário de ligações (mês a mês, pra validar visualmente) ---
+// Total de ligações por dia -- da equipe inteira (soma bruta do registro,
+// não rateada) se nenhum técnico estiver selecionado no filtro, ou só a
+// fatia rateada daquele técnico se estiver. Um bloco por mês presente no
+// período filtrado.
+function computeCalendarioMensal(registros, tecnico) {
+  const porDia = {};
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    if (tecnico) {
+      r.participantes.forEach(p => {
+        if (normalizarNome(p) !== tecnico) return;
+        porDia[r.data] = (porDia[r.data] || 0) + r.ligacoes / n;
+      });
+    } else {
+      porDia[r.data] = (porDia[r.data] || 0) + r.ligacoes;
+    }
+  });
+  return porDia;
+}
+
+const DIAS_SEMANA_ABREV = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+
+function renderCalendarioMeses(porDia, tecnico) {
+  document.getElementById("calendario-legenda").textContent = tecnico
+    ? `Ligações de ${nomeExibicao(tecnico)} por dia`
+    : "Total da equipe por dia";
+
+  const container = document.getElementById("calendario-meses");
+  container.innerHTML = "";
+
+  const meses = [...new Set(Object.keys(porDia).map(chaveMes))].sort();
+  if (meses.length === 0) {
+    container.innerHTML = `<p style="margin:0;color:var(--text-muted);font-size:0.85rem;">Sem dados no período selecionado.</p>`;
+    return;
+  }
+
+  meses.forEach(mesChave => {
+    const [ano, mes] = mesChave.split("-").map(Number);
+    const primeiroDiaSemana = new Date(Date.UTC(ano, mes - 1, 1)).getUTCDay();
+    const diasNoMes = new Date(Date.UTC(ano, mes, 0)).getUTCDate();
+
+    let totalMes = 0;
+    const celulas = [];
+    for (let i = 0; i < primeiroDiaSemana; i++) celulas.push(null);
+    for (let d = 1; d <= diasNoMes; d++) {
+      const iso = `${ano}-${String(mes).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      const valor = porDia[iso] || 0;
+      totalMes += valor;
+      const diaSemana = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
+      celulas.push({ dia: d, valor, fimSemana: diaSemana === 0 || diaSemana === 6 });
+    }
+
+    const diasHtml = celulas.map(cel => {
+      if (!cel) return `<div class="mes-calendario-dia fora-mes"></div>`;
+      const classes = ["mes-calendario-dia"];
+      if (cel.fimSemana) classes.push("fim-semana");
+      if (cel.valor > 0) {
+        classes.push("com-dado");
+        // O tier de cor só faz sentido comparando com a meta de 650/dia
+        // quando é a ligação de UMA pessoa -- pro total da equipe (sem
+        // técnico selecionado) isso não tem o mesmo significado.
+        if (tecnico && cel.valor > LIGACOES_BASE_DIA) classes.push("tier-2");
+      }
+      const valorHtml = cel.valor > 0 ? `<span class="dia-valor">${NUM.format(Math.round(cel.valor))}</span>` : "";
+      return `<div class="${classes.join(" ")}"><span class="dia-num">${cel.dia}</span>${valorHtml}</div>`;
+    }).join("");
+
+    const bloco = document.createElement("div");
+    bloco.className = "mes-calendario";
+    bloco.innerHTML = `
+      <div class="mes-calendario-header">
+        <span class="mes-calendario-titulo">${rotuloMesCompleto(mesChave)}</span>
+        <span class="mes-calendario-total">Total: <strong>${NUM.format(Math.round(totalMes))}</strong></span>
+      </div>
+      <div class="mes-calendario-semana">${DIAS_SEMANA_ABREV.map(d => `<span>${d}</span>`).join("")}</div>
+      <div class="mes-calendario-grid">${diasHtml}</div>
+    `;
+    container.appendChild(bloco);
+  });
+}
+
+// --- seletor de período (botão + painel com campos "de/até" e calendário) ---
+let periodoCalMes = new Date(); // mês exibido no calendário (dia sempre 1)
+let periodoSelecionando = "inicio"; // qual clique no calendário o próximo preenche
+
+function formatarDataBR(iso) {
+  if (!iso) return "DD/MM/AAAA";
+  const [ano, mes, dia] = iso.split("-");
+  return `${dia}/${mes}/${ano}`;
+}
+
+function atualizarResumoPeriodo() {
+  const inicio = document.getElementById("filtro-data-inicio").value;
+  const fim = document.getElementById("filtro-data-fim").value;
+  document.getElementById("periodo-de-txt").textContent = formatarDataBR(inicio);
+  document.getElementById("periodo-ate-txt").textContent = formatarDataBR(fim);
+  document.getElementById("periodo-resumo").textContent =
+    (inicio && fim) ? `${formatarDataBR(inicio)} - ${formatarDataBR(fim)}` : "Selecione o período";
+}
+
+function definirDataFiltro(id, iso) {
+  const input = document.getElementById(id);
+  input.value = iso;
+  input.dispatchEvent(new Event("change"));
+}
+
+function abrirPainelPeriodo() {
+  document.getElementById("periodo-painel").hidden = false;
+  document.querySelector(".periodo-picker").classList.add("aberto");
+  const fimAtual = document.getElementById("filtro-data-fim").value;
+  const base = fimAtual ? new Date(fimAtual + "T00:00:00Z") : new Date();
+  periodoCalMes = new Date(Date.UTC(base.getUTCFullYear(), base.getUTCMonth(), 1));
+  renderPeriodoCalendario();
+}
+
+function fecharPainelPeriodo() {
+  document.getElementById("periodo-painel").hidden = true;
+  document.querySelector(".periodo-picker").classList.remove("aberto");
+}
+
+function renderPeriodoCalendario() {
+  const grid = document.getElementById("periodo-cal-grid");
+  const titulo = document.getElementById("periodo-cal-titulo");
+  const ano = periodoCalMes.getUTCFullYear();
+  const mes = periodoCalMes.getUTCMonth(); // 0-indexado
+  titulo.textContent = `${NOMES_MES[mes]} ${ano}`;
+
+  const inicioIso = document.getElementById("filtro-data-inicio").value;
+  const fimIso = document.getElementById("filtro-data-fim").value;
+  const hojeIso = new Date().toISOString().slice(0, 10);
+
+  const primeiroDiaSemana = new Date(Date.UTC(ano, mes, 1)).getUTCDay(); // 0 = domingo
+  const diasNoMes = new Date(Date.UTC(ano, mes + 1, 0)).getUTCDate();
+  const diasMesAnterior = new Date(Date.UTC(ano, mes, 0)).getUTCDate();
+
+  const celulas = [];
+  for (let i = primeiroDiaSemana - 1; i >= 0; i--) {
+    celulas.push({ dia: diasMesAnterior - i, foraMes: true, iso: null });
+  }
+  for (let d = 1; d <= diasNoMes; d++) {
+    const iso = `${ano}-${String(mes + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    celulas.push({ dia: d, foraMes: false, iso });
+  }
+  let proximoDia = 1;
+  while (celulas.length % 7 !== 0) {
+    celulas.push({ dia: proximoDia++, foraMes: true, iso: null });
+  }
+
+  grid.innerHTML = "";
+  celulas.forEach(cel => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "periodo-cal-dia";
+    if (cel.foraMes) btn.classList.add("fora-mes");
+    if (cel.iso && cel.iso === hojeIso) btn.classList.add("hoje");
+
+    if (cel.iso && inicioIso && fimIso && cel.iso >= inicioIso && cel.iso <= fimIso) {
+      btn.classList.add("no-intervalo");
+      if (cel.iso === inicioIso) btn.classList.add("extremo-inicio");
+      if (cel.iso === fimIso) btn.classList.add("extremo-fim");
+    }
+    if (cel.iso && (cel.iso === inicioIso || cel.iso === fimIso)) btn.classList.add("selecionado");
+
+    const num = document.createElement("span");
+    num.className = "periodo-cal-dia-num";
+    num.textContent = cel.dia;
+    btn.appendChild(num);
+
+    if (cel.iso) {
+      btn.addEventListener("click", () => handleCliqueDiaPeriodo(cel.iso));
+    } else {
+      btn.disabled = true;
+    }
+    grid.appendChild(btn);
+  });
+}
+
+function handleCliqueDiaPeriodo(iso) {
+  const inicioIso = document.getElementById("filtro-data-inicio").value;
+
+  if (periodoSelecionando === "inicio" || !inicioIso) {
+    definirDataFiltro("filtro-data-inicio", iso);
+    definirDataFiltro("filtro-data-fim", iso);
+    periodoSelecionando = "fim";
+  } else {
+    if (iso < inicioIso) {
+      definirDataFiltro("filtro-data-fim", inicioIso);
+      definirDataFiltro("filtro-data-inicio", iso);
+    } else {
+      definirDataFiltro("filtro-data-fim", iso);
+    }
+    periodoSelecionando = "inicio";
+  }
+  renderPeriodoCalendario();
+}
+
+function configurarSeletorPeriodo() {
+  document.getElementById("periodo-toggle").addEventListener("click", (e) => {
+    e.stopPropagation();
+    const painel = document.getElementById("periodo-painel");
+    if (painel.hidden) abrirPainelPeriodo(); else fecharPainelPeriodo();
+  });
+  document.getElementById("periodo-painel").addEventListener("click", (e) => e.stopPropagation());
+  document.addEventListener("click", fecharPainelPeriodo);
+  document.getElementById("periodo-cal-prev").addEventListener("click", () => {
+    periodoCalMes = new Date(Date.UTC(periodoCalMes.getUTCFullYear(), periodoCalMes.getUTCMonth() - 1, 1));
+    renderPeriodoCalendario();
+  });
+  document.getElementById("periodo-cal-next").addEventListener("click", () => {
+    periodoCalMes = new Date(Date.UTC(periodoCalMes.getUTCFullYear(), periodoCalMes.getUTCMonth() + 1, 1));
+    renderPeriodoCalendario();
+  });
+}
+
 function renderTudo() {
+  atualizarResumoPeriodo();
   const inicio = document.getElementById("filtro-data-inicio").value;
   const fim = document.getElementById("filtro-data-fim").value;
   const tecnico = document.getElementById("filtro-tecnico").value;
@@ -958,31 +1970,584 @@ function renderTudo() {
   let registrosResumo = registrosPeriodo;
   if (tecnico) {
     registrosResumo = registrosPeriodo.filter(r =>
-      r.participantes.some(nome => {
-        if (isExFuncionario(nome)) return false;
-        const tec = matchTecnicoAtivo(nome);
-        return tec && tec.canon === tecnico;
-      })
+      r.participantes.some(nome => normalizarNome(nome) === tecnico)
     );
   }
 
-  const rankingLista = aplicarEstimativas(computeBonificacaoPorTecnico(registrosPeriodo), registrosPeriodo);
-  renderResumo(computeResumo(registrosResumo));
-  renderRankingChart(rankingLista);
-  renderComparativoChart(rankingLista);
-  renderInsights(rankingLista, registrosPeriodo);
+  // Ranking/top3/valores respeitam período + mês + técnico -- por isso usam
+  // registrosResumo (já filtrado pelo técnico selecionado), não
+  // registrosPeriodo bruto. A média/meta usa os dias do período filtrado
+  // (mesmo denominador pra todo mundo), não os dias que cada um trabalhou.
+  const diasPeriodo = contarDiasPeriodo(inicio, fim);
+  const rankingLista = computeLigacoesPorTecnico(registrosResumo, diasPeriodo);
+
+  const resumo = computeResumo(registrosResumo);
+  renderResumo(resumo);
+  renderComparativoChart(rankingLista, diasPeriodo);
+  renderInsights(rankingLista);
+  renderPrevisaoMeta(rankingLista, LIGACOES_BASE_DIA * diasPeriodo);
+  renderProgressaoChart(computeProgressaoMensal(registrosPeriodo, tecnico));
+
+  const top3 = renderTop3(rankingLista);
+  renderTop3MensalChart(computeEvolucaoMensalTop3(registrosResumo, top3.map(t => t.nome)));
+  renderValoresChart(rankingLista);
+  renderCalendarioMeses(computeCalendarioMensal(registrosResumo, tecnico), tecnico);
 
   document.getElementById("footer-periodo").textContent =
     `Período: ${inicio.split("-").reverse().join("/")} a ${fim.split("-").reverse().join("/")}`;
 }
 
-function popularFiltroTecnico() {
+function popularFiltroTecnico(registros) {
   const select = document.getElementById("filtro-tecnico");
-  TECNICOS_ATIVOS.forEach(t => {
+  nomesDistintos(registros).forEach(nome => {
     const opt = document.createElement("option");
-    opt.value = t.canon;
-    opt.textContent = t.canon;
+    opt.value = nome;
+    opt.textContent = nomeExibicao(nome);
     select.appendChild(opt);
+  });
+}
+
+const NOMES_MES = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+function rotuloMesCompleto(chave) {
+  const [ano, mes] = chave.split("-").map(Number);
+  return `${NOMES_MES[mes - 1]} de ${ano}`;
+}
+
+function ultimoDiaDoMes(chave) {
+  const [ano, mes] = chave.split("-").map(Number);
+  return new Date(Date.UTC(ano, mes, 0)).toISOString().slice(0, 10);
+}
+
+// Popula o seletor de "Mês" com todo mês que tem pelo menos 1 registro,
+// pra ver rapidinho a produtividade de um mês específico sem digitar datas.
+function popularFiltroMes(registros) {
+  const select = document.getElementById("filtro-mes");
+  const meses = [...new Set(registros.map(r => chaveMes(r.data)))].sort();
+  meses.forEach(mes => {
+    const opt = document.createElement("option");
+    opt.value = mes;
+    opt.textContent = rotuloMesCompleto(mes);
+    select.appendChild(opt);
+  });
+
+  select.addEventListener("change", () => {
+    if (!select.value) return;
+    document.getElementById("filtro-data-inicio").value = `${select.value}-01`;
+    document.getElementById("filtro-data-fim").value = ultimoDiaDoMes(select.value);
+    renderAbaAtiva();
+  });
+
+  // editar a data na mão volta o seletor de mês pra "Personalizado"
+  ["filtro-data-inicio", "filtro-data-fim"].forEach(id => {
+    document.getElementById(id).addEventListener("change", () => { select.value = ""; });
+  });
+}
+
+// Correção verificada registro a registro (por id/objectid do ArcGIS) contra
+// a planilha oficial de RDCs (PRODUTIVIDADE_PC 392_2026.Rev.1, aba por
+// registro -- não a pivotada por dia), cruzada em 2026-09-09 comparando
+// IDENTIDADE dos participantes (não só a contagem -- um erro do tipo
+// "trocou uma pessoa por outra mas manteve o mesmo número de gente" não
+// aparece só comparando contagem). Dos 92 RDCs com número conferidos, 86
+// batem exatamente (data + ligações + participantes); originalmente 6
+// divergiam (1060, 1066, 1070, 1073, 1076, 1077) -- ver histórico em
+// [[project_pc392_dashboard]] pros detalhes de cada um.
+//
+// 1066, 1070 e 1076 foram corrigidos DIRETO NO ARCGIS entre 09:00 e 18:47 de
+// 2026-09-09 (confirmado comparando dois exports no mesmo dia -- alguém está
+// arrumando os registros na origem) e por isso já saíram desta lista; não
+// reaplicar sem checar de novo, porque re-exportar vai trazer o valor real.
+// Ainda faltam (confirmado no export das 18:47):
+//   - 1073: "Carlos Henrique" ainda ausente (só "Oldair Luciano").
+//   - 1077: "Carlos Henrique" ainda trocado por "Carlos Alberto" +
+//     "Gisclayton Arruda".
+//   - 1060: "Christian Costa" ainda trocado por "Carlos Alberto".
+// NÃO editar/expandir esta lista sem conferir de novo contra a planilha --
+// isso não é "ajustar até bater", é uma correção pontual já verificada
+// linha a linha. Sempre que reexportar, vale conferir se mais algum destes
+// já foi corrigido na origem e pode sair da lista.
+const CORRECOES_VERIFICADAS = {
+  1060: ["Christian Costa", "Gisclayton Arruda", "Rairan Nascimento"],
+  1073: ["Oldair Luciano", "Carlos Henrique"],
+  1077: ["Oldair Luciano", "Carlos Henrique"],
+};
+
+function aplicarCorrecoesVerificadas(registros) {
+  return registros.map(r => {
+    const participantes = CORRECOES_VERIFICADAS[r.id];
+    return participantes ? { ...r, participantes } : r;
+  });
+}
+
+// =====================================================================
+// Aba MANUAL -- lançamento manual de ligações por dia/técnico, calculado
+// com as MESMAS regras (rateio já embutido no valor digitado, meta,
+// faixas) e renderizado nos MESMOS componentes visuais da aba Automático,
+// só que a partir de dados digitados aqui em vez do export do ArcGIS.
+// Persistência: só localStorage (não existe backend nesse projeto) -- por
+// isso os botões Exportar/Importar existem, pra levar os dados entre
+// navegadores/computadores.
+// =====================================================================
+let DADOS_MANUAL = {};   // { "AAAA-MM-DD": { "Nome Técnico": ligacoes } }
+let NOMES_MANUAL = [];   // ["Nome Técnico", ...]
+
+const CHAVE_DADOS_MANUAL = "pc392_manual_dados_v1";
+const CHAVE_NOMES_MANUAL = "pc392_manual_nomes_v1";
+
+function carregarDadosManuais() {
+  try {
+    DADOS_MANUAL = JSON.parse(localStorage.getItem(CHAVE_DADOS_MANUAL)) || {};
+  } catch { DADOS_MANUAL = {}; }
+  try {
+    NOMES_MANUAL = JSON.parse(localStorage.getItem(CHAVE_NOMES_MANUAL)) || [];
+  } catch { NOMES_MANUAL = []; }
+}
+
+function salvarDadosManuais() {
+  try { localStorage.setItem(CHAVE_DADOS_MANUAL, JSON.stringify(DADOS_MANUAL)); } catch {}
+}
+
+function salvarNomesManuais() {
+  try { localStorage.setItem(CHAVE_NOMES_MANUAL, JSON.stringify(NOMES_MANUAL)); } catch {}
+}
+
+// Na primeira vez que a aba Manual é aberta (sem nada salvo ainda), começa
+// a lista de técnicos com quem já aparece nos dados do ArcGIS -- só um
+// ponto de partida, dá pra adicionar/remover livremente depois.
+function inicializarNomesManuais() {
+  if (NOMES_MANUAL.length === 0 && REGISTROS.length > 0) {
+    NOMES_MANUAL = nomesDistintos(REGISTROS);
+    salvarNomesManuais();
+  }
+}
+
+// Mesmo formato de retorno de computeLigacoesPorTecnico (nome, ligacoes,
+// vistorias, diasTrabalhados, mediaDia, valorPorLigacao, valorReceber,
+// percentual) -- por isso dá pra reusar renderComparativoChart,
+// renderInsights, renderPrevisaoMeta, renderTop3 e renderValoresChart sem
+// nenhuma mudança neles, só passando o resultado desta função no lugar.
+function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim, diasPeriodo) {
+  const lista = nomes.map(nome => {
+    let ligacoes = 0;
+    let diasComDado = 0;
+    Object.keys(dados).forEach(data => {
+      if (data < inicio || data > fim) return;
+      const valor = Number(dados[data] && dados[data][nome]) || 0;
+      if (valor > 0) { ligacoes += valor; diasComDado++; }
+    });
+    const mediaDia = diasPeriodo > 0 ? ligacoes / diasPeriodo : 0;
+    const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
+    return {
+      nome,
+      ligacoes,
+      vistorias: diasComDado,
+      diasTrabalhados: diasComDado,
+      mediaDia,
+      valorPorLigacao,
+      valorReceber: ligacoes * valorPorLigacao,
+    };
+  }).sort((a, b) => b.ligacoes - a.ligacoes);
+
+  const max = lista.length > 0 ? lista[0].ligacoes : 0;
+  lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
+  return lista;
+}
+
+// Junta Automático (ArcGIS, rateado) + Manual (digitado) por pessoa/dia --
+// quando os dois têm valor no mesmo dia pra mesma pessoa, soma os dois
+// (ex.: Oldair pode ter uma sobra automática pequena E um lançamento manual
+// de fiscal no mesmo dia). Arredonda por dia antes de somar o período,
+// igual o resto do painel. Usada pra tudo na aba Manual que é "resultado"
+// (KPIs, gráfico, insights, previsão, Top 3, valores) -- a tabela de
+// lançamento em si continua mostrando só o digitado, pra não confundir a
+// edição.
+function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro, diasPeriodo) {
+  const registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
+  const registrosFiltrados = tecnicoFiltro
+    ? registrosPeriodo.filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
+    : registrosPeriodo;
+
+  const totals = {}; // nome -> { ligacoesPorDia: {data: valor}, vistorias, dias: Set }
+  function garantir(nome) {
+    if (!totals[nome]) totals[nome] = { ligacoesPorDia: {}, vistorias: 0, dias: new Set() };
+    return totals[nome];
+  }
+
+  registrosFiltrados.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    r.participantes.forEach(p => {
+      const t = garantir(normalizarNome(p));
+      t.ligacoesPorDia[r.data] = (t.ligacoesPorDia[r.data] || 0) + r.ligacoes / n;
+      t.vistorias += 1 / n;
+      t.dias.add(r.data);
+    });
+  });
+
+  Object.keys(DADOS_MANUAL).forEach(data => {
+    if (data < inicio || data > fim) return;
+    Object.entries(DADOS_MANUAL[data] || {}).forEach(([nome, valor]) => {
+      const v = Number(valor) || 0;
+      if (v <= 0) return;
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
+      const t = garantir(nome);
+      t.ligacoesPorDia[data] = (t.ligacoesPorDia[data] || 0) + v;
+      t.dias.add(data);
+    });
+  });
+
+  const lista = Object.keys(totals).map(nome => {
+    const t = totals[nome];
+    const dias = Object.keys(t.ligacoesPorDia);
+    const ligacoes = dias.reduce((soma, d) => soma + Math.round(t.ligacoesPorDia[d]), 0);
+    const diasTrabalhados = t.dias.size;
+    const mediaDia = diasPeriodo > 0 ? ligacoes / diasPeriodo : 0;
+    const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
+    return {
+      nome,
+      ligacoes,
+      vistorias: t.vistorias,
+      diasTrabalhados,
+      mediaDia,
+      valorPorLigacao,
+      valorReceber: ligacoes * valorPorLigacao,
+    };
+  }).sort((a, b) => b.ligacoes - a.ligacoes);
+
+  const max = lista.length > 0 ? lista[0].ligacoes : 0;
+  lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
+  return lista;
+}
+
+// rankingLista aqui é o COMBINADO (automático + manual) -- é o que vira o
+// "Total de ligações" de verdade. Os indicadores de baixo (lançamentos,
+// maior lançamento) continuam olhando só pra dados/DADOS_MANUAL puro,
+// porque são especificamente sobre o que foi digitado, não o total.
+function renderResumoManual(rankingLista, dados, registrosAutomatico, inicio, fim) {
+  const totalLigacoes = rankingLista.reduce((s, i) => s + i.ligacoes, 0);
+  const tecnicosComDado = rankingLista.filter(i => i.ligacoes > 0).length;
+
+  const diasAtividade = new Set();
+  registrosAutomatico.forEach(r => { if (r.participantes.length > 0) diasAtividade.add(r.data); });
+
+  let totalLancamentos = 0;
+  let maior = 0;
+  Object.keys(dados).forEach(data => {
+    if (data < inicio || data > fim) return;
+    Object.values(dados[data] || {}).forEach(v => {
+      const n = Number(v) || 0;
+      if (n > 0) {
+        diasAtividade.add(data);
+        totalLancamentos++;
+        maior = Math.max(maior, n);
+      }
+    });
+  });
+
+  document.getElementById("kpi-ligacoes-manual").textContent = NUM.format(Math.round(totalLigacoes));
+  document.getElementById("kpi-media-tecnico-manual").textContent =
+    NUM.format(tecnicosComDado > 0 ? Math.round(totalLigacoes / tecnicosComDado) : 0);
+  document.getElementById("kpi-tecnicos-manual").textContent = NUM.format(tecnicosComDado);
+  document.getElementById("kpi-dias-manual").textContent = NUM.format(diasAtividade.size);
+  document.getElementById("ind-lancamentos-manual").textContent = NUM.format(totalLancamentos);
+  document.getElementById("ind-maior-manual").textContent = NUM.format(Math.round(maior));
+}
+
+// Segunda-feira (UTC) da semana ISO daquela data -- usada como chave da
+// semana pra agrupar os lançamentos manuais.
+function inicioSemana(iso) {
+  const d = new Date(iso + "T00:00:00Z");
+  const diaSemana = d.getUTCDay() || 7; // domingo (0) -> 7
+  const seg = new Date(d);
+  seg.setUTCDate(d.getUTCDate() - diaSemana + 1);
+  return seg.toISOString().slice(0, 10);
+}
+
+function fimSemana(inicioIso) {
+  const d = new Date(inicioIso + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + 6);
+  return d.toISOString().slice(0, 10);
+}
+
+// Média de TODOS os lançamentos manuais (todo técnico, todo dia) dentro de
+// cada semana do período filtrado -- é o número usado como referência pra
+// preencher dias de FISCAL/LOC. VAZ/OUTRO PC (ver [[project_pc392_dashboard]]),
+// calculado direto de cima do que está na tabela de lançamento agora, não
+// de um valor fixo importado uma vez só.
+function computeMediaSemanalManual(dados, inicio, fim) {
+  const porSemana = {};
+  Object.keys(dados).forEach(data => {
+    if (data < inicio || data > fim) return;
+    const semana = inicioSemana(data);
+    Object.values(dados[data] || {}).forEach(v => {
+      const n = Number(v) || 0;
+      if (n <= 0) return;
+      if (!porSemana[semana]) porSemana[semana] = [];
+      porSemana[semana].push(n);
+    });
+  });
+  return Object.keys(porSemana).sort().map(semana => {
+    const valores = porSemana[semana];
+    const media = valores.reduce((a, b) => a + b, 0) / valores.length;
+    return { semana, fim: fimSemana(semana), media, amostras: valores.length };
+  });
+}
+
+function renderTabelaMediaSemanal(inicio, fim) {
+  const tabela = document.getElementById("tabela-media-semanal");
+  const semanas = computeMediaSemanalManual(DADOS_MANUAL, inicio, fim);
+
+  if (semanas.length === 0) {
+    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Sem lançamentos no período selecionado.</td></tr>`;
+    return;
+  }
+
+  const thead = `<thead><tr><th class="col-data">Semana</th><th>Média</th><th>Amostras</th></tr></thead>`;
+  const linhas = semanas.map(s => {
+    const [, m1, d1] = s.semana.split("-");
+    const [, m2, d2] = s.fim.split("-");
+    return `<tr><td class="col-data">${d1}/${m1} – ${d2}/${m2}</td><td>${NUM.format(Math.round(s.media * 100) / 100)}</td><td>${NUM.format(s.amostras)}</td></tr>`;
+  }).join("");
+
+  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+}
+
+function renderTabelaManual(inicio, fim) {
+  const tabela = document.getElementById("tabela-manual");
+  if (!inicio || !fim) { tabela.innerHTML = ""; return; }
+
+  const datas = [];
+  const d = new Date(inicio + "T00:00:00Z");
+  const fimDate = new Date(fim + "T00:00:00Z");
+  while (d <= fimDate) {
+    datas.push(d.toISOString().slice(0, 10));
+    d.setUTCDate(d.getUTCDate() + 1);
+  }
+
+  if (NOMES_MANUAL.length === 0) {
+    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Nenhum técnico cadastrado ainda -- use "+ Técnico" acima.</td></tr>`;
+    return;
+  }
+
+  const thead = `<thead><tr><th class="col-data">Data</th>${NOMES_MANUAL.map(nome =>
+    `<th>${nomeExibicao(nome)} <button type="button" class="remover-tecnico-manual" data-nome="${nome.replace(/"/g, "&quot;")}" title="Remover técnico da lista">✕</button></th>`
+  ).join("")}</tr></thead>`;
+
+  const linhas = datas.map(iso => {
+    const [, mes, dia] = iso.split("-");
+    const celulas = NOMES_MANUAL.map(nome => {
+      const valor = (DADOS_MANUAL[iso] && DADOS_MANUAL[iso][nome]) || "";
+      return `<td><input type="number" step="0.01" min="0" class="celula-manual" data-data="${iso}" data-nome="${nome.replace(/"/g, "&quot;")}" value="${valor}"></td>`;
+    }).join("");
+    return `<tr><td class="col-data">${dia}/${mes}</td>${celulas}</tr>`;
+  }).join("");
+
+  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+
+  tabela.querySelectorAll("input.celula-manual").forEach(input => {
+    input.addEventListener("change", (e) => {
+      const { data, nome } = e.target.dataset;
+      const valor = parseFloat(e.target.value);
+      if (!DADOS_MANUAL[data]) DADOS_MANUAL[data] = {};
+      if (!valor || valor <= 0) {
+        delete DADOS_MANUAL[data][nome];
+      } else {
+        DADOS_MANUAL[data][nome] = valor;
+      }
+      salvarDadosManuais();
+      renderManualView();
+    });
+  });
+
+  tabela.querySelectorAll("button.remover-tecnico-manual").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const nome = e.currentTarget.dataset.nome;
+      if (!confirm(`Remover "${nomeExibicao(nome)}" da lista de lançamento? Os valores já digitados pra essa pessoa continuam salvos, só param de aparecer.`)) return;
+      NOMES_MANUAL = NOMES_MANUAL.filter(n => n !== nome);
+      salvarNomesManuais();
+      renderManualView();
+    });
+  });
+}
+
+function renderManualView() {
+  const inicio = document.getElementById("filtro-data-inicio").value;
+  const fim = document.getElementById("filtro-data-fim").value;
+  const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
+  if (!inicio || !fim) return;
+  const diasPeriodo = contarDiasPeriodo(inicio, fim);
+
+  // Combinado = Automático (ArcGIS) + Manual somados por pessoa/dia --
+  // é o número "de verdade" (ex.: Oldair = ligações automáticas dele +
+  // ligações que digitamos manualmente pra ele). Confirmado com o usuário
+  // em 2026-09-09. A tabela de lançamento e o card de média semanal
+  // continuam mostrando só o digitado (facilita conferir/editar).
+  const rankingCombinado = computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro, diasPeriodo);
+  const registrosAutomaticoFiltrado = tecnicoFiltro
+    ? filtrarPorData(REGISTROS, inicio, fim).filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
+    : filtrarPorData(REGISTROS, inicio, fim);
+
+  renderResumoManual(rankingCombinado, DADOS_MANUAL, registrosAutomaticoFiltrado, inicio, fim);
+  renderComparativoChart(rankingCombinado, diasPeriodo, "-manual");
+  renderInsights(rankingCombinado, "-manual");
+  renderPrevisaoMeta(rankingCombinado, LIGACOES_BASE_DIA * diasPeriodo, "-manual");
+  renderTop3(rankingCombinado, "-manual");
+  renderValoresChart(rankingCombinado, "-manual");
+  renderTabelaManual(inicio, fim);
+  renderTabelaMediaSemanal(inicio, fim);
+}
+
+function configurarAcoesManuais() {
+  document.getElementById("manual-add-tecnico").addEventListener("click", () => {
+    const input = document.getElementById("manual-novo-tecnico");
+    const nome = input.value.trim();
+    if (!nome) return;
+    if (NOMES_MANUAL.some(n => n.toLowerCase() === nome.toLowerCase())) {
+      alert("Esse técnico já está na lista.");
+      return;
+    }
+    NOMES_MANUAL.push(nome);
+    salvarNomesManuais();
+    input.value = "";
+    renderManualView();
+  });
+
+  document.getElementById("manual-novo-tecnico").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") document.getElementById("manual-add-tecnico").click();
+  });
+
+  document.getElementById("manual-exportar").addEventListener("click", () => {
+    const payload = { nomes: NOMES_MANUAL, dados: DADOS_MANUAL, exportado_em: new Date().toISOString() };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `pc392_manual_${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  document.getElementById("manual-importar-arquivo").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const payload = JSON.parse(reader.result);
+        // Mescla em vez de substituir -- importar um arquivo não pode
+        // apagar o que já foi digitado antes. Datas/nomes repetidos no
+        // arquivo importado sobrescrevem só aquela célula específica.
+        if (Array.isArray(payload.nomes)) {
+          payload.nomes.forEach(nome => {
+            if (!NOMES_MANUAL.some(n => n.toLowerCase() === nome.toLowerCase())) {
+              NOMES_MANUAL.push(nome);
+            }
+          });
+        }
+        if (payload.dados) {
+          Object.keys(payload.dados).forEach(data => {
+            if (!DADOS_MANUAL[data]) DADOS_MANUAL[data] = {};
+            Object.assign(DADOS_MANUAL[data], payload.dados[data]);
+          });
+        }
+        salvarNomesManuais();
+        salvarDadosManuais();
+        renderManualView();
+        alert("Dados importados e mesclados com sucesso.");
+      } catch (err) {
+        alert("Arquivo inválido: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  });
+}
+
+// =====================================================================
+// Aba GERENCIAL -- comparativo lado a lado entre o total automático
+// (ArcGIS) e o total digitado manualmente, por técnico, no período/técnico
+// selecionados no filtro do topo. Serve pra fechamento/conferência.
+// =====================================================================
+function renderGerencialView() {
+  const inicio = document.getElementById("filtro-data-inicio").value;
+  const fim = document.getElementById("filtro-data-fim").value;
+  const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
+  if (!inicio || !fim) return;
+  const diasPeriodo = contarDiasPeriodo(inicio, fim);
+
+  const registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
+  const registrosFiltrados = tecnicoFiltro
+    ? registrosPeriodo.filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
+    : registrosPeriodo;
+  const rankingAuto = computeLigacoesPorTecnico(registrosFiltrados, diasPeriodo);
+  const rankingManual = computeLigacoesPorTecnicoManual(DADOS_MANUAL, NOMES_MANUAL, inicio, fim, diasPeriodo);
+
+  const nomes = [...new Set([...rankingAuto.map(i => i.nome), ...rankingManual.map(i => i.nome)])]
+    .sort((a, b) => a.localeCompare(b, "pt-BR"));
+
+  const tabela = document.getElementById("tabela-gerencial");
+  if (nomes.length === 0) {
+    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Sem dados automáticos nem manuais no período selecionado.</td></tr>`;
+    document.getElementById("gerencial-diff-total").textContent = "-";
+    return;
+  }
+
+  const thead = `<thead><tr><th class="col-data">Técnico</th><th>Automático (ArcGIS)</th><th>Manual</th><th>Diferença</th></tr></thead>`;
+
+  let totalDiff = 0;
+  const linhas = nomes.map(nome => {
+    const auto = rankingAuto.find(i => i.nome === nome);
+    const manual = rankingManual.find(i => i.nome === nome);
+    const ligAuto = auto ? auto.ligacoes : 0;
+    const ligManual = manual ? manual.ligacoes : 0;
+    const diff = Math.round(ligManual) - Math.round(ligAuto);
+    totalDiff += diff;
+    const classeLinha = diff > 0 ? "linha-diff-pos" : diff < 0 ? "linha-diff-neg" : "";
+    return `<tr class="${classeLinha}"><td class="col-data">${nomeExibicao(nome)}</td><td>${NUM.format(Math.round(ligAuto))}</td><td>${NUM.format(Math.round(ligManual))}</td><td class="col-diff">${diff > 0 ? "+" : ""}${NUM.format(diff)}</td></tr>`;
+  }).join("");
+
+  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+  document.getElementById("gerencial-diff-total").textContent = `${totalDiff > 0 ? "+" : ""}${NUM.format(totalDiff)} ligações`;
+}
+
+// =====================================================================
+// Abas -- troca de visão sem recarregar a página. Cada view só é
+// (re)renderizada quando fica visível (e a cada troca de filtro enquanto
+// ativa) -- criar um gráfico Chart.js num canvas escondido (display:none)
+// deixa ele com tamanho zero e não se corrige sozinho depois.
+// =====================================================================
+function abaAtiva() {
+  const btn = document.querySelector(".tab-btn.active");
+  return btn ? btn.dataset.view : "automatico";
+}
+
+function renderAbaAtiva() {
+  // O texto do filtro "Período" no cabeçalho precisa atualizar não importa
+  // qual aba está ativa -- antes só rodava dentro de renderTudo() (aba
+  // Automático), então trocar o período nas abas Manual/Gerencial mudava os
+  // dados mas deixava o texto do filtro com a data antiga, parecendo que o
+  // filtro não tinha feito nada.
+  atualizarResumoPeriodo();
+  const view = abaAtiva();
+  if (view === "automatico") renderTudo();
+  else if (view === "manual") renderManualView();
+  else if (view === "gerencial") renderGerencialView();
+}
+
+function configurarAbas() {
+  const botoes = document.querySelectorAll(".tab-btn");
+  botoes.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("active")) return;
+      botoes.forEach(b => b.classList.toggle("active", b === btn));
+      document.querySelectorAll(".view-panel").forEach(painel => {
+        painel.style.display = painel.dataset.view === btn.dataset.view ? "flex" : "none";
+      });
+      renderAbaAtiva();
+    });
   });
 }
 
@@ -991,7 +2556,10 @@ async function init() {
     const resp = await fetch(DATA_URL);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const json = await resp.json();
-    REGISTROS = json.registros || [];
+    // Descarta tudo de 2025 do proprio conjunto de dados (fica so 2026 em
+    // diante) -- vale pra qualquer calculo, grafico ou filtro (mes, tecnico,
+    // periodo), nao so pro periodo padrao exibido.
+    REGISTROS = aplicarCorrecoesVerificadas((json.registros || []).filter(r => r.data >= "2026-01-01"));
 
     if (json.gerado_em) {
       const dt = new Date(json.gerado_em);
@@ -999,14 +2567,21 @@ async function init() {
         `Atualizado em ${dt.toLocaleDateString("pt-BR")} às ${dt.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
     }
 
-    popularFiltroTecnico();
+    popularFiltroTecnico(REGISTROS);
+    popularFiltroMes(REGISTROS);
+    configurarSeletorPeriodo();
+
+    carregarDadosManuais();
+    inicializarNomesManuais();
+    configurarAbas();
+    configurarAcoesManuais();
 
     const hoje = new Date().toISOString().slice(0, 10);
     document.getElementById("filtro-data-inicio").value = PERIODO_INICIO_PADRAO;
     document.getElementById("filtro-data-fim").value = hoje;
 
     ["filtro-data-inicio", "filtro-data-fim", "filtro-tecnico"].forEach(id =>
-      document.getElementById(id).addEventListener("change", renderTudo)
+      document.getElementById(id).addEventListener("change", renderAbaAtiva)
     );
 
     document.getElementById("status-msg").style.display = "none";
