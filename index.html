@@ -769,49 +769,56 @@
     padding: 0;
   }
   .rdc-detalhe-card { margin-top: 16px; }
-  .rdc-detalhe-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 10px 24px;
-    padding: 4px 0 16px;
-    border-bottom: 1px solid var(--gridline);
-    margin-bottom: 12px;
+
+  /* Réplica visual do relatório .docx original: mesma grade de linhas e
+     colunas (cabeçalho Inspetores/Setor/Planta/Data/Subsetor/Zona
+     Pressão/Relatório, tabela de ruas, rodapé Ext./Qtde.), com bordas
+     finas iguais a uma tabela do Word, não um "card" resumido. */
+  .rdc-doc-wrap { font-size: 0.78rem; }
+  table.rdc-doc {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: inherit;
+    background: #fff;
   }
-  .rdc-detalhe-info div {
-    font-size: 0.68rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+  table.rdc-doc td, table.rdc-doc th {
+    border: 1px solid #bfbfbf;
+    padding: 5px 8px;
+    text-align: left;
+    vertical-align: middle;
+    font-variant-numeric: tabular-nums;
   }
-  .rdc-detalhe-info strong {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-dark);
-    text-transform: none;
-    letter-spacing: normal;
-    margin-top: 2px;
+  .rdc-doc-cabecalho td {
     font-weight: 600;
+    color: var(--text-dark);
   }
-  .rdc-detalhe-footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px 32px;
-    padding-top: 14px;
-    margin-top: 4px;
-    border-top: 1px solid var(--gridline);
-  }
-  .rdc-detalhe-footer span {
-    font-size: 0.68rem;
-    color: var(--text-muted);
+  .rdc-doc-cabecalho td.rdc-doc-titulo-celula {
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    background: #fafaf8;
   }
-  .rdc-detalhe-footer strong {
-    display: block;
-    font-size: 0.95rem;
-    color: var(--header-bg);
+  .rdc-doc-ruas { white-space: nowrap; }
+  .rdc-doc-ruas thead th {
+    position: sticky;
+    top: 0;
+    background: #f2f2ee;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--text-secondary);
+    text-align: center;
+    z-index: 1;
+  }
+  .rdc-doc-ruas td { text-align: center; }
+  .rdc-doc-ruas td:first-child { text-align: left; }
+  .rdc-doc-rodape td:first-child { width: 40%; }
+  .rdc-doc-rodape .rdc-rodape-label { font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+  .rdc-doc-rodape .rdc-rodape-valor { text-align: right; font-weight: 600; }
+  .rdc-doc-rodape .rdc-rodape-destaque {
     font-weight: 700;
-    margin-top: 2px;
+    color: var(--header-bg);
+    font-size: 0.9rem;
   }
 </style>
 </head>
@@ -1185,11 +1192,13 @@
         <div class="card-title" id="rdc-detalhe-titulo">Relatório RDC</div>
         <button type="button" id="rdc-detalhe-fechar" class="btn-manual btn-manual-secundario">Fechar</button>
       </div>
-      <div class="rdc-detalhe-info" id="rdc-detalhe-info"></div>
-      <div class="calendario-scroll">
-        <table class="tabela-manual" id="rdc-detalhe-tabela"></table>
+      <div class="rdc-doc-wrap">
+        <table class="rdc-doc rdc-doc-cabecalho" id="rdc-detalhe-cabecalho"></table>
+        <div class="calendario-scroll">
+          <table class="rdc-doc rdc-doc-ruas" id="rdc-detalhe-tabela"></table>
+        </div>
+        <table class="rdc-doc rdc-doc-rodape" id="rdc-detalhe-rodape"></table>
       </div>
-      <div class="rdc-detalhe-footer" id="rdc-detalhe-footer"></div>
     </div>
   </section>
 
@@ -2801,9 +2810,12 @@ function renderTabelaRDC() {
   });
 }
 
-// Réplica compacta do relatório RDC original (cabeçalho + tabela de ruas +
-// totais), pra quem quer conferir visualmente contra o .docx sem precisar
-// abrir o Word de novo.
+// Réplica visual do relatório RDC .docx original -- mesmas 3 partes, mesma
+// grade de linhas/colunas que o Word gera (conferido célula a célula contra
+// o documento real: "Ruas Pesquisadas" + Inspetores; Setor/Planta/Data;
+// Subsetor/Zona Pressão/Relatório; tabela de ruas com as mesmas 9 colunas;
+// rodapé OBS/Ext. Rel./Qtde. Vaz./Qtde. Ligações) -- não é um resumo, é a
+// mesma tabela, só sem precisar abrir o Word.
 function renderDetalheRDC(id) {
   const rdc = DADOS_RDC[id];
   const card = document.getElementById("rdc-detalhe-card");
@@ -2813,24 +2825,30 @@ function renderDetalheRDC(id) {
 
   document.getElementById("rdc-detalhe-titulo").textContent = `Relatório RDC Nº ${id} — ${formatarDataBR(rdc.data)}`;
 
-  const infoCampos = [
-    ["Inspetores", rdc.participantes.join(", ") || "-"],
-    ["Setor", rdc.setor || "-"],
-    ["Planta", rdc.planta || "-"],
-    ["Subsetor", rdc.subsetor || "-"],
-    ["Zona Pressão", rdc.zonaPressao || "-"],
-    ["Arquivo", rdc.arquivo || "-"],
-  ];
-  document.getElementById("rdc-detalhe-info").innerHTML = infoCampos
-    .map(([label, valor]) => `<div>${label}<strong>${valor}</strong></div>`)
-    .join("");
+  document.getElementById("rdc-detalhe-cabecalho").innerHTML = `
+    <tr>
+      <td class="rdc-doc-titulo-celula" colspan="2">Ruas Pesquisadas</td>
+      <td colspan="2">Inspetores: ${rdc.participantes.join(" - ") || "-"}</td>
+    </tr>
+    <tr>
+      <td>Setor: ${rdc.setor || "-"}</td>
+      <td>Planta: ${rdc.planta || "-"}</td>
+      <td></td>
+      <td>Data: ${formatarDataBR(rdc.data)}</td>
+    </tr>
+    <tr>
+      <td>Subsetor: ${rdc.subsetor || "-"}</td>
+      <td>Zona Pressão: ${rdc.zonaPressao || "-"}</td>
+      <td></td>
+      <td>Relatório: ${id}</td>
+    </tr>`;
 
   const theadRuas = `<thead><tr>
-    <th class="col-data">Endereço</th><th>Rede Ø</th><th>Material</th><th>Vaz</th>
+    <th>Endereço</th><th>rede Ø</th><th>Mat.</th><th>Vaz</th>
     <th>Km</th><th>Qtd Lig</th><th>Nº</th><th>Pres.</th><th>Hora</th>
   </tr></thead>`;
   const linhasRuas = rdc.ruas.map(r => `<tr>
-    <td class="col-data">${r.endereco || "-"}</td>
+    <td>${r.endereco || "-"}</td>
     <td>${r.rede || "-"}</td>
     <td>${r.material || "-"}</td>
     <td>${r.vaz || "0"}</td>
@@ -2842,16 +2860,12 @@ function renderDetalheRDC(id) {
   </tr>`).join("");
   document.getElementById("rdc-detalhe-tabela").innerHTML = theadRuas + `<tbody>${linhasRuas}</tbody>`;
 
-  const rodapeCampos = [
-    ["Ext. Rel. Anterior", rdc.extRelAnterior || "-"],
-    ["Ext. Rel.", rdc.extRel || "-"],
-    ["Ext. Acumulada", rdc.extAcumulada || "-"],
-    ["Qtde. Vaz.", NUM.format(rdc.qtdVaz || 0)],
-    ["Qtde. Ligações", NUM.format(rdc.qtdLigacoes || 0)],
-  ];
-  document.getElementById("rdc-detalhe-footer").innerHTML = rodapeCampos
-    .map(([label, valor]) => `<span>${label}<strong>${valor}</strong></span>`)
-    .join("");
+  document.getElementById("rdc-detalhe-rodape").innerHTML = `
+    <tr><td rowspan="5">OBS:</td><td rowspan="5"></td><td class="rdc-rodape-label">Ext. Rel. Anterior</td><td class="rdc-rodape-valor">${rdc.extRelAnterior || ""}</td></tr>
+    <tr><td class="rdc-rodape-label">Ext. Rel.</td><td class="rdc-rodape-valor">${rdc.extRel || ""}</td></tr>
+    <tr><td class="rdc-rodape-label">Ext. Acumulada</td><td class="rdc-rodape-valor">${rdc.extAcumulada || ""}</td></tr>
+    <tr><td class="rdc-rodape-label">Qtde. Vaz.</td><td class="rdc-rodape-valor">${NUM.format(rdc.qtdVaz || 0)}</td></tr>
+    <tr><td class="rdc-rodape-label rdc-rodape-destaque">Qtde. Ligações</td><td class="rdc-rodape-valor rdc-rodape-destaque">${NUM.format(rdc.qtdLigacoes || 0)}</td></tr>`;
 
   card.scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
