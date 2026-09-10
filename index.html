@@ -8,6 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@3/dist/chartjs-plugin-annotation.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <style>
   :root {
     --header-bg: #5B6B4A;
@@ -755,6 +756,63 @@
     color: var(--text-muted);
     margin: 10px 0 14px;
   }
+
+  /* --- detalhe de um RDC importado (replica do relatório .docx) --- */
+  .rdc-ver-btn {
+    border: none;
+    background: transparent;
+    color: var(--header-bg);
+    cursor: pointer;
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-decoration: underline;
+    padding: 0;
+  }
+  .rdc-detalhe-card { margin-top: 16px; }
+  .rdc-detalhe-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px 24px;
+    padding: 4px 0 16px;
+    border-bottom: 1px solid var(--gridline);
+    margin-bottom: 12px;
+  }
+  .rdc-detalhe-info div {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .rdc-detalhe-info strong {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    text-transform: none;
+    letter-spacing: normal;
+    margin-top: 2px;
+    font-weight: 600;
+  }
+  .rdc-detalhe-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 32px;
+    padding-top: 14px;
+    margin-top: 4px;
+    border-top: 1px solid var(--gridline);
+  }
+  .rdc-detalhe-footer span {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .rdc-detalhe-footer strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--header-bg);
+    font-weight: 700;
+    margin-top: 2px;
+  }
 </style>
 </head>
 <body>
@@ -1102,6 +1160,36 @@
       <div class="calendario-scroll">
         <table class="tabela-manual" id="tabela-gerencial"></table>
       </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Conferência RDC (Word) × ArcGIS</div>
+    <div class="card">
+      <div class="card-title-row">
+        <div class="card-title">Relatórios RDC (.docx) importados</div>
+        <div class="manual-acoes">
+          <label class="btn-manual btn-manual-secundario" for="rdc-importar-arquivo">Importar RDC (.docx)</label>
+          <input type="file" id="rdc-importar-arquivo" accept=".docx" multiple style="display:none">
+          <button type="button" id="rdc-limpar" class="btn-manual btn-manual-secundario">Limpar tudo</button>
+        </div>
+      </div>
+      <p class="manual-aviso">Importe aqui os relatórios RDC (.docx) exportados do ArcGIS para conferir, registro a registro, se o número de ligações e os participantes gravados no sistema batem com o documento oficial. Fica salvo neste navegador.</p>
+      <div class="calendario-scroll">
+        <table class="tabela-manual" id="tabela-rdc"></table>
+      </div>
+    </div>
+
+    <div class="card rdc-detalhe-card" id="rdc-detalhe-card" style="display:none;">
+      <div class="card-title-row">
+        <div class="card-title" id="rdc-detalhe-titulo">Relatório RDC</div>
+        <button type="button" id="rdc-detalhe-fechar" class="btn-manual btn-manual-secundario">Fechar</button>
+      </div>
+      <div class="rdc-detalhe-info" id="rdc-detalhe-info"></div>
+      <div class="calendario-scroll">
+        <table class="tabela-manual" id="rdc-detalhe-tabela"></table>
+      </div>
+      <div class="rdc-detalhe-footer" id="rdc-detalhe-footer"></div>
     </div>
   </section>
 
@@ -2467,11 +2555,316 @@ function configurarAcoesManuais() {
 }
 
 // =====================================================================
+// Conferência RDC (Word) -- o ArcGIS gera um .docx "RDC" por registro
+// (PC_392_RDC_OID<id>_<timestamp>.docx) com o número oficial de ligações,
+// vazamentos e os inspetores daquele dia. Lemos o arquivo inteiramente no
+// navegador (o .docx é um .zip com XML dentro -- usamos JSZip pra abrir e
+// regex pra extrair os campos do texto achatado, sem precisar reconstruir
+// a tabela de ruas linha a linha) e comparamos com o registro já gravado
+// em REGISTROS (pós CORRECOES_VERIFICADAS) pelo mesmo id de relatório.
+// Persistência: só localStorage, igual a aba Manual.
+// =====================================================================
+let DADOS_RDC = {}; // { id: { id, data, participantes:[...], qtdVaz, qtdLigacoes, arquivo, importadoEm } }
+const CHAVE_DADOS_RDC = "pc392_rdc_dados_v1";
+
+function carregarDadosRDC() {
+  try {
+    DADOS_RDC = JSON.parse(localStorage.getItem(CHAVE_DADOS_RDC)) || {};
+  } catch { DADOS_RDC = {}; }
+}
+
+function salvarDadosRDC() {
+  try { localStorage.setItem(CHAVE_DADOS_RDC, JSON.stringify(DADOS_RDC)); } catch {}
+}
+
+function decodificarEntidadesXml(s) {
+  return s
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
+// Lê a tabela real do Word (word/document.xml tem <w:tbl>/<w:tr>/<w:tc>) e
+// devolve uma matriz [linha][celula] de texto puro -- mais confiável que
+// tentar extrair tudo de um texto achatado, porque preserva a fronteira
+// entre colunas mesmo quando uma célula está vazia.
+function extrairTabelaWord(xml) {
+  const linhasXml = xml.match(/<w:tr\b[\s\S]*?<\/w:tr>/g) || [];
+  return linhasXml.map(linhaXml => {
+    const celulasXml = linhaXml.match(/<w:tc>[\s\S]*?<\/w:tc>/g) || [];
+    return celulasXml.map(c => {
+      const textos = [...c.matchAll(/<w:t[^>]*>([^<]*)<\/w:t>/g)];
+      return decodificarEntidadesXml(textos.map(t => t[1]).join("")).trim();
+    });
+  });
+}
+
+// Varre um conjunto de linhas procurando células no formato "Rótulo: valor"
+// (usado no cabeçalho do RDC: Inspetores, Setor, Planta, Data, Subsetor,
+// Zona Pressão, Relatório) e devolve um dicionário rótulo -> valor.
+function extrairCamposRotulados(linhas) {
+  const campos = {};
+  linhas.forEach(celulas => {
+    celulas.forEach(celula => {
+      const m = celula.match(/^([^:]{2,40}):\s*(.*)$/);
+      if (m) campos[m[1].trim()] = m[2].trim();
+    });
+  });
+  return campos;
+}
+
+function converterDataBrParaIso(dataBr) {
+  const m = (dataBr || "").match(/(\d{2})\/(\d{2})\/(\d{4})/);
+  return m ? `${m[3]}-${m[2]}-${m[1]}` : "";
+}
+
+function parseNumeroPtBr(valor) {
+  if (!valor) return 0;
+  return Number(String(valor).trim().replace(/\./g, "").replace(",", ".")) || 0;
+}
+
+async function parseRDCDocx(file) {
+  const zip = await JSZip.loadAsync(file);
+  const doc = zip.file("word/document.xml");
+  if (!doc) throw new Error("não parece um .docx válido (word/document.xml não encontrado)");
+  const xml = await doc.async("string");
+  const linhas = extrairTabelaWord(xml);
+
+  // A linha de cabeçalho da tabela de ruas é a que começa com "Endereço" --
+  // tudo antes dela é metadado (Inspetores/Setor/Data/...), tudo depois
+  // (enquanto tiver 9 colunas) é uma rua pesquisada, e o resto (4 colunas)
+  // é o rodapé (Ext. Rel., Qtde. Vaz., Qtde. Ligações).
+  const idxCabecalho = linhas.findIndex(l => (l[0] || "").trim() === "Endereço");
+  if (idxCabecalho === -1) {
+    throw new Error("não encontrei a tabela de ruas pesquisadas no documento");
+  }
+
+  const linhasMeta = linhas.slice(0, idxCabecalho);
+  const campos = extrairCamposRotulados(linhasMeta);
+
+  const ruas = [];
+  let i = idxCabecalho + 1;
+  while (i < linhas.length && linhas[i].length === 9) {
+    const [endereco, rede, material, vaz, km, qtdLig, nr, pres, hora] = linhas[i];
+    if (endereco || qtdLig) {
+      ruas.push({ endereco, rede, material, vaz, km, qtdLig, nr, pres, hora });
+    }
+    i++;
+  }
+
+  const linhasRodape = linhas.slice(i);
+  const rodape = {};
+  linhasRodape.forEach(celulas => {
+    if (celulas.length < 4) return;
+    const rotulo = (celulas[2] || "").trim();
+    if (rotulo) rodape[rotulo] = (celulas[3] || "").trim();
+  });
+
+  const idBruto = campos["Relatório"] || campos["Relatorio"];
+  const dataBruta = campos["Data"];
+  const qtdLigacoesBruta = rodape["Qtde. Ligações"] || rodape["Qtde. Ligacoes"];
+  if (!idBruto || !dataBruta || !qtdLigacoesBruta) {
+    throw new Error("não encontrei os campos Relatório/Data/Qtde. Ligações no documento");
+  }
+
+  const participantes = (campos["Inspetores"] || "")
+    .replace(/-\s*$/, "")
+    .split(" - ")
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  return {
+    id: Number(idBruto),
+    data: converterDataBrParaIso(dataBruta),
+    participantes,
+    setor: campos["Setor"] || "",
+    planta: campos["Planta"] || "",
+    subsetor: campos["Subsetor"] || "",
+    zonaPressao: campos["Zona Pressão"] || campos["Zona Pressao"] || "",
+    extRelAnterior: rodape["Ext. Rel. Anterior"] || "",
+    extRel: rodape["Ext. Rel."] || "",
+    extAcumulada: rodape["Ext. Acumulada"] || "",
+    qtdVaz: Number(rodape["Qtde. Vaz."]) || 0,
+    qtdLigacoes: parseNumeroPtBr(qtdLigacoesBruta),
+    ruas,
+    arquivo: file.name,
+  };
+}
+
+function configurarAcoesRDC() {
+  document.getElementById("rdc-importar-arquivo").addEventListener("change", async (e) => {
+    const files = [...e.target.files];
+    if (files.length === 0) return;
+    let ok = 0;
+    const falhas = [];
+    for (const file of files) {
+      try {
+        const parsed = await parseRDCDocx(file);
+        DADOS_RDC[parsed.id] = { ...parsed, importadoEm: new Date().toISOString() };
+        ok++;
+      } catch (err) {
+        falhas.push(`${file.name}: ${err.message}`);
+      }
+    }
+    salvarDadosRDC();
+    renderTabelaRDC();
+    e.target.value = "";
+    if (falhas.length > 0) {
+      alert(`${ok} RDC(s) importado(s). ${falhas.length} arquivo(s) com problema:\n\n` + falhas.join("\n"));
+    } else {
+      alert(`${ok} RDC(s) importado(s) e conferido(s) com sucesso.`);
+    }
+  });
+
+  document.getElementById("rdc-limpar").addEventListener("click", () => {
+    if (Object.keys(DADOS_RDC).length === 0) return;
+    if (!confirm("Remover todos os RDCs importados deste navegador?")) return;
+    DADOS_RDC = {};
+    salvarDadosRDC();
+    renderTabelaRDC();
+    document.getElementById("rdc-detalhe-card").style.display = "none";
+  });
+
+  document.getElementById("rdc-detalhe-fechar").addEventListener("click", () => {
+    document.getElementById("rdc-detalhe-card").style.display = "none";
+  });
+}
+
+function renderTabelaRDC() {
+  const tabela = document.getElementById("tabela-rdc");
+  if (!tabela) return;
+  const ids = Object.keys(DADOS_RDC).map(Number).sort((a, b) => b - a);
+
+  if (ids.length === 0) {
+    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Nenhum RDC importado ainda. Use "Importar RDC (.docx)" acima.</td></tr>`;
+    return;
+  }
+
+  const thead = `<thead><tr>
+    <th class="col-data">Relatório</th><th>Data</th><th>Inspetores</th>
+    <th>Ligações (RDC)</th><th>Ligações (ArcGIS)</th><th>Diferença</th><th>Status</th><th></th><th></th>
+  </tr></thead>`;
+
+  const linhas = ids.map(id => {
+    const rdc = DADOS_RDC[id];
+    const registro = REGISTROS.find(r => r.id === id);
+    const ligArcgis = registro ? registro.ligacoes : null;
+    const diff = ligArcgis != null ? rdc.qtdLigacoes - ligArcgis : null;
+
+    const partRdc = [...rdc.participantes].map(normalizarNome).sort((a, b) => a.localeCompare(b, "pt-BR"));
+    const partArcgis = registro ? [...registro.participantes].map(normalizarNome).sort((a, b) => a.localeCompare(b, "pt-BR")) : [];
+    const participantesIguais = partRdc.length === partArcgis.length && partRdc.every((n, i) => n === partArcgis[i]);
+
+    let status, classe;
+    if (!registro) {
+      status = "❌ Não encontrado no ArcGIS";
+      classe = "linha-diff-neg";
+    } else if (diff !== 0 || !participantesIguais) {
+      status = "⚠️ Divergente";
+      classe = "linha-diff-pos";
+    } else {
+      status = "✅ Confere";
+      classe = "";
+    }
+
+    const colInspetores = participantesIguais
+      ? partRdc.join(", ")
+      : `${partRdc.join(", ")}<br><span style="color:var(--text-muted);font-size:12px;">ArcGIS: ${partArcgis.join(", ") || "-"}</span>`;
+
+    return `<tr class="${classe}">
+      <td class="col-data">${id}</td>
+      <td>${formatarDataBR(rdc.data)}</td>
+      <td>${colInspetores}</td>
+      <td>${NUM.format(rdc.qtdLigacoes)}</td>
+      <td>${ligArcgis != null ? NUM.format(ligArcgis) : "-"}</td>
+      <td class="col-diff">${diff != null ? (diff > 0 ? "+" : "") + NUM.format(diff) : "-"}</td>
+      <td>${status}</td>
+      <td>${rdc.ruas && rdc.ruas.length > 0 ? `<button type="button" class="rdc-ver-btn" data-id="${id}">Ver detalhes</button>` : ""}</td>
+      <td><button type="button" class="btn-manual btn-manual-secundario rdc-remover" data-id="${id}">Remover</button></td>
+    </tr>`;
+  }).join("");
+
+  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+  tabela.querySelectorAll(".rdc-remover").forEach(btn => {
+    btn.addEventListener("click", () => {
+      delete DADOS_RDC[Number(btn.dataset.id)];
+      salvarDadosRDC();
+      renderTabelaRDC();
+      const card = document.getElementById("rdc-detalhe-card");
+      if (card && card.dataset.id === btn.dataset.id) card.style.display = "none";
+    });
+  });
+  tabela.querySelectorAll(".rdc-ver-btn").forEach(btn => {
+    btn.addEventListener("click", () => renderDetalheRDC(Number(btn.dataset.id)));
+  });
+}
+
+// Réplica compacta do relatório RDC original (cabeçalho + tabela de ruas +
+// totais), pra quem quer conferir visualmente contra o .docx sem precisar
+// abrir o Word de novo.
+function renderDetalheRDC(id) {
+  const rdc = DADOS_RDC[id];
+  const card = document.getElementById("rdc-detalhe-card");
+  if (!rdc || !card) return;
+  card.dataset.id = String(id);
+  card.style.display = "block";
+
+  document.getElementById("rdc-detalhe-titulo").textContent = `Relatório RDC Nº ${id} — ${formatarDataBR(rdc.data)}`;
+
+  const infoCampos = [
+    ["Inspetores", rdc.participantes.join(", ") || "-"],
+    ["Setor", rdc.setor || "-"],
+    ["Planta", rdc.planta || "-"],
+    ["Subsetor", rdc.subsetor || "-"],
+    ["Zona Pressão", rdc.zonaPressao || "-"],
+    ["Arquivo", rdc.arquivo || "-"],
+  ];
+  document.getElementById("rdc-detalhe-info").innerHTML = infoCampos
+    .map(([label, valor]) => `<div>${label}<strong>${valor}</strong></div>`)
+    .join("");
+
+  const theadRuas = `<thead><tr>
+    <th class="col-data">Endereço</th><th>Rede Ø</th><th>Material</th><th>Vaz</th>
+    <th>Km</th><th>Qtd Lig</th><th>Nº</th><th>Pres.</th><th>Hora</th>
+  </tr></thead>`;
+  const linhasRuas = rdc.ruas.map(r => `<tr>
+    <td class="col-data">${r.endereco || "-"}</td>
+    <td>${r.rede || "-"}</td>
+    <td>${r.material || "-"}</td>
+    <td>${r.vaz || "0"}</td>
+    <td>${r.km || "-"}</td>
+    <td>${r.qtdLig || "0"}</td>
+    <td>${r.nr || "-"}</td>
+    <td>${r.pres || "-"}</td>
+    <td>${r.hora || "-"}</td>
+  </tr>`).join("");
+  document.getElementById("rdc-detalhe-tabela").innerHTML = theadRuas + `<tbody>${linhasRuas}</tbody>`;
+
+  const rodapeCampos = [
+    ["Ext. Rel. Anterior", rdc.extRelAnterior || "-"],
+    ["Ext. Rel.", rdc.extRel || "-"],
+    ["Ext. Acumulada", rdc.extAcumulada || "-"],
+    ["Qtde. Vaz.", NUM.format(rdc.qtdVaz || 0)],
+    ["Qtde. Ligações", NUM.format(rdc.qtdLigacoes || 0)],
+  ];
+  document.getElementById("rdc-detalhe-footer").innerHTML = rodapeCampos
+    .map(([label, valor]) => `<span>${label}<strong>${valor}</strong></span>`)
+    .join("");
+
+  card.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// =====================================================================
 // Aba GERENCIAL -- comparativo lado a lado entre o total automático
 // (ArcGIS) e o total digitado manualmente, por técnico, no período/técnico
 // selecionados no filtro do topo. Serve pra fechamento/conferência.
+// A conferência RDC (abaixo) é independente do período selecionado --
+// é uma lista de auditoria de tudo que já foi importado.
 // =====================================================================
 function renderGerencialView() {
+  renderTabelaRDC();
   const inicio = document.getElementById("filtro-data-inicio").value;
   const fim = document.getElementById("filtro-data-fim").value;
   const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
@@ -2573,8 +2966,10 @@ async function init() {
 
     carregarDadosManuais();
     inicializarNomesManuais();
+    carregarDadosRDC();
     configurarAbas();
     configurarAcoesManuais();
+    configurarAcoesRDC();
 
     const hoje = new Date().toISOString().slice(0, 10);
     document.getElementById("filtro-data-inicio").value = PERIODO_INICIO_PADRAO;
