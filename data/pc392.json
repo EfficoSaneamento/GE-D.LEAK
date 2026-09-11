@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T12:36:31Z",
+  "gerado_em": "2026-09-11T10:10:23Z",
   "registros": [
     {
       "id": 1,
@@ -9933,6 +9933,14 @@
       "id": 1094,
       "data": "2026-09-08",
       "ligacoes": 1.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1095,
+      "data": "2026-09-10",
+      "ligacoes": 38.0,
       "participantes": [
         "Adeilson da Silva"
       ]
