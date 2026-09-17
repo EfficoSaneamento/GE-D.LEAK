@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T10:27:12Z",
+  "gerado_em": "2026-09-17T10:37:10Z",
   "registros": [
     {
       "id": 1,
@@ -10051,6 +10051,35 @@
       "participantes": [
         "Oldair Luciano",
         "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1108,
+      "data": "2026-09-16",
+      "ligacoes": 882.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1109,
+      "data": "2026-09-16",
+      "ligacoes": 1098.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1110,
+      "data": "2026-09-16",
+      "ligacoes": 1383.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
       ]
     }
   ]
