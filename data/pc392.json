@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T10:37:10Z",
+  "gerado_em": "2026-09-18T10:12:55Z",
   "registros": [
     {
       "id": 1,
@@ -10080,6 +10080,25 @@
       "participantes": [
         "Carlos Alberto",
         "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1111,
+      "data": "2026-09-17",
+      "ligacoes": 1358.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1112,
+      "data": "2026-09-17",
+      "ligacoes": 1998.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "carlos_henrique"
       ]
     }
   ]
