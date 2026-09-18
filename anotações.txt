@@ -1,0 +1,6 @@
+Adicionar calendario de feriados
+Deixar medias editaveis de acordo com periodo selecionado 
+Replicar na primeira pagina 
+Evolução mensal — Top 3 - trazer os dados de acordo com o periodo selecionado 
+Informar por pessoa a quantidade de dias trabalhado em periodo na aba ARCGIS+Media (Mudando a cor na produtividade)
+Criar um grafico por Media
