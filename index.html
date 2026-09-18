@@ -441,6 +441,7 @@
   .meta-dot-0 { background: var(--text-muted); }
   .meta-dot-1 { background: var(--header-bg); }
   .meta-dot-2 { background: var(--gold); }
+  .meta-dot-meta { background: #3f4a34; border-radius: 2px; }
 
   /* --- top 3 produtividade --- */
   .top3-grid {
@@ -596,6 +597,9 @@
   .mes-calendario-dia.tier-2 .dia-num,
   .mes-calendario-dia.tier-2 .dia-valor { color: #fff; }
   .mes-calendario-dia.fim-semana:not(.com-dado) { background: #ececea; }
+  .mes-calendario-dia.feriado { box-shadow: inset 0 0 0 1.5px #b3542e; }
+  .mes-calendario-dia.feriado .dia-num { color: #b3542e; }
+  .mes-calendario-dia.feriado .dia-num::after { content: " •"; font-weight: 700; }
 
   .indic-grid-wide { flex-direction: row; flex-wrap: wrap; gap: 0 32px; }
   .indic-grid-wide .indic-row { flex: 1 1 200px; }
@@ -963,6 +967,7 @@
         <div class="card-title">Ligações no período, por técnico</div>
         <canvas id="chart-comparativo"></canvas>
         <div class="meta-legenda">
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-meta"></span>Meta individual (650 × dias trabalhados)</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-0"></span>&lt; 650/dia — sem meta</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-1"></span>= 650/dia — R$ 0,05/ligação</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-2"></span>&gt; 650/dia — R$ 0,10/ligação</span>
@@ -979,6 +984,14 @@
   <section>
     <div class="section-title">Top 3 produtividade</div>
     <div class="top3-grid" id="top3-grid"></div>
+  </section>
+
+  <section>
+    <div class="section-title">Média diária por técnico</div>
+    <div class="card card-comparativo">
+      <div class="card-title">Ligações por dia trabalhado (ritmo de produtividade)</div>
+      <canvas id="chart-media-diaria"></canvas>
+    </div>
   </section>
 
   <section>
@@ -1013,6 +1026,7 @@
         <div class="card-title">Calendário de ligações</div>
         <div class="valores-total" id="calendario-legenda">Total da equipe por dia</div>
       </div>
+      <p class="manual-aviso" style="margin-top:-4px;">Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
       <div id="calendario-meses"></div>
     </div>
   </section>
@@ -1084,6 +1098,7 @@
         <p class="manual-aviso" style="margin-top:-6px;">Soma o total automático (ArcGIS) com o que foi digitado manualmente pra cada técnico.</p>
         <canvas id="chart-comparativo-manual"></canvas>
         <div class="meta-legenda">
+          <span class="meta-legenda-item"><span class="meta-dot meta-dot-meta"></span>Meta individual (650 × dias trabalhados)</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-0"></span>&lt; 650/dia — sem meta</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-1"></span>= 650/dia — R$ 0,05/ligação</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-2"></span>&gt; 650/dia — R$ 0,10/ligação</span>
@@ -1103,6 +1118,30 @@
   </section>
 
   <section>
+    <div class="section-title">Média diária por técnico</div>
+    <div class="card card-comparativo">
+      <div class="card-title">Ligações por dia trabalhado (ritmo de produtividade)</div>
+      <canvas id="chart-media-diaria-manual"></canvas>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Evolução mensal — Top 3</div>
+    <div class="card card-comparativo">
+      <div class="card-title">Ligações por mês, Top 3 do período</div>
+      <canvas id="chart-top3-mensal-manual"></canvas>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Progressão mensal</div>
+    <div class="card card-comparativo">
+      <div class="card-title">Ligações por mês</div>
+      <canvas id="chart-progressao-manual"></canvas>
+    </div>
+  </section>
+
+  <section>
     <div class="section-title">Valores a receber por técnico</div>
     <div class="card card-valores">
       <div class="card-title-row">
@@ -1112,6 +1151,14 @@
       <div class="chart-valores-wrap" id="chart-valores-wrap-manual">
         <canvas id="chart-valores-manual"></canvas>
       </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title-row">
+        <div class="card-title">Calendário de ligações</div>
+        <div class="valores-total" id="calendario-legenda-manual">Total da equipe por dia</div>
+      </div>
+      <p class="manual-aviso" style="margin-top:-4px;">Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
+      <div id="calendario-meses-manual"></div>
     </div>
   </section>
 
@@ -1136,7 +1183,7 @@
 
     <div class="card" style="margin-top:16px;">
       <div class="card-title">Média da semana por fiscal</div>
-      <p class="manual-aviso" style="margin-top:0;">Média de todos os lançamentos digitados em cada semana (segunda a domingo) do período selecionado — é o número usado pra preencher dias de FISCAL/LOC. VAZ/OUTRO PC pela média da equipe daquela semana.</p>
+      <p class="manual-aviso" style="margin-top:0;">Média de todos os lançamentos digitados em cada semana (segunda a domingo) do período selecionado — é o número usado pra preencher dias de FISCAL/LOC. VAZ/OUTRO PC pela média da equipe daquela semana. A coluna "Média usada" é editável: ajuste e saia do campo pra salvar; "Restaurar" volta pro valor calculado automaticamente.</p>
       <div class="calendario-scroll" style="max-height:320px;">
         <table class="tabela-manual" id="tabela-media-semanal"></table>
       </div>
@@ -1244,11 +1291,13 @@ function nomeExibicao(nome) {
 //   média < 650  -> R$ 0,00 / ligação (sem meta batida)
 //   média == 650 -> R$ 0,05 / ligação
 //   média > 650  -> R$ 0,10 / ligação
-// "Média" aqui NÃO é ligações ÷ dias que a pessoa trabalhou -- é ligações ÷
-// dias do PERÍODO FILTRADO (mesmo denominador pra todo mundo, ver
-// contarDiasPeriodo). "Dias trabalhados" continua existindo como métrica à
-// parte (quantos dias distintos a pessoa teve registro), só não entra mais
-// nessa conta.
+// "Média" = ligações ÷ DIAS TRABALHADOS DA PRÓPRIA PESSOA no período (não
+// mais os dias úteis do período inteiro pra todo mundo -- isso foi trocado
+// em 2026-09-18 pra bater com o relatório oficial de referência, que calcula
+// a meta de cada técnico como 650 × dias que ELE esteve alocado no PC. Ex.:
+// alguém que entrou no meio do período não é penalizado pelos dias em que
+// ainda nem estava no PC). Cada item de ranking carrega seu próprio `meta`
+// (650 × diasTrabalhados), usado no gráfico, na previsão e no Top 3.
 const LIGACOES_BASE_DIA = 650;
 
 function valorPorLigacaoMediaDia(mediaDia) {
@@ -1257,22 +1306,27 @@ function valorPorLigacaoMediaDia(mediaDia) {
   return 0;
 }
 
-// Dias ÚTEIS (seg-sex) do período filtrado -- base da média usada na meta
-// de produtividade, igual pra todo mundo (confirmado com o usuário em
-// 2026-09-09: dias corridos incluindo fim de semana zerava a bonificação de
-// todo mundo no período de teste 21/07-31/08).
-function contarDiasPeriodo(inicio, fim) {
-  if (!inicio || !fim) return 0;
-  let count = 0;
-  const d = new Date(inicio + "T00:00:00Z");
-  const fimDate = new Date(fim + "T00:00:00Z");
-  while (d <= fimDate) {
-    const diaSemana = d.getUTCDay(); // 0 = domingo, 6 = sábado
-    if (diaSemana !== 0 && diaSemana !== 6) count++;
-    d.setUTCDate(d.getUTCDate() + 1);
-  }
-  return count;
-}
+// Feriados nacionais + do Estado/Cidade de São Paulo (onde fica o PC 392),
+// usados só pra marcar visualmente o calendário de ligações -- datas fixas
+// conferidas pra 2026; se o período filtrado cair em outro ano, adicionar
+// as datas daquele ano aqui.
+const FERIADOS = new Set([
+  "2026-01-01", // Confraternização Universal
+  "2026-01-25", // Aniversário da cidade de São Paulo
+  "2026-02-16", // Carnaval (segunda)
+  "2026-02-17", // Carnaval (terça)
+  "2026-04-03", // Sexta-feira Santa
+  "2026-04-21", // Tiradentes
+  "2026-05-01", // Dia do Trabalho
+  "2026-06-04", // Corpus Christi
+  "2026-07-09", // Revolução Constitucionalista (Estado de SP)
+  "2026-09-07", // Independência do Brasil
+  "2026-10-12", // Nossa Senhora Aparecida
+  "2026-11-02", // Finados
+  "2026-11-15", // Proclamação da República
+  "2026-11-20", // Dia Nacional de Zumbi e da Consciência Negra
+  "2026-12-25", // Natal
+]);
 
 // Nomes distintos presentes num conjunto de registros, ordenados
 // alfabeticamente -- usado pra popular o filtro "Técnico" e pra saber quem
@@ -1327,7 +1381,7 @@ function computeResumo(registros) {
 // -- sem lista fixa de ativos/demitidos. Dado bruto do ArcGIS, sem correção,
 // override ou estimativa — só o rateio, que é a única forma de atribuir um
 // registro compartilhado a cada pessoa individualmente.
-function computeLigacoesPorTecnico(registros, diasPeriodo) {
+function computeLigacoesPorTecnico(registros) {
   const nomes = nomesDistintos(registros);
   const totals = {};
   nomes.forEach(nome => { totals[nome] = { ligacoesPorDia: {}, vistorias: 0 }; });
@@ -1357,13 +1411,15 @@ function computeLigacoesPorTecnico(registros, diasPeriodo) {
     const diasTrabalhados = dias.length;
     const ligacoesTotal = dias.reduce((soma, data) => soma + Math.round(tt.ligacoesPorDia[data]), 0);
     tt.ligacoes = ligacoesTotal;
-    const mediaDia = diasPeriodo > 0 ? tt.ligacoes / diasPeriodo : 0;
+    const meta = LIGACOES_BASE_DIA * diasTrabalhados;
+    const mediaDia = diasTrabalhados > 0 ? tt.ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return {
       nome,
       ligacoes: tt.ligacoes,
       vistorias: tt.vistorias,
       diasTrabalhados,
+      meta,
       mediaDia,
       valorPorLigacao,
       valorReceber: tt.ligacoes * valorPorLigacao,
@@ -1376,7 +1432,6 @@ function computeLigacoesPorTecnico(registros, diasPeriodo) {
 }
 
 // --- render ---
-let top3MensalChart = null;
 // Registro genérico de instâncias Chart.js por id de canvas -- usado pelos
 // gráficos que existem tanto na aba Automático quanto na aba Manual
 // (mesma função de render, canvas diferente por causa do sufixo).
@@ -1402,15 +1457,15 @@ function renderResumo(resumo) {
   document.getElementById("ind-media-ligacoes-dia").textContent = resumo.mediaLigacoesDia.toFixed(2).replace(".", ",");
 }
 
-function renderComparativoChart(rankingLista, diasPeriodo, sufixo) {
+function renderComparativoChart(rankingLista, sufixo) {
   sufixo = sufixo || "";
   const ordenado = [...rankingLista].sort((a, b) => b.ligacoes - a.ligacoes);
-  // Linha de corte = meta de ligações do período inteiro (650/dia útil x
-  // dias úteis do período filtrado), não a média da equipe -- confirmado
-  // com o usuário em 2026-09-09: é o alvo fixo que cada técnico precisaria
-  // bater no total do período pra alcançar a 1ª faixa da meta.
-  const meta = LIGACOES_BASE_DIA * diasPeriodo;
-  const maiorValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => i.ligacoes)) : 0;
+  // Cada técnico tem a própria meta (650 × dias que ELE trabalhou no
+  // período, ver comentário perto de LIGACOES_BASE_DIA) -- por isso não dá
+  // mais pra usar uma única linha de corte horizontal pra todo mundo. Em vez
+  // disso, desenha duas barras lado a lado por técnico: a meta individual
+  // (cor fixa) e o total batido (colorido pela faixa atingida).
+  const maiorValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => Math.max(i.ligacoes, i.meta))) : 0;
 
   const corPorTier = (valorPorLigacao) => {
     if (valorPorLigacao >= 0.10) return "#8C6D1F";
@@ -1424,10 +1479,17 @@ function renderComparativoChart(rankingLista, diasPeriodo, sufixo) {
       labels: ordenado.map(i => nomeExibicao(i.nome)),
       datasets: [
         {
-          label: "Ligações",
+          label: "Meta individual (650 × dias trabalhados)",
+          data: ordenado.map(i => Math.round(i.meta)),
+          backgroundColor: "#3f4a34",
+          maxBarThickness: 26,
+          datalabels: { display: false },
+        },
+        {
+          label: "Total de ligações",
           data: ordenado.map(i => Math.round(i.ligacoes)),
           backgroundColor: ordenado.map(i => corPorTier(i.valorPorLigacao)),
-          maxBarThickness: 46,
+          maxBarThickness: 26,
           datalabels: {
             display: true,
             anchor: "end",
@@ -1449,10 +1511,12 @@ function renderComparativoChart(rankingLista, diasPeriodo, sufixo) {
           backgroundColor: "#1a1a1a",
           padding: 8,
           callbacks: {
-            label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações`,
+            label: (ctx) => `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)}`,
             afterLabel: (ctx) => {
+              if (ctx.datasetIndex !== 1) return [];
               const item = ordenado[ctx.dataIndex];
               return [
+                `Dias trabalhados: ${NUM.format(item.diasTrabalhados)}`,
                 `Média/dia: ${NUM.format(Math.round(item.mediaDia))}`,
                 `Valor/ligação: ${BRL.format(item.valorPorLigacao)}`,
               ];
@@ -1460,18 +1524,89 @@ function renderComparativoChart(rankingLista, diasPeriodo, sufixo) {
           },
         },
         datalabels: { display: false },
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: "#1a1a1a", font: { size: 11, weight: "600" } },
+        },
+        y: {
+          beginAtZero: true,
+          suggestedMax: maiorValor > 0 ? maiorValor * 1.25 : 1,
+          grid: { color: "#e6e5df", drawTicks: false },
+          ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
+        },
+      },
+    },
+  });
+}
+
+// Gráfico por média -- em vez do total acumulado no período (que cresce
+// junto com os dias trabalhados), mostra ligações/dia de cada um, pra
+// comparar ritmo de produtividade independente de quantos dias cada
+// técnico esteve alocado no PC. Linha de referência fixa em 650/dia
+// (diferente do gráfico de total, aqui a meta É a mesma pra todo mundo
+// porque já é uma taxa diária, não um total acumulado).
+function renderMediaDiariaChart(rankingLista, sufixo) {
+  sufixo = sufixo || "";
+  const ordenado = [...rankingLista].filter(i => i.diasTrabalhados > 0).sort((a, b) => b.mediaDia - a.mediaDia);
+
+  const corPorTier = (valorPorLigacao) => {
+    if (valorPorLigacao >= 0.10) return "#8C6D1F";
+    if (valorPorLigacao >= 0.05) return "#5B6B4A";
+    return "#b9b8b2";
+  };
+
+  const maiorValor = Math.max(LIGACOES_BASE_DIA, ...ordenado.map(i => i.mediaDia), 1);
+
+  renderizarChart("chart-media-diaria" + sufixo, {
+    type: "bar",
+    data: {
+      labels: ordenado.map(i => nomeExibicao(i.nome)),
+      datasets: [
+        {
+          label: "Média de ligações/dia",
+          data: ordenado.map(i => Math.round(i.mediaDia)),
+          backgroundColor: ordenado.map(i => corPorTier(i.valorPorLigacao)),
+          maxBarThickness: 40,
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            color: "#1a1a1a",
+            font: { size: 11, weight: "700" },
+            formatter: (v) => NUM.format(v),
+          },
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { top: 26 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: "#1a1a1a",
+          padding: 8,
+          callbacks: {
+            label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações/dia`,
+            afterLabel: (ctx) => `Dias trabalhados: ${NUM.format(ordenado[ctx.dataIndex].diasTrabalhados)}`,
+          },
+        },
+        datalabels: { display: false },
         annotation: {
           annotations: {
             meta: {
               type: "line",
-              yMin: meta,
-              yMax: meta,
+              yMin: LIGACOES_BASE_DIA,
+              yMax: LIGACOES_BASE_DIA,
               borderColor: "#898781",
               borderWidth: 1.5,
               borderDash: [5, 4],
               label: {
-                display: meta > 0,
-                content: `Meta do período: ${NUM.format(Math.round(meta))} (${LIGACOES_BASE_DIA}/dia útil × ${diasPeriodo} dias)`,
+                display: true,
+                content: `Meta: ${LIGACOES_BASE_DIA}/dia`,
                 position: "end",
                 yAdjust: -12,
                 font: { size: 10, weight: "600" },
@@ -1490,7 +1625,7 @@ function renderComparativoChart(rankingLista, diasPeriodo, sufixo) {
         },
         y: {
           beginAtZero: true,
-          suggestedMax: Math.max(maiorValor, meta) > 0 ? Math.max(maiorValor, meta) * 1.25 : 1,
+          suggestedMax: maiorValor * 1.25,
           grid: { color: "#e6e5df", drawTicks: false },
           ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
         },
@@ -1549,11 +1684,10 @@ function renderInsights(rankingLista, sufixo) {
   });
 }
 
-// Previsão de quanto falta pra cada técnico bater a meta do período
-// filtrado -- meta = LIGACOES_BASE_DIA x dias úteis do período selecionado
-// (a mesma meta usada na linha de referência do gráfico "Ligações no
-// período, por técnico"), então muda junto com o filtro de período/mês.
-function renderPrevisaoMeta(rankingLista, meta, sufixo) {
+// Previsão de quanto falta pra cada técnico bater a PRÓPRIA meta (650 ×
+// dias que ele trabalhou no período selecionado) -- cada um tem uma meta
+// diferente, dependendo de quantos dias esteve alocado no PC.
+function renderPrevisaoMeta(rankingLista, sufixo) {
   const container = document.getElementById("lista-previsao-meta" + (sufixo || ""));
   container.innerHTML = "";
 
@@ -1564,16 +1698,16 @@ function renderPrevisaoMeta(rankingLista, meta, sufixo) {
   }
 
   // Mais perto de bater a meta primeiro (quem já bateu, no topo).
-  const ordenado = [...comAtividade].sort((a, b) => (meta - a.ligacoes) - (meta - b.ligacoes));
+  const ordenado = [...comAtividade].sort((a, b) => (a.meta - a.ligacoes) - (b.meta - b.ligacoes));
 
   ordenado.forEach(item => {
-    const faltam = meta - item.ligacoes;
+    const faltam = item.meta - item.ligacoes;
     const div = document.createElement("div");
     div.className = "insight-item";
     if (faltam <= 0) {
-      div.innerHTML = `<span class="insight-icon">✅</span><span><strong>${nomeExibicao(item.nome)}</strong> já bateu a meta do período (excedente de ${NUM.format(Math.round(-faltam))} ligações).</span>`;
+      div.innerHTML = `<span class="insight-icon">✅</span><span><strong>${nomeExibicao(item.nome)}</strong> superou a meta de ${NUM.format(Math.round(item.meta))} (650×${item.diasTrabalhados}dias) — excedente de ${NUM.format(Math.round(-faltam))} ligações.</span>`;
     } else {
-      div.innerHTML = `<span class="insight-icon">🎯</span><span><strong>${nomeExibicao(item.nome)}</strong> precisa de mais <strong>${NUM.format(Math.round(faltam))}</strong> ligações pra bater a meta (${NUM.format(Math.round(item.ligacoes))} de ${NUM.format(Math.round(meta))}).</span>`;
+      div.innerHTML = `<span class="insight-icon">🎯</span><span><strong>${nomeExibicao(item.nome)}</strong> precisa de mais <strong>${NUM.format(Math.round(faltam))}</strong> ligações pra bater a meta de ${NUM.format(Math.round(item.meta))} (650×${item.diasTrabalhados}dias). Produtividade atual: ${NUM.format(Math.round(item.ligacoes))}.</span>`;
     }
     container.appendChild(div);
   });
@@ -1611,12 +1745,8 @@ function computeProgressaoMensal(registros, tecnico) {
   return Object.keys(porMes).sort().map(mes => ({ mes, ...porMes[mes] }));
 }
 
-let progressaoChart = null;
-
-function renderProgressaoChart(progressao) {
-  const canvas = document.getElementById("chart-progressao");
-  if (progressaoChart) progressaoChart.destroy();
-  progressaoChart = new Chart(canvas.getContext("2d"), {
+function renderProgressaoChart(progressao, sufixo) {
+  renderizarChart("chart-progressao" + (sufixo || ""), {
     type: "bar",
     data: {
       labels: progressao.map(p => rotuloMes(p.mes)),
@@ -1694,8 +1824,8 @@ function renderTop3(rankingLista, sufixo) {
       <div class="top3-valor">${BRL.format(item.valorReceber)}</div>
       <div class="indic-grid">
         <div class="indic-row"><span class="indic-label">Total de ligações</span><span class="indic-value">${NUM.format(Math.round(item.ligacoes))}</span></div>
-        <div class="indic-row"><span class="indic-label">Média de ligações / dia</span><span class="indic-value">${NUM.format(Math.round(item.mediaDia))}</span></div>
-        <div class="indic-row"><span class="indic-label">Dias trabalhados</span><span class="indic-value">${NUM.format(item.diasTrabalhados)}</span></div>
+        <div class="indic-row"><span class="indic-label">Meta de ligações (650 × dias trabalhados)</span><span class="indic-value">${NUM.format(Math.round(item.meta))}</span></div>
+        <div class="indic-row"><span class="indic-label">Dias trabalhados no DV</span><span class="indic-value">${NUM.format(item.diasTrabalhados)}</span></div>
       </div>
     `;
     container.appendChild(div);
@@ -1730,10 +1860,8 @@ function computeEvolucaoMensalTop3(registros, nomesTop3) {
 
 const CORES_TOP3 = ["#8C6D1F", "#5B6B4A", "#9fb08c"];
 
-function renderTop3MensalChart(evolucao) {
-  const canvas = document.getElementById("chart-top3-mensal");
-  if (top3MensalChart) top3MensalChart.destroy();
-  top3MensalChart = new Chart(canvas.getContext("2d"), {
+function renderTop3MensalChart(evolucao, sufixo) {
+  renderizarChart("chart-top3-mensal" + (sufixo || ""), {
     type: "bar",
     data: {
       labels: evolucao.meses.map(rotuloMes),
@@ -1864,12 +1992,13 @@ function computeCalendarioMensal(registros, tecnico) {
 
 const DIAS_SEMANA_ABREV = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-function renderCalendarioMeses(porDia, tecnico) {
-  document.getElementById("calendario-legenda").textContent = tecnico
+function renderCalendarioMeses(porDia, tecnico, sufixo) {
+  sufixo = sufixo || "";
+  document.getElementById("calendario-legenda" + sufixo).textContent = tecnico
     ? `Ligações de ${nomeExibicao(tecnico)} por dia`
     : "Total da equipe por dia";
 
-  const container = document.getElementById("calendario-meses");
+  const container = document.getElementById("calendario-meses" + sufixo);
   container.innerHTML = "";
 
   const meses = [...new Set(Object.keys(porDia).map(chaveMes))].sort();
@@ -1891,13 +2020,14 @@ function renderCalendarioMeses(porDia, tecnico) {
       const valor = porDia[iso] || 0;
       totalMes += valor;
       const diaSemana = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
-      celulas.push({ dia: d, valor, fimSemana: diaSemana === 0 || diaSemana === 6 });
+      celulas.push({ dia: d, valor, fimSemana: diaSemana === 0 || diaSemana === 6, feriado: FERIADOS.has(iso) });
     }
 
     const diasHtml = celulas.map(cel => {
       if (!cel) return `<div class="mes-calendario-dia fora-mes"></div>`;
       const classes = ["mes-calendario-dia"];
       if (cel.fimSemana) classes.push("fim-semana");
+      if (cel.feriado) classes.push("feriado");
       if (cel.valor > 0) {
         classes.push("com-dado");
         // O tier de cor só faz sentido comparando com a meta de 650/dia
@@ -1906,7 +2036,8 @@ function renderCalendarioMeses(porDia, tecnico) {
         if (tecnico && cel.valor > LIGACOES_BASE_DIA) classes.push("tier-2");
       }
       const valorHtml = cel.valor > 0 ? `<span class="dia-valor">${NUM.format(Math.round(cel.valor))}</span>` : "";
-      return `<div class="${classes.join(" ")}"><span class="dia-num">${cel.dia}</span>${valorHtml}</div>`;
+      const tituloFeriado = cel.feriado ? ` title="Feriado"` : "";
+      return `<div class="${classes.join(" ")}"${tituloFeriado}><span class="dia-num">${cel.dia}</span>${valorHtml}</div>`;
     }).join("");
 
     const bloco = document.createElement("div");
@@ -2073,16 +2204,16 @@ function renderTudo() {
 
   // Ranking/top3/valores respeitam período + mês + técnico -- por isso usam
   // registrosResumo (já filtrado pelo técnico selecionado), não
-  // registrosPeriodo bruto. A média/meta usa os dias do período filtrado
-  // (mesmo denominador pra todo mundo), não os dias que cada um trabalhou.
-  const diasPeriodo = contarDiasPeriodo(inicio, fim);
-  const rankingLista = computeLigacoesPorTecnico(registrosResumo, diasPeriodo);
+  // registrosPeriodo bruto. A média/meta de cada um usa os PRÓPRIOS dias
+  // trabalhados (ver comentário perto de LIGACOES_BASE_DIA).
+  const rankingLista = computeLigacoesPorTecnico(registrosResumo);
 
   const resumo = computeResumo(registrosResumo);
   renderResumo(resumo);
-  renderComparativoChart(rankingLista, diasPeriodo);
+  renderComparativoChart(rankingLista);
   renderInsights(rankingLista);
-  renderPrevisaoMeta(rankingLista, LIGACOES_BASE_DIA * diasPeriodo);
+  renderPrevisaoMeta(rankingLista);
+  renderMediaDiariaChart(rankingLista);
   renderProgressaoChart(computeProgressaoMensal(registrosPeriodo, tecnico));
 
   const top3 = renderTop3(rankingLista);
@@ -2188,9 +2319,11 @@ function aplicarCorrecoesVerificadas(registros) {
 // =====================================================================
 let DADOS_MANUAL = {};   // { "AAAA-MM-DD": { "Nome Técnico": ligacoes } }
 let NOMES_MANUAL = [];   // ["Nome Técnico", ...]
+let MEDIAS_SEMANAIS_MANUAIS = {}; // { "AAAA-MM-DD" (segunda da semana): valor editado à mão }
 
 const CHAVE_DADOS_MANUAL = "pc392_manual_dados_v1";
 const CHAVE_NOMES_MANUAL = "pc392_manual_nomes_v1";
+const CHAVE_MEDIAS_SEMANAIS = "pc392_medias_semanais_v1";
 
 function carregarDadosManuais() {
   try {
@@ -2199,6 +2332,13 @@ function carregarDadosManuais() {
   try {
     NOMES_MANUAL = JSON.parse(localStorage.getItem(CHAVE_NOMES_MANUAL)) || [];
   } catch { NOMES_MANUAL = []; }
+  try {
+    MEDIAS_SEMANAIS_MANUAIS = JSON.parse(localStorage.getItem(CHAVE_MEDIAS_SEMANAIS)) || {};
+  } catch { MEDIAS_SEMANAIS_MANUAIS = {}; }
+}
+
+function salvarMediasSemanais() {
+  try { localStorage.setItem(CHAVE_MEDIAS_SEMANAIS, JSON.stringify(MEDIAS_SEMANAIS_MANUAIS)); } catch {}
 }
 
 function salvarDadosManuais() {
@@ -2224,7 +2364,7 @@ function inicializarNomesManuais() {
 // percentual) -- por isso dá pra reusar renderComparativoChart,
 // renderInsights, renderPrevisaoMeta, renderTop3 e renderValoresChart sem
 // nenhuma mudança neles, só passando o resultado desta função no lugar.
-function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim, diasPeriodo) {
+function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim) {
   const lista = nomes.map(nome => {
     let ligacoes = 0;
     let diasComDado = 0;
@@ -2233,13 +2373,15 @@ function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim, diasPeriodo)
       const valor = Number(dados[data] && dados[data][nome]) || 0;
       if (valor > 0) { ligacoes += valor; diasComDado++; }
     });
-    const mediaDia = diasPeriodo > 0 ? ligacoes / diasPeriodo : 0;
+    const meta = LIGACOES_BASE_DIA * diasComDado;
+    const mediaDia = diasComDado > 0 ? ligacoes / diasComDado : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return {
       nome,
       ligacoes,
       vistorias: diasComDado,
       diasTrabalhados: diasComDado,
+      meta,
       mediaDia,
       valorPorLigacao,
       valorReceber: ligacoes * valorPorLigacao,
@@ -2259,7 +2401,7 @@ function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim, diasPeriodo)
 // (KPIs, gráfico, insights, previsão, Top 3, valores) -- a tabela de
 // lançamento em si continua mostrando só o digitado, pra não confundir a
 // edição.
-function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro, diasPeriodo) {
+function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
   const registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
   const registrosFiltrados = tecnicoFiltro
     ? registrosPeriodo.filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
@@ -2299,13 +2441,15 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro, diasPeri
     const dias = Object.keys(t.ligacoesPorDia);
     const ligacoes = dias.reduce((soma, d) => soma + Math.round(t.ligacoesPorDia[d]), 0);
     const diasTrabalhados = t.dias.size;
-    const mediaDia = diasPeriodo > 0 ? ligacoes / diasPeriodo : 0;
+    const meta = LIGACOES_BASE_DIA * diasTrabalhados;
+    const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return {
       nome,
       ligacoes,
       vistorias: t.vistorias,
       diasTrabalhados,
+      meta,
       mediaDia,
       valorPorLigacao,
       valorReceber: ligacoes * valorPorLigacao,
@@ -2315,6 +2459,87 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro, diasPeri
   const max = lista.length > 0 ? lista[0].ligacoes : 0;
   lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
   return lista;
+}
+
+// Junta REGISTROS (rateado) + DADOS_MANUAL por dia/pessoa -- base comum das
+// 3 funções "combinado" abaixo (progressão mensal, evolução mensal do Top 3
+// e calendário da aba Manual), mesma lógica de rateio/filtro de
+// computeLigacoesPorTecnicoCombinado, só devolvendo por dia em vez de já
+// somado no período inteiro.
+function ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro) {
+  const registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
+  const registrosFiltrados = tecnicoFiltro
+    ? registrosPeriodo.filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
+    : registrosPeriodo;
+
+  const porDia = {}; // "AAAA-MM-DD" -> { "Nome Técnico": valor }
+  function add(data, nome, valor) {
+    if (!porDia[data]) porDia[data] = {};
+    porDia[data][nome] = (porDia[data][nome] || 0) + valor;
+  }
+
+  registrosFiltrados.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    r.participantes.forEach(p => add(r.data, normalizarNome(p), r.ligacoes / n));
+  });
+
+  Object.keys(DADOS_MANUAL).forEach(data => {
+    if (data < inicio || data > fim) return;
+    Object.entries(DADOS_MANUAL[data] || {}).forEach(([nome, valor]) => {
+      const v = Number(valor) || 0;
+      if (v <= 0) return;
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
+      add(data, nome, v);
+    });
+  });
+
+  return porDia;
+}
+
+// Progressão mensal combinada -- arredonda por pessoa/dia antes de somar
+// (mesmo critério do "Total de ligações" combinado), pra bater com o KPI
+// principal quando somado.
+function computeProgressaoMensalCombinado(inicio, fim, tecnicoFiltro) {
+  const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro);
+  const porMes = {};
+  Object.keys(porDia).forEach(data => {
+    const mes = chaveMes(data);
+    const totalDia = Object.values(porDia[data]).reduce((s, v) => s + Math.round(v), 0);
+    porMes[mes] = (porMes[mes] || 0) + totalDia;
+  });
+  return Object.keys(porMes).sort().map(mes => ({ mes, ligacoes: porMes[mes] }));
+}
+
+// Evolução mensal do Top 3 combinada -- mesma ideia, só pros nomes do Top 3.
+function computeEvolucaoMensalTop3Combinado(inicio, fim, tecnicoFiltro, nomesTop3) {
+  const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro);
+  const porMes = {}; // mes -> { nome -> total }
+  Object.keys(porDia).forEach(data => {
+    const mes = chaveMes(data);
+    if (!porMes[mes]) porMes[mes] = {};
+    Object.entries(porDia[data]).forEach(([nome, valor]) => {
+      if (!nomesTop3.includes(nome)) return;
+      porMes[mes][nome] = (porMes[mes][nome] || 0) + Math.round(valor);
+    });
+  });
+  const meses = Object.keys(porMes).sort();
+  const series = nomesTop3.map(nome => ({
+    nome,
+    valores: meses.map(mes => (porMes[mes] && porMes[mes][nome]) || 0),
+  }));
+  return { meses, series };
+}
+
+// Calendário combinado -- não arredonda por pessoa/dia aqui (só na hora de
+// exibir a célula), igual computeCalendarioMensal (automático) já fazia.
+function computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro) {
+  const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro);
+  const porDiaTotal = {};
+  Object.keys(porDia).forEach(data => {
+    porDiaTotal[data] = Object.values(porDia[data]).reduce((s, v) => s + v, 0);
+  });
+  return porDiaTotal;
 }
 
 // rankingLista aqui é o COMBINADO (automático + manual) -- é o que vira o
@@ -2400,14 +2625,44 @@ function renderTabelaMediaSemanal(inicio, fim) {
     return;
   }
 
-  const thead = `<thead><tr><th class="col-data">Semana</th><th>Média</th><th>Amostras</th></tr></thead>`;
+  const thead = `<thead><tr><th class="col-data">Semana</th><th>Média calculada</th><th>Amostras</th><th>Média usada (editável)</th><th></th></tr></thead>`;
   const linhas = semanas.map(s => {
     const [, m1, d1] = s.semana.split("-");
     const [, m2, d2] = s.fim.split("-");
-    return `<tr><td class="col-data">${d1}/${m1} – ${d2}/${m2}</td><td>${NUM.format(Math.round(s.media * 100) / 100)}</td><td>${NUM.format(s.amostras)}</td></tr>`;
+    const temOverride = Object.prototype.hasOwnProperty.call(MEDIAS_SEMANAIS_MANUAIS, s.semana);
+    const valorUsado = temOverride ? MEDIAS_SEMANAIS_MANUAIS[s.semana] : Math.round(s.media * 100) / 100;
+    return `<tr>
+      <td class="col-data">${d1}/${m1} – ${d2}/${m2}</td>
+      <td>${NUM.format(Math.round(s.media * 100) / 100)}</td>
+      <td>${NUM.format(s.amostras)}</td>
+      <td><input type="number" step="0.01" min="0" class="celula-manual media-semanal-input" data-semana="${s.semana}" value="${valorUsado}"></td>
+      <td>${temOverride ? `<button type="button" class="btn-manual btn-manual-secundario media-semanal-resetar" data-semana="${s.semana}" title="Voltar pro valor calculado">Restaurar</button>` : ""}</td>
+    </tr>`;
   }).join("");
 
   tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+
+  tabela.querySelectorAll(".media-semanal-input").forEach(input => {
+    input.addEventListener("change", (e) => {
+      const semana = e.target.dataset.semana;
+      const valor = parseFloat(e.target.value);
+      if (!valor || valor <= 0) {
+        delete MEDIAS_SEMANAIS_MANUAIS[semana];
+      } else {
+        MEDIAS_SEMANAIS_MANUAIS[semana] = valor;
+      }
+      salvarMediasSemanais();
+      renderTabelaMediaSemanal(inicio, fim);
+    });
+  });
+
+  tabela.querySelectorAll(".media-semanal-resetar").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      delete MEDIAS_SEMANAIS_MANUAIS[e.currentTarget.dataset.semana];
+      salvarMediasSemanais();
+      renderTabelaMediaSemanal(inicio, fim);
+    });
+  });
 }
 
 function renderTabelaManual(inicio, fim) {
@@ -2473,24 +2728,28 @@ function renderManualView() {
   const fim = document.getElementById("filtro-data-fim").value;
   const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
   if (!inicio || !fim) return;
-  const diasPeriodo = contarDiasPeriodo(inicio, fim);
 
   // Combinado = Automático (ArcGIS) + Manual somados por pessoa/dia --
   // é o número "de verdade" (ex.: Oldair = ligações automáticas dele +
   // ligações que digitamos manualmente pra ele). Confirmado com o usuário
   // em 2026-09-09. A tabela de lançamento e o card de média semanal
   // continuam mostrando só o digitado (facilita conferir/editar).
-  const rankingCombinado = computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro, diasPeriodo);
+  const rankingCombinado = computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro);
   const registrosAutomaticoFiltrado = tecnicoFiltro
     ? filtrarPorData(REGISTROS, inicio, fim).filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
     : filtrarPorData(REGISTROS, inicio, fim);
 
   renderResumoManual(rankingCombinado, DADOS_MANUAL, registrosAutomaticoFiltrado, inicio, fim);
-  renderComparativoChart(rankingCombinado, diasPeriodo, "-manual");
+  renderComparativoChart(rankingCombinado, "-manual");
   renderInsights(rankingCombinado, "-manual");
-  renderPrevisaoMeta(rankingCombinado, LIGACOES_BASE_DIA * diasPeriodo, "-manual");
-  renderTop3(rankingCombinado, "-manual");
+  renderPrevisaoMeta(rankingCombinado, "-manual");
+  renderMediaDiariaChart(rankingCombinado, "-manual");
+
+  const top3Manual = renderTop3(rankingCombinado, "-manual");
+  renderTop3MensalChart(computeEvolucaoMensalTop3Combinado(inicio, fim, tecnicoFiltro, top3Manual.map(t => t.nome)), "-manual");
+  renderProgressaoChart(computeProgressaoMensalCombinado(inicio, fim, tecnicoFiltro), "-manual");
   renderValoresChart(rankingCombinado, "-manual");
+  renderCalendarioMeses(computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro), tecnicoFiltro, "-manual");
   renderTabelaManual(inicio, fim);
   renderTabelaMediaSemanal(inicio, fim);
 }
@@ -2883,14 +3142,13 @@ function renderGerencialView() {
   const fim = document.getElementById("filtro-data-fim").value;
   const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
   if (!inicio || !fim) return;
-  const diasPeriodo = contarDiasPeriodo(inicio, fim);
 
   const registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
   const registrosFiltrados = tecnicoFiltro
     ? registrosPeriodo.filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
     : registrosPeriodo;
-  const rankingAuto = computeLigacoesPorTecnico(registrosFiltrados, diasPeriodo);
-  const rankingManual = computeLigacoesPorTecnicoManual(DADOS_MANUAL, NOMES_MANUAL, inicio, fim, diasPeriodo);
+  const rankingAuto = computeLigacoesPorTecnico(registrosFiltrados);
+  const rankingManual = computeLigacoesPorTecnicoManual(DADOS_MANUAL, NOMES_MANUAL, inicio, fim);
 
   const nomes = [...new Set([...rankingAuto.map(i => i.nome), ...rankingManual.map(i => i.nome)])]
     .sort((a, b) => a.localeCompare(b, "pt-BR"));
