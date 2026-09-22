@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T11:23:06Z",
+  "gerado_em": "2026-09-22T10:31:49Z",
   "registros": [
     {
       "id": 1,
@@ -10128,6 +10128,23 @@
         "Rairan Nascimento",
         "Gisclayton Arruda",
         "Carlos Alberto"
+      ]
+    },
+    {
+      "id": 1116,
+      "data": "2026-09-21",
+      "ligacoes": 8.0,
+      "participantes": [
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1117,
+      "data": "2026-09-21",
+      "ligacoes": 1383.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa",
+        "Gisclayton Arruda"
       ]
     }
   ]
