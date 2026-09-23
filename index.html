@@ -1374,7 +1374,7 @@
           <button type="button" id="colaborador-add" class="btn-manual">+ Colaborador</button>
         </div>
       </div>
-      <p class="manual-aviso">Marque os dias em que cada colaborador realmente trabalhou no período selecionado no filtro do topo. A meta (650 × dias trabalhados) e o valor a receber passam a considerar só os dias marcados aqui -- útil pra corrigir dias sem ligação em que a pessoa trabalhou, ou dias com ligação em que ela não deveria contar (férias, afastamento, desligamento etc.). Por padrão, um dia já vem marcado quando existe ligação registrada (automático ou manual) pra essa pessoa naquele dia. Dias com borda vermelha e • no número são feriados. Fica salvo neste navegador.</p>
+      <p class="manual-aviso">Marque os dias em que cada colaborador realmente trabalhou no período selecionado no filtro do topo. A meta (650 × dias trabalhados) e o valor a receber passam a considerar só os dias marcados aqui -- útil pra corrigir dias sem ligação em que a pessoa trabalhou, ou dias com ligação em que ela não deveria contar (férias, afastamento, desligamento etc.). Por padrão, todos os dias úteis (segunda a sexta, sem feriado) já vêm marcados como trabalhados, e também qualquer dia com ligação registrada; clique num dia pra desmarcar e ele deixa de contar. Dias com borda vermelha e • no número são feriados. Fica salvo neste navegador.</p>
       <div id="lista-colaboradores" class="lista-colaboradores-chips"></div>
       <div class="filtro-presenca-colaborador">
         <label for="presenca-colaborador-select">Calendário de</label>
@@ -2118,7 +2118,9 @@ function valorPorMes(porDiaPorPessoa) {
   Object.keys(porMesPessoa).forEach(mes => {
     let total = 0;
     Object.entries(porMesPessoa[mes]).forEach(([nome, t]) => {
-      const diasTrab = diasTrabalhadosComPresenca(nome, t.dias, `${mes}-01`, `${mes}-31`).size;
+      const [anoMes, numMes] = mes.split("-").map(Number);
+      const ultimoDia = `${mes}-${String(new Date(Date.UTC(anoMes, numMes, 0)).getUTCDate()).padStart(2, "0")}`;
+      const diasTrab = diasTrabalhadosComPresenca(nome, t.dias, `${mes}-01`, ultimoDia).size;
       const media = diasTrab > 0 ? t.ligacoes / diasTrab : 0;
       total += t.ligacoes * valorPorLigacaoMediaDia(media);
     });
@@ -2981,13 +2983,43 @@ function presencaOverride(iso, nome) {
   return porDia[nome];
 }
 
-// Aplica os overrides de PRESENCA_MANUAL sobre um conjunto de dias já
-// detectados automaticamente (por ligação) -- usada por toda meta (650 ×
-// dias trabalhados) do painel, nas 3 abas. Sem overrides no período, o
-// resultado é idêntico ao comportamento anterior (dias só contam por ter
-// ligação registrada).
+// Padrão de presença (confirmado com o usuário em 2026-09-23): TODO dia útil
+// (segunda a sexta, sem feriado) até hoje já vem marcado como trabalhado, e
+// qualquer dia com ligação registrada também (mesmo fim de semana/feriado).
+// Só deixa de contar quem for desmarcado à mão no calendário de presença.
+function diaUtilPadrao(iso) {
+  const dow = new Date(iso + "T00:00:00Z").getUTCDay();
+  return dow >= 1 && dow <= 5 && !FERIADOS.has(iso);
+}
+
+function hojeIso() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+// Dias úteis padrão entre inicio e fim (limitado a hoje -- dia futuro não
+// conta como trabalhado).
+function diasUteisPadrao(inicio, fim) {
+  const ini = inicio || PERIODO_INICIO_PADRAO;
+  const limite = fim && fim < hojeIso() ? fim : hojeIso();
+  const dias = [];
+  const d = new Date(ini + "T00:00:00Z");
+  const fimDate = new Date(limite + "T00:00:00Z");
+  if (isNaN(d) || isNaN(fimDate)) return dias;
+  while (d <= fimDate) {
+    const iso = d.toISOString().slice(0, 10);
+    if (diaUtilPadrao(iso)) dias.push(iso);
+    d.setUTCDate(d.getUTCDate() + 1);
+  }
+  return dias;
+}
+
+// Dias trabalhados de uma pessoa no período: dias com ligação + todos os
+// dias úteis (padrão "tudo marcado"), depois aplica os overrides de
+// PRESENCA_MANUAL (desmarcar tira o dia, marcar põe) -- usada por toda meta
+// (650 × dias trabalhados) do painel, nas 3 abas.
 function diasTrabalhadosComPresenca(nome, diasAutoIso, inicio, fim) {
   const dias = new Set(diasAutoIso);
+  diasUteisPadrao(inicio, fim).forEach(iso => dias.add(iso));
   Object.keys(PRESENCA_MANUAL).forEach(iso => {
     if (iso < inicio || iso > fim) return;
     const marcado = presencaOverride(iso, nome);
@@ -3837,7 +3869,8 @@ function renderCalendarioPresenca(inicio, fim) {
   const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, "");
   const efetivo = (iso, nome) => {
     const override = presencaOverride(iso, nome);
-    return override !== null ? override : !!(porDia[iso] && porDia[iso][nome] > 0);
+    if (override !== null) return override;
+    return !!(porDia[iso] && porDia[iso][nome] > 0) || (iso <= hojeIso() && diaUtilPadrao(iso));
   };
 
   container.innerHTML = "";
