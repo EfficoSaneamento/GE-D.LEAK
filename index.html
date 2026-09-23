@@ -911,6 +911,40 @@
   .rdc-doc-rodape td:first-child { width: 40%; }
   .rdc-doc-rodape .rdc-rodape-label { font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
   .rdc-doc-rodape .rdc-rodape-valor { text-align: right; font-weight: 600; }
+  .modal-fundo {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+  }
+  .modal-caixa {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px 22px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+  }
+  .modal-texto { margin: 0 0 16px; font-size: 0.88rem; line-height: 1.5; color: var(--text-dark); }
+  .modal-acoes { display: flex; justify-content: flex-end; gap: 8px; }
+  .aviso-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    max-width: 90vw;
+    z-index: 1001;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+  }
   .rdc-doc-rodape .rdc-rodape-destaque {
     font-weight: 700;
     color: var(--header-bg);
@@ -1397,6 +1431,38 @@ const PERIODO_INICIO_PADRAO = "2026-01-01";
 
 const NUM = new Intl.NumberFormat("pt-BR");
 const BRL = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
+
+// confirm()/alert() nativos não funcionam quando a página roda dentro de um
+// frame sem permissão de modal (ex.: incorporada em outro site) -- o
+// confirm() devolve "não" sem mostrar nada e a ação (ex.: remover
+// colaborador) nunca acontece. Por isso a confirmação e os avisos são
+// desenhados dentro da própria página.
+function confirmarNaPagina(mensagem, textoConfirmar) {
+  return new Promise(resolve => {
+    const fundo = document.createElement("div");
+    fundo.className = "modal-fundo";
+    fundo.innerHTML = `<div class="modal-caixa" role="dialog" aria-modal="true"><p class="modal-texto"></p><div class="modal-acoes"><button type="button" class="btn-manual btn-manual-secundario" data-r="0">Cancelar</button><button type="button" class="btn-manual" data-r="1"></button></div></div>`;
+    fundo.querySelector(".modal-texto").textContent = mensagem;
+    const botaoOk = fundo.querySelector('[data-r="1"]');
+    botaoOk.textContent = textoConfirmar || "Remover";
+    const fechar = (resposta) => { fundo.remove(); resolve(resposta); };
+    fundo.addEventListener("click", (e) => {
+      if (e.target === fundo) return fechar(false);
+      const botao = e.target.closest("button[data-r]");
+      if (botao) fechar(botao.dataset.r === "1");
+    });
+    document.body.appendChild(fundo);
+    botaoOk.focus();
+  });
+}
+
+function avisar(mensagem) {
+  const aviso = document.createElement("div");
+  aviso.className = "aviso-toast";
+  aviso.textContent = mensagem;
+  document.body.appendChild(aviso);
+  setTimeout(() => aviso.remove(), 5000);
+}
 
 Chart.register(ChartDataLabels);
 Chart.defaults.set("plugins.datalabels", { display: false });
@@ -3224,9 +3290,9 @@ function renderTabelaManual(inicio, fim) {
   });
 
   tabela.querySelectorAll("button.remover-tecnico-manual").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       const nome = e.currentTarget.dataset.nome;
-      if (!confirm(`Remover "${nomeExibicao(nome)}" da lista de lançamento? Os valores já digitados pra essa pessoa continuam salvos, só param de aparecer.`)) return;
+      if (!await confirmarNaPagina(`Remover "${nomeExibicao(nome)}" da lista de lançamento? Os valores já digitados pra essa pessoa continuam salvos, só param de aparecer.`)) return;
       NOMES_MANUAL = NOMES_MANUAL.filter(n => n !== nome);
       salvarNomesManuais();
       renderGerencialView();
@@ -3270,7 +3336,7 @@ function configurarAcoesManuais() {
     const nome = input.value.trim();
     if (!nome) return;
     if (NOMES_MANUAL.some(n => n.toLowerCase() === nome.toLowerCase())) {
-      alert("Esse técnico já está na lista.");
+      avisar("Esse técnico já está na lista.");
       return;
     }
     NOMES_MANUAL.push(nome);
@@ -3322,9 +3388,9 @@ function configurarAcoesManuais() {
         salvarNomesManuais();
         salvarDadosManuais();
         renderGerencialView();
-        alert("Dados importados e mesclados com sucesso.");
+        avisar("Dados importados e mesclados com sucesso.");
       } catch (err) {
-        alert("Arquivo inválido: " + err.message);
+        avisar("Arquivo inválido: " + err.message);
       }
     };
     reader.readAsText(file);
@@ -3490,15 +3556,15 @@ function configurarAcoesRDC() {
     renderTabelaRDC();
     e.target.value = "";
     if (falhas.length > 0) {
-      alert(`${ok} RDC(s) importado(s). ${falhas.length} arquivo(s) com problema:\n\n` + falhas.join("\n"));
+      avisar(`${ok} RDC(s) importado(s). ${falhas.length} arquivo(s) com problema:\n\n` + falhas.join("\n"));
     } else {
-      alert(`${ok} RDC(s) importado(s) e conferido(s) com sucesso.`);
+      avisar(`${ok} RDC(s) importado(s) e conferido(s) com sucesso.`);
     }
   });
 
-  document.getElementById("rdc-limpar").addEventListener("click", () => {
+  document.getElementById("rdc-limpar").addEventListener("click", async () => {
     if (Object.keys(DADOS_RDC).length === 0) return;
-    if (!confirm("Remover todos os RDCs importados deste navegador?")) return;
+    if (!await confirmarNaPagina("Remover todos os RDCs importados deste navegador?")) return;
     DADOS_RDC = {};
     salvarDadosRDC();
     renderTabelaRDC();
@@ -3712,9 +3778,9 @@ function renderListaColaboradores() {
   popularSelectColaboradorPresenca();
 
   container.querySelectorAll("button.remover-colaborador").forEach(btn => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", async (e) => {
       const nome = e.currentTarget.dataset.nome;
-      if (!confirm(`Remover "${nomeExibicao(nome)}" da lista de colaboradores? A presença já marcada pra essa pessoa continua salva, só para de aparecer aqui.`)) return;
+      if (!await confirmarNaPagina(`Remover "${nomeExibicao(nome)}" da lista de colaboradores? A presença já marcada pra essa pessoa continua salva, só para de aparecer aqui.`)) return;
       NOMES_COLABORADORES = NOMES_COLABORADORES.filter(n => n !== nome);
       salvarColaboradores();
       renderGerencialView();
@@ -3888,7 +3954,7 @@ function configurarAcoesColaboradores() {
     const nome = input.value.trim();
     if (!nome) return;
     if (NOMES_COLABORADORES.some(n => n.toLowerCase() === nome.toLowerCase())) {
-      alert("Esse colaborador já está na lista.");
+      avisar("Esse colaborador já está na lista.");
       return;
     }
     NOMES_COLABORADORES.push(nome);
@@ -3911,12 +3977,12 @@ function configurarAcoesColaboradores() {
   // PRESENCA_MANUAL_ULTIMA_VERSAO, tirado quando a página carregou) -- não
   // apaga o histórico de marcações de sessões anteriores, diferente de
   // zerar tudo pro automático.
-  document.getElementById("presenca-restaurar").addEventListener("click", () => {
+  document.getElementById("presenca-restaurar").addEventListener("click", async () => {
     if (JSON.stringify(PRESENCA_MANUAL) === PRESENCA_MANUAL_ULTIMA_VERSAO) {
-      alert("Não há nenhuma mudança nesta sessão pra desfazer -- já está igual à última vez que a página foi aberta.");
+      avisar("Não há nenhuma mudança nesta sessão pra desfazer -- já está igual à última vez que a página foi aberta.");
       return;
     }
-    if (!confirm("Isso desfaz as marcações de presença feitas nesta sessão (desde que a página foi aberta) e volta pro que estava salvo da última vez. Confirma?")) return;
+    if (!await confirmarNaPagina("Isso desfaz as marcações de presença feitas nesta sessão (desde que a página foi aberta) e volta pro que estava salvo da última vez. Confirma?", "Desfazer")) return;
     PRESENCA_MANUAL = JSON.parse(PRESENCA_MANUAL_ULTIMA_VERSAO);
     salvarPresencaManual();
     renderGerencialView();
