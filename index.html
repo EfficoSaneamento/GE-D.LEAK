@@ -409,12 +409,21 @@
     display: grid;
     grid-template-columns: 1.6fr 1fr;
     gap: 16px;
-    align-items: stretch;
+    align-items: start;
   }
+  /* A lista de previsão cresce com o nº de técnicos; sem limite ela esticava
+     o card do gráfico (vizinho na grade) e deixava um vazio enorme embaixo. */
+  #lista-previsao-meta, #lista-previsao-meta-manual { max-height: 470px; overflow-y: auto; }
   @media (max-width: 900px) {
     .comparativo-row { grid-template-columns: 1fr; }
   }
   .card-comparativo canvas { max-height: 300px; }
+  /* rolagem horizontal quando tem muito técnico -- cada um recebe uma
+     largura mínima (ver JS) pra o número de cima nunca colidir com o do
+     vizinho, em vez de espremer tudo e sobrepor o texto. */
+  .chart-comparativo-scroll { overflow-x: auto; overflow-y: hidden; }
+  .chart-comparativo-inner { height: 300px; }
+  .chart-comparativo-inner canvas { max-height: 300px; }
 
   .meta-legenda {
     display: flex;
@@ -601,6 +610,59 @@
   .mes-calendario-dia.feriado .dia-num { color: #b3542e; }
   .mes-calendario-dia.feriado .dia-num::after { content: " •"; font-weight: 700; }
 
+  /* --- calendário de presença (Gerencial): mesma grade de mês do
+     calendário de ligações (#calendario-meses), só que cada dia é
+     clicável -- um valor só por dia (a pessoa selecionada no filtro, ou
+     "todo mundo" quando nenhuma está selecionada), em vez de tentar
+     encaixar 1 controle por colaborador dentro da célula (não escala:
+     com muita gente vira uma bagunça vertical dentro do dia). --- */
+  #calendario-presenca {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 20px;
+  }
+  .mes-calendario-dia.presenca-dia { cursor: pointer; user-select: none; transition: background 0.1s ease, box-shadow 0.1s ease; }
+  .mes-calendario-dia.presenca-dia:hover { box-shadow: inset 0 0 0 1.5px var(--header-bg); }
+  .mes-calendario-dia.presenca-dia.marcado { background: var(--olive-tint); }
+  .mes-calendario-dia.presenca-dia.marcado .dia-num { color: var(--header-bg-dark); }
+  .mes-calendario-dia.presenca-dia.marcado .dia-valor { color: var(--header-bg); }
+  .mes-calendario-dia.presenca-dia.completo { background: var(--header-bg); }
+  .mes-calendario-dia.presenca-dia.completo .dia-num,
+  .mes-calendario-dia.presenca-dia.completo .dia-valor { color: #fff; }
+  .mes-calendario-dia.presenca-dia.parcial { background: var(--gold-tint); }
+  .mes-calendario-dia.presenca-dia.parcial .dia-num { color: #9c7a25; }
+  .mes-calendario-dia.presenca-dia.parcial .dia-valor { color: #6b5217; }
+
+  .lista-colaboradores-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 16px; }
+  .colaborador-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--olive-tint);
+    color: var(--header-bg-dark);
+    border-radius: 999px;
+    padding: 4px 4px 4px 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .colaborador-pill button {
+    border: none;
+    background: transparent;
+    color: var(--header-bg-dark);
+    opacity: 0.55;
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.62rem;
+    padding: 0;
+    line-height: 1;
+  }
+  .colaborador-pill button:hover { opacity: 1; background: #fff; color: #a33; }
+
   .indic-grid-wide { flex-direction: row; flex-wrap: wrap; gap: 0 32px; }
   .indic-grid-wide .indic-row { flex: 1 1 200px; }
 
@@ -730,6 +792,12 @@
   .tabela-manual tr.linha-diff-pos td.col-diff { color: var(--header-bg); font-weight: 700; }
   .tabela-manual tr.linha-diff-neg td.col-diff { color: #a33; font-weight: 700; }
 
+  /* destaque ao passar o mouse, pra facilitar achar a linha certa em
+     tabelas com muitas colunas (manual, gerencial, metas) */
+  .tabela-manual tbody tr { transition: background 0.1s ease; }
+  .tabela-manual tbody tr:hover td { background: var(--olive-tint); }
+
+
   .manual-acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
   .manual-input-nome {
     font: inherit;
@@ -740,6 +808,30 @@
     background: #f7f7f5;
     min-width: 160px;
   }
+  .filtro-presenca-colaborador {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .filtro-presenca-colaborador label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+  }
+  .filtro-presenca-colaborador select {
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    padding: 7px 10px;
+    border: 1px solid var(--gridline);
+    border-radius: 8px;
+    background: #f7f7f5;
+    cursor: pointer;
+  }
+  .filtro-presenca-colaborador #presenca-restaurar { margin-left: auto; }
   .btn-manual {
     font: inherit;
     font-size: 0.76rem;
@@ -923,9 +1015,9 @@
         <svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
       </div>
       <div class="kpi-body">
-        <div class="kpi-label">Ligações por técnico</div>
+        <div class="kpi-label">Média diária por técnico</div>
         <div class="kpi-value" id="kpi-media-tecnico">-</div>
-        <div class="kpi-sub">Média no período selecionado</div>
+        <div class="kpi-sub">Ligações por técnico, no dia em que trabalhou</div>
       </div>
     </div>
     <div class="kpi-tile">
@@ -955,7 +1047,7 @@
       <div class="kpi-body">
         <div class="kpi-label">Maior registro</div>
         <div class="kpi-value" id="kpi-maior-registro">-</div>
-        <div class="kpi-sub">Ligações em um único registro</div>
+        <div class="kpi-sub" id="kpi-maior-registro-info">Ligações em um único registro</div>
       </div>
     </div>
   </section>
@@ -965,7 +1057,11 @@
     <div class="comparativo-row">
       <div class="card card-comparativo">
         <div class="card-title">Ligações no período, por técnico</div>
-        <canvas id="chart-comparativo"></canvas>
+        <div class="chart-comparativo-scroll">
+          <div class="chart-comparativo-inner" id="chart-comparativo-inner">
+            <canvas id="chart-comparativo"></canvas>
+          </div>
+        </div>
         <div class="meta-legenda">
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-meta"></span>Meta individual (650 × dias trabalhados)</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-0"></span>&lt; 650/dia — sem meta</span>
@@ -1005,7 +1101,7 @@
   <section>
     <div class="section-title">Progressão mensal</div>
     <div class="card card-comparativo">
-      <div class="card-title">Ligações por mês</div>
+      <div class="card-title">Ligações (preto) e valor a receber × 1,89 (dourado) por mês</div>
       <canvas id="chart-progressao"></canvas>
     </div>
   </section>
@@ -1063,9 +1159,9 @@
         <svg viewBox="0 0 24 24"><path d="M4 20V10M12 20V4M20 20v-7"/></svg>
       </div>
       <div class="kpi-body">
-        <div class="kpi-label">Ligações por técnico</div>
+        <div class="kpi-label">Média diária por técnico</div>
         <div class="kpi-value" id="kpi-media-tecnico-manual">-</div>
-        <div class="kpi-sub">Média no período selecionado</div>
+        <div class="kpi-sub">Ligações por técnico, no dia em que trabalhou</div>
       </div>
     </div>
     <div class="kpi-tile">
@@ -1096,7 +1192,11 @@
       <div class="card card-comparativo">
         <div class="card-title">Ligações no período, por técnico</div>
         <p class="manual-aviso" style="margin-top:-6px;">Soma o total automático (ArcGIS) com o que foi digitado manualmente pra cada técnico.</p>
-        <canvas id="chart-comparativo-manual"></canvas>
+        <div class="chart-comparativo-scroll">
+          <div class="chart-comparativo-inner" id="chart-comparativo-inner-manual">
+            <canvas id="chart-comparativo-manual"></canvas>
+          </div>
+        </div>
         <div class="meta-legenda">
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-meta"></span>Meta individual (650 × dias trabalhados)</span>
           <span class="meta-legenda-item"><span class="meta-dot meta-dot-0"></span>&lt; 650/dia — sem meta</span>
@@ -1136,8 +1236,8 @@
   <section>
     <div class="section-title">Progressão mensal</div>
     <div class="card card-comparativo">
-      <div class="card-title">Ligações por mês</div>
-      <canvas id="chart-progressao-manual"></canvas>
+      <div class="card-title">Ligações (preto) e valor a receber × 1,89 (dourado) por mês</div>
+      <canvas id="chart-progressao-manual">
     </div>
   </section>
 
@@ -1162,6 +1262,46 @@
     </div>
   </section>
 
+</main>
+
+<main id="view-gerencial-panel" class="view-panel" data-view="gerencial" style="display:none;">
+
+  <section>
+    <div class="section-title">Meta por colaborador</div>
+    <div class="card">
+      <div class="card-title-row">
+        <div class="card-title">Meta, ligações e valor a receber (conforme presença marcada em "Colaboradores e presença")</div>
+      </div>
+      <div class="calendario-scroll">
+        <table class="tabela-manual" id="tabela-metas-colaboradores"></table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Medição mensal</div>
+    <div class="card">
+      <div class="card-title">Valor e quantidade de ligações da medição, por mês</div>
+      <p class="manual-aviso" style="margin-top:0;">Informe, pra cada mês, o valor (R$) e a quantidade de ligações da medição. Os dois entram como colunas na "Progressão mensal" das abas ArcGIS e Manual, ao lado das ligações do sistema. A coluna Diferença compara a quantidade da medição com as ligações do sistema (automático + manual). Os meses listados seguem o período do filtro do topo. Fica salvo neste navegador.</p>
+      <div class="calendario-scroll" style="max-height:420px;">
+        <table class="tabela-manual" id="tabela-medicao"></table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-title">Gerencial — Automático (ArcGIS) × Manual</div>
+    <div class="card">
+      <div class="card-title-row">
+        <div class="card-title">Comparativo por técnico no período selecionado</div>
+        <div class="valores-total">Diferença total: <strong id="gerencial-diff-total">-</strong></div>
+      </div>
+      <div class="calendario-scroll">
+        <table class="tabela-manual" id="tabela-gerencial"></table>
+      </div>
+    </div>
+  </section>
+
   <section>
     <div class="section-title">Lançamento manual</div>
     <div class="card">
@@ -1182,16 +1322,6 @@
     </div>
 
     <div class="card" style="margin-top:16px;">
-      <div class="card-title">Média da semana por fiscal</div>
-      <p class="manual-aviso" style="margin-top:0;">Média de todos os lançamentos digitados em cada semana (segunda a domingo) do período selecionado — é o número usado pra preencher dias de FISCAL/LOC. VAZ/OUTRO PC pela média da equipe daquela semana. A coluna "Média usada" é editável: ajuste e saia do campo pra salvar; "Restaurar" volta pro valor calculado automaticamente.</p>
-      <div class="calendario-scroll" style="max-height:320px;">
-        <table class="tabela-manual" id="tabela-media-semanal"></table>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="card">
       <div class="card-title">Indicadores de produção (manual)</div>
       <div class="indic-grid indic-grid-wide">
         <div class="indic-row"><span class="indic-label">Total de lançamentos</span><span class="indic-value" id="ind-lancamentos-manual">-</span></div>
@@ -1200,20 +1330,27 @@
     </div>
   </section>
 
-</main>
-
-<main id="view-gerencial-panel" class="view-panel" data-view="gerencial" style="display:none;">
-
   <section>
-    <div class="section-title">Gerencial — Automático (ArcGIS) × Manual</div>
+    <div class="section-title">Colaboradores e presença</div>
     <div class="card">
       <div class="card-title-row">
-        <div class="card-title">Comparativo por técnico no período selecionado</div>
-        <div class="valores-total">Diferença total: <strong id="gerencial-diff-total">-</strong></div>
+        <div class="card-title">Quem trabalhou no período selecionado</div>
+        <div class="manual-acoes">
+          <input type="text" id="colaborador-novo-nome" class="manual-input-nome" placeholder="Nome do colaborador">
+          <button type="button" id="colaborador-add" class="btn-manual">+ Colaborador</button>
+        </div>
       </div>
-      <div class="calendario-scroll">
-        <table class="tabela-manual" id="tabela-gerencial"></table>
+      <p class="manual-aviso">Marque os dias em que cada colaborador realmente trabalhou no período selecionado no filtro do topo. A meta (650 × dias trabalhados) e o valor a receber passam a considerar só os dias marcados aqui -- útil pra corrigir dias sem ligação em que a pessoa trabalhou, ou dias com ligação em que ela não deveria contar (férias, afastamento, desligamento etc.). Por padrão, um dia já vem marcado quando existe ligação registrada (automático ou manual) pra essa pessoa naquele dia. Dias com borda vermelha e • no número são feriados. Fica salvo neste navegador.</p>
+      <div id="lista-colaboradores" class="lista-colaboradores-chips"></div>
+      <div class="filtro-presenca-colaborador">
+        <label for="presenca-colaborador-select">Calendário de</label>
+        <select id="presenca-colaborador-select">
+          <option value="">Todo mundo (dia inteiro)</option>
+        </select>
+        <span class="manual-aviso" style="margin:0;">Selecione "Todo mundo" pra marcar o dia inteiro pra todos de uma vez, ou uma pessoa pra ajustar só ela. Clique no dia pra alternar.</span>
+        <button type="button" id="presenca-restaurar" class="btn-manual btn-manual-secundario" title="Desfaz as marcações de presença feitas nesta sessão e volta pro que estava salvo da última vez que a página foi aberta">Restaurar última versão</button>
       </div>
+      <div id="calendario-presenca"></div>
     </div>
   </section>
 
@@ -1344,18 +1481,41 @@ function filtrarPorData(registros, inicio, fim) {
   return registros.filter(r => r.data >= inicio && r.data <= fim);
 }
 
-function computeResumo(registros) {
+function computeResumo(registros, tecnicoFiltro) {
   const nomes = new Set();
   let totalLigacoes = 0;
   let maiorRegistro = 0;
+  let maiorRegistroInfo = null; // { data, participantes } do registro com mais ligações
   const dias = new Set();
 
   registros.forEach(r => {
     const n = r.participantes.length;
     if (n === 0) return;
+
+    if (tecnicoFiltro) {
+      // Com técnico filtrado, cada registro compartilhado conta só a
+      // FATIA rateada dele (não o valor cheio do registro, que é de todo
+      // mundo que participou) -- senão "Total de ligações" e "Técnicos
+      // envolvidos" ficam inflados com gente que só dividiu um relatório
+      // com o técnico selecionado.
+      if (!r.participantes.some(p => normalizarNome(p) === tecnicoFiltro)) return;
+      nomes.add(tecnicoFiltro.toLowerCase());
+      const parte = r.ligacoes / n;
+      totalLigacoes += parte;
+      if (parte > maiorRegistro) {
+        maiorRegistro = parte;
+        maiorRegistroInfo = { data: r.data, participantes: r.participantes.map(normalizarNome) };
+      }
+      dias.add(r.data);
+      return;
+    }
+
     r.participantes.forEach(p => nomes.add(p.toLowerCase()));
     totalLigacoes += r.ligacoes;
-    maiorRegistro = Math.max(maiorRegistro, r.ligacoes);
+    if (r.ligacoes > maiorRegistro) {
+      maiorRegistro = r.ligacoes;
+      maiorRegistroInfo = { data: r.data, participantes: r.participantes.map(normalizarNome) };
+    }
     dias.add(r.data);
   });
 
@@ -1373,7 +1533,21 @@ function computeResumo(registros) {
     mediaLigacoesDia: diasAtividade > 0 ? totalLigacoes / diasAtividade : 0,
     mediaVistoriasDia: diasAtividade > 0 ? totalVistorias / diasAtividade : 0,
     maiorRegistro,
+    maiorRegistroInfo,
   };
+}
+
+// "Média diária por técnico" -- soma de TODAS as ligações da equipe ÷ soma
+// de TODOS os dias trabalhados de cada técnico. Equivale a botar cada
+// célula "1 técnico, 1 dia" da planilha numa lista só e tirar a média
+// (conferido com o usuário em 2026-09-23 contra o Excel: período 1-4/set
+// = 583,2142857, que bate exatamente com essa conta). Recebe a lista de
+// ranking (item.ligacoes, item.diasTrabalhados) já calculada pra equipe
+// inteira, ignorando o filtro de técnico do dropdown.
+function mediaPorTecnicoDia(rankingLista) {
+  const totalLigacoes = rankingLista.reduce((s, i) => s + i.ligacoes, 0);
+  const totalDias = rankingLista.reduce((s, i) => s + i.diasTrabalhados, 0);
+  return totalDias > 0 ? totalLigacoes / totalDias : 0;
 }
 
 // Ligações por pessoa no período: soma rateada (ligações do registro / nº de
@@ -1381,8 +1555,15 @@ function computeResumo(registros) {
 // -- sem lista fixa de ativos/demitidos. Dado bruto do ArcGIS, sem correção,
 // override ou estimativa — só o rateio, que é a única forma de atribuir um
 // registro compartilhado a cada pessoa individualmente.
-function computeLigacoesPorTecnico(registros) {
-  const nomes = nomesDistintos(registros);
+function computeLigacoesPorTecnico(registros, inicio, fim, tecnicoFiltro) {
+  inicio = inicio || "";
+  fim = fim || "9999-12-31";
+  // Com técnico filtrado, a lista de nomes é só ELE -- registros
+  // compartilhados (um relatório com vários participantes) continuam
+  // trazendo os outros nomes se não filtrarmos também dentro do loop
+  // abaixo, senão o gráfico "some com o filtro" e mostra todo mundo que
+  // dividiu algum relatório com a pessoa selecionada.
+  const nomes = tecnicoFiltro ? [tecnicoFiltro] : nomesDistintos(registros);
   const totals = {};
   nomes.forEach(nome => { totals[nome] = { ligacoesPorDia: {}, vistorias: 0 }; });
 
@@ -1392,6 +1573,7 @@ function computeLigacoesPorTecnico(registros) {
     r.participantes.forEach(p => {
       const nome = normalizarNome(p);
       const t = totals[nome];
+      if (!t) return;
       t.ligacoesPorDia[r.data] = (t.ligacoesPorDia[r.data] || 0) + r.ligacoes / n;
       t.vistorias += 1 / n;
     });
@@ -1408,7 +1590,7 @@ function computeLigacoesPorTecnico(registros) {
     // cada dia e depois somar (o que a planilha faz). Ambos corretos, mas
     // só um bate célula a célula com a planilha pra validação.
     const dias = Object.keys(tt.ligacoesPorDia);
-    const diasTrabalhados = dias.length;
+    const diasTrabalhados = diasTrabalhadosComPresenca(nome, dias, inicio, fim).size;
     const ligacoesTotal = dias.reduce((soma, data) => soma + Math.round(tt.ligacoesPorDia[data]), 0);
     tt.ligacoes = ligacoesTotal;
     const meta = LIGACOES_BASE_DIA * diasTrabalhados;
@@ -1424,7 +1606,10 @@ function computeLigacoesPorTecnico(registros) {
       valorPorLigacao,
       valorReceber: tt.ligacoes * valorPorLigacao,
     };
-  }).sort((a, b) => b.ligacoes - a.ligacoes);
+    // Empate em ligações desempata por nome (ordem alfabética) -- critério
+    // determinístico, pro Top 3 não depender da ordem incidental de
+    // inserção do objeto/registro.
+  }).sort((a, b) => b.ligacoes - a.ligacoes || a.nome.localeCompare(b.nome, "pt-BR"));
 
   const max = lista.length > 0 ? lista[0].ligacoes : 0;
   lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
@@ -1443,13 +1628,20 @@ function renderizarChart(canvasId, config) {
   return CHARTS[canvasId];
 }
 
-function renderResumo(resumo) {
+function renderResumo(resumo, mediaPorTecnicoDia) {
   document.getElementById("kpi-ligacoes").textContent = NUM.format(Math.round(resumo.totalLigacoes));
-  const mediaPorTecnico = resumo.totalTecnicos > 0 ? resumo.totalLigacoes / resumo.totalTecnicos : 0;
-  document.getElementById("kpi-media-tecnico").textContent = NUM.format(Math.round(mediaPorTecnico));
+  document.getElementById("kpi-media-tecnico").textContent = NUM.format(Math.round(mediaPorTecnicoDia));
   document.getElementById("kpi-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
   document.getElementById("kpi-dias").textContent = NUM.format(resumo.diasAtividade);
   document.getElementById("kpi-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
+  const infoMaiorRegistro = document.getElementById("kpi-maior-registro-info");
+  if (resumo.maiorRegistroInfo) {
+    const { data, participantes } = resumo.maiorRegistroInfo;
+    const dataFormatada = data.split("-").reverse().join("/");
+    infoMaiorRegistro.textContent = `${participantes.map(nomeExibicao).join(", ")} — ${dataFormatada}`;
+  } else {
+    infoMaiorRegistro.textContent = "Ligações em um único registro";
+  }
 
   document.getElementById("ind-registros").textContent = NUM.format(resumo.totalRegistros);
   document.getElementById("ind-media-vistorias-dia").textContent = resumo.mediaVistoriasDia.toFixed(2).replace(".", ",");
@@ -1467,6 +1659,13 @@ function renderComparativoChart(rankingLista, sufixo) {
   // (cor fixa) e o total batido (colorido pela faixa atingida).
   const maiorValor = ordenado.length > 0 ? Math.max(...ordenado.map(i => Math.max(i.ligacoes, i.meta))) : 0;
 
+  // Largura mínima proporcional ao número de técnicos, pra cada um ter
+  // espaço suficiente pro número de cima nunca colidir com o do vizinho --
+  // com muito técnico o gráfico cresce pros lados e o card rola
+  // horizontalmente, em vez de espremer tudo e sobrepor o texto.
+  document.getElementById("chart-comparativo-inner" + sufixo).style.width =
+    Math.max(600, ordenado.length * 72) + "px";
+
   const corPorTier = (valorPorLigacao) => {
     if (valorPorLigacao >= 0.10) return "#8C6D1F";
     if (valorPorLigacao >= 0.05) return "#5B6B4A";
@@ -1483,7 +1682,14 @@ function renderComparativoChart(rankingLista, sufixo) {
           data: ordenado.map(i => Math.round(i.meta)),
           backgroundColor: "#3f4a34",
           maxBarThickness: 26,
-          datalabels: { display: false },
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            color: "#3f4a34",
+            font: { size: 10, weight: "700" },
+            formatter: (v) => NUM.format(v),
+          },
         },
         {
           label: "Total de ligações",
@@ -1742,43 +1948,220 @@ function computeProgressaoMensal(registros, tecnico) {
       porMes[mes].ligacoes += r.ligacoes;
     }
   });
-  return Object.keys(porMes).sort().map(mes => ({ mes, ...porMes[mes] }));
+  const valorMes = valorPorMes(porDiaPorPessoaAutomatico(registros, tecnico));
+  return Object.keys(porMes).sort().map(mes => ({ mes, ...porMes[mes], valor: (valorMes[mes] || 0) * FATOR_VALOR_PROGRESSAO }));
+}
+
+// O valor mostrado na Progressão mensal é o valor a receber × 1,89
+// (fator informado pelo usuário em 2026-09-23).
+const FATOR_VALOR_PROGRESSAO = 1.89;
+
+// Medição mensal (aba Gerencial): valor (R$) e quantidade de ligações da
+// medição de cada mês, digitados à mão -- entram como colunas na
+// Progressão mensal. Persistência só em localStorage, igual as outras.
+let MEDICAO_MENSAL = {}; // { "AAAA-MM": { valor, ligacoes } }
+const CHAVE_MEDICAO_MENSAL = "pc392_medicao_v1";
+
+function carregarMedicao() {
+  try {
+    MEDICAO_MENSAL = JSON.parse(localStorage.getItem(CHAVE_MEDICAO_MENSAL)) || {};
+  } catch { MEDICAO_MENSAL = {}; }
+}
+
+function salvarMedicao() {
+  try { localStorage.setItem(CHAVE_MEDICAO_MENSAL, JSON.stringify(MEDICAO_MENSAL)); } catch {}
+}
+
+function renderTabelaMedicao(inicio, fim) {
+  const tabela = document.getElementById("tabela-medicao");
+  if (!inicio || !fim) { tabela.innerHTML = ""; return; }
+
+  const sistema = {};
+  computeProgressaoMensalCombinado(inicio, fim, "").forEach(p => { sistema[p.mes] = p; });
+
+  const thead = `<thead><tr><th class="col-data">Mês</th><th>Valor da medição (R$)</th><th>Qtd. de ligações (medição)</th><th>Ligações no sistema</th><th>Diferença</th><th>Valor a receber × 1,89 (estimado)</th></tr></thead>`;
+  const linhas = mesesNoPeriodo(inicio, fim).map(mes => {
+    const m = MEDICAO_MENSAL[mes] || {};
+    const s = sistema[mes];
+    const ligSistema = s ? Math.round(s.ligacoes) : 0;
+    const temLig = m.ligacoes !== undefined && m.ligacoes !== null;
+    const diff = temLig ? Math.round(m.ligacoes) - ligSistema : null;
+    const classe = diff === null || diff === 0 ? "" : diff > 0 ? "linha-diff-pos" : "linha-diff-neg";
+    const valorAttr = m.valor !== undefined && m.valor !== null ? m.valor : "";
+    const ligAttr = temLig ? m.ligacoes : "";
+    return `<tr class="${classe}">
+      <td class="col-data">${rotuloMes(mes)}</td>
+      <td><input type="number" step="0.01" min="0" class="celula-manual medicao-input" data-mes="${mes}" data-campo="valor" value="${valorAttr}"></td>
+      <td><input type="number" step="1" min="0" class="celula-manual medicao-input" data-mes="${mes}" data-campo="ligacoes" value="${ligAttr}"></td>
+      <td>${NUM.format(ligSistema)}</td>
+      <td class="col-diff">${diff === null ? "-" : (diff > 0 ? "+" : "") + NUM.format(diff)}</td>
+      <td>${s ? BRL.format((s.valor || 0)) : "-"}</td>
+    </tr>`;
+  }).join("");
+
+  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+
+  tabela.querySelectorAll("input.medicao-input").forEach(input => {
+    input.addEventListener("change", (e) => {
+      const { mes, campo } = e.target.dataset;
+      const numero = parseFloat(e.target.value);
+      if (!MEDICAO_MENSAL[mes]) MEDICAO_MENSAL[mes] = {};
+      if (isNaN(numero) || numero < 0) delete MEDICAO_MENSAL[mes][campo];
+      else MEDICAO_MENSAL[mes][campo] = numero;
+      if (Object.keys(MEDICAO_MENSAL[mes]).length === 0) delete MEDICAO_MENSAL[mes];
+      salvarMedicao();
+      renderGerencialView();
+    });
+  });
+}
+
+// Ligações por dia por pessoa, só automático (ArcGIS), já rateadas --
+// { "AAAA-MM-DD": { nome: ligações } }. Com técnico filtrado, só ele.
+function porDiaPorPessoaAutomatico(registros, tecnicoFiltro) {
+  const porDia = {};
+  registros.forEach(r => {
+    const n = r.participantes.length;
+    if (n === 0) return;
+    r.participantes.forEach(p => {
+      const nome = normalizarNome(p);
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
+      if (!porDia[r.data]) porDia[r.data] = {};
+      porDia[r.data][nome] = (porDia[r.data][nome] || 0) + r.ligacoes / n;
+    });
+  });
+  return porDia;
+}
+
+// Valor a receber por mês ({ "AAAA-MM": R$ }): a regra de faixa (média/dia
+// vs. 650) é aplicada por técnico DENTRO de cada mês, com os dias
+// trabalhados do mês (respeitando a presença marcada no Gerencial), e os
+// valores dos técnicos são somados. Por isso a soma dos meses pode
+// diferir do "valor a receber" calculado com o período inteiro de uma vez.
+function valorPorMes(porDiaPorPessoa) {
+  const porMesPessoa = {}; // mes -> nome -> { dias: [iso], ligacoes }
+  Object.keys(porDiaPorPessoa).forEach(iso => {
+    const mes = chaveMes(iso);
+    Object.entries(porDiaPorPessoa[iso]).forEach(([nome, valor]) => {
+      if (!porMesPessoa[mes]) porMesPessoa[mes] = {};
+      if (!porMesPessoa[mes][nome]) porMesPessoa[mes][nome] = { dias: [], ligacoes: 0 };
+      porMesPessoa[mes][nome].dias.push(iso);
+      porMesPessoa[mes][nome].ligacoes += Math.round(valor);
+    });
+  });
+  const resultado = {};
+  Object.keys(porMesPessoa).forEach(mes => {
+    let total = 0;
+    Object.entries(porMesPessoa[mes]).forEach(([nome, t]) => {
+      const diasTrab = diasTrabalhadosComPresenca(nome, t.dias, `${mes}-01`, `${mes}-31`).size;
+      const media = diasTrab > 0 ? t.ligacoes / diasTrab : 0;
+      total += t.ligacoes * valorPorLigacaoMediaDia(media);
+    });
+    resultado[mes] = total;
+  });
+  return resultado;
 }
 
 function renderProgressaoChart(progressao, sufixo) {
+  // Medição mensal informada na aba Gerencial (ver MEDICAO_MENSAL): quando
+  // existe pra algum mês do gráfico, entram duas colunas ao lado da de
+  // ligações do sistema -- a quantidade de ligações da medição e o valor
+  // da medição (R$, eixo da direita). Mês sem medição fica sem coluna.
+  const medicaoDoMes = (p, campo) => {
+    const m = MEDICAO_MENSAL[p.mes];
+    return m && m[campo] !== undefined && m[campo] !== null ? m[campo] : null;
+  };
+  const temMedicao = progressao.some(p => medicaoDoMes(p, "valor") !== null || medicaoDoMes(p, "ligacoes") !== null);
+  const datasetsMedicao = temMedicao ? [
+    {
+      label: "Ligações (medição)",
+      data: progressao.map(p => medicaoDoMes(p, "ligacoes")),
+      backgroundColor: "#3f4a34",
+      borderRadius: 4,
+      maxBarThickness: 40,
+      datalabels: {
+        display: true,
+        anchor: "end",
+        align: "end",
+        offset: 3,
+        color: "#1a1a1a",
+        font: { size: 11, weight: "700" },
+        formatter: (v) => (v === null ? "" : NUM.format(v)),
+      },
+    },
+    {
+      label: "Valor da medição (R$)",
+      data: progressao.map(p => medicaoDoMes(p, "valor")),
+      yAxisID: "y1",
+      backgroundColor: "#8C6D1F",
+      borderRadius: 4,
+      maxBarThickness: 40,
+      datalabels: {
+        display: true,
+        anchor: "end",
+        align: "end",
+        offset: 3,
+        color: "#8C6D1F",
+        font: { size: 11, weight: "700" },
+        formatter: (v) => (v === null ? "" : BRL.format(v)),
+      },
+    },
+  ] : [];
+
   renderizarChart("chart-progressao" + (sufixo || ""), {
     type: "bar",
     data: {
       labels: progressao.map(p => rotuloMes(p.mes)),
       datasets: [
         {
-          label: "Ligações",
+          label: "Ligações (sistema)",
           data: progressao.map(p => Math.round(p.ligacoes)),
           backgroundColor: "#5B6B4A",
           borderRadius: 4,
-          maxBarThickness: 56,
+          maxBarThickness: temMedicao ? 40 : 56,
+          // Dois rótulos empilhados em cima de cada barra: a quantidade de
+          // ligações (preto) e, logo acima, o valor a receber do mês (dourado).
           datalabels: {
             display: true,
             anchor: "end",
             align: "end",
-            color: "#1a1a1a",
-            font: { size: 11, weight: "700" },
-            formatter: (v) => NUM.format(v),
+            labels: {
+              ligacoes: {
+                offset: 3,
+                color: "#1a1a1a",
+                font: { size: 11, weight: "700" },
+                formatter: (v) => NUM.format(v),
+              },
+              valor: {
+                display: !temMedicao,
+                offset: 18,
+                color: "#8C6D1F",
+                font: { size: 11, weight: "700" },
+                formatter: (v, ctx) => BRL.format(progressao[ctx.dataIndex].valor || 0),
+              },
+            },
           },
         },
+        ...datasetsMedicao,
       ],
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: { padding: { top: 22 } },
+      layout: { padding: { top: 40 } },
       plugins: {
-        legend: { display: false },
+        legend: { display: temMedicao, position: "bottom", labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" } },
         datalabels: { display: false },
         tooltip: {
           backgroundColor: "#1a1a1a",
           padding: 8,
-          callbacks: { label: (ctx) => `${NUM.format(ctx.parsed.y)} ligações` },
+          callbacks: {
+            label: (ctx) => (ctx.dataset.yAxisID === "y1"
+              ? `${ctx.dataset.label}: ${BRL.format(ctx.parsed.y)}`
+              : `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)} ligações`),
+            afterLabel: (ctx) => (ctx.datasetIndex === 0
+              ? `Valor a receber × 1,89: ${BRL.format(progressao[ctx.dataIndex].valor || 0)}`
+              : ""),
+          },
         },
       },
       scales: {
@@ -1787,6 +2170,13 @@ function renderProgressaoChart(progressao, sufixo) {
           beginAtZero: true,
           grid: { color: "#e6e5df", drawTicks: false },
           ticks: { color: "#898781", font: { size: 10 }, callback: (v) => NUM.format(v) },
+        },
+        y1: {
+          display: temMedicao,
+          position: "right",
+          beginAtZero: true,
+          grid: { display: false },
+          ticks: { color: "#8C6D1F", font: { size: 10 }, callback: (v) => BRL.format(v) },
         },
       },
     },
@@ -1835,54 +2225,170 @@ function renderTop3(rankingLista, sufixo) {
 }
 
 // --- evolução mensal do Top 3 ---
-// Mesma lógica de computeProgressaoMensal, mas rateando só pros nomes do
-// Top 3, um mês por coluna do período filtrado.
-function computeEvolucaoMensalTop3(registros, nomesTop3) {
-  const porMes = {};
+// O Top 3 é recalculado MÊS A MÊS (não pelo total do período): cada mês
+// tem seu próprio 1º/2º/3º lugar por ligações rateadas, e quem ocupa cada
+// posição pode mudar de um mês pro outro. Por isso os "datasets" do
+// gráfico são as 3 POSIÇÕES (1º/2º/3º), não 3 pessoas fixas -- cada
+// posição carrega, além do valor, o nome de quem a ocupou naquele mês
+// (usado no tooltip/rótulo), com empate desempatado por ordem alfabética.
+function computeTop3PorMes(registros, tecnicoFiltro) {
+  const porMes = {}; // mes -> { nome -> ligacoes }
   registros.forEach(r => {
     const n = r.participantes.length;
     if (n === 0) return;
     const mes = chaveMes(r.data);
+    if (!porMes[mes]) porMes[mes] = {};
     r.participantes.forEach(p => {
       const nome = normalizarNome(p);
-      if (!nomesTop3.includes(nome)) return;
-      if (!porMes[mes]) porMes[mes] = {};
+      // Com técnico filtrado, ignora quem mais dividiu o registro com ele
+      // -- mesmo motivo de computeLigacoesPorTecnico.
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
       porMes[mes][nome] = (porMes[mes][nome] || 0) + r.ligacoes / n;
     });
   });
+  return montarPosicoesPorMes(porMes);
+}
+
+// Recebe { mes -> { nome -> ligacoes } } (não arredondado) e devolve as 3
+// posições com valor + nome de quem ocupou cada uma, mês a mês -- usada
+// tanto pelo automático quanto pelo combinado (aba Manual).
+function montarPosicoesPorMes(porMes) {
   const meses = Object.keys(porMes).sort();
-  const series = nomesTop3.map(nome => ({
-    nome,
-    valores: meses.map(mes => Math.round((porMes[mes] && porMes[mes][nome]) || 0)),
-  }));
-  return { meses, series };
+  const posicoes = [0, 1, 2].map(() => ({ valores: [], nomes: [] }));
+
+  meses.forEach(mes => {
+    const ranking = Object.entries(porMes[mes] || {})
+      .map(([nome, valor]) => ({ nome, valor: Math.round(valor) }))
+      .filter(item => item.valor > 0)
+      .sort((a, b) => b.valor - a.valor || a.nome.localeCompare(b.nome, "pt-BR"));
+
+    posicoes.forEach((posicao, idx) => {
+      const item = ranking[idx];
+      posicao.valores.push(item ? item.valor : 0);
+      posicao.nomes.push(item ? item.nome : null);
+    });
+  });
+
+  return { meses, posicoes };
 }
 
 const CORES_TOP3 = ["#8C6D1F", "#5B6B4A", "#9fb08c"];
+const ROTULOS_POSICAO_TOP3 = ["1º lugar", "2º lugar", "3º lugar"];
+
+// Códigos oficiais de colaborador (confirmados pelo usuário em 2026-09-23),
+// usados só pra caber um selo curtinho em cima de cada coluna -- os nomes
+// aqui são digitados livres (às vezes abreviados, com grafia levemente
+// diferente do cadastro), por isso o cruzamento com o nome completo real
+// (vindo do ArcGIS) é feito por normalizarComparavel/encontrarCodigoColaborador,
+// não por igualdade direta de string.
+const CODIGOS_COLABORADOR = {
+  "Adeilson Silva": "ADS",
+  "Carlos Alberto": "CAR",
+  "Carlos Henrique": "CHF",
+  "Christian Costa": "CCL",
+  "Gisclayton Arruda": "GAS",
+  "Marcus Levi": "MLS",
+  "Oldair Luciano": "OLD",
+  "Rairan Nascimento": "RNS",
+  "Ronaldo de Oliveira": "ROB",
+  "Gustavo Bandeira Viana": "GBV",
+  "Ailton": "ARR",
+  "Igor Aquino": "IAA",
+  "Jackson": "JZO",
+  "Aparecido Valentin": "AVL",
+};
+
+// Minúsculo, sem acento/pontuação e sem conectores ("da"/"de"/...) -- pra
+// "Adeilson Silva" (código) bater com "Adeilson da Silva" (ArcGIS) e
+// "Ronaldo de Oliveira" bater com "Ronaldo De Oliveira Barbosa".
+function normalizarComparavel(s) {
+  return String(s)
+    .toLowerCase()
+    .replace(/[^a-z0-9À-ÿ\s]/g, "")
+    .split(/\s+/)
+    .filter(w => w && !["da", "de", "do", "das", "dos"].includes(w))
+    .join(" ");
+}
+
+// 1) nome bate exato (já normalizado) com uma chave de CODIGOS_COLABORADOR;
+// 2) a chave é um prefixo do nome completo (cobre nome cadastrado
+//    abreviado, tipo "Marcus Levi" pra "Marcus Levi da Silva"); 3) mesmo
+// primeiro nome e nenhum outro código compartilha esse primeiro nome
+// (cobre "Ailton" pra "Ailton Ramos Rocha Jr."). Sem match -> null (quem
+// chama decide o que mostrar no lugar).
+function encontrarCodigoColaborador(nomeCompleto) {
+  const alvo = normalizarComparavel(nomeCompleto);
+  if (!alvo) return null;
+  const entradas = Object.entries(CODIGOS_COLABORADOR);
+
+  for (const [nomeCurto, codigo] of entradas) {
+    if (normalizarComparavel(nomeCurto) === alvo) return codigo;
+  }
+  for (const [nomeCurto, codigo] of entradas) {
+    const curto = normalizarComparavel(nomeCurto);
+    if (curto && alvo.startsWith(curto + " ")) return codigo;
+  }
+  const primeiroNome = alvo.split(" ")[0];
+  const candidatos = entradas.filter(([nomeCurto]) => normalizarComparavel(nomeCurto).split(" ")[0] === primeiroNome);
+  return candidatos.length === 1 ? candidatos[0][1] : null;
+}
 
 function renderTop3MensalChart(evolucao, sufixo) {
   renderizarChart("chart-top3-mensal" + (sufixo || ""), {
     type: "bar",
     data: {
       labels: evolucao.meses.map(rotuloMes),
-      datasets: evolucao.series.map((s, idx) => ({
-        label: nomeExibicao(s.nome),
-        data: s.valores,
+      datasets: evolucao.posicoes.map((posicao, idx) => ({
+        // A série é a POSIÇÃO (1º/2º/3º lugar daquele mês), não uma pessoa
+        // fixa -- quem ocupa cada posição pode mudar mês a mês. `nomes`
+        // guarda, por mês, o nome completo de quem está naquela posição
+        // (usado no tooltip e pra achar o código do selo).
+        label: ROTULOS_POSICAO_TOP3[idx],
+        data: posicao.valores,
+        nomes: posicao.nomes,
         backgroundColor: CORES_TOP3[idx % CORES_TOP3.length],
         maxBarThickness: 34,
+        // Garante uma barrinha mínima visível mesmo pra valores bem baixos
+        // (senão a barra fica com ~0px de altura, invisível).
+        minBarLength: 4,
+        datalabels: {
+          // Selo com o código oficial do colaborador em cima da coluna --
+          // curto o bastante (3 letras) pra não colidir mesmo com 3 barras
+          // por mês. Sem código cadastrado, cai pro primeiro nome.
+          display: true,
+          anchor: "end",
+          align: "end",
+          offset: 3,
+          backgroundColor: (ctx) => (ctx.dataset.nomes[ctx.dataIndex] ? CORES_TOP3[idx % CORES_TOP3.length] : "transparent"),
+          borderRadius: 4,
+          color: "#fff",
+          padding: { top: 2, bottom: 2, left: 4, right: 4 },
+          font: { size: 9, weight: "700" },
+          formatter: (valor, ctx) => {
+            const nome = ctx.dataset.nomes[ctx.dataIndex];
+            if (!nome) return "";
+            return encontrarCodigoColaborador(nome) || nome.split(" ")[0];
+          },
+        },
       })),
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      layout: { padding: { top: 22 } },
+      layout: { padding: { top: 26 } },
       plugins: {
         legend: { display: true, position: "bottom", labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" } },
         datalabels: { display: false },
         tooltip: {
           backgroundColor: "#1a1a1a",
           padding: 8,
-          callbacks: { label: (ctx) => `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)} ligações` },
+          callbacks: {
+            label: (ctx) => {
+              const nome = ctx.dataset.nomes[ctx.dataIndex];
+              if (!nome) return `${ctx.dataset.label}: sem registros nesse mês`;
+              return `${ctx.dataset.label} — ${nome}: ${NUM.format(ctx.parsed.y)} ligações`;
+            },
+          },
         },
       },
       scales: {
@@ -2206,18 +2712,21 @@ function renderTudo() {
   // registrosResumo (já filtrado pelo técnico selecionado), não
   // registrosPeriodo bruto. A média/meta de cada um usa os PRÓPRIOS dias
   // trabalhados (ver comentário perto de LIGACOES_BASE_DIA).
-  const rankingLista = computeLigacoesPorTecnico(registrosResumo);
+  const rankingLista = computeLigacoesPorTecnico(registrosResumo, inicio, fim, tecnico);
 
-  const resumo = computeResumo(registrosResumo);
-  renderResumo(resumo);
+  const resumo = computeResumo(registrosResumo, tecnico);
+  // "Média diária por técnico" ignora o filtro de técnico do dropdown (é
+  // sempre da equipe inteira) -- ver mediaPorTecnicoDia.
+  const rankingEquipe = tecnico ? computeLigacoesPorTecnico(registrosPeriodo, inicio, fim) : rankingLista;
+  renderResumo(resumo, mediaPorTecnicoDia(rankingEquipe));
   renderComparativoChart(rankingLista);
   renderInsights(rankingLista);
   renderPrevisaoMeta(rankingLista);
   renderMediaDiariaChart(rankingLista);
   renderProgressaoChart(computeProgressaoMensal(registrosPeriodo, tecnico));
 
-  const top3 = renderTop3(rankingLista);
-  renderTop3MensalChart(computeEvolucaoMensalTop3(registrosResumo, top3.map(t => t.nome)));
+  renderTop3(rankingLista);
+  renderTop3MensalChart(computeTop3PorMes(registrosResumo, tecnico));
   renderValoresChart(rankingLista);
   renderCalendarioMeses(computeCalendarioMensal(registrosResumo, tecnico), tecnico);
 
@@ -2319,11 +2828,9 @@ function aplicarCorrecoesVerificadas(registros) {
 // =====================================================================
 let DADOS_MANUAL = {};   // { "AAAA-MM-DD": { "Nome Técnico": ligacoes } }
 let NOMES_MANUAL = [];   // ["Nome Técnico", ...]
-let MEDIAS_SEMANAIS_MANUAIS = {}; // { "AAAA-MM-DD" (segunda da semana): valor editado à mão }
 
 const CHAVE_DADOS_MANUAL = "pc392_manual_dados_v1";
 const CHAVE_NOMES_MANUAL = "pc392_manual_nomes_v1";
-const CHAVE_MEDIAS_SEMANAIS = "pc392_medias_semanais_v1";
 
 function carregarDadosManuais() {
   try {
@@ -2332,13 +2839,6 @@ function carregarDadosManuais() {
   try {
     NOMES_MANUAL = JSON.parse(localStorage.getItem(CHAVE_NOMES_MANUAL)) || [];
   } catch { NOMES_MANUAL = []; }
-  try {
-    MEDIAS_SEMANAIS_MANUAIS = JSON.parse(localStorage.getItem(CHAVE_MEDIAS_SEMANAIS)) || {};
-  } catch { MEDIAS_SEMANAIS_MANUAIS = {}; }
-}
-
-function salvarMediasSemanais() {
-  try { localStorage.setItem(CHAVE_MEDIAS_SEMANAIS, JSON.stringify(MEDIAS_SEMANAIS_MANUAIS)); } catch {}
 }
 
 function salvarDadosManuais() {
@@ -2359,6 +2859,79 @@ function inicializarNomesManuais() {
   }
 }
 
+// =====================================================================
+// Colaboradores e presença (aba Gerencial) -- roster de colaboradores +
+// marcação manual de quem trabalhou em cada dia do período. Serve pra
+// corrigir a meta (650 × dias trabalhados) quando o dia com ligação não
+// reflete presença real (ou vice-versa): sem override aqui, um dia
+// continua contando como "trabalhado" só se tiver ligação (automática ou
+// manual) registrada pra pessoa naquele dia -- mesmo critério de sempre.
+// Persistência: só localStorage, igual as outras abas.
+// =====================================================================
+let NOMES_COLABORADORES = [];  // ["Nome", ...]
+let PRESENCA_MANUAL = {};      // { "AAAA-MM-DD": { "Nome": true|false } }
+let PRESENCA_MANUAL_ULTIMA_VERSAO = "{}"; // snapshot (JSON) de como estava ao abrir a página, pra "Restaurar"
+
+const CHAVE_NOMES_COLABORADORES = "pc392_colaboradores_v1";
+const CHAVE_PRESENCA_MANUAL = "pc392_presenca_v1";
+
+function carregarColaboradores() {
+  try {
+    NOMES_COLABORADORES = JSON.parse(localStorage.getItem(CHAVE_NOMES_COLABORADORES)) || [];
+  } catch { NOMES_COLABORADORES = []; }
+  try {
+    PRESENCA_MANUAL = JSON.parse(localStorage.getItem(CHAVE_PRESENCA_MANUAL)) || {};
+  } catch { PRESENCA_MANUAL = {}; }
+  // Guarda como estava nesse exato carregamento -- é pra isso que o botão
+  // "Restaurar última versão" volta, desfazendo só o que foi clicado
+  // NESTA sessão (não apaga o histórico salvo de sessões anteriores).
+  PRESENCA_MANUAL_ULTIMA_VERSAO = JSON.stringify(PRESENCA_MANUAL);
+}
+
+function salvarColaboradores() {
+  try { localStorage.setItem(CHAVE_NOMES_COLABORADORES, JSON.stringify(NOMES_COLABORADORES)); } catch {}
+}
+
+function salvarPresencaManual() {
+  try { localStorage.setItem(CHAVE_PRESENCA_MANUAL, JSON.stringify(PRESENCA_MANUAL)); } catch {}
+}
+
+// Primeira vez (sem nada salvo ainda): começa com todo mundo que já
+// aparece nos dados (automático + manual) -- só um ponto de partida, dá
+// pra adicionar/remover livremente depois em "+ Colaborador".
+function inicializarColaboradores() {
+  if (NOMES_COLABORADORES.length === 0 && (REGISTROS.length > 0 || NOMES_MANUAL.length > 0)) {
+    const nomes = new Set([...nomesDistintos(REGISTROS), ...NOMES_MANUAL]);
+    NOMES_COLABORADORES = [...nomes].sort((a, b) => a.localeCompare(b, "pt-BR"));
+    salvarColaboradores();
+  }
+}
+
+// true/false/null -- null quando não há override manual pra esse dia+nome
+// (quem chama decide o padrão: hoje, "trabalhou" se tiver ligação).
+function presencaOverride(iso, nome) {
+  const porDia = PRESENCA_MANUAL[iso];
+  if (!porDia || !Object.prototype.hasOwnProperty.call(porDia, nome)) return null;
+  return porDia[nome];
+}
+
+// Aplica os overrides de PRESENCA_MANUAL sobre um conjunto de dias já
+// detectados automaticamente (por ligação) -- usada por toda meta (650 ×
+// dias trabalhados) do painel, nas 3 abas. Sem overrides no período, o
+// resultado é idêntico ao comportamento anterior (dias só contam por ter
+// ligação registrada).
+function diasTrabalhadosComPresenca(nome, diasAutoIso, inicio, fim) {
+  const dias = new Set(diasAutoIso);
+  Object.keys(PRESENCA_MANUAL).forEach(iso => {
+    if (iso < inicio || iso > fim) return;
+    const marcado = presencaOverride(iso, nome);
+    if (marcado === null) return;
+    if (marcado) dias.add(iso);
+    else dias.delete(iso);
+  });
+  return dias;
+}
+
 // Mesmo formato de retorno de computeLigacoesPorTecnico (nome, ligacoes,
 // vistorias, diasTrabalhados, mediaDia, valorPorLigacao, valorReceber,
 // percentual) -- por isso dá pra reusar renderComparativoChart,
@@ -2367,12 +2940,13 @@ function inicializarNomesManuais() {
 function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim) {
   const lista = nomes.map(nome => {
     let ligacoes = 0;
-    let diasComDado = 0;
+    const diasAuto = [];
     Object.keys(dados).forEach(data => {
       if (data < inicio || data > fim) return;
       const valor = Number(dados[data] && dados[data][nome]) || 0;
-      if (valor > 0) { ligacoes += valor; diasComDado++; }
+      if (valor > 0) { ligacoes += valor; diasAuto.push(data); }
     });
+    const diasComDado = diasTrabalhadosComPresenca(nome, diasAuto, inicio, fim).size;
     const meta = LIGACOES_BASE_DIA * diasComDado;
     const mediaDia = diasComDado > 0 ? ligacoes / diasComDado : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
@@ -2386,7 +2960,7 @@ function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim) {
       valorPorLigacao,
       valorReceber: ligacoes * valorPorLigacao,
     };
-  }).sort((a, b) => b.ligacoes - a.ligacoes);
+  }).sort((a, b) => b.ligacoes - a.ligacoes || a.nome.localeCompare(b.nome, "pt-BR"));
 
   const max = lista.length > 0 ? lista[0].ligacoes : 0;
   lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
@@ -2417,7 +2991,13 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
     const n = r.participantes.length;
     if (n === 0) return;
     r.participantes.forEach(p => {
-      const t = garantir(normalizarNome(p));
+      const nome = normalizarNome(p);
+      // Com técnico filtrado, ignora os outros participantes de um
+      // relatório compartilhado -- senão o filtro "vaza" pra quem dividiu
+      // o registro com a pessoa selecionada (mesmo bug de
+      // computeLigacoesPorTecnico).
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
+      const t = garantir(nome);
       t.ligacoesPorDia[r.data] = (t.ligacoesPorDia[r.data] || 0) + r.ligacoes / n;
       t.vistorias += 1 / n;
       t.dias.add(r.data);
@@ -2440,7 +3020,7 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
     const t = totals[nome];
     const dias = Object.keys(t.ligacoesPorDia);
     const ligacoes = dias.reduce((soma, d) => soma + Math.round(t.ligacoesPorDia[d]), 0);
-    const diasTrabalhados = t.dias.size;
+    const diasTrabalhados = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim).size;
     const meta = LIGACOES_BASE_DIA * diasTrabalhados;
     const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
@@ -2454,7 +3034,7 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
       valorPorLigacao,
       valorReceber: ligacoes * valorPorLigacao,
     };
-  }).sort((a, b) => b.ligacoes - a.ligacoes);
+  }).sort((a, b) => b.ligacoes - a.ligacoes || a.nome.localeCompare(b.nome, "pt-BR"));
 
   const max = lista.length > 0 ? lista[0].ligacoes : 0;
   lista.forEach(item => { item.percentual = max > 0 ? (item.ligacoes / max) * 100 : 0; });
@@ -2481,7 +3061,13 @@ function ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro) {
   registrosFiltrados.forEach(r => {
     const n = r.participantes.length;
     if (n === 0) return;
-    r.participantes.forEach(p => add(r.data, normalizarNome(p), r.ligacoes / n));
+    r.participantes.forEach(p => {
+      const nome = normalizarNome(p);
+      // Com técnico filtrado, ignora quem mais estava no mesmo registro
+      // compartilhado -- mesmo motivo de computeLigacoesPorTecnico.
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
+      add(r.data, nome, r.ligacoes / n);
+    });
   });
 
   Object.keys(DADOS_MANUAL).forEach(data => {
@@ -2508,27 +3094,24 @@ function computeProgressaoMensalCombinado(inicio, fim, tecnicoFiltro) {
     const totalDia = Object.values(porDia[data]).reduce((s, v) => s + Math.round(v), 0);
     porMes[mes] = (porMes[mes] || 0) + totalDia;
   });
-  return Object.keys(porMes).sort().map(mes => ({ mes, ligacoes: porMes[mes] }));
+  const valorMes = valorPorMes(porDia);
+  return Object.keys(porMes).sort().map(mes => ({ mes, ligacoes: porMes[mes], valor: (valorMes[mes] || 0) * FATOR_VALOR_PROGRESSAO }));
 }
 
 // Evolução mensal do Top 3 combinada -- mesma ideia, só pros nomes do Top 3.
-function computeEvolucaoMensalTop3Combinado(inicio, fim, tecnicoFiltro, nomesTop3) {
+// Mesma ideia de computeTop3PorMes (Top 3 recalculado mês a mês, não pelo
+// total do período), só que a partir do combinado automático+manual.
+function computeTop3PorMesCombinado(inicio, fim, tecnicoFiltro) {
   const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro);
   const porMes = {}; // mes -> { nome -> total }
   Object.keys(porDia).forEach(data => {
     const mes = chaveMes(data);
     if (!porMes[mes]) porMes[mes] = {};
     Object.entries(porDia[data]).forEach(([nome, valor]) => {
-      if (!nomesTop3.includes(nome)) return;
       porMes[mes][nome] = (porMes[mes][nome] || 0) + Math.round(valor);
     });
   });
-  const meses = Object.keys(porMes).sort();
-  const series = nomesTop3.map(nome => ({
-    nome,
-    valores: meses.map(mes => (porMes[mes] && porMes[mes][nome]) || 0),
-  }));
-  return { meses, series };
+  return montarPosicoesPorMes(porMes);
 }
 
 // Calendário combinado -- não arredonda por pessoa/dia aqui (só na hora de
@@ -2546,13 +3129,37 @@ function computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro) {
 // "Total de ligações" de verdade. Os indicadores de baixo (lançamentos,
 // maior lançamento) continuam olhando só pra dados/DADOS_MANUAL puro,
 // porque são especificamente sobre o que foi digitado, não o total.
-function renderResumoManual(rankingLista, dados, registrosAutomatico, inicio, fim) {
+function renderResumoManual(rankingLista, dados, registrosAutomatico, inicio, fim, rankingEquipe) {
   const totalLigacoes = rankingLista.reduce((s, i) => s + i.ligacoes, 0);
   const tecnicosComDado = rankingLista.filter(i => i.ligacoes > 0).length;
 
   const diasAtividade = new Set();
   registrosAutomatico.forEach(r => { if (r.participantes.length > 0) diasAtividade.add(r.data); });
 
+  Object.keys(dados).forEach(data => {
+    if (data < inicio || data > fim) return;
+    Object.values(dados[data] || {}).forEach(v => {
+      if ((Number(v) || 0) > 0) diasAtividade.add(data);
+    });
+  });
+
+  document.getElementById("kpi-ligacoes-manual").textContent = NUM.format(Math.round(totalLigacoes));
+  // "Média diária por técnico" -- da EQUIPE INTEIRA (não do técnico
+  // filtrado no dropdown), mesmo critério da aba Automático, ver
+  // mediaPorTecnicoDia.
+  const listaEquipe = rankingEquipe || rankingLista;
+  document.getElementById("kpi-media-tecnico-manual").textContent =
+    NUM.format(Math.round(mediaPorTecnicoDia(listaEquipe)));
+  document.getElementById("kpi-tecnicos-manual").textContent = NUM.format(tecnicosComDado);
+  document.getElementById("kpi-dias-manual").textContent = NUM.format(diasAtividade.size);
+}
+
+// "Indicadores de produção (manual)" ficam na aba Gerencial (controle/
+// importação), separados do resumo acima (que é só dashboard, aba Manual)
+// -- mesmo critério de sempre pra achar lançamento (valor > 0 num dia do
+// período), só que sem precisar do ranking combinado nem dos registros
+// automáticos.
+function renderIndicadoresLancamentoManual(dados, inicio, fim) {
   let totalLancamentos = 0;
   let maior = 0;
   Object.keys(dados).forEach(data => {
@@ -2560,109 +3167,13 @@ function renderResumoManual(rankingLista, dados, registrosAutomatico, inicio, fi
     Object.values(dados[data] || {}).forEach(v => {
       const n = Number(v) || 0;
       if (n > 0) {
-        diasAtividade.add(data);
         totalLancamentos++;
         maior = Math.max(maior, n);
       }
     });
   });
-
-  document.getElementById("kpi-ligacoes-manual").textContent = NUM.format(Math.round(totalLigacoes));
-  document.getElementById("kpi-media-tecnico-manual").textContent =
-    NUM.format(tecnicosComDado > 0 ? Math.round(totalLigacoes / tecnicosComDado) : 0);
-  document.getElementById("kpi-tecnicos-manual").textContent = NUM.format(tecnicosComDado);
-  document.getElementById("kpi-dias-manual").textContent = NUM.format(diasAtividade.size);
   document.getElementById("ind-lancamentos-manual").textContent = NUM.format(totalLancamentos);
   document.getElementById("ind-maior-manual").textContent = NUM.format(Math.round(maior));
-}
-
-// Segunda-feira (UTC) da semana ISO daquela data -- usada como chave da
-// semana pra agrupar os lançamentos manuais.
-function inicioSemana(iso) {
-  const d = new Date(iso + "T00:00:00Z");
-  const diaSemana = d.getUTCDay() || 7; // domingo (0) -> 7
-  const seg = new Date(d);
-  seg.setUTCDate(d.getUTCDate() - diaSemana + 1);
-  return seg.toISOString().slice(0, 10);
-}
-
-function fimSemana(inicioIso) {
-  const d = new Date(inicioIso + "T00:00:00Z");
-  d.setUTCDate(d.getUTCDate() + 6);
-  return d.toISOString().slice(0, 10);
-}
-
-// Média de TODOS os lançamentos manuais (todo técnico, todo dia) dentro de
-// cada semana do período filtrado -- é o número usado como referência pra
-// preencher dias de FISCAL/LOC. VAZ/OUTRO PC (ver [[project_pc392_dashboard]]),
-// calculado direto de cima do que está na tabela de lançamento agora, não
-// de um valor fixo importado uma vez só.
-function computeMediaSemanalManual(dados, inicio, fim) {
-  const porSemana = {};
-  Object.keys(dados).forEach(data => {
-    if (data < inicio || data > fim) return;
-    const semana = inicioSemana(data);
-    Object.values(dados[data] || {}).forEach(v => {
-      const n = Number(v) || 0;
-      if (n <= 0) return;
-      if (!porSemana[semana]) porSemana[semana] = [];
-      porSemana[semana].push(n);
-    });
-  });
-  return Object.keys(porSemana).sort().map(semana => {
-    const valores = porSemana[semana];
-    const media = valores.reduce((a, b) => a + b, 0) / valores.length;
-    return { semana, fim: fimSemana(semana), media, amostras: valores.length };
-  });
-}
-
-function renderTabelaMediaSemanal(inicio, fim) {
-  const tabela = document.getElementById("tabela-media-semanal");
-  const semanas = computeMediaSemanalManual(DADOS_MANUAL, inicio, fim);
-
-  if (semanas.length === 0) {
-    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Sem lançamentos no período selecionado.</td></tr>`;
-    return;
-  }
-
-  const thead = `<thead><tr><th class="col-data">Semana</th><th>Média calculada</th><th>Amostras</th><th>Média usada (editável)</th><th></th></tr></thead>`;
-  const linhas = semanas.map(s => {
-    const [, m1, d1] = s.semana.split("-");
-    const [, m2, d2] = s.fim.split("-");
-    const temOverride = Object.prototype.hasOwnProperty.call(MEDIAS_SEMANAIS_MANUAIS, s.semana);
-    const valorUsado = temOverride ? MEDIAS_SEMANAIS_MANUAIS[s.semana] : Math.round(s.media * 100) / 100;
-    return `<tr>
-      <td class="col-data">${d1}/${m1} – ${d2}/${m2}</td>
-      <td>${NUM.format(Math.round(s.media * 100) / 100)}</td>
-      <td>${NUM.format(s.amostras)}</td>
-      <td><input type="number" step="0.01" min="0" class="celula-manual media-semanal-input" data-semana="${s.semana}" value="${valorUsado}"></td>
-      <td>${temOverride ? `<button type="button" class="btn-manual btn-manual-secundario media-semanal-resetar" data-semana="${s.semana}" title="Voltar pro valor calculado">Restaurar</button>` : ""}</td>
-    </tr>`;
-  }).join("");
-
-  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
-
-  tabela.querySelectorAll(".media-semanal-input").forEach(input => {
-    input.addEventListener("change", (e) => {
-      const semana = e.target.dataset.semana;
-      const valor = parseFloat(e.target.value);
-      if (!valor || valor <= 0) {
-        delete MEDIAS_SEMANAIS_MANUAIS[semana];
-      } else {
-        MEDIAS_SEMANAIS_MANUAIS[semana] = valor;
-      }
-      salvarMediasSemanais();
-      renderTabelaMediaSemanal(inicio, fim);
-    });
-  });
-
-  tabela.querySelectorAll(".media-semanal-resetar").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      delete MEDIAS_SEMANAIS_MANUAIS[e.currentTarget.dataset.semana];
-      salvarMediasSemanais();
-      renderTabelaMediaSemanal(inicio, fim);
-    });
-  });
 }
 
 function renderTabelaManual(inicio, fim) {
@@ -2708,7 +3219,7 @@ function renderTabelaManual(inicio, fim) {
         DADOS_MANUAL[data][nome] = valor;
       }
       salvarDadosManuais();
-      renderManualView();
+      renderGerencialView();
     });
   });
 
@@ -2718,7 +3229,7 @@ function renderTabelaManual(inicio, fim) {
       if (!confirm(`Remover "${nomeExibicao(nome)}" da lista de lançamento? Os valores já digitados pra essa pessoa continuam salvos, só param de aparecer.`)) return;
       NOMES_MANUAL = NOMES_MANUAL.filter(n => n !== nome);
       salvarNomesManuais();
-      renderManualView();
+      renderGerencialView();
     });
   });
 }
@@ -2738,20 +3249,19 @@ function renderManualView() {
   const registrosAutomaticoFiltrado = tecnicoFiltro
     ? filtrarPorData(REGISTROS, inicio, fim).filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
     : filtrarPorData(REGISTROS, inicio, fim);
+  const rankingCombinadoEquipe = tecnicoFiltro ? computeLigacoesPorTecnicoCombinado(inicio, fim, "") : rankingCombinado;
 
-  renderResumoManual(rankingCombinado, DADOS_MANUAL, registrosAutomaticoFiltrado, inicio, fim);
+  renderResumoManual(rankingCombinado, DADOS_MANUAL, registrosAutomaticoFiltrado, inicio, fim, rankingCombinadoEquipe);
   renderComparativoChart(rankingCombinado, "-manual");
   renderInsights(rankingCombinado, "-manual");
   renderPrevisaoMeta(rankingCombinado, "-manual");
   renderMediaDiariaChart(rankingCombinado, "-manual");
 
-  const top3Manual = renderTop3(rankingCombinado, "-manual");
-  renderTop3MensalChart(computeEvolucaoMensalTop3Combinado(inicio, fim, tecnicoFiltro, top3Manual.map(t => t.nome)), "-manual");
+  renderTop3(rankingCombinado, "-manual");
+  renderTop3MensalChart(computeTop3PorMesCombinado(inicio, fim, tecnicoFiltro), "-manual");
   renderProgressaoChart(computeProgressaoMensalCombinado(inicio, fim, tecnicoFiltro), "-manual");
   renderValoresChart(rankingCombinado, "-manual");
   renderCalendarioMeses(computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro), tecnicoFiltro, "-manual");
-  renderTabelaManual(inicio, fim);
-  renderTabelaMediaSemanal(inicio, fim);
 }
 
 function configurarAcoesManuais() {
@@ -2766,7 +3276,7 @@ function configurarAcoesManuais() {
     NOMES_MANUAL.push(nome);
     salvarNomesManuais();
     input.value = "";
-    renderManualView();
+    renderGerencialView();
   });
 
   document.getElementById("manual-novo-tecnico").addEventListener("keydown", (e) => {
@@ -2811,7 +3321,7 @@ function configurarAcoesManuais() {
         }
         salvarNomesManuais();
         salvarDadosManuais();
-        renderManualView();
+        renderGerencialView();
         alert("Dados importados e mesclados com sucesso.");
       } catch (err) {
         alert("Arquivo inválido: " + err.message);
@@ -3141,13 +3651,19 @@ function renderGerencialView() {
   const inicio = document.getElementById("filtro-data-inicio").value;
   const fim = document.getElementById("filtro-data-fim").value;
   const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
+  renderTabelaManual(inicio, fim);
+  if (inicio && fim) renderIndicadoresLancamentoManual(DADOS_MANUAL, inicio, fim);
+  renderListaColaboradores();
+  renderCalendarioPresenca(inicio, fim);
+  renderTabelaMetasColaboradores(inicio, fim);
+  renderTabelaMedicao(inicio, fim);
   if (!inicio || !fim) return;
 
   const registrosPeriodo = filtrarPorData(REGISTROS, inicio, fim);
   const registrosFiltrados = tecnicoFiltro
     ? registrosPeriodo.filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
     : registrosPeriodo;
-  const rankingAuto = computeLigacoesPorTecnico(registrosFiltrados);
+  const rankingAuto = computeLigacoesPorTecnico(registrosFiltrados, inicio, fim, tecnicoFiltro);
   const rankingManual = computeLigacoesPorTecnicoManual(DADOS_MANUAL, NOMES_MANUAL, inicio, fim);
 
   const nomes = [...new Set([...rankingAuto.map(i => i.nome), ...rankingManual.map(i => i.nome)])]
@@ -3176,6 +3692,235 @@ function renderGerencialView() {
 
   tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
   document.getElementById("gerencial-diff-total").textContent = `${totalDiff > 0 ? "+" : ""}${NUM.format(totalDiff)} ligações`;
+}
+
+// Lista de colaboradores cadastrados, como chips com botão de remover --
+// fica acima do calendário de presença (que não tem espaço pra isso em
+// cada dia).
+function renderListaColaboradores() {
+  const container = document.getElementById("lista-colaboradores");
+  if (NOMES_COLABORADORES.length === 0) {
+    container.innerHTML = `<p style="margin:0;color:var(--text-muted);font-size:0.85rem;">Nenhum colaborador cadastrado ainda -- use "+ Colaborador" acima.</p>`;
+    popularSelectColaboradorPresenca();
+    return;
+  }
+
+  container.innerHTML = NOMES_COLABORADORES.map(nome => `
+    <span class="colaborador-pill">${nomeExibicao(nome)}<button type="button" class="remover-colaborador" data-nome="${nome.replace(/"/g, "&quot;")}" title="Remover colaborador da lista">✕</button></span>
+  `).join("");
+
+  popularSelectColaboradorPresenca();
+
+  container.querySelectorAll("button.remover-colaborador").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const nome = e.currentTarget.dataset.nome;
+      if (!confirm(`Remover "${nomeExibicao(nome)}" da lista de colaboradores? A presença já marcada pra essa pessoa continua salva, só para de aparecer aqui.`)) return;
+      NOMES_COLABORADORES = NOMES_COLABORADORES.filter(n => n !== nome);
+      salvarColaboradores();
+      renderGerencialView();
+    });
+  });
+}
+
+// Chaves "AAAA-MM" de todo mês tocado pelo período (inclusive os das
+// pontas) -- diferente de computeCalendarioMensal, que só lista meses com
+// dado: aqui precisamos dos dias mesmo sem ligação nenhuma, pra dar pra
+// marcar presença neles.
+function mesesNoPeriodo(inicio, fim) {
+  const [anoIni, mesIni] = inicio.split("-").map(Number);
+  const [anoFim, mesFim] = fim.split("-").map(Number);
+  const meses = [];
+  let ano = anoIni, mes = mesIni;
+  while (ano < anoFim || (ano === anoFim && mes <= mesFim)) {
+    meses.push(`${ano}-${String(mes).padStart(2, "0")}`);
+    mes++;
+    if (mes > 12) { mes = 1; ano++; }
+  }
+  return meses;
+}
+
+// Preenche o <select> do calendário de presença com os colaboradores
+// cadastrados -- mantém a seleção atual se a pessoa ainda estiver na
+// lista (senão volta pra "Todo mundo").
+function popularSelectColaboradorPresenca() {
+  const select = document.getElementById("presenca-colaborador-select");
+  const atual = select.value;
+  select.innerHTML = `<option value="">Todo mundo (dia inteiro)</option>` +
+    NOMES_COLABORADORES.map(nome => `<option value="${nome.replace(/"/g, "&quot;")}">${nomeExibicao(nome)}</option>`).join("");
+  select.value = NOMES_COLABORADORES.includes(atual) ? atual : "";
+}
+
+// Calendário de presença (aba Gerencial) -- mesma grade de mês do
+// calendário de ligações (ver renderCalendarioMeses), cobrindo TODO dia do
+// período (não só os com ligação). Um valor só por dia: ou a pessoa
+// escolhida no seletor acima (clique no dia alterna só ela), ou, com
+// "Todo mundo" selecionado, quantos dos colaboradores estão marcados
+// naquele dia (clique marca/desmarca todos de uma vez). Sem override
+// salvo, o padrão é o de sempre: "trabalhou" se tiver ligação (automática
+// ou manual) registrada pra pessoa naquele dia.
+function renderCalendarioPresenca(inicio, fim) {
+  const container = document.getElementById("calendario-presenca");
+  if (!inicio || !fim) { container.innerHTML = ""; return; }
+
+  if (NOMES_COLABORADORES.length === 0) {
+    container.innerHTML = "";
+    return;
+  }
+
+  const pessoa = document.getElementById("presenca-colaborador-select").value;
+  const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, "");
+  const efetivo = (iso, nome) => {
+    const override = presencaOverride(iso, nome);
+    return override !== null ? override : !!(porDia[iso] && porDia[iso][nome] > 0);
+  };
+
+  container.innerHTML = "";
+
+  mesesNoPeriodo(inicio, fim).forEach(mesChave => {
+    const [ano, mes] = mesChave.split("-").map(Number);
+    const primeiroDiaSemana = new Date(Date.UTC(ano, mes - 1, 1)).getUTCDay();
+    const diasNoMes = new Date(Date.UTC(ano, mes, 0)).getUTCDate();
+
+    const celulas = [];
+    for (let i = 0; i < primeiroDiaSemana; i++) celulas.push(null);
+    for (let d = 1; d <= diasNoMes; d++) {
+      const iso = `${ano}-${String(mes).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      if (iso < inicio || iso > fim) { celulas.push(null); continue; }
+      const diaSemana = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
+      celulas.push({ iso, dia: d, fimSemana: diaSemana === 0 || diaSemana === 6, feriado: FERIADOS.has(iso) });
+    }
+
+    const diasHtml = celulas.map(cel => {
+      if (!cel) return `<div class="mes-calendario-dia presenca-dia fora-mes"></div>`;
+      const classes = ["mes-calendario-dia", "presenca-dia"];
+      if (cel.fimSemana) classes.push("fim-semana");
+      if (cel.feriado) classes.push("feriado");
+
+      let valorHtml = "";
+      let titulo;
+      if (pessoa) {
+        const marcado = efetivo(cel.iso, pessoa);
+        if (marcado) classes.push("marcado");
+        titulo = `${nomeExibicao(pessoa)} -- ${marcado ? "trabalhou" : "não trabalhou"} (clique pra alternar)`;
+      } else {
+        const marcados = NOMES_COLABORADORES.filter(nome => efetivo(cel.iso, nome)).length;
+        if (marcados === NOMES_COLABORADORES.length) classes.push("completo");
+        else if (marcados > 0) classes.push("parcial");
+        valorHtml = `<span class="dia-valor">${marcados}/${NOMES_COLABORADORES.length}</span>`;
+        titulo = `${marcados} de ${NOMES_COLABORADORES.length} colaboradores trabalharam (clique pra marcar/desmarcar todo mundo)`;
+      }
+
+      return `<div class="${classes.join(" ")}" data-data="${cel.iso}" title="${titulo.replace(/"/g, "&quot;")}">
+        <span class="dia-num">${cel.dia}</span>
+        ${valorHtml}
+      </div>`;
+    }).join("");
+
+    const bloco = document.createElement("div");
+    bloco.className = "mes-calendario";
+    bloco.innerHTML = `
+      <div class="mes-calendario-header">
+        <span class="mes-calendario-titulo">${rotuloMesCompleto(mesChave)}</span>
+      </div>
+      <div class="mes-calendario-semana">${DIAS_SEMANA_ABREV.map(d => `<span>${d}</span>`).join("")}</div>
+      <div class="mes-calendario-grid">${diasHtml}</div>
+    `;
+    container.appendChild(bloco);
+  });
+
+  container.querySelectorAll(".presenca-dia:not(.fora-mes)").forEach(diaEl => {
+    diaEl.addEventListener("click", () => {
+      const data = diaEl.dataset.data;
+      if (!PRESENCA_MANUAL[data]) PRESENCA_MANUAL[data] = {};
+      if (pessoa) {
+        PRESENCA_MANUAL[data][pessoa] = !diaEl.classList.contains("marcado");
+      } else {
+        const todosMarcados = diaEl.classList.contains("completo");
+        NOMES_COLABORADORES.forEach(nome => { PRESENCA_MANUAL[data][nome] = !todosMarcados; });
+      }
+      salvarPresencaManual();
+      renderGerencialView();
+    });
+  });
+}
+
+// Resumo de meta por colaborador cadastrado (todo o roster, ativo ou não
+// no período) -- dias trabalhados e ligações vêm da presença marcada acima
+// (diasTrabalhadosComPresenca), meta/valor seguem a mesma regra fixa de
+// LIGACOES_BASE_DIA/valorPorLigacaoMediaDia usada no resto do painel.
+function renderTabelaMetasColaboradores(inicio, fim) {
+  const tabela = document.getElementById("tabela-metas-colaboradores");
+  if (!inicio || !fim) { tabela.innerHTML = ""; return; }
+
+  if (NOMES_COLABORADORES.length === 0) {
+    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Nenhum colaborador cadastrado ainda.</td></tr>`;
+    return;
+  }
+
+  const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, "");
+
+  const linhas = NOMES_COLABORADORES.map(nome => {
+    const diasAuto = Object.keys(porDia).filter(iso => (porDia[iso][nome] || 0) > 0);
+    const diasTrabalhados = diasTrabalhadosComPresenca(nome, diasAuto, inicio, fim).size;
+    const ligacoes = diasAuto.reduce((soma, iso) => soma + Math.round(porDia[iso][nome]), 0);
+    const meta = LIGACOES_BASE_DIA * diasTrabalhados;
+    const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
+    const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
+    return { nome, diasTrabalhados, meta, ligacoes, mediaDia, valorReceber: ligacoes * valorPorLigacao };
+  }).sort((a, b) => b.ligacoes - a.ligacoes);
+
+  const thead = `<thead><tr><th class="col-data">Colaborador</th><th>Dias trabalhados</th><th>Meta (650×dias)</th><th>Ligações</th><th>Média/dia</th><th>Valor a receber</th></tr></thead>`;
+  const corpo = linhas.map(i => `<tr>
+    <td class="col-data">${nomeExibicao(i.nome)}</td>
+    <td>${NUM.format(i.diasTrabalhados)}</td>
+    <td>${NUM.format(Math.round(i.meta))}</td>
+    <td>${NUM.format(i.ligacoes)}</td>
+    <td>${i.mediaDia.toFixed(1).replace(".", ",")}</td>
+    <td>${BRL.format(i.valorReceber)}</td>
+  </tr>`).join("");
+
+  tabela.innerHTML = thead + `<tbody>${corpo}</tbody>`;
+}
+
+function configurarAcoesColaboradores() {
+  document.getElementById("colaborador-add").addEventListener("click", () => {
+    const input = document.getElementById("colaborador-novo-nome");
+    const nome = input.value.trim();
+    if (!nome) return;
+    if (NOMES_COLABORADORES.some(n => n.toLowerCase() === nome.toLowerCase())) {
+      alert("Esse colaborador já está na lista.");
+      return;
+    }
+    NOMES_COLABORADORES.push(nome);
+    salvarColaboradores();
+    input.value = "";
+    renderGerencialView();
+  });
+
+  document.getElementById("colaborador-novo-nome").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") document.getElementById("colaborador-add").click();
+  });
+
+  document.getElementById("presenca-colaborador-select").addEventListener("change", () => {
+    const inicio = document.getElementById("filtro-data-inicio").value;
+    const fim = document.getElementById("filtro-data-fim").value;
+    renderCalendarioPresenca(inicio, fim);
+  });
+
+  // Desfaz só o que foi clicado NESTA sessão (volta pro snapshot salvo em
+  // PRESENCA_MANUAL_ULTIMA_VERSAO, tirado quando a página carregou) -- não
+  // apaga o histórico de marcações de sessões anteriores, diferente de
+  // zerar tudo pro automático.
+  document.getElementById("presenca-restaurar").addEventListener("click", () => {
+    if (JSON.stringify(PRESENCA_MANUAL) === PRESENCA_MANUAL_ULTIMA_VERSAO) {
+      alert("Não há nenhuma mudança nesta sessão pra desfazer -- já está igual à última vez que a página foi aberta.");
+      return;
+    }
+    if (!confirm("Isso desfaz as marcações de presença feitas nesta sessão (desde que a página foi aberta) e volta pro que estava salvo da última vez. Confirma?")) return;
+    PRESENCA_MANUAL = JSON.parse(PRESENCA_MANUAL_ULTIMA_VERSAO);
+    salvarPresencaManual();
+    renderGerencialView();
+  });
 }
 
 // =====================================================================
@@ -3238,9 +3983,13 @@ async function init() {
 
     carregarDadosManuais();
     inicializarNomesManuais();
+    carregarColaboradores();
+    inicializarColaboradores();
+    carregarMedicao();
     carregarDadosRDC();
     configurarAbas();
     configurarAcoesManuais();
+    configurarAcoesColaboradores();
     configurarAcoesRDC();
 
     const hoje = new Date().toISOString().slice(0, 10);
