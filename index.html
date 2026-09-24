@@ -1660,7 +1660,9 @@ function computeLigacoesPorTecnico(registros, inicio, fim, tecnicoFiltro) {
     // só um bate célula a célula com a planilha pra validação.
     const dias = Object.keys(tt.ligacoesPorDia);
     const diasTrabalhados = diasTrabalhadosComPresenca(nome, dias, inicio, fim).size;
-    const diasMedia = diasTrabalhadosComPresenca(nome, dias, inicio, fim, false).size;
+    // Dias com ligação, sem presença manual: a "Média diária por técnico"
+    // tem que ser a mesma em qualquer navegador e bater com a planilha.
+    const diasMedia = dias.length;
     const ligacoesTotal = dias.reduce((soma, data) => soma + Math.round(tt.ligacoesPorDia[data]), 0);
     tt.ligacoes = ligacoesTotal;
     const meta = LIGACOES_BASE_DIA * diasTrabalhados;
@@ -3124,7 +3126,7 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
     const dias = Object.keys(t.ligacoesPorDia);
     const ligacoes = dias.reduce((soma, d) => soma + Math.round(t.ligacoesPorDia[d]), 0);
     const diasTrabalhados = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim).size;
-    const diasMedia = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim, false).size;
+    const diasMedia = t.dias.size;
     const meta = LIGACOES_BASE_DIA * diasTrabalhados;
     const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
