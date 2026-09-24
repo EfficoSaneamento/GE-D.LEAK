@@ -1612,7 +1612,10 @@ function computeResumo(registros, tecnicoFiltro) {
 // inteira, ignorando o filtro de técnico do dropdown.
 function mediaPorTecnicoDia(rankingLista) {
   const totalLigacoes = rankingLista.reduce((s, i) => s + i.ligacoes, 0);
-  const totalDias = rankingLista.reduce((s, i) => s + i.diasTrabalhados, 0);
+  // Conta só os dias em que a pessoa teve ligação (célula preenchida na
+  // planilha), sem o "todos os dias úteis marcados" da presença -- senão a
+  // média deixa de bater com o Excel (ex.: 8, 10 e 11/09 = 4.871 ÷ 12 = 405,9).
+  const totalDias = rankingLista.reduce((s, i) => s + (i.diasMedia !== undefined ? i.diasMedia : i.diasTrabalhados), 0);
   return totalDias > 0 ? totalLigacoes / totalDias : 0;
 }
 
@@ -1657,6 +1660,7 @@ function computeLigacoesPorTecnico(registros, inicio, fim, tecnicoFiltro) {
     // só um bate célula a célula com a planilha pra validação.
     const dias = Object.keys(tt.ligacoesPorDia);
     const diasTrabalhados = diasTrabalhadosComPresenca(nome, dias, inicio, fim).size;
+    const diasMedia = diasTrabalhadosComPresenca(nome, dias, inicio, fim, false).size;
     const ligacoesTotal = dias.reduce((soma, data) => soma + Math.round(tt.ligacoesPorDia[data]), 0);
     tt.ligacoes = ligacoesTotal;
     const meta = LIGACOES_BASE_DIA * diasTrabalhados;
@@ -1667,6 +1671,7 @@ function computeLigacoesPorTecnico(registros, inicio, fim, tecnicoFiltro) {
       ligacoes: tt.ligacoes,
       vistorias: tt.vistorias,
       diasTrabalhados,
+      diasMedia,
       meta,
       mediaDia,
       valorPorLigacao,
@@ -3017,9 +3022,9 @@ function diasUteisPadrao(inicio, fim) {
 // dias úteis (padrão "tudo marcado"), depois aplica os overrides de
 // PRESENCA_MANUAL (desmarcar tira o dia, marcar põe) -- usada por toda meta
 // (650 × dias trabalhados) do painel, nas 3 abas.
-function diasTrabalhadosComPresenca(nome, diasAutoIso, inicio, fim) {
+function diasTrabalhadosComPresenca(nome, diasAutoIso, inicio, fim, incluirPadrao = true) {
   const dias = new Set(diasAutoIso);
-  diasUteisPadrao(inicio, fim).forEach(iso => dias.add(iso));
+  if (incluirPadrao) diasUteisPadrao(inicio, fim).forEach(iso => dias.add(iso));
   Object.keys(PRESENCA_MANUAL).forEach(iso => {
     if (iso < inicio || iso > fim) return;
     const marcado = presencaOverride(iso, nome);
@@ -3119,6 +3124,7 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
     const dias = Object.keys(t.ligacoesPorDia);
     const ligacoes = dias.reduce((soma, d) => soma + Math.round(t.ligacoesPorDia[d]), 0);
     const diasTrabalhados = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim).size;
+    const diasMedia = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim, false).size;
     const meta = LIGACOES_BASE_DIA * diasTrabalhados;
     const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
@@ -3127,6 +3133,7 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
       ligacoes,
       vistorias: t.vistorias,
       diasTrabalhados,
+      diasMedia,
       meta,
       mediaDia,
       valorPorLigacao,
