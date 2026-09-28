@@ -936,8 +936,6 @@
   .modal-lista { max-height: 320px; overflow-y: auto; margin: 0 0 16px; border-top: 1px solid var(--gridline); }
   .modal-linha { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 2px; border-bottom: 1px solid #f0f0ee; font-size: 0.82rem; }
   .modal-linha input { width: 96px; }
-  .mes-calendario-dia.editavel { cursor: pointer; }
-  .mes-calendario-dia.editavel:hover { box-shadow: inset 0 0 0 1.5px var(--header-bg); }
   .modal-texto { margin: 0 0 16px; font-size: 0.88rem; line-height: 1.5; color: var(--text-dark); }
   .modal-acoes { display: flex; justify-content: flex-end; gap: 8px; }
   .aviso-toast {
@@ -1310,7 +1308,7 @@
         <div class="card-title">Calendário de ligações</div>
         <div class="valores-total" id="calendario-legenda-manual">Total da equipe por dia</div>
       </div>
-      <p class="manual-aviso" style="margin-top:-4px;">Total do dia = ArcGIS + médias lançadas (a média de cada dia aparece em verde dentro do dia). Pra editar as médias, use o calendário na aba Gerencial. Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
+      <p class="manual-aviso" style="margin-top:-4px;">Total do dia = ArcGIS + médias lançadas (a média de cada dia aparece em verde dentro do dia). Pra editar as médias, use a tabela "Lançamento manual" na aba Gerencial. Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
       <div id="calendario-meses-manual"></div>
     </div>
   </section>
@@ -1334,6 +1332,13 @@
   <section>
     <div class="section-title">Meta por colaborador</div>
     <div class="card">
+      <div class="card-title">Meta diária por semana (editável)</div>
+      <p class="manual-aviso" style="margin-top:0;">A meta diária padrão é 650 ligações. Quando a meta de um colaborador for diferente numa semana (ex.: entrou depois, combinado à parte etc.), edite aqui -- vale só pra aquela semana e aquele colaborador. Deixe 650 (ou apague) pra voltar ao padrão. As faixas de valor por ligação (R$ 0,05/R$ 0,10) continuam comparando com 650 fixo pra todo mundo -- só o número da meta muda.</p>
+      <div class="calendario-scroll" style="max-height:320px;">
+        <table class="tabela-manual" id="tabela-meta-semanal"></table>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
       <div class="card-title-row">
         <div class="card-title">Meta, ligações e valor a receber (conforme presença marcada em "Colaboradores e presença")</div>
       </div>
@@ -1370,15 +1375,6 @@
   <section>
     <div class="section-title">Lançamento manual</div>
     <div class="card">
-      <div class="card-title-row">
-        <div class="card-title">Calendário de médias por dia</div>
-        <div class="valores-total" id="calendario-legenda-gerencial">Total da equipe por dia</div>
-      </div>
-      <p class="manual-aviso" style="margin-top:-4px;"><strong>Clique num dia pra editar a média lançada de cada colaborador</strong> (a meta deles muda com frequência). O valor fica salvo e aparece no calendário e no ranking da aba ArcGis + Médias. A média de cada dia aparece em verde dentro do dia; dias com borda vermelha e • são feriados.</p>
-      <div id="calendario-meses-gerencial"></div>
-    </div>
-
-    <div class="card" style="margin-top:16px;">
       <div class="card-title-row">
         <div class="card-title">Ligações por dia, por técnico</div>
         <div class="manual-acoes">
@@ -1549,6 +1545,116 @@ function valorPorLigacaoMediaDia(mediaDia) {
   return 0;
 }
 
+// Meta semanal personalizada por colaborador (aba Gerencial): a meta
+// diária padrão é LIGACOES_BASE_DIA (650) pra todo mundo, mas um
+// colaborador pode ter uma meta diferente numa semana específica --
+// confirmado com o usuário em 2026-09-28. Muda só o NÚMERO da meta
+// (650×dias vira taxa_da_semana×dias); as faixas de R$/ligação continuam
+// comparando com 650 fixo pra todo mundo, não com a meta personalizada.
+let METAS_SEMANAIS_COLABORADOR = {}; // { nome: { "AAAA-MM-DD" (segunda da semana): metaDiaria } }
+const CHAVE_METAS_SEMANAIS = "pc392_metas_semanais_v1";
+
+function carregarMetasSemanais() {
+  try {
+    METAS_SEMANAIS_COLABORADOR = JSON.parse(localStorage.getItem(CHAVE_METAS_SEMANAIS)) || {};
+  } catch { METAS_SEMANAIS_COLABORADOR = {}; }
+}
+
+function salvarMetasSemanais() {
+  try { localStorage.setItem(CHAVE_METAS_SEMANAIS, JSON.stringify(METAS_SEMANAIS_COLABORADOR)); } catch {}
+}
+
+// Segunda-feira (UTC) da semana ISO daquela data -- chave usada pra
+// agrupar a meta semanal de cada colaborador.
+function inicioSemanaIso(iso) {
+  const d = new Date(iso + "T00:00:00Z");
+  const diaSemana = d.getUTCDay() || 7; // domingo (0) -> 7
+  d.setUTCDate(d.getUTCDate() - diaSemana + 1);
+  return d.toISOString().slice(0, 10);
+}
+
+function fimSemanaIso(inicioIso) {
+  const d = new Date(inicioIso + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + 6);
+  return d.toISOString().slice(0, 10);
+}
+
+function semanasNoPeriodo(inicio, fim) {
+  const semanas = [];
+  let cursor = inicioSemanaIso(inicio);
+  while (cursor <= fim) {
+    semanas.push(cursor);
+    const d = new Date(cursor + "T00:00:00Z");
+    d.setUTCDate(d.getUTCDate() + 7);
+    cursor = d.toISOString().slice(0, 10);
+  }
+  return semanas;
+}
+
+// Meta diária de um colaborador numa semana -- personalizada, se editada,
+// senão a base (650).
+function metaDiariaColaborador(nome, semanaIso) {
+  const porNome = METAS_SEMANAIS_COLABORADOR[nome];
+  const valor = porNome ? porNome[semanaIso] : undefined;
+  return valor !== undefined && valor !== null ? valor : LIGACOES_BASE_DIA;
+}
+
+// Soma, pra cada semana em que o colaborador tem um dia trabalhado (Set de
+// ISOs), a meta diária daquela semana (personalizada ou a base) × os dias
+// trabalhados dele naquela semana -- assim editar a meta de uma semana não
+// mexe nas outras.
+function metaTotalComOverrides(nome, diasSet) {
+  const porSemana = {};
+  diasSet.forEach(iso => {
+    const semana = inicioSemanaIso(iso);
+    porSemana[semana] = (porSemana[semana] || 0) + 1;
+  });
+  return Object.entries(porSemana).reduce(
+    (soma, [semana, qtd]) => soma + metaDiariaColaborador(nome, semana) * qtd,
+    0
+  );
+}
+
+function renderTabelaMetaSemanal(inicio, fim) {
+  const tabela = document.getElementById("tabela-meta-semanal");
+  if (!inicio || !fim) { tabela.innerHTML = ""; return; }
+
+  if (NOMES_COLABORADORES.length === 0) {
+    tabela.innerHTML = `<tr><td style="padding:16px;color:var(--text-muted);">Nenhum colaborador cadastrado ainda -- cadastre em "Colaboradores e presença".</td></tr>`;
+    return;
+  }
+
+  const semanas = semanasNoPeriodo(inicio, fim);
+  const thead = `<thead><tr><th class="col-data">Semana</th>${NOMES_COLABORADORES.map(nome => `<th>${nomeExibicao(nome)}</th>`).join("")}</tr></thead>`;
+  const linhas = semanas.map(semana => {
+    const [, m1, d1] = semana.split("-");
+    const [, m2, d2] = fimSemanaIso(semana).split("-");
+    const celulas = NOMES_COLABORADORES.map(nome => {
+      const valor = metaDiariaColaborador(nome, semana);
+      return `<td><input type="number" step="1" min="0" class="celula-manual meta-semanal-input" data-semana="${semana}" data-nome="${nome.replace(/"/g, "&quot;")}" value="${valor}"></td>`;
+    }).join("");
+    return `<tr><td class="col-data">${d1}/${m1} – ${d2}/${m2}</td>${celulas}</tr>`;
+  }).join("");
+
+  tabela.innerHTML = thead + `<tbody>${linhas}</tbody>`;
+
+  tabela.querySelectorAll(".meta-semanal-input").forEach(input => {
+    input.addEventListener("change", (e) => {
+      const { semana, nome } = e.target.dataset;
+      const numero = parseFloat(e.target.value);
+      if (!METAS_SEMANAIS_COLABORADOR[nome]) METAS_SEMANAIS_COLABORADOR[nome] = {};
+      if (isNaN(numero) || numero < 0 || numero === LIGACOES_BASE_DIA) {
+        delete METAS_SEMANAIS_COLABORADOR[nome][semana];
+      } else {
+        METAS_SEMANAIS_COLABORADOR[nome][semana] = numero;
+      }
+      if (Object.keys(METAS_SEMANAIS_COLABORADOR[nome]).length === 0) delete METAS_SEMANAIS_COLABORADOR[nome];
+      salvarMetasSemanais();
+      renderGerencialView();
+    });
+  });
+}
+
 // Feriados nacionais + do Estado/Cidade de São Paulo (onde fica o PC 392),
 // usados só pra marcar visualmente o calendário de ligações -- datas fixas
 // conferidas pra 2026; se o período filtrado cair em outro ano, adicionar
@@ -1699,13 +1805,14 @@ function computeLigacoesPorTecnico(registros, inicio, fim, tecnicoFiltro) {
     // cada dia e depois somar (o que a planilha faz). Ambos corretos, mas
     // só um bate célula a célula com a planilha pra validação.
     const dias = Object.keys(tt.ligacoesPorDia);
-    const diasTrabalhados = diasTrabalhadosComPresenca(nome, dias, inicio, fim).size;
+    const diasTrabalhadosSet = diasTrabalhadosComPresenca(nome, dias, inicio, fim);
+    const diasTrabalhados = diasTrabalhadosSet.size;
     // Dias com ligação, sem presença manual: a "Média diária por técnico"
     // tem que ser a mesma em qualquer navegador e bater com a planilha.
     const diasMedia = dias.length;
     const ligacoesTotal = dias.reduce((soma, data) => soma + Math.round(tt.ligacoesPorDia[data]), 0);
     tt.ligacoes = ligacoesTotal;
-    const meta = LIGACOES_BASE_DIA * diasTrabalhados;
+    const meta = metaTotalComOverrides(nome, diasTrabalhadosSet);
     const mediaDia = diasTrabalhados > 0 ? tt.ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return {
@@ -2550,7 +2657,7 @@ function computeCalendarioMensal(registros, tecnico) {
 
 const DIAS_SEMANA_ABREV = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-function renderCalendarioMeses(porDia, tecnico, sufixo, porDiaMedia, editavel) {
+function renderCalendarioMeses(porDia, tecnico, sufixo, porDiaMedia) {
   porDiaMedia = porDiaMedia || {};
   sufixo = sufixo || "";
   document.getElementById("calendario-legenda" + sufixo).textContent = tecnico
@@ -2599,8 +2706,7 @@ function renderCalendarioMeses(porDia, tecnico, sufixo, porDiaMedia, editavel) {
       }
       const valorHtml = cel.valor > 0 ? `<span class="dia-valor">${NUM.format(Math.round(cel.valor))}</span>` : "";
       const mediaHtml = cel.media > 0 ? `<span class="dia-media" title="Média lançada à mão, já somada ao total do dia">+${NUM.format(Math.round(cel.media))} média</span>` : "";
-      if (editavel) classes.push("editavel");
-      const tituloFeriado = editavel ? ` title="Clique pra editar a média deste dia${cel.feriado ? " (feriado)" : ""}"` : (cel.feriado ? ` title="Feriado"` : "");
+      const tituloFeriado = cel.feriado ? ` title="Feriado"` : "";
       return `<div class="${classes.join(" ")}" data-iso="${cel.iso}"${tituloFeriado}><span class="dia-num">${cel.dia}</span>${valorHtml}${mediaHtml}</div>`;
     }).join("");
 
@@ -2616,60 +2722,6 @@ function renderCalendarioMeses(porDia, tecnico, sufixo, porDiaMedia, editavel) {
     `;
     container.appendChild(bloco);
   });
-
-  // A média do dia só é editada no calendário da aba Gerencial (as abas de
-  // dashboard são só visualização, pra não confundir).
-  if (editavel) {
-    container.querySelectorAll(".mes-calendario-dia.editavel").forEach(cel => {
-      cel.addEventListener("click", () => editarMediaDoDia(cel.dataset.iso));
-    });
-  }
-}
-
-// Edita, num dia do calendário, a média lançada pra cada colaborador
-// (DADOS_MANUAL[dia][nome]) -- a meta de cada um muda com frequência, então
-// dá pra ajustar o valor direto aqui em vez de ir na tabela do Gerencial.
-// Valor vazio/0 apaga o lançamento daquele colaborador nesse dia.
-function editarMediaDoDia(iso) {
-  if (NOMES_MANUAL.length === 0) {
-    avisar("Nenhum colaborador na lista de lançamento -- adicione em Gerencial > Lançamento manual (+ Técnico).");
-    return;
-  }
-  const [ano, mes, dia] = iso.split("-");
-  const fundo = document.createElement("div");
-  fundo.className = "modal-fundo";
-  const linhas = NOMES_MANUAL.map(nome => {
-    const valor = (DADOS_MANUAL[iso] && DADOS_MANUAL[iso][nome]) || "";
-    return `<label class="modal-linha"><span>${nomeExibicao(nome)}</span><input type="number" step="0.01" min="0" class="celula-manual" data-nome="${nome.replace(/"/g, "&quot;")}" value="${valor}"></label>`;
-  }).join("");
-  fundo.innerHTML = `<div class="modal-caixa modal-caixa-larga" role="dialog" aria-modal="true">
-    <p class="modal-texto"><strong>Média do dia ${dia}/${mes}/${ano}</strong><br>Ligações lançadas à mão pra cada colaborador nesse dia (vazio = sem lançamento). Elas entram no total do calendário e no ranking da aba ArcGis + Médias.</p>
-    <div class="modal-lista">${linhas}</div>
-    <div class="modal-acoes"><button type="button" class="btn-manual btn-manual-secundario" data-r="0">Cancelar</button><button type="button" class="btn-manual" data-r="1">Salvar</button></div>
-  </div>`;
-  const fechar = () => fundo.remove();
-  fundo.addEventListener("click", (e) => {
-    if (e.target === fundo) return fechar();
-    const botao = e.target.closest("button[data-r]");
-    if (!botao) return;
-    if (botao.dataset.r === "1") {
-      if (!DADOS_MANUAL[iso]) DADOS_MANUAL[iso] = {};
-      fundo.querySelectorAll("input[data-nome]").forEach(input => {
-        const numero = parseFloat(input.value);
-        if (!numero || numero <= 0) delete DADOS_MANUAL[iso][input.dataset.nome];
-        else DADOS_MANUAL[iso][input.dataset.nome] = numero;
-      });
-      if (Object.keys(DADOS_MANUAL[iso]).length === 0) delete DADOS_MANUAL[iso];
-      salvarDadosManuais();
-      fechar();
-      renderAbaAtiva();
-    } else {
-      fechar();
-    }
-  });
-  document.body.appendChild(fundo);
-  const primeiro = fundo.querySelector("input");
-  if (primeiro) primeiro.focus();
 }
 
 // --- seletor de período (botão + painel com campos "de/até" e calendário) ---
@@ -3090,8 +3142,9 @@ function computeLigacoesPorTecnicoManual(dados, nomes, inicio, fim) {
       const valor = Number(dados[data] && dados[data][nome]) || 0;
       if (valor > 0) { ligacoes += valor; diasAuto.push(data); }
     });
-    const diasComDado = diasTrabalhadosComPresenca(nome, diasAuto, inicio, fim).size;
-    const meta = LIGACOES_BASE_DIA * diasComDado;
+    const diasComDadoSet = diasTrabalhadosComPresenca(nome, diasAuto, inicio, fim);
+    const diasComDado = diasComDadoSet.size;
+    const meta = metaTotalComOverrides(nome, diasComDadoSet);
     const mediaDia = diasComDado > 0 ? ligacoes / diasComDado : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return {
@@ -3164,9 +3217,10 @@ function computeLigacoesPorTecnicoCombinado(inicio, fim, tecnicoFiltro) {
     const t = totals[nome];
     const dias = Object.keys(t.ligacoesPorDia);
     const ligacoes = dias.reduce((soma, d) => soma + Math.round(t.ligacoesPorDia[d]), 0);
-    const diasTrabalhados = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim).size;
+    const diasTrabalhadosSet = diasTrabalhadosComPresenca(nome, [...t.dias], inicio, fim);
+    const diasTrabalhados = diasTrabalhadosSet.size;
     const diasMedia = t.dias.size;
-    const meta = LIGACOES_BASE_DIA * diasTrabalhados;
+    const meta = metaTotalComOverrides(nome, diasTrabalhadosSet);
     const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return {
@@ -3781,9 +3835,9 @@ function renderGerencialView() {
   const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
   renderTabelaManual(inicio, fim);
   if (inicio && fim) renderIndicadoresLancamentoManual(DADOS_MANUAL, inicio, fim);
-  if (inicio && fim) renderCalendarioMeses(computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro), tecnicoFiltro, "-gerencial", computeMediaManualPorDia(inicio, fim, tecnicoFiltro), true);
   renderListaColaboradores();
   renderCalendarioPresenca(inicio, fim);
+  renderTabelaMetaSemanal(inicio, fim);
   renderTabelaMetasColaboradores(inicio, fim);
   renderTabelaMedicao(inicio, fim);
   if (!inicio || !fim) return;
@@ -3991,9 +4045,10 @@ function renderTabelaMetasColaboradores(inicio, fim) {
 
   const linhas = NOMES_COLABORADORES.map(nome => {
     const diasAuto = Object.keys(porDia).filter(iso => (porDia[iso][nome] || 0) > 0);
-    const diasTrabalhados = diasTrabalhadosComPresenca(nome, diasAuto, inicio, fim).size;
+    const diasTrabalhadosSet = diasTrabalhadosComPresenca(nome, diasAuto, inicio, fim);
+    const diasTrabalhados = diasTrabalhadosSet.size;
     const ligacoes = diasAuto.reduce((soma, iso) => soma + Math.round(porDia[iso][nome]), 0);
-    const meta = LIGACOES_BASE_DIA * diasTrabalhados;
+    const meta = metaTotalComOverrides(nome, diasTrabalhadosSet);
     const mediaDia = diasTrabalhados > 0 ? ligacoes / diasTrabalhados : 0;
     const valorPorLigacao = valorPorLigacaoMediaDia(mediaDia);
     return { nome, diasTrabalhados, meta, ligacoes, mediaDia, valorReceber: ligacoes * valorPorLigacao };
@@ -4117,6 +4172,7 @@ async function init() {
     carregarColaboradores();
     inicializarColaboradores();
     carregarMedicao();
+    carregarMetasSemanais();
     carregarDadosRDC();
     configurarAbas();
     configurarAcoesManuais();
