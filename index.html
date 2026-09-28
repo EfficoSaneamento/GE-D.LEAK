@@ -606,6 +606,9 @@
   .mes-calendario-dia.tier-2 .dia-num,
   .mes-calendario-dia.tier-2 .dia-valor { color: #fff; }
   .mes-calendario-dia.fim-semana:not(.com-dado) { background: #ececea; }
+  .mes-calendario-dia .dia-media { font-size: 0.56rem; font-weight: 700; color: var(--header-bg); line-height: 1.1; }
+  .mes-calendario-dia.tier-2 .dia-media { color: #fff; }
+  .mes-calendario-media { font-style: normal; color: var(--header-bg); font-weight: 600; }
   .mes-calendario-dia.feriado { box-shadow: inset 0 0 0 1.5px #b3542e; }
   .mes-calendario-dia.feriado .dia-num { color: #b3542e; }
   .mes-calendario-dia.feriado .dia-num::after { content: " •"; font-weight: 700; }
@@ -929,6 +932,12 @@
     width: 100%;
     box-shadow: 0 10px 40px rgba(0,0,0,0.25);
   }
+  .modal-caixa-larga { max-width: 460px; }
+  .modal-lista { max-height: 320px; overflow-y: auto; margin: 0 0 16px; border-top: 1px solid var(--gridline); }
+  .modal-linha { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 6px 2px; border-bottom: 1px solid #f0f0ee; font-size: 0.82rem; }
+  .modal-linha input { width: 96px; }
+  .mes-calendario-dia.editavel { cursor: pointer; }
+  .mes-calendario-dia.editavel:hover { box-shadow: inset 0 0 0 1.5px var(--header-bg); }
   .modal-texto { margin: 0 0 16px; font-size: 0.88rem; line-height: 1.5; color: var(--text-dark); }
   .modal-acoes { display: flex; justify-content: flex-end; gap: 8px; }
   .aviso-toast {
@@ -1135,7 +1144,7 @@
   <section>
     <div class="section-title">Progressão mensal</div>
     <div class="card card-comparativo">
-      <div class="card-title">Ligações (preto) e valor a receber × 1,89 (dourado) por mês</div>
+      <div class="card-title">Ligações e valor recebido por ligação (verde) e valor da medição (laranja), por mês</div>
       <canvas id="chart-progressao"></canvas>
     </div>
   </section>
@@ -1156,7 +1165,7 @@
         <div class="card-title">Calendário de ligações</div>
         <div class="valores-total" id="calendario-legenda">Total da equipe por dia</div>
       </div>
-      <p class="manual-aviso" style="margin-top:-4px;">Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
+      <p class="manual-aviso" style="margin-top:-4px;">Só ligações do ArcGIS, sem as médias lançadas à mão (elas aparecem na aba ArcGis + Médias). Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
       <div id="calendario-meses"></div>
     </div>
   </section>
@@ -1185,7 +1194,7 @@
       <div class="kpi-body">
         <div class="kpi-label">Total de ligações</div>
         <div class="kpi-value" id="kpi-ligacoes-manual">-</div>
-        <div class="kpi-sub">Automático + manual</div>
+        <div class="kpi-sub">Ligações feitas no período</div>
       </div>
     </div>
     <div class="kpi-tile">
@@ -1215,7 +1224,17 @@
       <div class="kpi-body">
         <div class="kpi-label">Dias com atividade</div>
         <div class="kpi-value" id="kpi-dias-manual">-</div>
-        <div class="kpi-sub">Automático + manual</div>
+        <div class="kpi-sub">Dias distintos com registro</div>
+      </div>
+    </div>
+    <div class="kpi-tile">
+      <div class="kpi-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+      </div>
+      <div class="kpi-body">
+        <div class="kpi-label">Maior registro</div>
+        <div class="kpi-value" id="kpi-maior-registro-manual">-</div>
+        <div class="kpi-sub" id="kpi-maior-registro-info-manual">Ligações em um único registro</div>
       </div>
     </div>
   </section>
@@ -1270,7 +1289,7 @@
   <section>
     <div class="section-title">Progressão mensal</div>
     <div class="card card-comparativo">
-      <div class="card-title">Ligações (preto) e valor a receber × 1,89 (dourado) por mês</div>
+      <div class="card-title">Ligações e valor recebido por ligação (verde) e valor da medição (laranja), por mês</div>
       <canvas id="chart-progressao-manual">
     </div>
   </section>
@@ -1291,8 +1310,20 @@
         <div class="card-title">Calendário de ligações</div>
         <div class="valores-total" id="calendario-legenda-manual">Total da equipe por dia</div>
       </div>
-      <p class="manual-aviso" style="margin-top:-4px;">Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
+      <p class="manual-aviso" style="margin-top:-4px;">Total do dia = ArcGIS + médias lançadas (a média de cada dia aparece em verde dentro do dia). Pra editar as médias, use o calendário na aba Gerencial. Dias com borda vermelha e • no número são feriados (nacionais + Estado/Cidade de São Paulo).</p>
       <div id="calendario-meses-manual"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="card">
+      <div class="card-title">Indicadores de produção</div>
+      <div class="indic-grid indic-grid-wide">
+        <div class="indic-row"><span class="indic-label">Total de registros</span><span class="indic-value" id="ind-registros-manual">-</span></div>
+        <div class="indic-row"><span class="indic-label">Média de vistorias / dia</span><span class="indic-value" id="ind-media-vistorias-dia-manual">-</span></div>
+        <div class="indic-row"><span class="indic-label">Média de ligações / vistoria</span><span class="indic-value" id="ind-media-ligacoes-vistoria-manual">-</span></div>
+        <div class="indic-row"><span class="indic-label">Média de ligações / dia</span><span class="indic-value" id="ind-media-ligacoes-dia-manual">-</span></div>
+      </div>
     </div>
   </section>
 
@@ -1315,8 +1346,8 @@
   <section>
     <div class="section-title">Medição mensal</div>
     <div class="card">
-      <div class="card-title">Valor e quantidade de ligações da medição, por mês</div>
-      <p class="manual-aviso" style="margin-top:0;">Informe, pra cada mês, o valor (R$) e a quantidade de ligações da medição. Os dois entram como colunas na "Progressão mensal" das abas ArcGIS e Manual, ao lado das ligações do sistema. A coluna Diferença compara a quantidade da medição com as ligações do sistema (automático + manual). Os meses listados seguem o período do filtro do topo. Fica salvo neste navegador.</p>
+      <div class="card-title">Valor da medição e valor recebido por ligação, por mês</div>
+      <p class="manual-aviso" style="margin-top:0;">Informe, pra cada mês, só o valor total da medição (R$). O sistema calcula sozinho as ligações do ArcGIS (sem os lançamentos manuais) e o valor recebido apenas por ligação (ligações × R$ 1,85). Ligações e valor recebido por ligação formam uma coluna, e o valor da medição outra, na "Progressão mensal" das abas ArcGIS e ArcGis + Médias -- que ficam idênticas nas duas abas. Os meses listados seguem o período do filtro do topo. Fica salvo neste navegador.</p>
       <div class="calendario-scroll" style="max-height:420px;">
         <table class="tabela-manual" id="tabela-medicao"></table>
       </div>
@@ -1339,6 +1370,15 @@
   <section>
     <div class="section-title">Lançamento manual</div>
     <div class="card">
+      <div class="card-title-row">
+        <div class="card-title">Calendário de médias por dia</div>
+        <div class="valores-total" id="calendario-legenda-gerencial">Total da equipe por dia</div>
+      </div>
+      <p class="manual-aviso" style="margin-top:-4px;"><strong>Clique num dia pra editar a média lançada de cada colaborador</strong> (a meta deles muda com frequência). O valor fica salvo e aparece no calendário e no ranking da aba ArcGis + Médias. A média de cada dia aparece em verde dentro do dia; dias com borda vermelha e • são feriados.</p>
+      <div id="calendario-meses-gerencial"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
       <div class="card-title-row">
         <div class="card-title">Ligações por dia, por técnico</div>
         <div class="manual-acoes">
@@ -1701,13 +1741,17 @@ function renderizarChart(canvasId, config) {
   return CHARTS[canvasId];
 }
 
-function renderResumo(resumo, mediaPorTecnicoDia) {
-  document.getElementById("kpi-ligacoes").textContent = NUM.format(Math.round(resumo.totalLigacoes));
-  document.getElementById("kpi-media-tecnico").textContent = NUM.format(Math.round(mediaPorTecnicoDia));
-  document.getElementById("kpi-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
-  document.getElementById("kpi-dias").textContent = NUM.format(resumo.diasAtividade);
-  document.getElementById("kpi-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
-  const infoMaiorRegistro = document.getElementById("kpi-maior-registro-info");
+// sufixo "" = aba ArcGIS, "-manual" = aba ArcGis + Médias: as duas mostram o
+// mesmo resumo (só ArcGIS), pelos mesmos elementos com sufixo no id.
+function renderResumo(resumo, mediaPorTecnicoDia, sufixo) {
+  sufixo = sufixo || "";
+  const el = (id) => document.getElementById(id + sufixo);
+  el("kpi-ligacoes").textContent = NUM.format(Math.round(resumo.totalLigacoes));
+  el("kpi-media-tecnico").textContent = NUM.format(Math.round(mediaPorTecnicoDia));
+  el("kpi-tecnicos").textContent = NUM.format(resumo.totalTecnicos);
+  el("kpi-dias").textContent = NUM.format(resumo.diasAtividade);
+  el("kpi-maior-registro").textContent = NUM.format(resumo.maiorRegistro);
+  const infoMaiorRegistro = el("kpi-maior-registro-info");
   if (resumo.maiorRegistroInfo) {
     const { data, participantes } = resumo.maiorRegistroInfo;
     const dataFormatada = data.split("-").reverse().join("/");
@@ -1716,10 +1760,10 @@ function renderResumo(resumo, mediaPorTecnicoDia) {
     infoMaiorRegistro.textContent = "Ligações em um único registro";
   }
 
-  document.getElementById("ind-registros").textContent = NUM.format(resumo.totalRegistros);
-  document.getElementById("ind-media-vistorias-dia").textContent = resumo.mediaVistoriasDia.toFixed(2).replace(".", ",");
-  document.getElementById("ind-media-ligacoes-vistoria").textContent = resumo.mediaLigacoesVistoria.toFixed(2).replace(".", ",");
-  document.getElementById("ind-media-ligacoes-dia").textContent = resumo.mediaLigacoesDia.toFixed(2).replace(".", ",");
+  el("ind-registros").textContent = NUM.format(resumo.totalRegistros);
+  el("ind-media-vistorias-dia").textContent = resumo.mediaVistoriasDia.toFixed(2).replace(".", ",");
+  el("ind-media-ligacoes-vistoria").textContent = resumo.mediaLigacoesVistoria.toFixed(2).replace(".", ",");
+  el("ind-media-ligacoes-dia").textContent = resumo.mediaLigacoesDia.toFixed(2).replace(".", ",");
 }
 
 function renderComparativoChart(rankingLista, sufixo) {
@@ -2003,8 +2047,16 @@ function rotuloMes(chave) {
   return `${MESES_ABREV[mes - 1]}/${String(ano).slice(2)}`;
 }
 
+// Valor recebido apenas por ligação: quantidade real de ligações (só
+// ArcGIS, sem os lançamentos manuais) × R$ 1,85 fixo -- sem faixa/meta,
+// direto (confirmado com o usuário em 2026-09-25, substitui o cálculo por
+// faixa que existia antes).
+const VALOR_POR_LIGACAO_FIXO = 1.85;
+
 // Agrupa ligações por mês. Se um técnico estiver selecionado, conta só a
-// fatia dele (rateada); senão, conta o total de cada registro.
+// fatia dele (rateada); senão, conta o total de cada registro. `registros`
+// deve ser sempre só ArcGIS (sem DADOS_MANUAL) -- é o que "ligações no
+// sistema" significa em toda a Progressão mensal e na Medição mensal.
 function computeProgressaoMensal(registros, tecnico) {
   const porMes = {};
   registros.forEach(r => {
@@ -2021,13 +2073,11 @@ function computeProgressaoMensal(registros, tecnico) {
       porMes[mes].ligacoes += r.ligacoes;
     }
   });
-  const valorMes = valorPorMes(porDiaPorPessoaAutomatico(registros, tecnico));
-  return Object.keys(porMes).sort().map(mes => ({ mes, ...porMes[mes], valor: (valorMes[mes] || 0) * FATOR_VALOR_PROGRESSAO }));
+  return Object.keys(porMes).sort().map(mes => {
+    const ligacoes = Math.round(porMes[mes].ligacoes);
+    return { mes, ligacoes, valorPorLigacao: ligacoes * VALOR_POR_LIGACAO_FIXO };
+  });
 }
-
-// O valor mostrado na Progressão mensal é o valor a receber × 1,89
-// (fator informado pelo usuário em 2026-09-23).
-const FATOR_VALOR_PROGRESSAO = 1.89;
 
 // Medição mensal (aba Gerencial): valor (R$) e quantidade de ligações da
 // medição de cada mês, digitados à mão -- entram como colunas na
@@ -2049,26 +2099,21 @@ function renderTabelaMedicao(inicio, fim) {
   const tabela = document.getElementById("tabela-medicao");
   if (!inicio || !fim) { tabela.innerHTML = ""; return; }
 
+  // Sistema = só ArcGIS (sem DADOS_MANUAL), pra bater com a Progressão
+  // mensal das duas abas.
   const sistema = {};
-  computeProgressaoMensalCombinado(inicio, fim, "").forEach(p => { sistema[p.mes] = p; });
+  computeProgressaoMensal(filtrarPorData(REGISTROS, inicio, fim), "").forEach(p => { sistema[p.mes] = p; });
 
-  const thead = `<thead><tr><th class="col-data">Mês</th><th>Valor da medição (R$)</th><th>Qtd. de ligações (medição)</th><th>Ligações no sistema</th><th>Diferença</th><th>Valor a receber × 1,89 (estimado)</th></tr></thead>`;
+  const thead = `<thead><tr><th class="col-data">Mês</th><th>Valor da medição (R$)</th><th>Ligações no sistema (ArcGIS)</th><th>Valor recebido apenas por ligação (R$ ${VALOR_POR_LIGACAO_FIXO.toFixed(2).replace(".", ",")}/ligação)</th></tr></thead>`;
   const linhas = mesesNoPeriodo(inicio, fim).map(mes => {
     const m = MEDICAO_MENSAL[mes] || {};
     const s = sistema[mes];
-    const ligSistema = s ? Math.round(s.ligacoes) : 0;
-    const temLig = m.ligacoes !== undefined && m.ligacoes !== null;
-    const diff = temLig ? Math.round(m.ligacoes) - ligSistema : null;
-    const classe = diff === null || diff === 0 ? "" : diff > 0 ? "linha-diff-pos" : "linha-diff-neg";
     const valorAttr = m.valor !== undefined && m.valor !== null ? m.valor : "";
-    const ligAttr = temLig ? m.ligacoes : "";
-    return `<tr class="${classe}">
+    return `<tr>
       <td class="col-data">${rotuloMes(mes)}</td>
       <td><input type="number" step="0.01" min="0" class="celula-manual medicao-input" data-mes="${mes}" data-campo="valor" value="${valorAttr}"></td>
-      <td><input type="number" step="1" min="0" class="celula-manual medicao-input" data-mes="${mes}" data-campo="ligacoes" value="${ligAttr}"></td>
-      <td>${NUM.format(ligSistema)}</td>
-      <td class="col-diff">${diff === null ? "-" : (diff > 0 ? "+" : "") + NUM.format(diff)}</td>
-      <td>${s ? BRL.format((s.valor || 0)) : "-"}</td>
+      <td>${NUM.format(s ? s.ligacoes : 0)}</td>
+      <td>${BRL.format(s ? s.valorPorLigacao : 0)}</td>
     </tr>`;
   }).join("");
 
@@ -2088,99 +2133,18 @@ function renderTabelaMedicao(inicio, fim) {
   });
 }
 
-// Ligações por dia por pessoa, só automático (ArcGIS), já rateadas --
-// { "AAAA-MM-DD": { nome: ligações } }. Com técnico filtrado, só ele.
-function porDiaPorPessoaAutomatico(registros, tecnicoFiltro) {
-  const porDia = {};
-  registros.forEach(r => {
-    const n = r.participantes.length;
-    if (n === 0) return;
-    r.participantes.forEach(p => {
-      const nome = normalizarNome(p);
-      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
-      if (!porDia[r.data]) porDia[r.data] = {};
-      porDia[r.data][nome] = (porDia[r.data][nome] || 0) + r.ligacoes / n;
-    });
-  });
-  return porDia;
-}
-
-// Valor a receber por mês ({ "AAAA-MM": R$ }): a regra de faixa (média/dia
-// vs. 650) é aplicada por técnico DENTRO de cada mês, com os dias
-// trabalhados do mês (respeitando a presença marcada no Gerencial), e os
-// valores dos técnicos são somados. Por isso a soma dos meses pode
-// diferir do "valor a receber" calculado com o período inteiro de uma vez.
-function valorPorMes(porDiaPorPessoa) {
-  const porMesPessoa = {}; // mes -> nome -> { dias: [iso], ligacoes }
-  Object.keys(porDiaPorPessoa).forEach(iso => {
-    const mes = chaveMes(iso);
-    Object.entries(porDiaPorPessoa[iso]).forEach(([nome, valor]) => {
-      if (!porMesPessoa[mes]) porMesPessoa[mes] = {};
-      if (!porMesPessoa[mes][nome]) porMesPessoa[mes][nome] = { dias: [], ligacoes: 0 };
-      porMesPessoa[mes][nome].dias.push(iso);
-      porMesPessoa[mes][nome].ligacoes += Math.round(valor);
-    });
-  });
-  const resultado = {};
-  Object.keys(porMesPessoa).forEach(mes => {
-    let total = 0;
-    Object.entries(porMesPessoa[mes]).forEach(([nome, t]) => {
-      const [anoMes, numMes] = mes.split("-").map(Number);
-      const ultimoDia = `${mes}-${String(new Date(Date.UTC(anoMes, numMes, 0)).getUTCDate()).padStart(2, "0")}`;
-      const diasTrab = diasTrabalhadosComPresenca(nome, t.dias, `${mes}-01`, ultimoDia).size;
-      const media = diasTrab > 0 ? t.ligacoes / diasTrab : 0;
-      total += t.ligacoes * valorPorLigacaoMediaDia(media);
-    });
-    resultado[mes] = total;
-  });
-  return resultado;
-}
-
 function renderProgressaoChart(progressao, sufixo) {
-  // Medição mensal informada na aba Gerencial (ver MEDICAO_MENSAL): quando
-  // existe pra algum mês do gráfico, entram duas colunas ao lado da de
-  // ligações do sistema -- a quantidade de ligações da medição e o valor
-  // da medição (R$, eixo da direita). Mês sem medição fica sem coluna.
-  const medicaoDoMes = (p, campo) => {
+  // Duas colunas por mês: (1) ligações do sistema, com o valor recebido só
+  // por ligação (ligações ArcGIS × R$ 1,85, sem faixa/meta) empilhado no
+  // rótulo em cima da mesma coluna; (2) valor total da medição, digitado à
+  // mão na aba Gerencial (ver MEDICAO_MENSAL) -- mês sem medição fica sem
+  // essa coluna. Confirmado com o usuário em 2026-09-28.
+  const valorMedicaoDoMes = (p) => {
     const m = MEDICAO_MENSAL[p.mes];
-    return m && m[campo] !== undefined && m[campo] !== null ? m[campo] : null;
+    return m && m.valor !== undefined && m.valor !== null ? m.valor : null;
   };
-  const temMedicao = progressao.some(p => medicaoDoMes(p, "valor") !== null || medicaoDoMes(p, "ligacoes") !== null);
-  const datasetsMedicao = temMedicao ? [
-    {
-      label: "Ligações (medição)",
-      data: progressao.map(p => medicaoDoMes(p, "ligacoes")),
-      backgroundColor: "#3f4a34",
-      borderRadius: 4,
-      maxBarThickness: 40,
-      datalabels: {
-        display: true,
-        anchor: "end",
-        align: "end",
-        offset: 3,
-        color: "#1a1a1a",
-        font: { size: 11, weight: "700" },
-        formatter: (v) => (v === null ? "" : NUM.format(v)),
-      },
-    },
-    {
-      label: "Valor da medição (R$)",
-      data: progressao.map(p => medicaoDoMes(p, "valor")),
-      yAxisID: "y1",
-      backgroundColor: "#8C6D1F",
-      borderRadius: 4,
-      maxBarThickness: 40,
-      datalabels: {
-        display: true,
-        anchor: "end",
-        align: "end",
-        offset: 3,
-        color: "#8C6D1F",
-        font: { size: 11, weight: "700" },
-        formatter: (v) => (v === null ? "" : BRL.format(v)),
-      },
-    },
-  ] : [];
+  const temMedicao = progressao.some(p => valorMedicaoDoMes(p) !== null);
+  const rotuloFixo = VALOR_POR_LIGACAO_FIXO.toFixed(2).replace(".", ",");
 
   renderizarChart("chart-progressao" + (sufixo || ""), {
     type: "bar",
@@ -2188,13 +2152,11 @@ function renderProgressaoChart(progressao, sufixo) {
       labels: progressao.map(p => rotuloMes(p.mes)),
       datasets: [
         {
-          label: "Ligações (sistema)",
-          data: progressao.map(p => Math.round(p.ligacoes)),
+          label: `Ligações (sistema) e valor recebido por ligação (× R$ ${rotuloFixo})`,
+          data: progressao.map(p => p.ligacoes),
           backgroundColor: "#5B6B4A",
           borderRadius: 4,
-          maxBarThickness: temMedicao ? 40 : 56,
-          // Dois rótulos empilhados em cima de cada barra: a quantidade de
-          // ligações (preto) e, logo acima, o valor a receber do mês (dourado).
+          maxBarThickness: 48,
           datalabels: {
             display: true,
             anchor: "end",
@@ -2207,16 +2169,31 @@ function renderProgressaoChart(progressao, sufixo) {
                 formatter: (v) => NUM.format(v),
               },
               valor: {
-                display: !temMedicao,
                 offset: 18,
                 color: "#8C6D1F",
                 font: { size: 11, weight: "700" },
-                formatter: (v, ctx) => BRL.format(progressao[ctx.dataIndex].valor || 0),
+                formatter: (v, ctx) => BRL.format(progressao[ctx.dataIndex].valorPorLigacao),
               },
             },
           },
         },
-        ...datasetsMedicao,
+        {
+          label: "Valor total da medição (R$)",
+          data: progressao.map(p => valorMedicaoDoMes(p)),
+          yAxisID: "y1",
+          backgroundColor: "#f0932b",
+          borderRadius: 4,
+          maxBarThickness: 48,
+          datalabels: {
+            display: true,
+            anchor: "end",
+            align: "end",
+            offset: 3,
+            color: "#b36b12",
+            font: { size: 11, weight: "700" },
+            formatter: (v) => (v === null ? "" : BRL.format(v)),
+          },
+        },
       ],
     },
     options: {
@@ -2224,17 +2201,18 @@ function renderProgressaoChart(progressao, sufixo) {
       maintainAspectRatio: false,
       layout: { padding: { top: 40 } },
       plugins: {
-        legend: { display: temMedicao, position: "bottom", labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" } },
+        legend: { display: true, position: "bottom", labels: { boxWidth: 12, font: { size: 10 }, color: "#52514e" } },
         datalabels: { display: false },
         tooltip: {
           backgroundColor: "#1a1a1a",
           padding: 8,
+          filter: (ctx) => !(ctx.datasetIndex === 1 && !temMedicao),
           callbacks: {
-            label: (ctx) => (ctx.dataset.yAxisID === "y1"
+            label: (ctx) => (ctx.datasetIndex === 1
               ? `${ctx.dataset.label}: ${BRL.format(ctx.parsed.y)}`
-              : `${ctx.dataset.label}: ${NUM.format(ctx.parsed.y)} ligações`),
+              : `Ligações (sistema): ${NUM.format(ctx.parsed.y)}`),
             afterLabel: (ctx) => (ctx.datasetIndex === 0
-              ? `Valor a receber × 1,89: ${BRL.format(progressao[ctx.dataIndex].valor || 0)}`
+              ? `Valor recebido por ligação (× R$ ${rotuloFixo}): ${BRL.format(progressao[ctx.dataIndex].valorPorLigacao)}`
               : ""),
           },
         },
@@ -2251,13 +2229,12 @@ function renderProgressaoChart(progressao, sufixo) {
           position: "right",
           beginAtZero: true,
           grid: { display: false },
-          ticks: { color: "#8C6D1F", font: { size: 10 }, callback: (v) => BRL.format(v) },
+          ticks: { color: "#b36b12", font: { size: 10 }, callback: (v) => BRL.format(v) },
         },
       },
     },
   });
 }
-
 // --- Top 3 produtividade ---
 // Recebe a mesma lista usada no gráfico comparativo (já respeita
 // período/mês/técnico) e retorna os 3 primeiros por ligações, pra reusar em
@@ -2550,10 +2527,10 @@ function renderValoresChart(rankingLista, sufixo) {
 // coluna por técnico, valor já rateado) -- serve pra comparar célula a
 // célula contra a planilha, sem precisar confiar só nos totais agregados.
 // --- calendário de ligações (mês a mês, pra validar visualmente) ---
-// Total de ligações por dia -- da equipe inteira (soma bruta do registro,
-// não rateada) se nenhum técnico estiver selecionado no filtro, ou só a
-// fatia rateada daquele técnico se estiver. Um bloco por mês presente no
-// período filtrado.
+// Total de ligações por dia SÓ do ArcGIS (sem lançamentos manuais) -- da
+// equipe inteira (soma bruta do registro) se nenhum técnico estiver
+// selecionado, ou só a fatia rateada daquele técnico se estiver. Usado no
+// calendário da aba ArcGIS; a aba ArcGis + Médias usa o combinado.
 function computeCalendarioMensal(registros, tecnico) {
   const porDia = {};
   registros.forEach(r => {
@@ -2573,7 +2550,8 @@ function computeCalendarioMensal(registros, tecnico) {
 
 const DIAS_SEMANA_ABREV = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
-function renderCalendarioMeses(porDia, tecnico, sufixo) {
+function renderCalendarioMeses(porDia, tecnico, sufixo, porDiaMedia, editavel) {
+  porDiaMedia = porDiaMedia || {};
   sufixo = sufixo || "";
   document.getElementById("calendario-legenda" + sufixo).textContent = tecnico
     ? `Ligações de ${nomeExibicao(tecnico)} por dia`
@@ -2594,14 +2572,17 @@ function renderCalendarioMeses(porDia, tecnico, sufixo) {
     const diasNoMes = new Date(Date.UTC(ano, mes, 0)).getUTCDate();
 
     let totalMes = 0;
+    let mediaMes = 0;
     const celulas = [];
     for (let i = 0; i < primeiroDiaSemana; i++) celulas.push(null);
     for (let d = 1; d <= diasNoMes; d++) {
       const iso = `${ano}-${String(mes).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
       const valor = porDia[iso] || 0;
       totalMes += valor;
+      const media = porDiaMedia[iso] || 0;
+      mediaMes += media;
       const diaSemana = new Date(Date.UTC(ano, mes - 1, d)).getUTCDay();
-      celulas.push({ dia: d, valor, fimSemana: diaSemana === 0 || diaSemana === 6, feriado: FERIADOS.has(iso) });
+      celulas.push({ iso, dia: d, valor, media, fimSemana: diaSemana === 0 || diaSemana === 6, feriado: FERIADOS.has(iso) });
     }
 
     const diasHtml = celulas.map(cel => {
@@ -2617,8 +2598,10 @@ function renderCalendarioMeses(porDia, tecnico, sufixo) {
         if (tecnico && cel.valor > LIGACOES_BASE_DIA) classes.push("tier-2");
       }
       const valorHtml = cel.valor > 0 ? `<span class="dia-valor">${NUM.format(Math.round(cel.valor))}</span>` : "";
-      const tituloFeriado = cel.feriado ? ` title="Feriado"` : "";
-      return `<div class="${classes.join(" ")}"${tituloFeriado}><span class="dia-num">${cel.dia}</span>${valorHtml}</div>`;
+      const mediaHtml = cel.media > 0 ? `<span class="dia-media" title="Média lançada à mão, já somada ao total do dia">+${NUM.format(Math.round(cel.media))} média</span>` : "";
+      if (editavel) classes.push("editavel");
+      const tituloFeriado = editavel ? ` title="Clique pra editar a média deste dia${cel.feriado ? " (feriado)" : ""}"` : (cel.feriado ? ` title="Feriado"` : "");
+      return `<div class="${classes.join(" ")}" data-iso="${cel.iso}"${tituloFeriado}><span class="dia-num">${cel.dia}</span>${valorHtml}${mediaHtml}</div>`;
     }).join("");
 
     const bloco = document.createElement("div");
@@ -2626,13 +2609,67 @@ function renderCalendarioMeses(porDia, tecnico, sufixo) {
     bloco.innerHTML = `
       <div class="mes-calendario-header">
         <span class="mes-calendario-titulo">${rotuloMesCompleto(mesChave)}</span>
-        <span class="mes-calendario-total">Total: <strong>${NUM.format(Math.round(totalMes))}</strong></span>
+        <span class="mes-calendario-total">${sufixo ? "Total (ArcGIS + médias)" : "Total"}: <strong>${NUM.format(Math.round(totalMes))}</strong>${mediaMes > 0 ? ` <em class="mes-calendario-media">· médias: ${NUM.format(Math.round(mediaMes))}</em>` : ""}</span>
       </div>
       <div class="mes-calendario-semana">${DIAS_SEMANA_ABREV.map(d => `<span>${d}</span>`).join("")}</div>
       <div class="mes-calendario-grid">${diasHtml}</div>
     `;
     container.appendChild(bloco);
   });
+
+  // A média do dia só é editada no calendário da aba Gerencial (as abas de
+  // dashboard são só visualização, pra não confundir).
+  if (editavel) {
+    container.querySelectorAll(".mes-calendario-dia.editavel").forEach(cel => {
+      cel.addEventListener("click", () => editarMediaDoDia(cel.dataset.iso));
+    });
+  }
+}
+
+// Edita, num dia do calendário, a média lançada pra cada colaborador
+// (DADOS_MANUAL[dia][nome]) -- a meta de cada um muda com frequência, então
+// dá pra ajustar o valor direto aqui em vez de ir na tabela do Gerencial.
+// Valor vazio/0 apaga o lançamento daquele colaborador nesse dia.
+function editarMediaDoDia(iso) {
+  if (NOMES_MANUAL.length === 0) {
+    avisar("Nenhum colaborador na lista de lançamento -- adicione em Gerencial > Lançamento manual (+ Técnico).");
+    return;
+  }
+  const [ano, mes, dia] = iso.split("-");
+  const fundo = document.createElement("div");
+  fundo.className = "modal-fundo";
+  const linhas = NOMES_MANUAL.map(nome => {
+    const valor = (DADOS_MANUAL[iso] && DADOS_MANUAL[iso][nome]) || "";
+    return `<label class="modal-linha"><span>${nomeExibicao(nome)}</span><input type="number" step="0.01" min="0" class="celula-manual" data-nome="${nome.replace(/"/g, "&quot;")}" value="${valor}"></label>`;
+  }).join("");
+  fundo.innerHTML = `<div class="modal-caixa modal-caixa-larga" role="dialog" aria-modal="true">
+    <p class="modal-texto"><strong>Média do dia ${dia}/${mes}/${ano}</strong><br>Ligações lançadas à mão pra cada colaborador nesse dia (vazio = sem lançamento). Elas entram no total do calendário e no ranking da aba ArcGis + Médias.</p>
+    <div class="modal-lista">${linhas}</div>
+    <div class="modal-acoes"><button type="button" class="btn-manual btn-manual-secundario" data-r="0">Cancelar</button><button type="button" class="btn-manual" data-r="1">Salvar</button></div>
+  </div>`;
+  const fechar = () => fundo.remove();
+  fundo.addEventListener("click", (e) => {
+    if (e.target === fundo) return fechar();
+    const botao = e.target.closest("button[data-r]");
+    if (!botao) return;
+    if (botao.dataset.r === "1") {
+      if (!DADOS_MANUAL[iso]) DADOS_MANUAL[iso] = {};
+      fundo.querySelectorAll("input[data-nome]").forEach(input => {
+        const numero = parseFloat(input.value);
+        if (!numero || numero <= 0) delete DADOS_MANUAL[iso][input.dataset.nome];
+        else DADOS_MANUAL[iso][input.dataset.nome] = numero;
+      });
+      if (Object.keys(DADOS_MANUAL[iso]).length === 0) delete DADOS_MANUAL[iso];
+      salvarDadosManuais();
+      fechar();
+      renderAbaAtiva();
+    } else {
+      fechar();
+    }
+  });
+  document.body.appendChild(fundo);
+  const primeiro = fundo.querySelector("input");
+  if (primeiro) primeiro.focus();
 }
 
 // --- seletor de período (botão + painel com campos "de/até" e calendário) ---
@@ -2803,7 +2840,9 @@ function renderTudo() {
   renderTop3(rankingLista);
   renderTop3MensalChart(computeTop3PorMes(registrosResumo, tecnico));
   renderValoresChart(rankingLista);
-  renderCalendarioMeses(computeCalendarioMensal(registrosResumo, tecnico), tecnico);
+  // Aba ArcGIS = só o que veio do ArcGIS, sem as médias lançadas à mão (as
+  // médias ficam só na aba ArcGis + Médias) -- pedido do usuário em 2026-09-28.
+  renderCalendarioMeses(computeCalendarioMensal(registrosResumo, tecnico), tecnico, "");
 
   document.getElementById("footer-periodo").textContent =
     `Período: ${inicio.split("-").reverse().join("/")} a ${fim.split("-").reverse().join("/")}`;
@@ -3190,21 +3229,6 @@ function ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro) {
   return porDia;
 }
 
-// Progressão mensal combinada -- arredonda por pessoa/dia antes de somar
-// (mesmo critério do "Total de ligações" combinado), pra bater com o KPI
-// principal quando somado.
-function computeProgressaoMensalCombinado(inicio, fim, tecnicoFiltro) {
-  const porDia = ligacoesPorDiaPorPessoaCombinado(inicio, fim, tecnicoFiltro);
-  const porMes = {};
-  Object.keys(porDia).forEach(data => {
-    const mes = chaveMes(data);
-    const totalDia = Object.values(porDia[data]).reduce((s, v) => s + Math.round(v), 0);
-    porMes[mes] = (porMes[mes] || 0) + totalDia;
-  });
-  const valorMes = valorPorMes(porDia);
-  return Object.keys(porMes).sort().map(mes => ({ mes, ligacoes: porMes[mes], valor: (valorMes[mes] || 0) * FATOR_VALOR_PROGRESSAO }));
-}
-
 // Evolução mensal do Top 3 combinada -- mesma ideia, só pros nomes do Top 3.
 // Mesma ideia de computeTop3PorMes (Top 3 recalculado mês a mês, não pelo
 // total do período), só que a partir do combinado automático+manual.
@@ -3221,6 +3245,22 @@ function computeTop3PorMesCombinado(inicio, fim, tecnicoFiltro) {
   return montarPosicoesPorMes(porMes);
 }
 
+// Média lançada à mão por dia (só DADOS_MANUAL) -- é a parte do total do
+// calendário combinado que veio dos lançamentos, mostrada em cada dia.
+function computeMediaManualPorDia(inicio, fim, tecnicoFiltro) {
+  const porDia = {};
+  Object.keys(DADOS_MANUAL).forEach(data => {
+    if (data < inicio || data > fim) return;
+    Object.entries(DADOS_MANUAL[data] || {}).forEach(([nome, valor]) => {
+      const v = Number(valor) || 0;
+      if (v <= 0) return;
+      if (tecnicoFiltro && nome !== tecnicoFiltro) return;
+      porDia[data] = (porDia[data] || 0) + v;
+    });
+  });
+  return porDia;
+}
+
 // Calendário combinado -- não arredonda por pessoa/dia aqui (só na hora de
 // exibir a célula), igual computeCalendarioMensal (automático) já fazia.
 function computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro) {
@@ -3230,35 +3270,6 @@ function computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro) {
     porDiaTotal[data] = Object.values(porDia[data]).reduce((s, v) => s + v, 0);
   });
   return porDiaTotal;
-}
-
-// rankingLista aqui é o COMBINADO (automático + manual) -- é o que vira o
-// "Total de ligações" de verdade. Os indicadores de baixo (lançamentos,
-// maior lançamento) continuam olhando só pra dados/DADOS_MANUAL puro,
-// porque são especificamente sobre o que foi digitado, não o total.
-function renderResumoManual(rankingLista, dados, registrosAutomatico, inicio, fim, rankingEquipe) {
-  const totalLigacoes = rankingLista.reduce((s, i) => s + i.ligacoes, 0);
-  const tecnicosComDado = rankingLista.filter(i => i.ligacoes > 0).length;
-
-  const diasAtividade = new Set();
-  registrosAutomatico.forEach(r => { if (r.participantes.length > 0) diasAtividade.add(r.data); });
-
-  Object.keys(dados).forEach(data => {
-    if (data < inicio || data > fim) return;
-    Object.values(dados[data] || {}).forEach(v => {
-      if ((Number(v) || 0) > 0) diasAtividade.add(data);
-    });
-  });
-
-  document.getElementById("kpi-ligacoes-manual").textContent = NUM.format(Math.round(totalLigacoes));
-  // "Média diária por técnico" -- da EQUIPE INTEIRA (não do técnico
-  // filtrado no dropdown), mesmo critério da aba Automático, ver
-  // mediaPorTecnicoDia.
-  const listaEquipe = rankingEquipe || rankingLista;
-  document.getElementById("kpi-media-tecnico-manual").textContent =
-    NUM.format(Math.round(mediaPorTecnicoDia(listaEquipe)));
-  document.getElementById("kpi-tecnicos-manual").textContent = NUM.format(tecnicosComDado);
-  document.getElementById("kpi-dias-manual").textContent = NUM.format(diasAtividade.size);
 }
 
 // "Indicadores de produção (manual)" ficam na aba Gerencial (controle/
@@ -3356,9 +3367,17 @@ function renderManualView() {
   const registrosAutomaticoFiltrado = tecnicoFiltro
     ? filtrarPorData(REGISTROS, inicio, fim).filter(r => r.participantes.some(n => normalizarNome(n) === tecnicoFiltro))
     : filtrarPorData(REGISTROS, inicio, fim);
-  const rankingCombinadoEquipe = tecnicoFiltro ? computeLigacoesPorTecnicoCombinado(inicio, fim, "") : rankingCombinado;
 
-  renderResumoManual(rankingCombinado, DADOS_MANUAL, registrosAutomaticoFiltrado, inicio, fim, rankingCombinadoEquipe);
+  // Resumo do topo = igual à aba Automático (só ArcGIS, sem os lançamentos
+  // manuais) -- ver comentário em renderResumoManual.
+  const resumoAutomatico = computeResumo(registrosAutomaticoFiltrado, tecnicoFiltro);
+  const rankingAutoEquipe = computeLigacoesPorTecnico(filtrarPorData(REGISTROS, inicio, fim), inicio, fim);
+
+  // O resumo (cartões do topo e Indicadores de produção) é sobre "como anda
+  // a pesquisa em si" -- só ArcGIS, IGUAL à aba ArcGIS (mesma função, só
+  // muda o sufixo dos ids). Os lançamentos manuais só entram nos gráficos de
+  // produtividade individual abaixo. Confirmado com o usuário em 2026-09-25.
+  renderResumo(resumoAutomatico, mediaPorTecnicoDia(rankingAutoEquipe), "-manual");
   renderComparativoChart(rankingCombinado, "-manual");
   renderInsights(rankingCombinado, "-manual");
   renderPrevisaoMeta(rankingCombinado, "-manual");
@@ -3366,9 +3385,11 @@ function renderManualView() {
 
   renderTop3(rankingCombinado, "-manual");
   renderTop3MensalChart(computeTop3PorMesCombinado(inicio, fim, tecnicoFiltro), "-manual");
-  renderProgressaoChart(computeProgressaoMensalCombinado(inicio, fim, tecnicoFiltro), "-manual");
+  // Progressão mensal também é só ArcGIS (mesmo critério do resumo acima),
+  // pra ficar idêntica à da aba Automático.
+  renderProgressaoChart(computeProgressaoMensal(filtrarPorData(REGISTROS, inicio, fim), tecnicoFiltro), "-manual");
   renderValoresChart(rankingCombinado, "-manual");
-  renderCalendarioMeses(computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro), tecnicoFiltro, "-manual");
+  renderCalendarioMeses(computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro), tecnicoFiltro, "-manual", computeMediaManualPorDia(inicio, fim, tecnicoFiltro));
 }
 
 function configurarAcoesManuais() {
@@ -3760,6 +3781,7 @@ function renderGerencialView() {
   const tecnicoFiltro = document.getElementById("filtro-tecnico").value;
   renderTabelaManual(inicio, fim);
   if (inicio && fim) renderIndicadoresLancamentoManual(DADOS_MANUAL, inicio, fim);
+  if (inicio && fim) renderCalendarioMeses(computeCalendarioMensalCombinado(inicio, fim, tecnicoFiltro), tecnicoFiltro, "-gerencial", computeMediaManualPorDia(inicio, fim, tecnicoFiltro), true);
   renderListaColaboradores();
   renderCalendarioPresenca(inicio, fim);
   renderTabelaMetasColaboradores(inicio, fim);
@@ -4071,7 +4093,8 @@ function configurarAbas() {
 
 async function init() {
   try {
-    const resp = await fetch(DATA_URL);
+    // no-store: o arquivo de dados muda todo dia; sem isso o navegador pode reaproveitar uma cópia antiga e faltar os dias mais recentes.
+    const resp = await fetch(DATA_URL, { cache: "no-store" });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const json = await resp.json();
     // Descarta tudo de 2025 do proprio conjunto de dados (fica so 2026 em
