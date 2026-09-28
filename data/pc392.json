@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-27T10:59:42Z",
+  "gerado_em": "2026-09-28T12:17:40Z",
   "registros": [
     {
       "id": 1,
@@ -10172,6 +10172,16 @@
       "participantes": [
         "Oldair Luciano",
         "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1121,
+      "data": "2026-09-25",
+      "ligacoes": 673.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda",
+        "carlos_henrique"
       ]
     }
   ]
