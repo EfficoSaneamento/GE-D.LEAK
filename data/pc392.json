@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T11:45:51Z",
+  "gerado_em": "2026-09-30T11:32:21Z",
   "registros": [
     {
       "id": 1,
@@ -10182,6 +10182,55 @@
         "Rairan Nascimento",
         "Gisclayton Arruda",
         "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1122,
+      "data": "2026-09-28",
+      "ligacoes": 1368.0,
+      "participantes": [
+        "Oldair Luciano",
+        "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1123,
+      "data": "2026-09-28",
+      "ligacoes": 1429.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "carlos_henrique",
+        "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1124,
+      "data": "2026-09-29",
+      "ligacoes": 827.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Oldair Luciano",
+        "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1125,
+      "data": "2026-09-29",
+      "ligacoes": 1159.0,
+      "participantes": [
+        "Oldair Luciano",
+        "gustavo_bandeira",
+        "Adeilson da Silva"
+      ]
+    },
+    {
+      "id": 1126,
+      "data": "2026-09-29",
+      "ligacoes": 222.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Adeilson da Silva",
+        "gustavo_bandeira"
       ]
     }
   ]
