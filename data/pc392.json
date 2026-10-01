@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-30T11:32:21Z",
+  "gerado_em": "2026-10-01T12:00:40Z",
   "registros": [
     {
       "id": 1,
@@ -10230,6 +10230,15 @@
       "participantes": [
         "Oldair Luciano",
         "Adeilson da Silva",
+        "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1127,
+      "data": "2026-09-30",
+      "ligacoes": 8.0,
+      "participantes": [
+        "Oldair Luciano",
         "gustavo_bandeira"
       ]
     }
