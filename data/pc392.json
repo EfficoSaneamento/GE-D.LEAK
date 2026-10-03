@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-02T11:32:29Z",
+  "gerado_em": "2026-10-03T10:47:04Z",
   "registros": [
     {
       "id": 1,
@@ -10268,6 +10268,33 @@
       "participantes": [
         "Adeilson da Silva",
         "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1131,
+      "data": "2026-09-29",
+      "ligacoes": 1208.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1132,
+      "data": "2026-10-01",
+      "ligacoes": 537.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1133,
+      "data": "2026-10-01",
+      "ligacoes": 4.0,
+      "participantes": [
+        "Oldair Luciano",
+        "Rairan Nascimento"
       ]
     }
   ]
