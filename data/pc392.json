@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T10:31:36Z",
+  "gerado_em": "2026-10-16T10:18:48Z",
   "registros": [
     {
       "id": 1,
@@ -10534,6 +10534,16 @@
       "participantes": [
         "Adeilson da Silva",
         "Christian Costa"
+      ]
+    },
+    {
+      "id": 1161,
+      "data": "2026-10-15",
+      "ligacoes": 2054.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa",
+        "gustavo_bandeira"
       ]
     }
   ]
