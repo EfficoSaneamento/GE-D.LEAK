@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-18T10:03:59Z",
+  "gerado_em": "2026-10-19T11:30:14Z",
   "registros": [
     {
       "id": 1,
@@ -10552,6 +10552,15 @@
       "ligacoes": 3.0,
       "participantes": [
         "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1163,
+      "data": "2026-10-14",
+      "ligacoes": 1434.0,
+      "participantes": [
+        "Oldair Luciano",
+        "gustavo_bandeira"
       ]
     }
   ]
