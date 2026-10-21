@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T10:35:35Z",
+  "gerado_em": "2026-10-21T10:47:48Z",
   "registros": [
     {
       "id": 1,
@@ -10585,6 +10585,41 @@
       "id": 1166,
       "data": "2026-10-15",
       "ligacoes": 472.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1167,
+      "data": "2026-10-20",
+      "ligacoes": 1419.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1168,
+      "data": "2026-10-20",
+      "ligacoes": 1573.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa",
+        "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1169,
+      "data": "2026-10-20",
+      "ligacoes": 6.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1170,
+      "data": "2026-10-20",
+      "ligacoes": 374.0,
       "participantes": [
         "Rairan Nascimento",
         "carlos_henrique"
