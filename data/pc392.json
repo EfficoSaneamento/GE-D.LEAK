@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-28T11:48:12Z",
+  "gerado_em": "2026-10-29T11:56:04Z",
   "registros": [
     {
       "id": 1,
@@ -10772,6 +10772,32 @@
       "id": 1187,
       "data": "2026-10-27",
       "ligacoes": 7.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1188,
+      "data": "2026-10-28",
+      "ligacoes": 664.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa",
+        "gustavo_bandeira",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1189,
+      "data": "2026-10-28",
+      "ligacoes": 15.0,
+      "participantes": [
+        "Oldair Luciano"
+      ]
+    },
+    {
+      "id": 1190,
+      "data": "2026-10-28",
+      "ligacoes": 6.0,
       "participantes": [
         "Oldair Luciano"
       ]
