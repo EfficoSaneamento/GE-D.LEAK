@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-30T11:49:56Z",
+  "gerado_em": "2026-10-31T11:24:00Z",
   "registros": [
     {
       "id": 1,
@@ -10828,6 +10828,14 @@
         "Adeilson da Silva",
         "Carlos Alberto",
         "Christian Costa"
+      ]
+    },
+    {
+      "id": 1194,
+      "data": "2026-10-30",
+      "ligacoes": 3.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa"
       ]
     }
   ]
