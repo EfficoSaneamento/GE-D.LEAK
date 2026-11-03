@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-02T14:06:55Z",
+  "gerado_em": "2026-11-03T13:12:56Z",
   "registros": [
     {
       "id": 1,
@@ -10836,6 +10836,15 @@
       "ligacoes": 3.0,
       "participantes": [
         "Ronaldo De Oliveira Barbosa"
+      ]
+    },
+    {
+      "id": 1195,
+      "data": "2026-10-30",
+      "ligacoes": 1105.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "carlos_henrique"
       ]
     }
   ]
