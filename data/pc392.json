@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-13T13:36:02Z",
+  "gerado_em": "2026-11-14T12:40:53Z",
   "registros": [
     {
       "id": 1,
@@ -11137,6 +11137,33 @@
       "participantes": [
         "Rairan Nascimento",
         "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1228,
+      "data": "2026-11-13",
+      "ligacoes": 1735.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1229,
+      "data": "2026-11-13",
+      "ligacoes": 1305.0,
+      "participantes": [
+        "Rairan Nascimento",
+        "Gisclayton Arruda"
+      ]
+    },
+    {
+      "id": 1230,
+      "data": "2026-11-13",
+      "ligacoes": 851.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa",
+        "gustavo_bandeira"
       ]
     }
   ]
