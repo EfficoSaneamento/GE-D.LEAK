@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-15T13:07:18Z",
+  "gerado_em": "2026-11-16T14:13:59Z",
   "registros": [
     {
       "id": 1,
@@ -11164,6 +11164,15 @@
       "participantes": [
         "Ronaldo De Oliveira Barbosa",
         "gustavo_bandeira"
+      ]
+    },
+    {
+      "id": 1231,
+      "data": "2026-11-13",
+      "ligacoes": 286.0,
+      "participantes": [
+        "Carlos Alberto",
+        "Christian Costa"
       ]
     }
   ]
