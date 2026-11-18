@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-17T15:06:41Z",
+  "gerado_em": "2026-11-18T14:45:32Z",
   "registros": [
     {
       "id": 1,
@@ -11229,6 +11229,25 @@
       "participantes": [
         "Adeilson da Silva",
         "carlos_henrique"
+      ]
+    },
+    {
+      "id": 1238,
+      "data": "2026-11-17",
+      "ligacoes": 217.0,
+      "participantes": [
+        "Ronaldo De Oliveira Barbosa",
+        "Christian Costa"
+      ]
+    },
+    {
+      "id": 1239,
+      "data": "2026-11-17",
+      "ligacoes": 2001.0,
+      "participantes": [
+        "Adeilson da Silva",
+        "carlos_henrique",
+        "Gisclayton Arruda"
       ]
     }
   ]
